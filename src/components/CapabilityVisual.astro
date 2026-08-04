@@ -1,0 +1,27 @@
+---
+import AgentPlatformIcon from "./AgentPlatformIcon.astro";
+
+interface Platform {
+  name: string;
+  category: string;
+  icon?: { path: string };
+  kind?: string;
+}
+
+interface Props {
+  type: string;
+  platforms: Platform[];
+}
+
+const { type, platforms } = Astro.props;
+---
+
+{type === "operations" ? (
+  <div class="capability-visual cap-operations" aria-hidden="true"><div class="cap-window"><span>Operations</span><b><i></i> Live</b></div><div class="cap-stat"><p><small>WORK COMPLETED</small><strong>1,284</strong></p><em>+18%</em></div><div class="cap-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="cap-event"><span>✓</span><p><b>Weekly report prepared</b><small>Ready for review</small></p></div></div>
+) : type === "customer" ? (
+  <div class="capability-visual cap-customer" aria-hidden="true"><div class="cap-window"><span>Customer assistant</span><b><i></i> Online</b></div><div class="chat-line customer-line">Can you help us choose the right plan?</div><div class="chat-line agent-line"><span>✦</span><p>Absolutely. I’ll ask two quick questions, then recommend the best fit.</p></div><div class="lead-chip"><span>QUALIFIED LEAD</span><b>Meeting ready ↗</b></div></div>
+) : type === "workflow" ? (
+  <div class="capability-visual cap-workflow" aria-hidden="true"><div class="cap-window"><span>Invoice workflow</span><b>5 systems</b></div><div class="mini-flow"><div><span>✉</span><small>Email</small></div><i></i><div class="active"><span>✦</span><small>Extract</small></div><i></i><div><span>✓</span><small>Approve</small></div></div><div class="workflow-status"><span><i></i>3 invoices processed</span><b>42 min saved</b></div></div>
+) : (
+  <div class="capability-visual cap-ecosystem" aria-hidden="true"><div class="cap-window"><span>AI enablement</span><b><i></i> 7 tools supported</b></div><div class="mini-platforms">{platforms.slice(0, 4).map((platform) => <div><AgentPlatformIcon platform={platform} /><span>{platform.name}</span></div>)}</div><div class="mini-enablement-layer"><span>SEESTEMIC LAYER</span><b>Context · workflows · guardrails · training</b></div></div>
+)}

@@ -1,0 +1,22 @@
+---
+import AgentPlatformIcon from "./AgentPlatformIcon.astro";
+
+interface Platform {
+  name: string;
+  category: string;
+  icon?: { path: string };
+  kind?: string;
+}
+
+interface Props {
+  platforms: Platform[];
+}
+
+const { platforms } = Astro.props;
+---
+
+<div class="story-scene enablement-scene" aria-label="Supported AI agent platforms connected through a company enablement layer">
+  <div class="enablement-top"><div><small>YOUR AI ECOSYSTEM</small><b>Tools your team already uses</b></div><span><i></i> Vendor-neutral</span></div>
+  <div class="agent-platform-grid">{platforms.map((platform) => <div class="agent-platform"><AgentPlatformIcon platform={platform} /><p><b>{platform.name}</b><small>{platform.category}</small></p><span>✓</span></div>)}</div>
+  <div class="enablement-layer"><div><small>SEESTEMIC ENABLEMENT LAYER</small><b>Make every tool work with your business—not around it.</b></div><ul><li><span>01</span>Company context</li><li><span>02</span>Custom skills & workflows</li><li><span>03</span>Security & governance</li><li><span>04</span>Training & adoption</li></ul></div>
+</div>
