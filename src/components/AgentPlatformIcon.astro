@@ -1,0 +1,26 @@
+---
+interface Platform {
+  name: string;
+  category: string;
+  icon?: { path: string };
+  kind?: string;
+}
+
+interface Props {
+  platform: Platform;
+}
+
+const { platform } = Astro.props;
+---
+
+{platform.icon ? (
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d={platform.icon.path}></path></svg>
+) : platform.kind === "microsoft" ? (
+  <span class="microsoft-grid" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+) : platform.kind === "chatgpt" ? (
+  <span class="chatgpt-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+) : platform.kind === "seestemic" ? (
+  <span class="platform-seestemic" aria-hidden="true">S</span>
+) : (
+  <span class="platform-codex" aria-hidden="true">✦</span>
+)}

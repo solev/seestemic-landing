@@ -1,0 +1,191 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Brand from "../components/Brand.astro";
+import WorkflowDemo from "../components/WorkflowDemo.astro";
+import OperationsScene from "../components/OperationsScene.astro";
+import SystemsScene from "../components/SystemsScene.astro";
+import EnablementScene from "../components/EnablementScene.astro";
+import CapabilityVisual from "../components/CapabilityVisual.astro";
+import OpportunityMap from "../components/OpportunityMap.astro";
+import PaybackVisual from "../components/PaybackVisual.astro";
+import { siClaudecode, siCursor, siGithubcopilot, siGooglegemini } from "simple-icons";
+
+const process = [
+  ["01", "Discover", "Find the work where AI can create the clearest return.", "AI opportunity map + business case"],
+  ["02", "Design", "Map the workflow, controls, data, and success measures.", "Workflow blueprint + control plan"],
+  ["03", "Build", "Ship a useful first version inside the tools your team knows.", "Working pilot in your current systems"],
+  ["04", "Improve", "Measure adoption, refine performance, and expand what works.", "Adoption data + optimization plan"],
+];
+
+const faqs = [
+  ["Do we need technical knowledge?", "No. We translate business needs into a practical plan, handle the technical delivery, and make sure your team understands how to use what we build."],
+  ["Can AI work with our current software?", "Usually, yes. We design around your existing tools—such as Microsoft 365, Google Workspace, CRM platforms, support systems, document stores, and custom applications."],
+  ["How quickly can we see value?", "A focused first workflow can often be operating within 3–6 weeks. Larger programs are delivered in stages so useful results arrive early."],
+  ["How do you protect company data?", "Security, access boundaries, human approvals, auditability, and suitable model providers are designed into the solution from the start."],
+  ["Will you train our employees?", "Yes. Adoption is part of the work. We provide role-specific training, playbooks, and practical guidance so teams know when and how to use AI well."],
+];
+
+const buildCapabilities = [
+  {
+    eyebrow: "AUTONOMOUS BUSINESS AGENTS",
+    title: "AI that works 24/7",
+    description: "Agents that monitor operations, make routine decisions, generate reports, and keep work moving around the clock.",
+    tags: ["Monitor operations", "Trigger workflows", "Generate reports"],
+    visual: "operations",
+  },
+  {
+    eyebrow: "CUSTOMER SUPPORT & SALES",
+    title: "Never miss another customer",
+    description: "Assistants that answer questions, qualify leads, schedule meetings, create quotes, and follow up across your channels.",
+    tags: ["Lead qualification", "Customer support", "Sales follow-up"],
+    visual: "customer",
+  },
+  {
+    eyebrow: "AI WORKFLOW AUTOMATION",
+    title: "Eliminate manual work",
+    description: "Connected workflows that process email and documents, update systems, route requests, and handle approvals.",
+    tags: ["Document processing", "CRM updates", "Approvals"],
+    visual: "workflow",
+  },
+  {
+    eyebrow: "AI ENABLEMENT & AGENT ECOSYSTEMS",
+    title: "Turn everyday AI use into company capability",
+    description: "We configure, connect, and extend the AI tools your people already use—then add company context, practical workflows, guardrails, and training.",
+    tags: ["Choose the right tools", "Custom skills & agents", "Team training"],
+    visual: "ecosystem",
+  },
+];
+
+const agentPlatforms = [
+  { name: "Codex", category: "BUILD", kind: "codex" },
+  { name: "Claude Code", category: "BUILD", icon: siClaudecode },
+  { name: "GitHub Copilot", category: "BUILD", icon: siGithubcopilot },
+  { name: "Cursor", category: "BUILD", icon: siCursor },
+  { name: "ChatGPT", category: "KNOWLEDGE", kind: "chatgpt" },
+  { name: "Microsoft 365 Copilot", category: "KNOWLEDGE", kind: "microsoft" },
+  { name: "Gemini", category: "KNOWLEDGE", icon: siGooglegemini },
+  { name: "Custom agents", category: "YOUR WORKFLOWS", kind: "seestemic" },
+];
+
+const testimonials = [
+  {
+    quote: "Seestemic helped us move from broad AI ideas to a workflow our team could actually use. The value was clear because it was designed around how we already work.",
+    name: "Sarah Lin",
+    role: "COO, Northline Advisory",
+  },
+  {
+    quote: "They treated adoption as part of delivery. Our team understood what changed, where to stay in control, and how to keep improving the workflow after launch.",
+    name: "Daniel Weber",
+    role: "Managing Director, Atlas Property Group",
+  },
+  {
+    quote: "The strongest part was the partnership: practical priorities, senior technical judgment, and no pressure to force AI into the wrong places.",
+    name: "Maya Chen",
+    role: "VP Operations, Fieldstone Commerce",
+  },
+];
+
+const paybackAreas = [
+  {
+    number: "01",
+    eyebrow: "REPETITIVE COORDINATION",
+    title: "Keep requests and handoffs moving.",
+    description: "AI can route email, schedule work, update CRMs, follow up, and manage approvals without the constant copy-paste and chasing.",
+    examples: ["Email routing", "Scheduling", "CRM updates", "Approvals"],
+    industries: "Professional services · Agencies · Real estate · SaaS",
+    visual: "coordination",
+  },
+  {
+    number: "02",
+    eyebrow: "DOCUMENT-HEAVY OPERATIONS",
+    title: "Turn documents into usable work.",
+    description: "Extract information, review submissions, process invoices, produce reports, and send the right details to the right system.",
+    examples: ["Data extraction", "Document review", "Invoices", "Reports"],
+    industries: "Healthcare · Finance · Manufacturing · Logistics",
+    visual: "documents",
+  },
+  {
+    number: "03",
+    eyebrow: "KNOWLEDGE BOTTLENECKS",
+    title: "Make company knowledge easy to use.",
+    description: "Give employees fast, permission-aware answers from policies, SOPs, customer history, and operational documentation.",
+    examples: ["Internal search", "SOP guidance", "Employee support", "Handovers"],
+    industries: "Useful across every growing organization",
+    visual: "knowledge",
+  },
+];
+---
+
+<BaseLayout
+  title="Seestemic — Your AI Partner for Smarter Business"
+  description="AI strategy, custom agents, workflow automation, and employee enablement for businesses ready to work smarter."
+>
+  <main id="top">
+    <header class="site-header page-shell">
+      <a href="#top" aria-label="Seestemic home"><Brand /></a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="#capabilities">Capabilities</a>
+        <a href="#approach">Approach</a>
+        <a href="#company">Company</a>
+      </nav>
+      <a class="header-cta" href="mailto:hello@seestemic.com">Start a conversation <span aria-hidden="true">↗</span></a>
+      <details class="mobile-nav"><summary aria-label="Open navigation"><i></i><i></i></summary><div><a href="#capabilities">Capabilities</a><a href="#approach">Approach</a><a href="#company">Company</a><a href="mailto:hello@seestemic.com">Start a conversation</a></div></details>
+    </header>
+
+    <section class="hero page-shell">
+      <div class="hero-kicker"><span>YOUR LONG-TERM AI PARTNER</span><i>Strategy · Systems · Adoption</i></div>
+      <h1>Put AI to work across your business.</h1>
+      <div class="hero-bottom">
+        <p>We work alongside your team to find the right opportunities, build the agents and workflows, and teach your people how to use them—securely and measurably.</p>
+        <div class="hero-actions"><a class="primary-button" href="mailto:hello@seestemic.com">Find your first AI opportunity <span aria-hidden="true">↗</span></a><a class="text-button" href="#capabilities">See a workflow in action <span>↓</span></a></div>
+      </div>
+    </section>
+
+    <section class="demo-wrap page-shell">
+      <WorkflowDemo />
+      <div class="demo-caption"><p><span>01</span> One workflow, from request to result.</p><p>AI handles the coordination. Your team keeps control.</p></div>
+    </section>
+
+    <section class="proof-strip page-shell">
+      <div><small>EXPERIENCE</small><b>12+ years building enterprise software</b></div>
+      <div><small>DELIVERY</small><b>From strategy to working systems</b></div>
+      <div><small>INTEGRATION</small><b>Built around the tools you already use</b></div>
+      <div><small>CONTROL</small><b>Human oversight where it matters</b></div>
+    </section>
+
+    <section class="opportunity-section page-shell" id="company">
+      <span class="section-index">01 / FIND THE VALUE</span>
+      <div class="opportunity-head"><h2>We don’t start with an AI product.<br />We start with where AI creates the clearest return.</h2><p>Together, we identify the opportunities worth pursuing, what to postpone, and how success will be measured—before technology becomes the answer.</p></div>
+      <div class="opportunity-workspace"><OpportunityMap /><aside class="decision-panel"><span>WHAT WE DECIDE TOGETHER</span><ol><li><i>01</i><p><b>Business outcome</b><small>What should improve—and by how much?</small></p></li><li><i>02</i><p><b>Workflow and data</b><small>Where does the work happen today?</small></p></li><li><i>03</i><p><b>Controls and ownership</b><small>Where should people review or approve?</small></p></li><li><i>04</i><p><b>Success measure</b><small>How will we know it is creating value?</small></p></li></ol><div><small>FIRST DELIVERABLE</small><b>A prioritized AI roadmap tied to business value.</b></div></aside></div>
+    </section>
+
+    <section class="build-overview page-shell" id="capabilities">
+      <span class="section-index">02 / WHAT WE CAN BUILD</span>
+      <div class="build-overview-head"><h2>What we can build.</h2><p>Four practical ways to remove repetitive work, improve response times, and give your team more capacity—built around the systems you already use.</p></div>
+      <div class="capability-grid">{buildCapabilities.map((capability, index) => <article class="capability-card"><div class="capability-number">0{index + 1}</div><CapabilityVisual type={capability.visual} platforms={agentPlatforms} /><div class="capability-copy"><span>{capability.eyebrow}</span><h3>{capability.title}</h3><p>{capability.description}</p><ul>{capability.tags.map((tag) => <li>{tag}</li>)}</ul></div></article>)}</div>
+      <div class="capability-bridge"><span>A CLOSER LOOK</span><p>Explore how three of these systems work in practice.</p><i>↓</i></div>
+    </section>
+
+    <section class="story-chapter"><article class="story-block page-shell"><div class="story-copy"><span>01 / AUTONOMOUS OPERATIONS</span><h3>Agents turn busywork into progress.</h3><p>Always-on agents monitor the work your business generates, make routine decisions, and keep operations moving—even when nobody is watching a queue.</p><ul><li>Monitor inboxes, orders and documents</li><li>Resolve routine exceptions</li><li>Prepare reports and trigger next steps</li></ul></div><OperationsScene /></article></section>
+
+    <section class="story-chapter story-chapter-tint"><article class="story-block reverse page-shell"><div class="story-copy"><span>02 / CONNECTED WORKFLOWS</span><h3>One workflow. Every system.</h3><p>AI connects the tools you already use, moving information between them without copy-paste work, missed handoffs, or another dashboard for your team to maintain.</p><ul><li>Email, CRM and document automation</li><li>Human approvals at the right moments</li><li>Clear audit trail from start to finish</li></ul></div><SystemsScene /></article></section>
+
+    <section class="story-chapter"><article class="story-block page-shell"><div class="story-copy"><span>03 / AI ENABLEMENT</span><h3>Your team already uses AI. Make it work like a system.</h3><p>We help you choose where tools like Codex, Claude Code, Copilot, ChatGPT, Cursor, and Gemini fit—then connect them to the right company context, workflows, controls, and people.</p><ul><li>Standardize tools, access, and guardrails</li><li>Build role-specific agents, skills, and automations</li><li>Train teams and measure real adoption</li></ul></div><EnablementScene platforms={agentPlatforms} /></article></section>
+
+    <section class="partner-section" id="partnership"><div class="page-shell"><span class="section-index">03 / THE PARTNERSHIP</span><div class="partner-head"><h2>One partner.<br />From first opportunity<br />to everyday capability.</h2><p>We do more than deliver software. We work alongside your leaders and teams to choose the right problems, build useful systems, and make AI a capability your business can confidently grow.</p></div><div class="partner-path"><article><span>01</span><b>Find the value</b><p>Opportunity mapping tied to practical business outcomes.</p></article><article><span>02</span><b>Build it around you</b><p>Custom agents and workflows connected to your current tools.</p></article><article class="training-card"><span>03</span><small>TRAINING INCLUDED</small><b>Teach the team</b><p>Role-based workshops, practical playbooks, and hands-on guidance.</p></article><article><span>04</span><b>Improve what works</b><p>Ongoing monitoring, refinement, and expansion after launch.</p></article></div><div class="partner-note"><span>ENABLEMENT, NOT A HANDOVER</span><h3>Your people should understand the system—not depend on us to operate it.</h3><p>We train employees to use AI responsibly, recognize where it helps, review its work, and build better habits around it. When new opportunities emerge, we are still there to help.</p></div></div></section>
+
+    <section class="approach page-shell" id="approach"><span class="section-index">04 / HOW WE WORK</span><div class="approach-head"><h2>Start focused.<br />Prove value.<br />Expand with confidence.</h2><p>A transparent process that turns opportunity into a working capability—without forcing your business into a long transformation program.</p></div><div class="process-grid">{process.map(([number, title, description, output], index) => <article><div><span>{number}</span>{index < 3 && <i></i>}</div><h3>{title}</h3><p>{description}</p><div class="process-output"><small>YOU RECEIVE</small><b>{output}</b></div></article>)}</div></section>
+
+    <section class="credibility" id="company-details"><div class="page-shell credibility-inner"><span class="section-index light">05 / WHY SEESTEMIC</span><div class="credibility-main"><h2>Senior engineering.<br />Business-first delivery.<br /><span>Built for the long term.</span></h2><p>Technology only matters when people can put it to work. We bring product thinking, enterprise engineering experience, and hands-on enablement to every engagement.</p></div><div class="credibility-facts"><div><b>12+</b><span>years building enterprise software</span></div><div><b>01</b><span>accountable partner from strategy through adoption</span></div><div><b>∞</b><span>continuous improvement after launch</span></div></div></div></section>
+
+    <section class="testimonials page-shell"><span class="section-index">06 / CLIENT PERSPECTIVE</span><div class="testimonials-head"><h2>Built for outcomes,<br />not optics.</h2><p>Sample testimonial copy to show the intended direction. Replace these with verified client stories as they become available.</p></div><div class="testimonial-grid">{testimonials.map((testimonial, index) => <article class={index === 0 ? "featured" : ""}><span class="sample-label">SAMPLE COPY · REPLACE LATER</span><blockquote>“{testimonial.quote}”</blockquote><footer><div class="testimonial-avatar">{testimonial.name.split(" ").map((part) => part[0]).join("")}</div><p><b>{testimonial.name}</b><small>{testimonial.role}</small></p></footer></article>)}</div></section>
+
+    <section class="payback-section page-shell"><span class="section-index">07 / WHERE AI PAYS BACK</span><div class="payback-head"><h2>Where AI usually<br />pays back first.</h2><p>The strongest opportunities often share the same underlying pattern: frequent work, clear rules, and valuable employee attention being consumed by coordination or searching.</p></div><div class="payback-grid">{paybackAreas.map((area) => <article><div class="payback-number">{area.number}</div><PaybackVisual type={area.visual} /><div class="payback-copy"><span>{area.eyebrow}</span><h3>{area.title}</h3><p>{area.description}</p><ul>{area.examples.map((example) => <li>{example}</li>)}</ul><footer><small>OFTEN RELEVANT TO</small><b>{area.industries}</b></footer></div></article>)}</div><div class="payback-note"><span>SAME PATTERNS. DIFFERENT REALITIES.</span><p>We learn your industry through its workflows, constraints, data, and people—then tailor the solution around how your business actually operates.</p></div></section>
+
+    <section class="faq page-shell"><div class="faq-title"><span class="section-index">08 / FAQ</span><h2>Clear answers.<br />No AI theatre.</h2><a href="mailto:hello@seestemic.com">Ask us directly <span aria-hidden="true">↗</span></a></div><div class="faq-list">{faqs.map(([question, answer], index) => <details open={index === 0}><summary>{question}<i>+</i></summary><p>{answer}</p></details>)}</div></section>
+
+    <section class="final-cta page-shell"><div class="cta-copy"><span>YOUR FIRST USEFUL AI WORKFLOW</span><h2>What should AI<br />take off your plate?</h2><p>Bring us one repetitive process, slow handoff, or overloaded team. We’ll help you see what is possible and where to begin.</p><a href="mailto:hello@seestemic.com">Find your first AI opportunity <span aria-hidden="true">↗</span></a></div><div class="cta-graphic" aria-hidden="true"><div class="cta-core"><span>✦</span><i></i><i></i><i></i></div><div class="orbit orbit-a"><span>EMAIL</span></div><div class="orbit orbit-b"><span>CRM</span></div><div class="orbit orbit-c"><span>DOCS</span></div><div class="orbit orbit-d"><span>TEAM</span></div></div></section>
+
+    <footer class="site-footer page-shell"><div class="footer-main"><div><Brand /><p>AI strategy, custom agents, connected workflows, and team enablement for businesses ready to work smarter.</p><a href="mailto:hello@seestemic.com">hello@seestemic.com <span aria-hidden="true">↗</span></a></div><div><b>Explore</b><a href="#capabilities">Capabilities</a><a href="#approach">Approach</a><a href="#company">Company</a></div><div><b>Connect</b><a href="mailto:hello@seestemic.com">Contact</a><a href="#linkedin">LinkedIn</a></div><div><b>Legal</b><a href="#privacy">Privacy</a></div></div><div class="footer-bottom"><span>© 2026 Seestemic</span><span>AI that works for business.</span></div></footer>
+  </main>
+</BaseLayout>
