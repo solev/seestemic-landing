@@ -8,7 +8,7 @@ import EnablementScene from "../components/EnablementScene.astro";
 import CapabilityVisual from "../components/CapabilityVisual.astro";
 import OpportunityMap from "../components/OpportunityMap.astro";
 import PaybackVisual from "../components/PaybackVisual.astro";
-import { siClaudecode, siCursor, siGithubcopilot, siGooglegemini } from "simple-icons";
+import { siGithubcopilot, siGooglegemini } from "simple-icons";
 
 const process = [
   ["01", "Discover", "Find the work where AI can create the clearest return.", "AI opportunity map + business case"],
@@ -48,19 +48,19 @@ const buildCapabilities = [
     visual: "workflow",
   },
   {
-    eyebrow: "AI ENABLEMENT & AGENT ECOSYSTEMS",
-    title: "Turn everyday AI use into company capability",
-    description: "We configure, connect, and extend the AI tools your people already use—then add company context, practical workflows, guardrails, and training.",
-    tags: ["Choose the right tools", "Custom skills & agents", "Team training"],
+    eyebrow: "AI TOOLS, CODING HARNESSES & AGENT SYSTEMS",
+    title: "Make every AI tool work like one system",
+    description: "We connect coding harnesses and everyday AI tools to the right company context, workflows, controls, and training—so capability grows instead of fragmenting.",
+    tags: ["Coding harnesses", "Company context", "Adoption & governance"],
     visual: "ecosystem",
   },
 ];
 
 const agentPlatforms = [
   { name: "Codex", category: "BUILD", kind: "codex" },
-  { name: "Claude Code", category: "BUILD", icon: siClaudecode },
+  { name: "Claude Code", category: "BUILD", kind: "claude" },
   { name: "GitHub Copilot", category: "BUILD", icon: siGithubcopilot },
-  { name: "Cursor", category: "BUILD", icon: siCursor },
+  { name: "Cursor", category: "BUILD", kind: "cursor" },
   { name: "ChatGPT", category: "KNOWLEDGE", kind: "chatgpt" },
   { name: "Microsoft 365 Copilot", category: "KNOWLEDGE", kind: "microsoft" },
   { name: "Gemini", category: "KNOWLEDGE", icon: siGooglegemini },
@@ -170,7 +170,7 @@ const paybackAreas = [
 
     <section class="story-chapter story-chapter-tint"><article class="story-block reverse page-shell"><div class="story-copy"><span>02 / CONNECTED WORKFLOWS</span><h3>One workflow. Every system.</h3><p>AI connects the tools you already use, moving information between them without copy-paste work, missed handoffs, or another dashboard for your team to maintain.</p><ul><li>Email, CRM and document automation</li><li>Human approvals at the right moments</li><li>Clear audit trail from start to finish</li></ul></div><SystemsScene /></article></section>
 
-    <section class="story-chapter"><article class="story-block page-shell"><div class="story-copy"><span>03 / AI ENABLEMENT</span><h3>Your team already uses AI. Make it work like a system.</h3><p>We help you choose where tools like Codex, Claude Code, Copilot, ChatGPT, Cursor, and Gemini fit—then connect them to the right company context, workflows, controls, and people.</p><ul><li>Standardize tools, access, and guardrails</li><li>Build role-specific agents, skills, and automations</li><li>Train teams and measure real adoption</li></ul></div><EnablementScene platforms={agentPlatforms} /></article></section>
+    <section class="story-chapter"><article class="story-block page-shell"><div class="story-copy"><span>03 / AI ENABLEMENT</span><h3>Your team already uses AI. Make it work like a system.</h3><p>We help you choose where coding harnesses like Codex, Claude Code, Copilot, and Cursor—and knowledge tools like ChatGPT, Microsoft 365 Copilot, and Gemini—fit. Then we connect each one to company context, workflows, controls, and people.</p><ul><li>Standardize harnesses, models, access, and guardrails</li><li>Build shared skills, agents, and automations</li><li>Train teams and measure real adoption</li></ul></div><EnablementScene platforms={agentPlatforms} /></article></section>
 
     <section class="partner-section" id="partnership"><div class="page-shell"><span class="section-index">03 / THE PARTNERSHIP</span><div class="partner-head"><h2>One partner.<br />From first opportunity<br />to everyday capability.</h2><p>We do more than deliver software. We work alongside your leaders and teams to choose the right problems, build useful systems, and make AI a capability your business can confidently grow.</p></div><div class="partner-path"><article><span>01</span><b>Find the value</b><p>Opportunity mapping tied to practical business outcomes.</p></article><article><span>02</span><b>Build it around you</b><p>Custom agents and workflows connected to your current tools.</p></article><article class="training-card"><span>03</span><small>TRAINING INCLUDED</small><b>Teach the team</b><p>Role-based workshops, practical playbooks, and hands-on guidance.</p></article><article><span>04</span><b>Improve what works</b><p>Ongoing monitoring, refinement, and expansion after launch.</p></article></div><div class="partner-note"><span>ENABLEMENT, NOT A HANDOVER</span><h3>Your people should understand the system—not depend on us to operate it.</h3><p>We train employees to use AI responsibly, recognize where it helps, review its work, and build better habits around it. When new opportunities emerge, we are still there to help.</p></div></div></section>
 

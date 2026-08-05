@@ -13,10 +13,64 @@ interface Props {
 }
 
 const { platforms } = Astro.props;
+
+const codingPlatforms = platforms.filter((platform) => platform.category === "BUILD");
+const knowledgePlatforms = platforms.filter((platform) => platform.category === "KNOWLEDGE");
 ---
 
-<div class="story-scene enablement-scene" aria-label="Supported AI agent platforms connected through a company enablement layer">
-  <div class="enablement-top"><div><small>YOUR AI ECOSYSTEM</small><b>Tools your team already uses</b></div><span><i></i> Vendor-neutral</span></div>
-  <div class="agent-platform-grid">{platforms.map((platform) => <div class="agent-platform"><AgentPlatformIcon platform={platform} /><p><b>{platform.name}</b><small>{platform.category}</small></p><span>✓</span></div>)}</div>
-  <div class="enablement-layer"><div><small>SEESTEMIC ENABLEMENT LAYER</small><b>Make every tool work with your business—not around it.</b></div><ul><li><span>01</span>Company context</li><li><span>02</span>Custom skills & workflows</li><li><span>03</span>Security & governance</li><li><span>04</span>Training & adoption</li></ul></div>
+<div class="story-scene enablement-scene" role="img" aria-label="A company AI workbench connecting coding harnesses and knowledge tools to shared context, workflows, controls, and human review">
+  <div class="workbench-appbar" aria-hidden="true">
+    <div class="workbench-identity"><span>S</span><p><b>Company AI workspace</b><small>Configured by Seestemic</small></p></div>
+    <div class="workbench-path"><span>NORTHSTAR</span><i></i><b>Product &amp; engineering</b></div>
+    <div class="workbench-health"><i></i><span>POLICY ACTIVE</span></div>
+  </div>
+  <div class="workbench-shell" aria-hidden="true">
+    <aside class="workbench-sidebar">
+      <div class="workbench-sidebar-label"><span>CODING HARNESSES</span><b>04</b></div>
+      <div class="workbench-harness-list">
+        {codingPlatforms.map((platform, index) => <div class={index === 0 ? "workbench-harness active" : "workbench-harness"}><AgentPlatformIcon platform={platform} /><p><b>{platform.name}</b><small>{index === 0 ? "ACTIVE TASK" : "AVAILABLE"}</small></p><i></i></div>)}
+      </div>
+      <div class="workbench-sidebar-label secondary"><span>KNOWLEDGE TOOLS</span><b>03</b></div>
+      <div class="workbench-knowledge-list">
+        {knowledgePlatforms.map((platform) => <div><AgentPlatformIcon platform={platform} /><span>{platform.name}</span></div>)}
+      </div>
+      <div class="workbench-custom-agent"><span>S</span><p><b>Custom agent</b><small>Company owned</small></p><i></i></div>
+    </aside>
+    <section class="workbench-main">
+      <header class="workbench-header">
+        <div><small>ENG-247 · ACTIVE TASK</small><h4>Prepare the onboarding flow for release</h4></div>
+        <div class="workbench-active-harness"><AgentPlatformIcon platform={codingPlatforms[0]} /><span>Codex</span></div>
+      </header>
+      <div class="workbench-content">
+        <article class="workbench-agent-run">
+          <div class="workbench-run-status"><span><i></i>AGENT RUNNING</span><small>01:42</small></div>
+          <p class="workbench-prompt">Review the onboarding flow against our design system and release checklist. Prepare a safe fix for human approval.</p>
+          <ol class="workbench-steps">
+            <li class="complete"><i></i><p><b>Company context loaded</b><small>Design system · security policy · release checklist</small></p><span>0.3s</span></li>
+            <li class="complete"><i></i><p><b>Implementation reviewed</b><small>8 files inspected across the onboarding flow</small></p><span>8.1s</span></li>
+            <li class="active"><i></i><p><b>Preparing a focused change</b><small>Aligning form states and access controls</small></p><span>NOW</span></li>
+          </ol>
+          <div class="workbench-change-set">
+            <div><span>CHANGE SET</span><b>2 files</b></div>
+            <p><code>OnboardingForm.astro</code><span class="added">+24</span><span class="removed">−7</span></p>
+            <p><code>onboarding.css</code><span class="added">+18</span><span class="removed">−3</span></p>
+          </div>
+          <div class="workbench-approval"><span><i></i>Human review required</span><b>Ready in ~1 min</b></div>
+        </article>
+        <aside class="workbench-context">
+          <div class="workbench-context-head"><span>CONTEXT GRAPH</span><b>4 sources</b></div>
+          <div class="workbench-context-map">
+            <div class="context-core"><span>S</span><p><b>Task context</b><small>Permission aware</small></p></div>
+            <div class="context-source source-a"><i></i><p><b>Design system</b><small>v2.4</small></p></div>
+            <div class="context-source source-b"><i></i><p><b>Security policy</b><small>Current</small></p></div>
+            <div class="context-source source-c"><i></i><p><b>Release checks</b><small>12 rules</small></p></div>
+            <svg viewBox="0 0 260 170" preserveAspectRatio="none"><path d="M132 84 C90 84 93 35 52 35"></path><path d="M132 84 C180 84 174 35 214 35"></path><path d="M132 84 C132 124 188 126 214 137"></path></svg>
+          </div>
+          <div class="workbench-controls"><div><span>CONTROLS</span><b>Enforced</b></div><ul><li><i></i>Pull request required</li><li><i></i>Secrets blocked</li><li><i></i>Audit trail on</li></ul></div>
+        </aside>
+      </div>
+      <div class="workbench-command"><span>/</span><p>Ask another harness to review this change</p><kbd>⌘ ↵</kbd></div>
+    </section>
+  </div>
+  <div class="workbench-foundation" aria-hidden="true"><div><b>01</b><p>Company context<small>Shared across tools</small></p></div><div><b>02</b><p>Custom skills<small>Built for each role</small></p></div><div><b>03</b><p>Access controls<small>Human ownership</small></p></div><div><b>04</b><p>Adoption data<small>Improve what works</small></p></div></div>
 </div>
