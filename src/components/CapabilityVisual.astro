@@ -23,5 +23,23 @@ const { type, platforms } = Astro.props;
 ) : type === "workflow" ? (
   <div class="capability-visual cap-workflow" aria-hidden="true"><div class="cap-window"><span>Invoice workflow</span><b>5 systems</b></div><div class="mini-flow"><div><span>✉</span><small>Email</small></div><i></i><div class="active"><span>✦</span><small>Extract</small></div><i></i><div><span>✓</span><small>Approve</small></div></div><div class="workflow-status"><span><i></i>3 invoices processed</span><b>42 min saved</b></div></div>
 ) : (
-  <div class="capability-visual cap-ecosystem" aria-hidden="true"><div class="cap-window"><span>AI enablement</span><b><i></i> 7 tools supported</b></div><div class="mini-platforms">{platforms.slice(0, 4).map((platform) => <div><AgentPlatformIcon platform={platform} /><span>{platform.name}</span></div>)}</div><div class="mini-enablement-layer"><span>SEESTEMIC LAYER</span><b>Context · workflows · guardrails · training</b></div></div>
+  <div class="capability-visual cap-ecosystem" aria-hidden="true">
+    <div class="cap-window cap-ecosystem-window"><span>AI operations / engineering</span><b><i></i> Harnesses connected</b></div>
+    <div class="harness-mini-shell">
+      <aside class="harness-mini-rail">
+        <span>TOOLS</span>
+        {platforms.slice(0, 4).map((platform, index) => <div class={index === 0 ? "active" : ""}><AgentPlatformIcon platform={platform} /><b>{platform.name.replace("GitHub ", "")}</b><i></i></div>)}
+      </aside>
+      <div class="harness-mini-main">
+        <div class="harness-mini-head"><p><small>ACTIVE WORKFLOW</small><b>Release readiness review</b></p><span>Engineering</span></div>
+        <div class="harness-mini-task">
+          <div class="harness-mini-state"><span></span><b>Codex</b><small>RUNNING</small></div>
+          <p>Review the onboarding flow and prepare a safe fix.</p>
+          <div class="harness-mini-steps"><span><i></i>Company context loaded</span><span><i></i>Release checks running</span></div>
+          <div class="harness-mini-review"><span>2 files changed</span><b>Review required</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="harness-mini-foundation"><span>Context</span><i></i><span>Skills</span><i></i><span>Controls</span><i></i><span>Training</span></div>
+  </div>
 )}
