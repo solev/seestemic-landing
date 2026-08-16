@@ -1,0 +1,68 @@
+---
+interface Platform {
+  name: string;
+  category: string;
+  icon?: { path: string };
+  kind?: string;
+}
+
+interface Props {
+  platforms: Platform[];
+}
+
+const { platforms } = Astro.props;
+const activePlatform = platforms.find((platform) => platform.category === "BUILD");
+---
+
+<div class="agentic-coding-console" role="img" aria-label="A browser-like agent editor where Codex reviews an onboarding change, consults company guidance, and prepares a controlled change for approval.">
+  <div class="console-window">
+    <header class="console-browser" aria-hidden="true">
+      <div class="console-controls"><i></i><i></i><i></i></div>
+      <div class="console-address"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="10" height="6.5" rx="1.4"/><path d="M5 7V5a3 3 0 0 1 6 0v2"/></svg><span>northstar.ai/workspace</span><svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9"/><path d="M13.5 3v3.2H10.3"/></svg></div>
+      <span></span>
+    </header>
+
+    <div class="console-app">
+      <aside class="console-sidebar" aria-hidden="true">
+        <div class="console-mark"><span>S</span><b>Northstar</b></div>
+        <div class="console-group"><p>Active work</p><div class="console-row selected"><i class="dot-active"></i><span>Onboarding release</span></div><div class="console-row"><i class="dot-review"></i><span>Policy check</span></div><div class="console-row"><i class="dot-done"></i><span>Design-system audit</span></div></div>
+        <div class="console-group"><p>Recently reviewed</p><div class="console-row"><i class="dot-done"></i><span>Account access flow</span></div><div class="console-row"><i class="dot-done"></i><span>Support handover</span></div></div>
+        <div class="console-harness"><small>ACTIVE HARNESS</small>{activePlatform && <div><span>{activePlatform.name}</span><i></i></div>}<p>Company policy attached</p></div>
+      </aside>
+
+      <section class="console-main">
+        <header class="console-titlebar"><div><small>ENG-247 · REVIEW RUN</small><h4>Onboarding release review</h4></div><span><i></i> human approval required</span></header>
+        <div class="console-conversation">
+          <div class="console-prompt">Review the onboarding flow against our design system and release checklist. Prepare a safe change for review.</div>
+          <div class="console-response">
+            <p class="meta">Loaded <span>company guidance, access policy, release checklist</span></p>
+            <p>The task is grounded in the guidance your team already uses. The harness can prepare a recommendation, while the release owner keeps the final decision.</p>
+            <div class="console-context">
+              <header><span>SHARED CONTEXT</span><b>permission aware</b></header>
+              <div class="console-context-list">
+                <div><i>01</i><p><b>Design system</b><small>Approved patterns and form states</small></p><em>v2.4</em></div>
+                <div><i>02</i><p><b>Release checklist</b><small>12 checks for a safe handover</small></p><em>current</em></div>
+                <div><i>03</i><p><b>Access policy</b><small>Decisions that still need a person</small></p><em>enforced</em></div>
+              </div>
+              <footer><span><i></i> 3 approved sources attached</span><b>Audit trail on</b></footer>
+            </div>
+            <div class="console-result"><b>Review brief ready</b><p>Context, constraints, and the required human decision are collected in one place.</p></div>
+          </div>
+        </div>
+        <div class="console-composer" aria-hidden="true"><span>Ask for a second review or adjust the scope...</span><div><b>✦</b><small>Shared company context on</small><i>↑</i></div></div>
+      </section>
+    </div>
+  </div>
+  <div class="console-caption" aria-hidden="true"><span>GOVERNED AGENT RUN</span><p>Uses company context, prepares a focused change, then keeps the decision with your team.</p></div>
+</div>
+
+<style>
+  .agentic-coding-console{width:100%;min-width:0;padding:30px;border-radius:12px;background:#b6b9be;box-shadow:inset 0 0 0 .5px rgba(0,0,0,.06);color:#26251e}.console-window{overflow:hidden;border-radius:10px;background:#f2f1ed;box-shadow:0 22px 70px 4px rgba(0,0,0,.26),0 0 0 .5px rgba(0,0,0,.15)}
+  .console-browser{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;align-items:center;height:38px;padding-inline:12px;border-bottom:1px solid rgba(38,37,30,.1);background:#ebeae5}.console-controls{display:flex;gap:6px}.console-controls i{width:10px;height:10px;border-radius:50%;background:rgba(38,37,30,.2)}.console-address{display:flex;align-items:center;gap:10px;justify-self:center;width:100%;max-width:320px;padding:3px 10px;border:1px solid rgba(38,37,30,.06);border-radius:8px;color:rgba(38,37,30,.4);font-size:11px}.console-address span{flex:1;overflow:hidden;color:rgba(38,37,30,.55);text-align:center;text-overflow:ellipsis;white-space:nowrap}
+  .console-app{display:grid;grid-template-columns:172px minmax(0,1fr);min-height:465px}.console-sidebar{display:flex;flex-direction:column;min-width:0;border-right:1px solid rgba(38,37,30,.1);background:#f2f1ed}.console-mark{display:flex;align-items:center;gap:8px;padding:12px}.console-mark span{display:grid;place-items:center;width:18px;height:18px;border-radius:5px;background:#315efb;color:#fff;font-size:7px;font-weight:700}.console-mark b{font-size:10px;font-weight:600}.console-group{padding:7px 6px 0}.console-group p{margin:0;padding:0 6px 5px;font-size:10px;color:rgba(38,37,30,.5)}.console-row{display:flex;align-items:center;gap:7px;margin-bottom:2px;padding:6px;border-radius:6px;color:rgba(38,37,30,.62);font-size:11px;line-height:14px}.console-row.selected{background:#e5e4df;color:#26251e}.console-row>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.console-row>i{width:6px;height:6px;flex:0 0 auto;border-radius:50%;background:rgba(38,37,30,.2)}.console-row .dot-active{background:#3b82f6}.console-row .dot-review{border:1px solid #d9a53c;background:#fff6dc}.console-row .dot-done{background:#87c69c}.console-harness{margin-top:auto;padding:12px;border-top:1px solid rgba(38,37,30,.1)}.console-harness small{display:block;margin-bottom:7px;font-size:7px;letter-spacing:.07em;color:rgba(38,37,30,.45)}.console-harness>div{display:flex;align-items:center;gap:7px;color:#4c4b46;font-size:10px}.console-harness>div>span{font-weight:600}.console-harness>div>i{width:5px;height:5px;margin-left:auto;border-radius:50%;background:#69c08a}.console-harness p{margin:5px 0 0;font-size:8px;color:rgba(38,37,30,.55)}
+  .console-main{display:flex;min-width:0;flex-direction:column;background:#f2f1ed}.console-titlebar{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;padding:12px 16px 10px}.console-titlebar small{font-family:var(--mono);font-size:7px;letter-spacing:.07em;color:#5270d4}.console-titlebar h4{margin:6px 0 0;font-size:15px;line-height:1.15;font-weight:600;letter-spacing:-.025em}.console-titlebar>span{display:flex;align-items:center;gap:5px;margin-top:5px;color:#81692e;font-size:8px;white-space:nowrap}.console-titlebar>span i{width:5px;height:5px;border-radius:50%;background:#d5a94c}.console-conversation{min-height:0;flex:1;overflow:hidden}.console-prompt{margin:0 16px;padding:10px;border:1px solid rgba(38,37,30,.1);border-radius:8px;background:#ebeae5;font-size:12px;line-height:1.38}.console-response{padding:8px 24px 14px}.console-response p{margin:0;padding-top:6px;font-size:12px;line-height:1.38}.console-response p.meta{padding-top:7px;font-size:10px;color:rgba(38,37,30,.6)}.console-response p.meta span{opacity:.65}
+  .console-context{margin:14px 0 12px;overflow:hidden;border:1px solid rgba(38,37,30,.14);border-radius:8px;background:#fff;box-shadow:0 10px 24px rgba(20,20,18,.08)}.console-context header{display:flex;align-items:center;justify-content:space-between;padding:9px 10px;border-bottom:1px solid #dedfd9;font-family:var(--mono);font-size:7px;letter-spacing:.07em;color:#6a6d66}.console-context header b{color:#3d5cc9;font-weight:500}.console-context-list{padding:0 10px}.console-context-list>div{display:grid;grid-template-columns:24px minmax(0,1fr) auto;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid #e4e5e0}.console-context-list>div:last-child{border-bottom:0}.console-context-list i{display:grid;place-items:center;width:20px;height:20px;border-radius:5px;background:#eef0ea;color:#545750;font-family:var(--mono);font-size:7px;font-style:normal}.console-context-list p{display:flex;min-width:0;flex-direction:column;gap:2px;margin:0;padding:0}.console-context-list p b{font-size:9px}.console-context-list p small{overflow:hidden;color:#868982;font-size:8px;text-overflow:ellipsis;white-space:nowrap}.console-context-list em{color:#678073;font-family:var(--mono);font-size:7px;font-style:normal}.console-context footer{display:flex;align-items:center;gap:7px;padding:8px 10px;border-top:1px solid #dedfd9;background:#f3f4f0;color:#686b64;font-size:8px}.console-context footer span{display:flex;align-items:center;gap:5px}.console-context footer i{width:5px;height:5px;border-radius:50%;background:#69c08a}.console-context footer b{margin-left:auto;color:#3e5fc7;font-size:8px;font-weight:500}.console-result{padding:10px;border-left:2px solid #315efb;background:#e6eafe}.console-result b{font-size:11px;font-weight:600}.console-result p{padding-top:4px;color:#505a7d;font-size:10px}.console-composer{margin:0 16px 16px;border:1px solid rgba(38,37,30,.1);border-radius:8px;background:#f7f7f4;color:rgba(38,37,30,.55);font-size:11px}.console-composer>span{display:block;padding:9px 9px 6px}.console-composer>div{display:flex;align-items:center;gap:6px;padding:4px 8px 8px}.console-composer b{display:grid;place-items:center;width:18px;height:18px;border-radius:5px;background:#e8ecff;color:#315efb;font-size:9px}.console-composer small{font-size:9px}.console-composer i{display:grid;place-items:center;width:19px;height:19px;margin-left:auto;border-radius:50%;background:#deded8;color:#777872;font-size:12px;font-style:normal}
+  .console-caption{display:grid;grid-template-columns:130px minmax(0,1fr);gap:22px;padding:14px 2px 0;color:#454641}.console-caption span{font-family:var(--mono);font-size:7px;letter-spacing:.08em}.console-caption p{max-width:460px;margin:0;font-size:11px;line-height:1.45}
+  @media(min-width:1024px){.agentic-coding-console{padding:40px}.console-app{min-height:515px}.console-titlebar{padding-top:15px}.console-titlebar h4{font-size:17px}.console-response p{font-size:13px}.console-context{margin-top:16px}}
+  @media(max-width:720px){.agentic-coding-console{width:min(100%,calc(100vw - 32px));padding:14px;border-radius:9px}.console-browser{grid-template-columns:34px minmax(0,1fr) 34px;padding-inline:9px}.console-controls{gap:4px}.console-controls i{width:8px;height:8px}.console-address{gap:6px;font-size:9px}.console-app{grid-template-columns:1fr;min-height:0}.console-sidebar{display:none}.console-titlebar{padding:12px}.console-titlebar h4{font-size:15px}.console-titlebar>span{display:none}.console-prompt{margin-inline:12px;font-size:10px}.console-response{padding-inline:16px}.console-response p{font-size:11px}.console-response p.meta{font-size:9px}.console-context header,.console-context-list p small,.console-context-list em,.console-context footer{font-size:7px}.console-composer{margin:0 12px 12px}.console-caption{grid-template-columns:1fr;gap:5px;padding-top:11px}.console-caption p{font-size:10px}}
+</style>
