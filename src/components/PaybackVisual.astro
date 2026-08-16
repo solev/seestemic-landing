@@ -7,7 +7,7 @@ const { type } = Astro.props;
 ---
 
 {type === "coordination" ? (
-  <div class="payback-visual coordination-visual" aria-hidden="true"><div class="payback-bar"><span>REQUEST FLOW</span><b><i></i>Running</b></div><div class="coordination-list"><div><span>✉</span><p><small>NEW REQUEST</small><b>Website inquiry received</b></p><em>Now</em></div><i></i><div><span>✦</span><p><small>QUALIFIED</small><b>CRM enriched and owner assigned</b></p><em>12 sec</em></div><i></i><div><span>✓</span><p><small>NEXT STEP</small><b>Follow-up meeting proposed</b></p><em>Done</em></div></div></div>
+  <div class="payback-visual coordination-visual" aria-hidden="true"><div class="payback-bar"><span>REQUEST FLOW</span><b><i></i>Running</b></div><div class="coordination-list"><div><span>✉</span><p><small>NEW REQUEST</small><b>Website inquiry received</b></p><em>Now</em></div><i></i><div><span>✦</span><p><small>QUALIFIED</small><b>CRM updated and owner assigned</b></p><em>12 sec</em></div><i></i><div><span>✓</span><p><small>NEXT STEP</small><b>Follow-up meeting proposed</b></p><em>Done</em></div></div></div>
 ) : type === "documents" ? (
   <div class="payback-visual documents-visual" aria-hidden="true"><div class="payback-bar"><span>DOCUMENT PROCESSING</span><b>42 today</b></div><div class="document-workspace"><div class="document-stack"><i></i><i></i><article><span>INVOICE #4921</span><b>Northstar Logistics</b><p></p><p></p><p></p></article></div><div class="extracted-data"><small>EXTRACTED</small><div><span>Supplier</span><b>Northstar Logistics</b></div><div><span>Total</span><b>€4,850.00</b></div><div><span>Order</span><b>PO-1842</b></div><em>✓ Ready for approval</em></div></div></div>
 ) : (

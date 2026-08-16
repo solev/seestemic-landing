@@ -1,13 +1,132 @@
-<div class="story-scene systems-scene" aria-label="AI workflow connecting business systems">
-  <div class="scene-bar"><span>CLIENT REQUEST / WORKFLOW</span><b>8 steps · 5 systems</b></div>
+<div class="story-scene systems-scene" role="img" aria-label="Illustrative AI workflow moving a client request from email and documents into CRM updates, human approval, and a scheduled follow-up">
+  <div class="scene-bar"><span>REQUEST TO FOLLOW-UP</span><b>5 systems · 1 human approval</b></div>
   <div class="systems-canvas">
-    <div class="system-node email"><span>✉</span><p><b>New email</b><small>Inquiry received</small></p></div>
-    <div class="system-node document"><span>▤</span><p><b>Documents</b><small>Data extracted</small></p></div>
-    <div class="system-node agent"><span>✦</span><p><b>Seestemic agent</b><small>Qualify · decide · coordinate</small></p><i></i><i></i><i></i></div>
-    <div class="system-node crm"><span>▦</span><p><b>CRM</b><small>Record enriched</small></p></div>
-    <div class="system-node approval"><span>✓</span><p><b>Human approval</b><small>Commercial review</small></p></div>
-    <div class="system-node calendar"><span>□</span><p><b>Calendar</b><small>Follow-up booked</small></p></div>
-    <svg class="system-paths" viewBox="0 0 900 390" preserveAspectRatio="none" aria-hidden="true"><path d="M165 88 C280 88 250 190 398 190"></path><path d="M165 300 C280 300 250 205 398 205"></path><path d="M510 190 C630 190 610 86 740 86"></path><path d="M510 205 C625 205 615 200 740 200"></path><path d="M510 215 C635 215 610 310 740 310"></path></svg>
-    <div class="system-pulse p1"></div><div class="system-pulse p2"></div><div class="system-pulse p3"></div>
+    <div class="system-node email"><span aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="2"></rect><path d="m4.5 7 7.5 5.5L19.5 7"></path></svg></span><p><b>Email</b><small>Inquiry received</small></p></div>
+    <div class="system-node document"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3.5h8l4 4V20H6z"></path><path d="M14 3.5V8h4M9 12h6M9 15.5h6"></path></svg></span><p><b>Documents</b><small>Requirements extracted</small></p></div>
+    <div class="system-node agent"><span aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.5"></circle><circle cx="5" cy="6" r="1.5"></circle><circle cx="19" cy="6" r="1.5"></circle><circle cx="5" cy="18" r="1.5"></circle><circle cx="19" cy="18" r="1.5"></circle><path d="m6.2 7 4 3.5m7.6-3.5-4 3.5m-7.6 6.5 4-3.5m7.6 3.5-4-3.5"></path></svg></span><p><b>AI workflow</b><small>Understand · route · update</small></p><i></i><i></i><i></i></div>
+    <div class="system-node crm"><span aria-hidden="true"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7.5" ry="3"></ellipse><path d="M4.5 6v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V6m-15 6v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-6"></path></svg></span><p><b>CRM</b><small>Customer record updated</small></p></div>
+    <div class="system-node approval"><span aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"></circle><path d="m8.2 12.2 2.5 2.5 5.4-5.5"></path></svg></span><p><b>Human approval</b><small>Commercial decision</small></p></div>
+    <div class="system-node calendar"><span aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="15" rx="2"></rect><path d="M7.5 3.5v4m9-4v4m-13 3h17m-12 4h2m3 0h2"></path></svg></span><p><b>Calendar</b><small>Follow-up scheduled</small></p></div>
+
+    <svg class="system-paths" aria-hidden="true">
+      <defs>
+        <marker id="workflow-arrow" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="6" markerHeight="6" orient="auto" markerUnits="strokeWidth"><path d="M0 0 6 3 0 6z"></path></marker>
+      </defs>
+      <path id="workflow-route-email"></path>
+      <path id="workflow-route-document"></path>
+      <path id="workflow-route-crm"></path>
+      <path id="workflow-route-approval"></path>
+      <path id="workflow-route-calendar"></path>
+
+      <circle class="system-packet" r="4.5">
+        <animateMotion dur="4.1s" begin="-0.7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keyPoints="0;1" keySplines=".42 0 .18 1"><mpath href="#workflow-route-email"></mpath></animateMotion>
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.88;1" dur="4.1s" begin="-0.7s" repeatCount="indefinite"></animate>
+      </circle>
+      <circle class="system-packet" r="4.5">
+        <animateMotion dur="4.6s" begin="-3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keyPoints="0;1" keySplines=".42 0 .18 1"><mpath href="#workflow-route-document"></mpath></animateMotion>
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.88;1" dur="4.6s" begin="-3s" repeatCount="indefinite"></animate>
+      </circle>
+      <circle class="system-packet" r="4.5">
+        <animateMotion dur="4.8s" begin="-1.5s" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keyPoints="0;1" keySplines=".42 0 .18 1"><mpath href="#workflow-route-crm"></mpath></animateMotion>
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.88;1" dur="4.8s" begin="-1.5s" repeatCount="indefinite"></animate>
+      </circle>
+      <circle class="system-packet" r="4.5">
+        <animateMotion dur="4.2s" begin="-2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keyPoints="0;1" keySplines=".42 0 .18 1"><mpath href="#workflow-route-approval"></mpath></animateMotion>
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.88;1" dur="4.2s" begin="-2.4s" repeatCount="indefinite"></animate>
+      </circle>
+      <circle class="system-packet" r="4.5">
+        <animateMotion dur="5s" begin="-4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keyPoints="0;1" keySplines=".42 0 .18 1"><mpath href="#workflow-route-calendar"></mpath></animateMotion>
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.88;1" dur="5s" begin="-4s" repeatCount="indefinite"></animate>
+      </circle>
+    </svg>
   </div>
 </div>
+
+<script>
+  const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  document.querySelectorAll(".systems-scene").forEach((scene) => {
+    const canvas = scene.querySelector(".systems-canvas");
+    const svg = scene.querySelector(".system-paths");
+    if (!canvas || !svg || typeof svg.pauseAnimations !== "function") return;
+
+    const anchor = (node, side, ratio = 0.5) => {
+      const canvasBounds = canvas.getBoundingClientRect();
+      const bounds = node.getBoundingClientRect();
+      const left = bounds.left - canvasBounds.left;
+      const top = bounds.top - canvasBounds.top;
+
+      if (side === "left" || side === "right") {
+        return { x: side === "left" ? left : left + bounds.width, y: top + bounds.height * ratio, side };
+      }
+
+      return { x: left + bounds.width * ratio, y: side === "top" ? top : top + bounds.height, side };
+    };
+
+    const curveBetween = (start, end) => {
+      const horizontal = start.side === "left" || start.side === "right";
+
+      if (horizontal) {
+        const direction = start.side === "right" ? 1 : -1;
+        const reach = Math.max(30, Math.abs(end.x - start.x) * 0.48);
+        return `M ${start.x.toFixed(1)} ${start.y.toFixed(1)} C ${(start.x + reach * direction).toFixed(1)} ${start.y.toFixed(1)}, ${(end.x - reach * direction).toFixed(1)} ${end.y.toFixed(1)}, ${end.x.toFixed(1)} ${end.y.toFixed(1)}`;
+      }
+
+      const direction = start.side === "bottom" ? 1 : -1;
+      const reach = Math.max(30, Math.abs(end.y - start.y) * 0.48);
+      return `M ${start.x.toFixed(1)} ${start.y.toFixed(1)} C ${start.x.toFixed(1)} ${(start.y + reach * direction).toFixed(1)}, ${end.x.toFixed(1)} ${(end.y - reach * direction).toFixed(1)}, ${end.x.toFixed(1)} ${end.y.toFixed(1)}`;
+    };
+
+    const routes = [
+      { id: "workflow-route-email", from: ".email", to: ".agent", desktop: ["right", "left"], mobile: ["bottom", "top", 0.5, 0.35] },
+      { id: "workflow-route-document", from: ".document", to: ".agent", desktop: ["right", "left"], mobile: ["top", "bottom", 0.5, 0.35] },
+      { id: "workflow-route-crm", from: ".agent", to: ".crm", desktop: ["right", "left"], mobile: ["top", "bottom", 0.65, 0.5] },
+      { id: "workflow-route-approval", from: ".agent", to: ".approval", desktop: ["right", "left"], mobile: ["right", "left", 0.5, 0.5] },
+      { id: "workflow-route-calendar", from: ".agent", to: ".calendar", desktop: ["right", "left"], mobile: ["bottom", "top", 0.65, 0.5] },
+    ];
+
+    const updateRoutes = () => {
+      const compact = canvas.clientWidth <= 560;
+
+      routes.forEach(({ id, from, to, desktop, mobile }) => {
+        const source = canvas.querySelector(from);
+        const destination = canvas.querySelector(to);
+        const path = svg.querySelector(`#${id}`);
+        if (!source || !destination || !path) return;
+
+        const [fromSide, toSide, fromRatio = 0.5, toRatio = 0.5] = compact ? mobile : desktop;
+        path.setAttribute("d", curveBetween(anchor(source, fromSide, fromRatio), anchor(destination, toSide, toRatio)));
+      });
+    };
+
+    let isVisible = false;
+    const syncMotion = () => {
+      const shouldRun = isVisible && !document.hidden && !motionPreference.matches;
+      scene.classList.toggle("is-motion-active", shouldRun);
+      if (shouldRun) svg.unpauseAnimations();
+      else svg.pauseAnimations();
+    };
+
+    const updateVisibility = () => {
+      const bounds = scene.getBoundingClientRect();
+      isVisible = bounds.bottom > 0 && bounds.top < window.innerHeight;
+      syncMotion();
+    };
+
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      syncMotion();
+    }, { threshold: 0.15 });
+
+    observer.observe(scene);
+    document.addEventListener("visibilitychange", syncMotion);
+    motionPreference.addEventListener("change", syncMotion);
+    window.addEventListener("scroll", updateVisibility, { passive: true });
+    window.addEventListener("resize", updateVisibility);
+    new ResizeObserver(updateRoutes).observe(canvas);
+    requestAnimationFrame(() => {
+      updateRoutes();
+      updateVisibility();
+    });
+  });
+</script>
