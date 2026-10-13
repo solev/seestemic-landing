@@ -1,0 +1,38 @@
+---
+import Logo from "./Logo.astro";
+import { email, introCallUrl, navLinks } from "../data/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" aria-label="Seestemic home"><Logo /></a>
+        <p>AI helpers for the everyday work of running a business.</p>
+        <a class="footer-mail" href={`mailto:${email}`}>{email}</a>
+      </div>
+      <nav class="footer-col" aria-label="Footer">
+        <b>Explore</b>
+        {navLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+      </nav>
+      <div class="footer-col">
+        <b>Get in touch</b>
+        <a
+          href={introCallUrl}
+          target="_blank"
+          rel="noreferrer"
+          data-booking-trigger
+          aria-expanded="false"
+          aria-controls="intro-call-calendar">Book an intro call</a
+        >
+        <a href={`mailto:${email}`}>Email us</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© {year} Seestemic</span>
+      <span>Start with one job. Keep what works.</span>
+    </div>
+  </div>
+</footer>

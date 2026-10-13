@@ -1,0 +1,74 @@
+---
+/**
+ * The Seestemic helper: a speech-bubble squircle with two pill eyes.
+ * Solid and outline helpers can follow the pointer (data-helper-follow) and blink;
+ * avatars are small, coloured and still.
+ */
+interface Props {
+  variant?: "solid" | "outline" | "avatar";
+  color?: string;
+  follow?: boolean;
+  label?: string;
+  class?: string;
+  tilt?: number;
+  /** How far the eyes can travel, in viewBox units. */
+  reach?: number;
+}
+
+const { variant = "solid", color, follow = false, label, class: className, tilt = -7, reach = 7 } = Astro.props;
+
+// Continuous-curvature corners: extents per corner, controls pulled close to the vertex.
+function squircle(x: number, y: number, w: number, h: number, [tl, tr, br, bl]: number[], k = 0.14) {
+  return [
+    `M${x + tl} ${y}`,
+    `H${x + w - tr}`,
+    `C${x + w - tr * k} ${y} ${x + w} ${y + tr * k} ${x + w} ${y + tr}`,
+    `V${y + h - br}`,
+    `C${x + w} ${y + h - br * k} ${x + w - br * k} ${y + h} ${x + w - br} ${y + h}`,
+    `H${x + bl}`,
+    `C${x + bl * k} ${y + h} ${x} ${y + h - bl * k} ${x} ${y + h - bl}`,
+    `V${y + tl}`,
+    `C${x} ${y + tl * k} ${x + tl * k} ${y} ${x + tl} ${y}`,
+    "Z",
+  ].join("");
+}
+
+const body = squircle(10, 10, 100, 100, [48, 48, 20, 48]);
+
+// Stagger blinks so a page full of helpers never blinks in unison.
+const g = globalThis as typeof globalThis & { __helperCount?: number };
+g.__helperCount = (g.__helperCount ?? 0) + 1;
+const blinkDelay = ((g.__helperCount * 2.3) % 7).toFixed(2);
+
+const style = [color ? `--helper-color:${color}` : "", `--blink-delay:-${blinkDelay}s`].filter(Boolean).join(";");
+---
+
+<svg
+  class:list={["helper", `helper--${variant}`, className]}
+  viewBox="0 0 120 120"
+  role={label ? "img" : undefined}
+  aria-label={label}
+  aria-hidden={label ? undefined : "true"}
+  focusable="false"
+  data-helper-follow={follow ? "" : undefined}
+  data-reach={follow ? reach : undefined}
+  style={style}
+>
+  <g transform={`rotate(${tilt} 60 60)`}>
+    <path class="helper-body" d={body} pathLength="1" />
+    <g class="helper-eyes">
+      <g class="helper-eyes-open">
+        <rect class="helper-eye" x="41" y="37" width="12" height="27" rx="6" pathLength="1" />
+        <rect class="helper-eye" x="67" y="37" width="12" height="27" rx="6" pathLength="1" />
+      </g>
+      {
+        variant !== "avatar" && (
+          <g class="helper-eyes-happy">
+            <path d="M40.5 56.5Q47 44 53.5 56.5" />
+            <path d="M66.5 56.5Q73 44 79.5 56.5" />
+          </g>
+        )
+      }
+    </g>
+  </g>
+</svg>
