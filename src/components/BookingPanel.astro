@@ -1,0 +1,33 @@
+---
+import Icon from "./Icon.astro";
+import { introCallUrl } from "../data/site";
+---
+
+<section class="cta-booking" id="intro-call-calendar" aria-labelledby="intro-call-title" hidden>
+  <header class="booking-header">
+    <div>
+      <h3 id="intro-call-title">Choose a time with Martin</h3>
+      <p>Pick a slot that suits you. Times are shown in your own time zone.</p>
+    </div>
+    <div class="booking-header-actions">
+      <a class="btn btn-secondary btn-sm" href={introCallUrl} target="_blank" rel="noreferrer">
+        Open Cal.com
+        <Icon name="external" size={15} />
+      </a>
+      <button class="booking-close" type="button" aria-label="Close booking calendar">
+        <Icon name="close" size={18} />
+      </button>
+    </div>
+  </header>
+
+  <div class="booking-frame">
+    <div class="booking-status" role="status" aria-live="polite">
+      <i aria-hidden="true"></i>
+      <span>Loading available times…</span>
+    </div>
+    <div class="cal-inline" id="my-cal-inline-intro-call-with-martin"></div>
+    <noscript>
+      <p>The calendar needs JavaScript. <a href={introCallUrl}>Open Martin’s Cal.com page</a> instead.</p>
+    </noscript>
+  </div>
+</section>

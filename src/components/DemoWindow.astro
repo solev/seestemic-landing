@@ -1,0 +1,259 @@
+---
+import Helper from "./Helper.astro";
+import Icon from "./Icon.astro";
+import { demoThreads, helpers, type IconName } from "../data/helpers";
+
+const docIcons: Record<string, IconName> = {
+  quotes: "doc",
+  inbox: "mail",
+  frontDesk: "calendar",
+  invoices: "receipt",
+  bookkeeping: "receipt",
+  report: "doc",
+};
+---
+
+<div class="window" data-demo>
+  <div class="window-bar">
+    <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="window-title">Your helpers</span>
+    <span class="window-tools">
+      <button class="window-replay" type="button" data-demo-replay hidden>
+        <Icon name="replay" size={14} />
+        Replay
+      </button>
+      <span class="window-tag">Example</span>
+    </span>
+  </div>
+
+  <div class="window-body">
+    <div class="side">
+      <div class="side-search" aria-hidden="true">
+        <Icon name="search" size={15} />
+        <span>Search</span>
+      </div>
+      <div class="side-list" role="tablist" aria-orientation="vertical" aria-label="Example helpers">
+        {
+          demoThreads.map((thread, index) => {
+            const helper = helpers[thread.helper];
+            return (
+              <button
+                type="button"
+                class="side-item"
+                role="tab"
+                id={`demo-tab-${thread.helper}`}
+                aria-controls={`demo-thread-${thread.helper}`}
+                aria-selected={index === 0 ? "true" : "false"}
+                tabindex={index === 0 ? "0" : "-1"}
+                data-thread-tab={thread.helper}
+              >
+                <Helper variant="avatar" color={helper.color} class="side-avatar" />
+                <span class="side-name">{helper.name}</span>
+                <span class="side-time">{thread.time}</span>
+                <span class="side-preview">{thread.preview}</span>
+                {thread.unread && (
+                  <span class="side-unread">
+                    {thread.unread}
+                    <span class="sr-only"> need you</span>
+                  </span>
+                )}
+              </button>
+            );
+          })
+        }
+      </div>
+      <div class="side-me" aria-hidden="true">
+        <span class="side-me-avatar"><Icon name="user" size={15} /></span>
+        <span class="side-me-name">You<small>Owner</small></span>
+      </div>
+    </div>
+
+    <div class="threads">
+      {
+        demoThreads.map((thread, index) => {
+          const helper = helpers[thread.helper];
+          const last = thread.steps.length;
+          return (
+            <section
+              class="thread"
+              id={`demo-thread-${thread.helper}`}
+              role="tabpanel"
+              aria-labelledby={`demo-tab-${thread.helper}`}
+              hidden={index !== 0}
+              data-thread={thread.helper}
+            >
+              <header class="thread-head">
+                <Helper variant="avatar" color={helper.color} class="thread-avatar" />
+                <div class="thread-title">
+                  <h3>{helper.name}</h3>
+                  <p>{thread.subtitle}</p>
+                </div>
+              </header>
+
+              <div class="thread-body">
+                <div class="stream">
+                  <article class="msg-in" data-reveal="intro">
+                    <header class="msg-in-head">
+                      <span class="msg-in-avatar" aria-hidden="true">
+                        {thread.intro.from.charAt(0)}
+                      </span>
+                      <span class="msg-in-from">
+                        <b>{thread.intro.from}</b>
+                        {thread.intro.org && <span>{thread.intro.org}</span>}
+                      </span>
+                      <span class="msg-in-via">
+                        <Icon name={thread.intro.viaIcon} size={13} />
+                        {thread.intro.via}
+                        <span class="tnum">{thread.intro.time}</span>
+                      </span>
+                    </header>
+                    <p>{thread.intro.text}</p>
+                    {thread.intro.attachment && (
+                      <span class="attach">
+                        <Icon name="photo" size={14} />
+                        {thread.intro.attachment}
+                      </span>
+                    )}
+                  </article>
+
+                  <ol class="steps" aria-label={`What ${helper.name} did`}>
+                    {thread.steps.map((step) => (
+                      <li class="step" data-step>
+                        <span class="step-mark" aria-hidden="true">
+                          <Icon name="check" size={12} />
+                        </span>
+                        <span class="step-text">{step.text}</span>
+                        <span class="tool">
+                          <Icon name={step.tool} size={13} />
+                          {step.toolLabel}
+                        </span>
+                      </li>
+                    ))}
+                  </ol>
+
+                  {thread.ask && (
+                    <div class="msg-helper" data-reveal="ask">
+                      <Helper variant="avatar" color={helper.color} class="msg-avatar" />
+                      <p>{thread.ask}</p>
+                    </div>
+                  )}
+                  {thread.owner && (
+                    <div class="msg-owner" data-reveal="owner">
+                      <p data-owner-text>{thread.owner}</p>
+                    </div>
+                  )}
+                  {thread.system && (
+                    <p class="msg-system" data-reveal="system">
+                      <Icon name="check" size={13} />
+                      {thread.system}
+                    </p>
+                  )}
+                  <div class="msg-helper" data-reveal="reply">
+                    <Helper variant="avatar" color={helper.color} class="msg-avatar" />
+                    <p>{thread.reply}</p>
+                    <span class="typing" aria-hidden="true">
+                      <i />
+                      <i />
+                      <i />
+                    </span>
+                  </div>
+                </div>
+
+                <aside
+                  class="doc"
+                  aria-label={thread.doc.id ? `${thread.doc.title} ${thread.doc.id}` : thread.doc.title}
+                  data-doc
+                  data-has-sent={thread.doc.sent ? "" : undefined}
+                >
+                  <header class="doc-head">
+                    <span class="doc-icon" aria-hidden="true">
+                      <Icon name={docIcons[thread.helper] ?? "doc"} size={15} />
+                    </span>
+                    <span class="doc-title">
+                      {thread.doc.title}
+                      {thread.doc.id && <span class="tnum">{thread.doc.id}</span>}
+                    </span>
+                    <span class="doc-status" data-doc-status data-final={thread.doc.status}>
+                      {thread.doc.status}
+                    </span>
+                  </header>
+                  {thread.doc.meta && (
+                    <dl class="doc-meta">
+                      {thread.doc.meta.map((item) => (
+                        <div data-after-step={item.step ?? 1}>
+                          <dt>{item.label}</dt>
+                          <dd>{item.value}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  )}
+                  <ul class="doc-rows">
+                    {thread.doc.rows.map((row) => (
+                      <li data-after-step={row.step ?? Math.max(1, last - 1)}>
+                        <span class="doc-row-label">
+                          <b>{row.label}</b>
+                          {row.note && <small>{row.note}</small>}
+                        </span>
+                        {row.value && <span class="doc-row-value tnum">{row.value}</span>}
+                      </li>
+                    ))}
+                  </ul>
+                  {thread.doc.total && (
+                    <div class="doc-total" data-after-step={last}>
+                      <span>{thread.doc.total[0]}</span>
+                      <b class="tnum">{thread.doc.total[1]}</b>
+                    </div>
+                  )}
+                  {thread.doc.actions && (
+                    <div class="doc-actions" data-after-step={last}>
+                      <span class="pill pill-dark">{thread.doc.actions[0]}</span>
+                      {thread.doc.actions[1] && <span class="pill pill-light">{thread.doc.actions[1]}</span>}
+                    </div>
+                  )}
+                  {thread.doc.sent && (
+                    <p class="doc-sent">
+                      <Icon name="check" size={14} />
+                      {thread.doc.sent}
+                    </p>
+                  )}
+                </aside>
+              </div>
+
+              <div class="composer" aria-hidden="true">
+                <span class="composer-field">
+                  <span class="composer-text" data-composer-text />
+                  <span class="composer-placeholder">Message {helper.name}…</span>
+                </span>
+                <span class="composer-send" data-composer-send>
+                  <Icon name="arrowUp" size={16} />
+                </span>
+              </div>
+            </section>
+          );
+        })
+      }
+    </div>
+  </div>
+</div>
+<script is:inline>
+  // Hold the first thread at its start frame before first paint, so the demo never flashes its ending.
+  // If the player never starts, the finished thread comes back on its own.
+  (function () {
+    var root = document.currentScript && document.currentScript.previousElementSibling;
+    if (!root || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var first = root.querySelector("[data-thread]");
+    if (!first) return;
+    first.setAttribute("data-playing", "");
+    first.setAttribute("data-prestart", "");
+    window.setTimeout(function () {
+      if (!first.hasAttribute("data-prestart")) return;
+      first.removeAttribute("data-playing");
+      first.removeAttribute("data-prestart");
+    }, 5000);
+  })();
+</script>
+
+<script>
+  import { initDemo } from "../scripts/demo";
+  initDemo();
+</script>

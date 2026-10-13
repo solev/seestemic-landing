@@ -1,0 +1,126 @@
+---
+import Art from "./Art.astro";
+import Helper from "./Helper.astro";
+import Icon from "./Icon.astro";
+import field from "../assets/art/field.webp";
+import { helpers, jobs } from "../data/helpers";
+---
+
+<div class="jobs" data-jobs>
+  <div class="chips" role="tablist" aria-label="Example jobs">
+    {
+      jobs.map((job, index) => {
+        const helper = helpers[job.helper];
+        return (
+          <button
+            type="button"
+            class="chip"
+            role="tab"
+            id={`job-tab-${job.helper}`}
+            aria-controls={`job-panel-${job.helper}`}
+            aria-selected={index === 0 ? "true" : "false"}
+            tabindex={index === 0 ? "0" : "-1"}
+          >
+            <Helper variant="avatar" color={helper.color} class="chip-avatar" />
+            {helper.name}
+          </button>
+        );
+      })
+    }
+  </div>
+
+  <div class="jobs-stage">
+    <Art src={field} sizes="(min-width: 1280px) 1200px, 100vw" class="jobs-art" />
+    <span class="example-tag" aria-hidden="true">Example</span>
+    {
+      jobs.map((job, index) => {
+        const helper = helpers[job.helper];
+        return (
+          <div
+            class="job-panel"
+            role="tabpanel"
+            id={`job-panel-${job.helper}`}
+            aria-labelledby={`job-tab-${job.helper}`}
+            hidden={index !== 0}
+          >
+            <div class="job-card">
+              <Helper variant="avatar" color={helper.color} class="job-card-avatar" />
+              <h3>{job.lead}</h3>
+              <p>{job.description}</p>
+              <ul class="job-uses" aria-label="Works with">
+                {job.uses.map((use) => (
+                  <li>
+                    <Icon name={use.icon} size={15} />
+                    {use.label}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="phone" role="group" aria-label={`Example conversation with ${job.phoneTitle}`}>
+              <div class="phone-screen">
+                <div class="phone-status" aria-hidden="true">
+                  <span>9:41</span>
+                  <span class="phone-island" />
+                  <svg class="phone-icons" viewBox="0 0 54 12" width="54" height="12">
+                    <rect x="0" y="7" width="3" height="5" rx="1" />
+                    <rect x="4.5" y="5" width="3" height="7" rx="1" />
+                    <rect x="9" y="2.5" width="3" height="9.5" rx="1" />
+                    <rect x="13.5" y="0" width="3" height="12" rx="1" />
+                    <path d="M22 4.6a8 8 0 0 1 10.4 0M24.2 7.2a4.6 4.6 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                    <circle cx="27.2" cy="10.2" r="1.4" />
+                    <rect x="36.5" y="1" width="15" height="10" rx="3" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".45" />
+                    <rect x="38" y="2.5" width="10.5" height="7" rx="1.6" />
+                    <rect x="52.4" y="4.2" width="1.4" height="3.6" rx=".7" opacity=".45" />
+                  </svg>
+                </div>
+                <header class="phone-head">
+                  <Icon name="chevronLeft" size={20} class="phone-back" />
+                  <Helper variant="avatar" color={helper.color} class="phone-avatar" />
+                  <span class="phone-name">
+                    <b>{job.phoneTitle}</b>
+                    <small>{job.phoneSubtitle}</small>
+                  </span>
+                </header>
+                <div class="phone-thread">
+                  <p class="phone-day" aria-hidden="true">Today 9:41</p>
+                  {job.convo.map((line, i) =>
+                    line.from === "card" ? (
+                      <div class="p-card" style={`--i:${i}`}>
+                        <span class="p-card-icon">
+                          <Icon name={line.icon} size={16} />
+                        </span>
+                        <span class="p-card-text">
+                          <b>{line.title}</b>
+                          {line.lines.map((text) => (
+                            <small>{text}</small>
+                          ))}
+                        </span>
+                      </div>
+                    ) : (
+                      <p class:list={["p-bubble", line.from === "me" ? "p-me" : "p-helper"]} style={`--i:${i}`}>
+                        {line.text}
+                      </p>
+                    ),
+                  )}
+                </div>
+                <div class="phone-composer" aria-hidden="true">
+                  <span>Message</span>
+                  <span class="phone-send">
+                    <Icon name="arrowUp" size={14} />
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })
+    }
+  </div>
+</div>
+
+<script>
+  import { initTabs } from "../scripts/tabs";
+  const root = document.querySelector<HTMLElement>("[data-jobs]");
+  if (root) initTabs(root);
+</script>

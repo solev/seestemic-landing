@@ -1,0 +1,59 @@
+---
+import Logo from "./Logo.astro";
+import { email, introCallUrl, navLinks } from "../data/site";
+---
+
+<header class="site-header" data-header>
+  <div class="shell header-inner">
+    <a class="header-logo" href="#top" aria-label="Seestemic home"><Logo /></a>
+
+    <nav class="header-nav" aria-label="Main">
+      {navLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+    </nav>
+
+    <div class="header-actions">
+      <a class="btn btn-secondary btn-sm header-email" href={`mailto:${email}`}>Email us</a>
+      <a
+        class="btn btn-primary btn-sm"
+        href={introCallUrl}
+        target="_blank"
+        rel="noreferrer"
+        data-booking-trigger
+        aria-expanded="false"
+        aria-controls="intro-call-calendar"
+      >
+        Book a call
+      </a>
+      <details class="mobile-nav">
+        <summary aria-label="Menu">
+          <span></span>
+          <span></span>
+        </summary>
+        <div class="mobile-nav-panel">
+          {navLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+          <a href={`mailto:${email}`}>Email us</a>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>("[data-header]");
+  const nav = header?.querySelector<HTMLDetailsElement>("details.mobile-nav");
+  if (header) {
+    const update = () => header.classList.toggle("is-scrolled", window.scrollY > 8);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+  }
+  nav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => (nav.open = false)));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && nav?.open) {
+      nav.open = false;
+      nav.querySelector("summary")?.focus();
+    }
+  });
+  document.addEventListener("click", (event) => {
+    if (nav?.open && event.target instanceof Node && !nav.contains(event.target)) nav.open = false;
+  });
+</script>

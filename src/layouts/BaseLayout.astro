@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import geist from "../assets/fonts/geist.woff2?url";
 
 interface Props {
   title: string;
@@ -13,13 +14,29 @@ const { title, description } = Astro.props;
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#ffffff" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Seestemic" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:card" content="summary" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href={geist} as="font" type="font/woff2" crossorigin />
     <title>{title}</title>
   </head>
   <body>
+    <!--
+      THESIS: A business owner grasps in five seconds that Seestemic sets up AI helpers that take repetitive jobs off their plate, and that they stay in charge.
+      OWN-WORLD: Grok Bot's product page, pinned by the brief, rebuilt with Seestemic's own assets: white ground, near-black Geist, warm gray cards, black pills, product UI floating on painted landscapes, an original speech-bubble helper whose eyes follow you.
+      STORY: meet the helper, watch one finish a job, talk to it, see how it fits, pick a job, three steps, questions, book a call.
+      FIRST VIEWPORT: centred "Let [helper] AI handle the busywork" on white ground, with the painted stage below holding the example app already working.
+      FORM: brief-pinned style over the seed roll (seed key c1d99fa6).
+      FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+    -->
+    <a class="skip-link" href="#main">Skip to content</a>
     <slot />
   </body>
 </html>

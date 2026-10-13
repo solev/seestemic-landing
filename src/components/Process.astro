@@ -1,0 +1,74 @@
+---
+import Helper from "./Helper.astro";
+import Icon from "./Icon.astro";
+import { helpers } from "../data/helpers";
+---
+
+<ol class="process">
+  <li class="process-card">
+    <span class="process-num" aria-hidden="true">1</span>
+    <h3>Tell us what eats your week</h3>
+    <p>A relaxed call about the jobs that take too long. We’ll be honest about where AI helps, and where it doesn’t.</p>
+    <div class="process-mini mini-list" aria-hidden="true">
+      <span class="mini-row is-picked">
+        <Icon name="check" size={13} />
+        Typing up quotes
+        <em>Start here</em>
+      </span>
+      <span class="mini-row">Chasing late invoices</span>
+      <span class="mini-row">Answering the same emails</span>
+    </div>
+  </li>
+
+  <li class="process-card">
+    <span class="process-num" aria-hidden="true">2</span>
+    <h3>We set up your first helper</h3>
+    <p>One job, done well, inside the tools you already use, with your approval rules built in.</p>
+    <div class="process-mini mini-setup" aria-hidden="true">
+      <span class="mini-setup-head">
+        <Helper variant="avatar" color={helpers.quotes.color} class="mini-avatar" />
+        <b>Quotes</b>
+        <small>Ready</small>
+      </span>
+      <span class="mini-setup-row">
+        <Icon name="mail" size={14} />
+        Email
+        <i class="mini-on"></i>
+      </span>
+      <span class="mini-setup-row">
+        <Icon name="sheet" size={14} />
+        Price list
+        <i class="mini-on"></i>
+      </span>
+      <span class="mini-setup-row">
+        <Icon name="lock" size={14} />
+        Ask me before sending
+        <i class="mini-on"></i>
+      </span>
+    </div>
+  </li>
+
+  <li class="process-card">
+    <span class="process-num" aria-hidden="true">3</span>
+    <h3>We train your team and stay</h3>
+    <p>Hands-on training for the people who’ll use it. Then we measure, fix and add what works.</p>
+    <div class="process-mini mini-team" aria-hidden="true">
+      <span class="mini-faces">
+        <i style="--c:#F2D2B6">S</i>
+        <i style="--c:#CFE3F7">M</i>
+        <i style="--c:#D8EBCF">J</i>
+        <i style="--c:#E7DDF8">+4</i>
+      </span>
+      <span class="mini-event">
+        <Icon name="calendar" size={14} />
+        Team training
+        <span class="tnum">Tue 10:00</span>
+      </span>
+      <span class="mini-event">
+        <Icon name="replay" size={14} />
+        Monthly check-in
+        <span class="tnum">1st Mon</span>
+      </span>
+    </div>
+  </li>
+</ol>
