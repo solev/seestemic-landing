@@ -35,8 +35,8 @@ Engagements begin with a company's existing business processes, tools, data, doc
 Offer and prices, approved by Martin in October 2026:
 - **Free AI review:** a free 30-minute call, booked through Cal.com. It is the page's main action.
 - **Setup:** from €1,500, one-time, for the first helper.
-- **Care:** from €300 a month: up to 4 hours of Martin's time and a check-in each month. The 4 hours came from review feedback in October 2026, so confirm it with Martin before building on it. Never price it per helper or say how many helpers it includes.
-- **Partner:** from €1,200 a month. Martin helps the whole company adopt AI in various ways, not only through helpers. The page shows it as its own card with three points: a plan for where AI can help, team by team; help picking AI tools, plus simple rules for using them safely; and hands-on training for every team. Partner's hours, and whether it includes Care, are not decided, so do not claim them.
+- **Care:** from €300 a month: up to 4 hours of the Seestemic team's time and a check-in each month. The 4 hours came from review feedback in October 2026, so confirm it with Martin before building on it. Never price it per helper or say how many helpers it includes.
+- **Partner:** from €1,200 a month. Seestemic helps the whole company adopt AI in various ways, not only through helpers. The page shows it as its own card with three points: a plan for where AI can help, team by team; help picking AI tools, plus simple rules for using them safely; and hands-on training for every team. Partner's hours, and whether it includes Care, are not decided, so do not claim them.
 - AI costs, such as an AI subscription, are not included; the client pays them separately.
 - Clients keep everything Seestemic builds, including if they stop Care. Minimum terms and notice periods are not decided, so do not claim any.
 - Seestemic is not VAT-registered (exempt for now). The page says "No VAT is added, as Seestemic isn't VAT-registered." Do not write "prices exclude VAT" until it registers, because that reads as 24% on top; once it registers, switch to that line.
@@ -53,13 +53,13 @@ Offer and prices, approved by Martin in October 2026:
 - Emphasize partnership, measurable usefulness, integration with existing work, human control, and employee adoption.
 - Do not narrow the company to one industry or a single AI product without an explicit product decision.
 - Do not mention Microsoft Teams for now.
-- Seestemic is Martin working solo, and the page says so. Speak as Martin in the first person singular ("I", "me", "my") or as "Seestemic"; never "we", "us" or "our team" for Seestemic. Customers' own words, such as FAQ questions and example messages, may say "we".
+- Seestemic speaks as "we", "us" and "our" (Martin's decision, October 2026), never "I" or "me". The one exception is the founder chat, where Martin introduces himself in the first person; the lead above it names him ("Short answer: Martin"). Do not claim a team size, names or roles. Customers' own words, such as FAQ questions and example messages, may say "I" or "we".
 
 ## Evidence on Hand
 
 There are currently no verified testimonials, case studies, benchmarks, customer names, or quantitative proof claims approved for publication.
 
-Approved founder facts, taken from Martin's CV and approved when he picked the founder chat: Martin Solev is the founder and runs Seestemic from Tallinn; he has built software for over 12 years, including cloud services used by millions of people; his LinkedIn is https://www.linkedin.com/in/martin-solev-a09b0061/. Do not name his employer or its products without his explicit approval.
+Approved founder facts, taken from Martin's CV and approved when he picked the founder chat: Martin Solev is the founder and runs Seestemic from Tallinn; he has built software for over 12 years, including cloud services used by millions of people; his LinkedIn is https://www.linkedin.com/in/martin-solev-a09b0061/. He is behind the company and is each client's first contact, on the first call. Seestemic has a team that builds and looks after helpers with him, so never imply he works alone (Martin, October 2026). Do not name his employer or its products without his explicit approval.
 
 The previous landing page's named testimonials, the `3–6 weeks` delivery claim, and all other proof-like statistics or attributed statements are placeholders. Future work must not treat them as factual evidence or invent replacements. They require explicit verification or approved content before publication.
 

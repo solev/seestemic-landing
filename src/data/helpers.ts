@@ -485,27 +485,27 @@ export const faqs: Faq[] = [
   {
     question: "Do I need to be technical?",
     answer:
-      "No. I handle the setup and explain everything in plain language. If you can write an email, you can work with an AI helper.",
+      "No. We handle the setup and explain everything in plain language. If you can write an email, you can work with an AI helper.",
   },
   {
     question: "Will it work with the software we already use?",
     answer:
-      "Usually, yes. I build around what you have, such as Microsoft 365, Google Workspace, your CRM, help desk or accounting software, instead of asking you to switch.",
+      "Usually, yes. We build around what you have, such as Microsoft 365, Google Workspace, your CRM, help desk or accounting software, instead of asking you to switch.",
   },
   {
     question: "Is our information safe?",
     answer:
-      "You decide what each helper can see and which actions need your approval, and its work is logged so you can check it. I pick an AI provider that fits your needs, your data can stay in the EU, and you get a signed data processing agreement.",
+      "You decide what each helper can see and which actions need your approval, and its work is logged so you can check it. We choose the AI provider that fits your needs, your data can stay in the EU, and we sign a data processing agreement with you.",
   },
   {
     question: "Which languages do the helpers speak?",
     answer:
-      "Your customers’ languages. A helper can talk to each customer in their own language. Calls and training with me are in English.",
+      "Your customers’ languages. A helper can talk to each customer in their own language. Our calls and training are in English.",
   },
   {
     question: "What happens if we stop Care?",
     answer:
-      "You keep everything I built. Care is simply my time when you need it: up to 4 hours a month, plus a monthly check-in. AI costs, such as an AI subscription, are always paid separately.",
+      "You keep everything we built. Care is simply our team’s time when you need it: up to 4 hours a month, plus a monthly check-in. AI costs, such as an AI subscription, are always paid separately.",
   },
   {
     question: "Will AI replace my staff?",
@@ -515,7 +515,7 @@ export const faqs: Faq[] = [
   {
     question: "How soon will we see results?",
     answer:
-      "You start with one job, so your first helper can be useful early. Then I measure it with you and only expand what clearly works.",
+      "We start with one job, so your first helper can be useful early. Then we measure it with you and only expand what clearly works.",
   },
   {
     question: "Do you train our team?",

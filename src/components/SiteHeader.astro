@@ -12,7 +12,7 @@ import { email, introCallUrl, navLinks } from "../data/site";
     </nav>
 
     <div class="header-actions">
-      <a class="btn btn-secondary btn-sm header-email" href={`mailto:${email}`}>Email me</a>
+      <a class="btn btn-secondary btn-sm header-email" href={`mailto:${email}`}>Email us</a>
       <a
         class="btn btn-primary btn-sm"
         href={introCallUrl}
@@ -31,7 +31,7 @@ import { email, introCallUrl, navLinks } from "../data/site";
         </summary>
         <div class="mobile-nav-panel">
           {navLinks.map((link) => <a href={link.href}>{link.label}</a>)}
-          <a href={`mailto:${email}`}>Email me</a>
+          <a href={`mailto:${email}`}>Email us</a>
         </div>
       </details>
     </div>

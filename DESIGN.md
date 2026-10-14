@@ -422,7 +422,7 @@ Pills you can't misread: one black, one gray.
 - **Border:** none.
 - **Internal Padding:** clamp(1.5rem, 3vw, 2.25rem) on showcase cards and 2rem on step cards.
 - **Showcase (2×2):** copy sits on top as a small title and graphite text. Two cards end in painted insets that bleed off the bottom, at least 360px tall. The two quiet cards hold white 14px rows on linen, up to 420px wide and centred. A pending row gets a dashed hairline outline, and a 2px Connector line joins consecutive rows.
-- **Step cards:** a 36px ink circle with a white numeral, a title and graphite text, then the step's price, then a white mini UI rising from the card bottom. The price sits under a Strong Hairline rule: the figure at 1.5rem, weight 500 and tabular figures, with "from" and "a month" in graphite at 0.9375rem, over a short graphite label. Care's label says what it includes: up to 4 hours of Martin's time and a check-in each month. The mini UI has 18px top corners, a soft upward shadow and a minimum height of 184px. In three columns the cards share the grid's five rows through subgrid, so the price rules and mini UIs line up whatever wraps above them.
+- **Step cards:** a 36px ink circle with a white numeral, a title and graphite text, then the step's price, then a white mini UI rising from the card bottom. The price sits under a Strong Hairline rule: the figure at 1.5rem, weight 500 and tabular figures, with "from" and "a month" in graphite at 0.9375rem, over a short graphite label. Care's label says what it includes: up to 4 hours of Seestemic's time and a check-in each month. The mini UI has 18px top corners, a soft upward shadow and a minimum height of 184px. In three columns the cards share the grid's five rows through subgrid, so the price rules and mini UIs line up whatever wraps above them.
 - **Partner card:** a linen 32px card 1.25rem under the steps that borrows their three columns, each padded like a step card. The question "Want AI across your whole company?" and a graphite line sit under step 1. Three graphite points with Done Green checks sit under step 2. The price ("from €1,200 a month", labelled "Partner") sits under step 3, level with the question, so it reads beside Care's price. At 900px and below it stacks to 560px, and the price takes its Strong Hairline rule back.
 - **Fine print:** three centred pebble lines at 0.9375rem, held to 40rem and set 2rem under the Partner card. One sentence group per line: everything built is the client's to keep and AI costs are separate; no VAT is added; larger setups of €4,000 or more may qualify for EIS co-funding. "EIS co-funding" links to the funding answer in the FAQ.
 - **Teammate card:** a linen card that holds the headline, the lead and three black "you" bubbles on the left, with the giant solid helper and its "On it." reply on the right.
@@ -446,7 +446,7 @@ The signature frame: a 32px-radius frame filled edge to edge with an original im
 
 ### Navigation
 - **Header:** a sticky 68px three-column grid with the logo on the left, the nav centred and the actions on the right. It is transparent at rest and frosts after 8px of scroll (see Elevation & Depth).
-- **Links:** Small Label pills in graphite that take a linen fill and ink text on hover. The actions are a small secondary "Email me" and a small primary "Free AI review".
+- **Links:** Small Label pills in graphite that take a linen fill and ink text on hover. The actions are a small secondary "Email us" and a small primary "Free AI review".
 - **Mobile (860px and below):** links and email hide. A 38px stone circle with two 1.5px ink lines that cross into an × opens a white 20px menu panel with 12px rows. Escape and outside clicks close it.
 - **Footer:** a hairline top rule over a brand column with an underlined ink mail link. Graphite links turn ink on hover, and the bottom row sits under a second hairline in pebble at 0.8125rem.
 
@@ -456,7 +456,7 @@ The signature frame: a 32px-radius frame filled edge to edge with an original im
 - **Typing:** three 6px dots bounce in a linen bubble.
 
 ### Founder Chat
-"Who's behind Seestemic" introduces Martin as a short chat thread instead of a bio, so the one real person behind the service speaks in the page's own conversation grammar.
+"Who's behind Seestemic" introduces Martin as a short chat thread instead of a bio, so the founder, and every client's first contact, speaks in the page's own conversation grammar. His last answer brings in the team that builds with him.
 - **Card:** a flat linen card (32px, and 24px at 760px and below) padded clamp(2rem, 6vw, 4.5rem) by clamp(1rem, 5vw, 4rem). The thread is centred and held to 640px, with 1.25rem between turns.
 - **Martin:** a 48px circular photo (36px at 480px and below) on a stone placeholder. Beside it, a Small line names him, "Martin Solev" at 600 in ink and his role in graphite, above white bubbles with Contact. The bubbles are set at the Question size but weight 400 with a 1.45 line height, padded 0.75rem 1.125rem and held to 30em. The first bubble of each turn tightens its top-left corner to 6px toward his photo.
 - **Owner:** one ink "you" bubble on the right at the same size, held to 24em, with its 6px corner at the bottom-right and no shadow.
