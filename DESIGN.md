@@ -286,7 +286,7 @@ An ink-on-white interface with warm, faintly yellowed grays. Hue lives in the pa
 - **Seestemic Blue** (#0c79d8): the logo mark, the 2px focus ring and the back chevron in the depicted phone. The logo's tiles mix this blue with two lighter blues that live only in the mark.
 - **Deep Signal Blue** (#0a6bc2): unread counts and the "New" badge inside product UI. It is the only filled blue.
 - **Selection Wash** (#cde4fa) and **New Ring** (#b9d5f2): pale brand tints. Selection Wash is the text-selection highlight, and New Ring is the 1.5px inset ring on a memory row the helper has just learned. Neither fills a control.
-- **Done Green** (#157a48) on **Done Wash** (#eaf5ee): completion. It covers step checks, "Sent", "Ready", switched-on toggles, system confirmations and the check beside the hero note.
+- **Done Green** (#157a48) on **Done Wash** (#eaf5ee): completion. It covers step checks, "Sent", "Ready", switched-on toggles, system confirmations, the check beside the hero note and the lock beside the closing data note.
 - **Error Brick** (#a1301b) and **Error Ember** (#c2452d): the booking panel's failure state, brick for the status text and ember for its 8px dot. They appear nowhere else.
 
 ### Tertiary
@@ -403,7 +403,7 @@ Pills you can't misread: one black, one gray.
 - **Secondary:** a stone pill with an ink label that turns Pressed Stone on hover.
 - **Small:** 38px tall with 1rem side padding, in the header and booking panel.
 - **Mini pills:** inside product UI, 30px tall at UI size (0.8125rem) and weight 500. Dark (ink) marks the action, light (stone) the alternative, and ghost (graphite text, no fill) the dismissal.
-- **Pairing:** a CTA row pairs one primary with one secondary, centred and 0.75rem apart.
+- **Pairing:** a CTA row pairs one primary with one secondary, centred and 0.75rem apart. A short graphite note may sit 1rem below a CTA row with a small Done Green glyph, such as "No tech skills needed." in the hero and the EU data note at the close. The glyph stays inline, so it travels with the first word when the note wraps.
 
 **The One Black Choice Rule.** In any set of choices exactly one element is black: the primary action or the current selection. This covers CTA rows, Approve / Edit / Not now, the job tabs and the picked row in a list. Everything else is stone, linen or ghost.
 
@@ -422,7 +422,8 @@ Pills you can't misread: one black, one gray.
 - **Border:** none.
 - **Internal Padding:** clamp(1.5rem, 3vw, 2.25rem) on showcase cards and 2rem on step cards.
 - **Showcase (2×2):** copy sits on top as a small title and graphite text. Two cards end in painted insets that bleed off the bottom, at least 360px tall. The two quiet cards hold white 14px rows on linen, up to 420px wide and centred. A pending row gets a dashed hairline outline, and a 2px Connector line joins consecutive rows.
-- **Step cards:** a 36px ink circle with a white numeral, a title and graphite text, then a white mini UI rising from the card bottom. The mini UI has 18px top corners, a soft upward shadow and a minimum height of 184px.
+- **Step cards:** a 36px ink circle with a white numeral, a title and graphite text, then the step's price, then a white mini UI rising from the card bottom. The price sits under a Strong Hairline rule: the figure at 1.5rem, weight 500 and tabular figures, with "from" and "a month" in graphite at 0.9375rem, over a one-line graphite label. The mini UI has 18px top corners, a soft upward shadow and a minimum height of 184px. In three columns the cards share the grid's five rows through subgrid, so the price rules and mini UIs line up whatever wraps above them.
+- **Under the steps:** a centred graphite line offers the Partner tier, with "Partner" in ink, and a smaller pebble note says AI costs are paid separately and that everything built is the client's to keep. Both wrap balanced and are held to 38rem.
 - **Teammate card:** a linen card that holds the headline, the lead and three black "you" bubbles on the left, with the giant solid helper and its "On it." reply on the right.
 
 ### Painted Stage
@@ -444,7 +445,7 @@ The signature frame: a 32px-radius frame filled edge to edge with an original im
 
 ### Navigation
 - **Header:** a sticky 68px three-column grid with the logo on the left, the nav centred and the actions on the right. It is transparent at rest and frosts after 8px of scroll (see Elevation & Depth).
-- **Links:** Small Label pills in graphite that take a linen fill and ink text on hover. The actions are a small secondary "Email us" and a small primary "Book a call".
+- **Links:** Small Label pills in graphite that take a linen fill and ink text on hover. The actions are a small secondary "Email us" and a small primary "Free AI review".
 - **Mobile (860px and below):** links and email hide. A 38px stone circle with two 1.5px ink lines that cross into an × opens a white 20px menu panel with 12px rows. Escape and outside clicks close it.
 - **Footer:** a hairline top rule over a brand column with an underlined ink mail link. Graphite links turn ink on hover, and the bottom row sits under a second hairline in pebble at 0.8125rem.
 
@@ -458,7 +459,7 @@ The signature frame: a 32px-radius frame filled edge to edge with an original im
 - **Card:** a flat linen card (32px, and 24px at 760px and below) padded clamp(2rem, 6vw, 4.5rem) by clamp(1rem, 5vw, 4rem). The thread is centred and held to 640px, with 1.25rem between turns.
 - **Martin:** a 48px circular photo (36px at 480px and below) on a stone placeholder. Beside it, a Small line names him, "Martin Solev" at 600 in ink and his role in graphite, above white bubbles with Contact. The bubbles are set at the Question size but weight 400 with a 1.45 line height, padded 0.75rem 1.125rem and held to 30em. The first bubble of each turn tightens its top-left corner to 6px toward his photo.
 - **Owner:** one ink "you" bubble on the right at the same size, held to 24em, with its 6px corner at the bottom-right and no shadow.
-- **Quick replies:** the last turn ends in a CTA row 0.625rem apart. The primary "Book a call with Martin" opens the booking panel. Beside it is a white secondary "LinkedIn" pill with an external icon, which turns stone on hover. It is white instead of stone because stone barely parts from linen. At 480px and below both stretch full width.
+- **Quick replies:** the last turn ends in a CTA row 0.625rem apart. The primary "Book a free AI review" opens the booking panel. Beside it is a white secondary "LinkedIn" pill with an external icon, which turns stone on hover. It is white instead of stone because stone barely parts from linen. At 480px and below both stretch full width.
 - **Screen readers:** the photos are decorative, and hidden "You:" and "Martin:" prefixes name the speakers.
 - **Motion:** the thread plays once when it scrolls into view. Photo, name, bubbles and replies fade up 12px, 650ms apart, with opacity over 0.5s and movement over 0.6s on the shared ease-out, so the last beat lands about 3.3s in. Without JavaScript or with reduced motion, the whole chat is simply shown.
 
@@ -473,6 +474,7 @@ The signature character: a speech-bubble squircle with two white pill eyes, tilt
 ### FAQ Accordion
 - **Style:** a hairline-ruled list of questions in 500 weight with 1.375rem vertical padding. Each question has a 34px linen circle holding a plus, which turns stone on hover.
 - **Open:** the plus rotates 45° into an × and the circle fills ink with a white icon. The answer appears in graphite at up to 60ch, and its height animates over 0.4s where the browser supports it. Only one question is open at a time.
+- **Links:** an answer may end in an underlined ink link to an outside source, such as the EIS grant conditions, which opens in a new tab.
 
 ## Do's and Don'ts
 
