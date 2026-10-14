@@ -286,7 +286,7 @@ An ink-on-white interface with warm, faintly yellowed grays. Hue lives in the pa
 - **Seestemic Blue** (#0c79d8): the logo mark, the 2px focus ring and the back chevron in the depicted phone. The logo's tiles mix this blue with two lighter blues that live only in the mark.
 - **Deep Signal Blue** (#0a6bc2): unread counts and the "New" badge inside product UI. It is the only filled blue.
 - **Selection Wash** (#cde4fa) and **New Ring** (#b9d5f2): pale brand tints. Selection Wash is the text-selection highlight, and New Ring is the 1.5px inset ring on a memory row the helper has just learned. Neither fills a control.
-- **Done Green** (#157a48) on **Done Wash** (#eaf5ee): completion. It covers step checks, "Sent", "Ready", switched-on toggles, system confirmations, the check beside the hero note and the lock beside the closing data note.
+- **Done Green** (#157a48) on **Done Wash** (#eaf5ee): completion. It covers step checks, "Sent", "Ready", switched-on toggles, system confirmations, the check beside the hero note, the checks on the Partner card's points and the lock beside the closing data note.
 - **Error Brick** (#a1301b) and **Error Ember** (#c2452d): the booking panel's failure state, brick for the status text and ember for its 8px dot. They appear nowhere else.
 
 ### Tertiary
@@ -352,13 +352,13 @@ The page runs in a single centred column: a 1200px content shell, and a wider 13
 
 - **Vertical rhythm.** Each section opens with clamp(5rem, 10vw, 8.5rem) of space above it, and the closing gets more (clamp(6rem, 12vw, 10rem)). Section heads are capped at 44rem and sit clamp(2rem, 4vw, 3rem) above their content. Heads that argue a point are left-aligned, and heads that introduce a picker, the steps or the founder chat are centred.
 - **Hero.** The composition is centred: the display line, the lead, a CTA row and a small checked note. Below it the painted stage spans the wide shell, with the app window (up to 1180px) floating inside and a centred pebble caption underneath.
-- **Grids.** The showcase is 2×2 and the process is three equal columns, both with 1.25rem gaps. The FAQ splits 5fr/7fr with a sticky intro, and the footer splits 2fr/1fr/1fr.
+- **Grids.** The showcase is 2×2 and the process is three equal columns, both with 1.25rem gaps. The Partner card under the steps reuses the same three columns. The FAQ splits 5fr/7fr with a sticky intro, and the footer splits 2fr/1fr/1fr.
 - **Inner spacing.** Inside product UI, spacing is tuned by eye in single-pixel steps (5, 6, 7, 9, 10, 12 and 14px). There is no coarse scale to snap to. The durable rhythm lives at section and card level.
 - **Responsive.**
   - At 1180px and below, the app window's sidebar collapses to a 72px avatar rail.
   - At 1024px and below, the teammate card stacks. The giant helper shrinks to clamp(340px, 86vw, 500px) and sits below the copy, still breaking out to the right.
   - Between 761 and 1279px, the chips form a four-column grid.
-  - At 900px and below, the showcase, process (capped at 560px) and FAQ go single-column. The window stacks: its sidebar becomes horizontal pill tabs and the thread reorders. The phone shortens and drops below the job card.
+  - At 900px and below, the showcase, process (capped at 560px), Partner card and FAQ go single-column. The window stacks: its sidebar becomes horizontal pill tabs and the thread reorders. The phone shortens and drops below the job card.
   - At 860px and below, the header nav collapses into a round menu button.
   - At 760px and below, frames step down one radius, chips scroll edge to edge and the window dots hide.
   - At 480px and below, tool pills drop out of demo steps, the founder chat's photos shrink to 36px and its quick replies stack full width, and the footer becomes one column.
@@ -422,8 +422,9 @@ Pills you can't misread: one black, one gray.
 - **Border:** none.
 - **Internal Padding:** clamp(1.5rem, 3vw, 2.25rem) on showcase cards and 2rem on step cards.
 - **Showcase (2×2):** copy sits on top as a small title and graphite text. Two cards end in painted insets that bleed off the bottom, at least 360px tall. The two quiet cards hold white 14px rows on linen, up to 420px wide and centred. A pending row gets a dashed hairline outline, and a 2px Connector line joins consecutive rows.
-- **Step cards:** a 36px ink circle with a white numeral, a title and graphite text, then the step's price, then a white mini UI rising from the card bottom. The price sits under a Strong Hairline rule: the figure at 1.5rem, weight 500 and tabular figures, with "from" and "a month" in graphite at 0.9375rem, over a one-line graphite label. The mini UI has 18px top corners, a soft upward shadow and a minimum height of 184px. In three columns the cards share the grid's five rows through subgrid, so the price rules and mini UIs line up whatever wraps above them.
-- **Under the steps:** a centred graphite line offers the Partner tier, with "Partner" in ink, and a smaller pebble note says AI costs are paid separately and that everything built is the client's to keep. Both wrap balanced and are held to 38rem.
+- **Step cards:** a 36px ink circle with a white numeral, a title and graphite text, then the step's price, then a white mini UI rising from the card bottom. The price sits under a Strong Hairline rule: the figure at 1.5rem, weight 500 and tabular figures, with "from" and "a month" in graphite at 0.9375rem, over a short graphite label. Care's label says what it includes: up to 4 hours of Seestemic's time and a check-in each month. The mini UI has 18px top corners, a soft upward shadow and a minimum height of 184px. In three columns the cards share the grid's five rows through subgrid, so the price rules and mini UIs line up whatever wraps above them.
+- **Partner card:** a linen 32px card 1.25rem under the steps that borrows their three columns, each padded like a step card. The question "Want AI across your whole company?" and a graphite line sit under step 1. Three graphite points with Done Green checks sit under step 2. The price ("from €1,200 a month", labelled "Partner") sits under step 3, level with the question, so it reads beside Care's price. At 900px and below it stacks to 560px, and the price takes its Strong Hairline rule back.
+- **Fine print:** three centred pebble lines at 0.9375rem, held to 40rem and set 2rem under the Partner card. One sentence group per line: everything built is the client's to keep and AI costs are separate; no VAT is added; larger setups of €4,000 or more may qualify for EIS co-funding. "EIS co-funding" links to the funding answer in the FAQ.
 - **Teammate card:** a linen card that holds the headline, the lead and three black "you" bubbles on the left, with the giant solid helper and its "On it." reply on the right.
 
 ### Painted Stage
@@ -455,7 +456,7 @@ The signature frame: a 32px-radius frame filled edge to edge with an original im
 - **Typing:** three 6px dots bounce in a linen bubble.
 
 ### Founder Chat
-"Who's behind Seestemic" introduces Martin as a short chat thread instead of a bio, so the one real person behind the service speaks in the page's own conversation grammar.
+"Who's behind Seestemic" introduces Martin as a short chat thread instead of a bio, so the founder, and every client's first contact, speaks in the page's own conversation grammar. His last answer brings in the team that builds with him.
 - **Card:** a flat linen card (32px, and 24px at 760px and below) padded clamp(2rem, 6vw, 4.5rem) by clamp(1rem, 5vw, 4rem). The thread is centred and held to 640px, with 1.25rem between turns.
 - **Martin:** a 48px circular photo (36px at 480px and below) on a stone placeholder. Beside it, a Small line names him, "Martin Solev" at 600 in ink and his role in graphite, above white bubbles with Contact. The bubbles are set at the Question size but weight 400 with a 1.45 line height, padded 0.75rem 1.125rem and held to 30em. The first bubble of each turn tightens its top-left corner to 6px toward his photo.
 - **Owner:** one ink "you" bubble on the right at the same size, held to 24em, with its 6px corner at the bottom-right and no shadow.
@@ -474,7 +475,7 @@ The signature character: a speech-bubble squircle with two white pill eyes, tilt
 ### FAQ Accordion
 - **Style:** a hairline-ruled list of questions in 500 weight with 1.375rem vertical padding. Each question has a 34px linen circle holding a plus, which turns stone on hover.
 - **Open:** the plus rotates 45° into an × and the circle fills ink with a white icon. The answer appears in graphite at up to 60ch, and its height animates over 0.4s where the browser supports it. Only one question is open at a time.
-- **Links:** an answer may end in an underlined ink link to an outside source, such as the EIS grant conditions, which opens in a new tab.
+- **Links:** an answer may end in an underlined ink link to an outside source, such as the EIS grant conditions, which opens in a new tab. An answer can also be a link target (the funding answer is `#funding`). Following a link to it opens that answer and closes the others.
 
 ## Do's and Don'ts
 

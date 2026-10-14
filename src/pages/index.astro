@@ -118,12 +118,12 @@ const booking = {
           <p class="lead">We start small, prove it works, then grow it with you. Here’s what each step costs.</p>
         </header>
         <Process />
-        <p class="process-more">
-          Want AI across your whole company? As your <b>Partner</b>, from <span class="tnum">€1,200</span> a month, we
-          help every part of it adopt AI, well beyond the helpers.
-        </p>
         <p class="process-note">
-          AI costs, such as an AI subscription, are paid separately. Everything we build is yours to keep.
+          Everything we build is yours to keep. AI costs, such as an AI subscription, are paid separately.
+        </p>
+        <p class="process-note">No VAT is added, as Seestemic isn’t <span class="nowrap">VAT-registered</span>.</p>
+        <p class="process-note">
+          Larger setups of <span class="tnum">€4,000</span> or more may qualify for <a href="#funding">EIS co-funding</a>.
         </p>
         <div class="section-cta">
           <a class="btn btn-primary" {...booking}>Book a free AI review</a>
@@ -135,7 +135,7 @@ const booking = {
       <div class="shell">
         <header class="section-head section-head--center">
           <h2 class="h2" id="about-title">Who’s behind Seestemic</h2>
-          <p class="lead">Short answer: me. Here’s the longer one.</p>
+          <p class="lead">Short answer: Martin. Here’s the longer one.</p>
         </header>
         <FounderChat />
       </div>
@@ -151,8 +151,8 @@ const booking = {
         </div>
         <div class="faq-list">
           {
-            faqs.map(({ question, answer, link }) => (
-              <details class="faq-item" name="faq">
+            faqs.map(({ id, question, answer, link }) => (
+              <details class="faq-item" name="faq" id={id}>
                 <summary>
                   {question}
                   <span class="faq-icon" aria-hidden="true">
@@ -205,6 +205,20 @@ const booking = {
   <script>
     import { initHelpers } from "../scripts/helpers";
     initHelpers();
+  </script>
+
+  <script is:inline>
+    (() => {
+      // A link to a closed FAQ item opens it, so "EIS co-funding" lands on the answer.
+      const openTarget = (hash) => {
+        const target = hash.length > 1 ? document.getElementById(decodeURIComponent(hash.slice(1))) : null;
+        if (target instanceof HTMLDetailsElement) target.open = true;
+      };
+      document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener("click", () => openTarget(link.hash));
+      });
+      openTarget(location.hash);
+    })();
   </script>
 
   <script is:inline>

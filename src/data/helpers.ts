@@ -475,6 +475,7 @@ export const jobs: Job[] = [
 /* ------------------------------------------------------------------ */
 
 export interface Faq {
+  id?: string;
   question: string;
   answer: string;
   link?: { href: string; label: string };
@@ -504,7 +505,7 @@ export const faqs: Faq[] = [
   {
     question: "What happens if we stop Care?",
     answer:
-      "You keep everything we built. Care is simply hours from our team whenever you need help. AI costs, such as an AI subscription, are always paid separately.",
+      "You keep everything we built. Care is simply our team’s time when you need it: up to 4 hours a month, plus a monthly check-in. AI costs, such as an AI subscription, are always paid separately.",
   },
   {
     question: "Will AI replace my staff?",
@@ -522,9 +523,10 @@ export const faqs: Faq[] = [
       "Yes. Hands-on sessions and simple guides, so everyone knows when to use their helpers, how to check the work and when to step in.",
   },
   {
+    id: "funding",
     question: "Can we get funding for this?",
     answer:
-      "Possibly. EIS (Enterprise Estonia) can cover half the cost of a software project for Estonian companies, from €2,000 to €5,000. The project needs to cost €4,000 or more, your revenue should average at least €50,000 a year, and you apply before the work starts. Monthly fees aren’t covered, and other conditions apply.",
+      "Possibly, for larger setups. EIS (Enterprise Estonia) can cover up to half the cost of a software project for Estonian companies, with a grant of €2,000 to €5,000, so the project needs to cost at least €4,000. Your revenue should average at least €50,000 a year over the last two years, and you apply before the work starts. Care isn’t covered, and other conditions apply.",
     link: { href: "https://eis.ee/en/services/rte-software/", label: "See the EIS grant" },
   },
 ];
