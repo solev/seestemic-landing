@@ -227,6 +227,15 @@ components:
     textColor: "{colors.ink}"
     rounded: "{rounded.panel}"
     padding: "0.5rem 1rem"
+  bubble-founder:
+    backgroundColor: "{colors.bg}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.panel}"
+    padding: "0.75rem 1.125rem"
+  founder-photo:
+    backgroundColor: "{colors.card-strong}"
+    rounded: "{rounded.circle}"
+    size: "48px"
   helper:
     backgroundColor: "{colors.ink}"
     textColor: "{colors.bg}"
@@ -254,7 +263,7 @@ Seestemic's page is a quiet white showroom. Near-black Geist, warm gray cards an
 
 Density is low at page level and high inside the product UI. Sections breathe, and type stays compact because the paintings and the giant helpers carry the scale. The helpers break card edges and run off the viewport. Inside the floating windows the system turns dense and exact, with small UI text, 1px hairline rings and spacing tuned pixel by pixel. Motion is soft and decelerating, on one ease-out curve, and most of it belongs to the helper.
 
-Honesty is part of the look. Everything that depicts work is labelled "Example". The page has no logo walls, ratings or metric bands, because there is no approved proof to fill them. Colour is earned: the interface is ink on white and warm gray, and saturated hue appears only in the paintings, in each helper's own colour and in the tool icons.
+Honesty is part of the look. Everything that depicts work is labelled "Example". The page has no logo walls, ratings or metric bands, because there is no approved proof to fill them. The one trust signal is a real person: Martin introduces himself in a short chat, using only facts he has approved. Colour is earned: the interface is ink on white and warm gray, and saturated hue appears only in the paintings, in each helper's own colour and in the tool icons.
 
 **Key Characteristics:**
 - White ground, near-black ink, warm gray cards, 1px hairline rules.
@@ -277,7 +286,7 @@ An ink-on-white interface with warm, faintly yellowed grays. Hue lives in the pa
 - **Seestemic Blue** (#0c79d8): the logo mark, the 2px focus ring and the back chevron in the depicted phone. The logo's tiles mix this blue with two lighter blues that live only in the mark.
 - **Deep Signal Blue** (#0a6bc2): unread counts and the "New" badge inside product UI. It is the only filled blue.
 - **Selection Wash** (#cde4fa) and **New Ring** (#b9d5f2): pale brand tints. Selection Wash is the text-selection highlight, and New Ring is the 1.5px inset ring on a memory row the helper has just learned. Neither fills a control.
-- **Done Green** (#157a48) on **Done Wash** (#eaf5ee): completion. It covers step checks, "Sent", "Ready", switched-on toggles, system confirmations and the check beside the hero note.
+- **Done Green** (#157a48) on **Done Wash** (#eaf5ee): completion. It covers step checks, "Sent", "Ready", switched-on toggles, system confirmations, the check beside the hero note and the lock beside the closing data note.
 - **Error Brick** (#a1301b) and **Error Ember** (#c2452d): the booking panel's failure state, brick for the status text and ember for its 8px dot. They appear nowhere else.
 
 ### Tertiary
@@ -285,11 +294,11 @@ An ink-on-white interface with warm, faintly yellowed grays. Hue lives in the pa
 - **Tool icons.** In the tools vignette, six app glyphs sit on white tiles over the coast painting, each in its own hue. Email, Calendar, Accounting and Website chat borrow Questions Blue, Quotes Orange, Inbox Teal and Front Desk Violet. Two hues exist only here: **Sheets Green** (#3E9E62) for Spreadsheets and **Files Amber** (#D99A1E) for Shared files.
 
 ### Neutral
-- **Gallery White** (#ffffff): the page ground, every product UI surface and the rows on quiet cards.
+- **Gallery White** (#ffffff): the page ground, every product UI surface, the rows on quiet cards and Martin's bubbles in the founder chat.
 - **Warm Graphite** (#5d5d5a): leads, descriptions, nav links and secondary text inside UI.
 - **Pebble** (#6b6b67): metadata such as timestamps, captions, placeholders and footer fine print.
 - **Linen** (#f6f5f3): section cards, helper bubbles inside UI, chips at rest and nav hover.
-- **Stone** (#efeeeb): secondary pills, tags, the Example pill and the menu button.
+- **Stone** (#efeeeb): secondary pills, tags, the Example pill, the menu button and the founder photo's placeholder.
 - **Pressed Stone** (#e7e6e2): the hover state for stone controls.
 - **Hairline** (#e8e7e3): every 1px rule and ring, including FAQ dividers, footer rules, window dividers and ring shadows.
 - **Strong Hairline** (#dddcd7): one step darker, for small marks that must read on white or chrome: the window's three title-bar dots, the dashed rule under the doc card's metadata, the track of a pending step's spinner and the booking status spinner.
@@ -341,7 +350,7 @@ Each painted frame also carries a flat load-in fill in its own painting's mean t
 
 The page runs in a single centred column: a 1200px content shell, and a wider 1320px shell for the hero stage, with fluid gutters on both sides. The 68px header is sticky, and anchor jumps clear it by 16px.
 
-- **Vertical rhythm.** Each section opens with clamp(5rem, 10vw, 8.5rem) of space above it, and the closing gets more (clamp(6rem, 12vw, 10rem)). Section heads are capped at 44rem and sit clamp(2rem, 4vw, 3rem) above their content. Heads that argue a point are left-aligned, and heads that introduce a picker or the steps are centred.
+- **Vertical rhythm.** Each section opens with clamp(5rem, 10vw, 8.5rem) of space above it, and the closing gets more (clamp(6rem, 12vw, 10rem)). Section heads are capped at 44rem and sit clamp(2rem, 4vw, 3rem) above their content. Heads that argue a point are left-aligned, and heads that introduce a picker, the steps or the founder chat are centred.
 - **Hero.** The composition is centred: the display line, the lead, a CTA row and a small checked note. Below it the painted stage spans the wide shell, with the app window (up to 1180px) floating inside and a centred pebble caption underneath.
 - **Grids.** The showcase is 2×2 and the process is three equal columns, both with 1.25rem gaps. The FAQ splits 5fr/7fr with a sticky intro, and the footer splits 2fr/1fr/1fr.
 - **Inner spacing.** Inside product UI, spacing is tuned by eye in single-pixel steps (5, 6, 7, 9, 10, 12 and 14px). There is no coarse scale to snap to. The durable rhythm lives at section and card level.
@@ -352,7 +361,7 @@ The page runs in a single centred column: a 1200px content shell, and a wider 13
   - At 900px and below, the showcase, process (capped at 560px) and FAQ go single-column. The window stacks: its sidebar becomes horizontal pill tabs and the thread reorders. The phone shortens and drops below the job card.
   - At 860px and below, the header nav collapses into a round menu button.
   - At 760px and below, frames step down one radius, chips scroll edge to edge and the window dots hide.
-  - At 480px and below, tool pills drop out of demo steps and the footer becomes one column.
+  - At 480px and below, tool pills drop out of demo steps, the founder chat's photos shrink to 36px and its quick replies stack full width, and the footer becomes one column.
 
 ### Named Rules
 **The One Crop Rule.** A giant helper is cropped by exactly one edge. The teammate helper rises through its card's top edge and runs off the right of the viewport, and only the card's bottom edge cuts it. The closing outline helper is cut at the waist by the footer's top rule. Never box a giant helper inside its container.
@@ -364,6 +373,7 @@ The system is a hybrid. The page itself is flat and tonal, built from white grou
 ### Shadow Vocabulary
 - **Float** (`box-shadow: 0 2px 4px rgb(0 0 0 / 0.04), 0 30px 70px -26px rgb(0 0 0 / 0.45)`): white product UI on a painting, namely the app window, the approval panel, the job card and the phone.
 - **Lift** (`box-shadow: 0 1px 2px rgb(0 0 0 / 0.05), 0 14px 30px -14px rgb(0 0 0 / 0.3)`): small white objects, namely the tool tiles on the coast painting and the white "On it." reply on the teammate card.
+- **Contact** (`box-shadow: 0 1px 2px rgb(0 0 0 / 0.04)`): the white bubbles of the founder chat on linen. It gives white just enough edge to part from linen without lifting a whole thread off the card.
 - **Hairline Ring** (`box-shadow: 0 0 0 1px var(--line)`): the edge of a white object inside UI, such as the selected sidebar row, attachments, the composer and the booking frame. Use rings, not borders.
 - **Ring and Soft Drop** (`box-shadow: 0 0 0 1px var(--line), 0 10px 30px -14px rgb(0 0 0 / 0.18)`): a white card resting inside UI, such as the doc card. Phone cards and the composer use smaller versions.
 - **Window Edge** (`box-shadow: 0 0 0 1px rgb(0 0 0 / 0.05)`): paired with Float on the app window, and with a soft drop on the mobile menu panel.
@@ -377,7 +387,7 @@ The system is a hybrid. The page itself is flat and tonal, built from white grou
 The form language is soft, generous and concentric. Frames, cards and panels are rounded rectangles, every control is a full pill, and avatars, toggles and step numbers are circles. Rules and rings are 1px hairlines. Small marks inside UI, such as spinner tracks, the hand-off connector and dashed or inset rings, go to 1.5–2px, and the outline helper keeps its own line.
 
 ### Named Rules
-**The Speech-Bubble Corner Rule.** The house silhouette is a rounded rectangle with one tighter corner. The helper's body is a continuous-curvature squircle with three wide corners and a tighter bottom-right tail (48, 48, 20 and 48 units on a 100-unit body). Every chat bubble is an 18–20px rounded rectangle with a single 6px corner pointing at whoever is speaking. The logo echoes the idea: its two large tiles meet at the centre with a square corner.
+**The Speech-Bubble Corner Rule.** The house silhouette is a rounded rectangle with one tighter corner. The helper's body is a continuous-curvature squircle with three wide corners and a tighter bottom-right tail (48, 48, 20 and 48 units on a 100-unit body). Every chat bubble is an 18–20px rounded rectangle with a single 6px corner pointing at whoever is speaking. When one speaker sends a run of bubbles beside a single photo, as Martin does in the founder chat, only the first bubble takes the corner. The logo echoes the idea: its two large tiles meet at the centre with a square corner.
 
 **The Nested Corners Rule.** Radii step down as you go inward: a 32px frame, a 20px window or panel, 16px cards, 12–14px rows, 10px fields and mini rows, 8px attachment chips and focus rings, then pills. A child never has a larger radius than its parent. At 760px and below the outer frames step down a notch: frames to 24px, and the window and tool tiles to 14px. Two shapes keep their own geometry: the composer is 22px, so a one-line reply reads as a pill and a wrapped reply stays a soft rectangle, and the depicted phone is a 54px frame around a 44px screen, concentric across its 10px bezel.
 
@@ -393,7 +403,7 @@ Pills you can't misread: one black, one gray.
 - **Secondary:** a stone pill with an ink label that turns Pressed Stone on hover.
 - **Small:** 38px tall with 1rem side padding, in the header and booking panel.
 - **Mini pills:** inside product UI, 30px tall at UI size (0.8125rem) and weight 500. Dark (ink) marks the action, light (stone) the alternative, and ghost (graphite text, no fill) the dismissal.
-- **Pairing:** a CTA row pairs one primary with one secondary, centred and 0.75rem apart.
+- **Pairing:** a CTA row pairs one primary with one secondary, centred and 0.75rem apart. A short graphite note may sit 1rem below a CTA row with a small Done Green glyph, such as "No tech skills needed." in the hero and the EU data note at the close. The glyph stays inline, so it travels with the first word when the note wraps.
 
 **The One Black Choice Rule.** In any set of choices exactly one element is black: the primary action or the current selection. This covers CTA rows, Approve / Edit / Not now, the job tabs and the picked row in a list. Everything else is stone, linen or ghost.
 
@@ -412,7 +422,8 @@ Pills you can't misread: one black, one gray.
 - **Border:** none.
 - **Internal Padding:** clamp(1.5rem, 3vw, 2.25rem) on showcase cards and 2rem on step cards.
 - **Showcase (2×2):** copy sits on top as a small title and graphite text. Two cards end in painted insets that bleed off the bottom, at least 360px tall. The two quiet cards hold white 14px rows on linen, up to 420px wide and centred. A pending row gets a dashed hairline outline, and a 2px Connector line joins consecutive rows.
-- **Step cards:** a 36px ink circle with a white numeral, a title and graphite text, then a white mini UI rising from the card bottom. The mini UI has 18px top corners, a soft upward shadow and a minimum height of 184px.
+- **Step cards:** a 36px ink circle with a white numeral, a title and graphite text, then the step's price, then a white mini UI rising from the card bottom. The price sits under a Strong Hairline rule: the figure at 1.5rem, weight 500 and tabular figures, with "from" and "a month" in graphite at 0.9375rem, over a one-line graphite label. The mini UI has 18px top corners, a soft upward shadow and a minimum height of 184px. In three columns the cards share the grid's five rows through subgrid, so the price rules and mini UIs line up whatever wraps above them.
+- **Under the steps:** a centred graphite line offers the Partner tier, with "Partner" in ink, and a smaller pebble note says AI costs are paid separately and that everything built is the client's to keep. Both wrap balanced and are held to 38rem.
 - **Teammate card:** a linen card that holds the headline, the lead and three black "you" bubbles on the left, with the giant solid helper and its "On it." reply on the right.
 
 ### Painted Stage
@@ -434,7 +445,7 @@ The signature frame: a 32px-radius frame filled edge to edge with an original im
 
 ### Navigation
 - **Header:** a sticky 68px three-column grid with the logo on the left, the nav centred and the actions on the right. It is transparent at rest and frosts after 8px of scroll (see Elevation & Depth).
-- **Links:** Small Label pills in graphite that take a linen fill and ink text on hover. The actions are a small secondary "Email us" and a small primary "Book a call".
+- **Links:** Small Label pills in graphite that take a linen fill and ink text on hover. The actions are a small secondary "Email us" and a small primary "Free AI review".
 - **Mobile (860px and below):** links and email hide. A 38px stone circle with two 1.5px ink lines that cross into an × opens a white 20px menu panel with 12px rows. Escape and outside clicks close it.
 - **Footer:** a hairline top rule over a brand column with an underlined ink mail link. Graphite links turn ink on hover, and the bottom row sits under a second hairline in pebble at 0.8125rem.
 
@@ -442,6 +453,15 @@ The signature frame: a 32px-radius frame filled edge to edge with an original im
 - **You:** ink bubbles with white 1rem text and a 20px radius whose bottom-left corner tightens to 6px. They stack left-aligned 0.5rem apart. In the app window and phone they shrink to 18px, align right and put the tight corner at the bottom-right.
 - **Helper reply:** on linen, a white bubble with Lift ("On it.", weight 500) whose tight corner faces the helper. Inside UI the helper speaks in linen or stone, with the tight corner at its avatar.
 - **Typing:** three 6px dots bounce in a linen bubble.
+
+### Founder Chat
+"Who's behind Seestemic" introduces Martin as a short chat thread instead of a bio, so the one real person behind the service speaks in the page's own conversation grammar.
+- **Card:** a flat linen card (32px, and 24px at 760px and below) padded clamp(2rem, 6vw, 4.5rem) by clamp(1rem, 5vw, 4rem). The thread is centred and held to 640px, with 1.25rem between turns.
+- **Martin:** a 48px circular photo (36px at 480px and below) on a stone placeholder. Beside it, a Small line names him, "Martin Solev" at 600 in ink and his role in graphite, above white bubbles with Contact. The bubbles are set at the Question size but weight 400 with a 1.45 line height, padded 0.75rem 1.125rem and held to 30em. The first bubble of each turn tightens its top-left corner to 6px toward his photo.
+- **Owner:** one ink "you" bubble on the right at the same size, held to 24em, with its 6px corner at the bottom-right and no shadow.
+- **Quick replies:** the last turn ends in a CTA row 0.625rem apart. The primary "Book a free AI review" opens the booking panel. Beside it is a white secondary "LinkedIn" pill with an external icon, which turns stone on hover. It is white instead of stone because stone barely parts from linen. At 480px and below both stretch full width.
+- **Screen readers:** the photos are decorative, and hidden "You:" and "Martin:" prefixes name the speakers.
+- **Motion:** the thread plays once when it scrolls into view. Photo, name, bubbles and replies fade up 12px, 650ms apart, with opacity over 0.5s and movement over 0.6s on the shared ease-out, so the last beat lands about 3.3s in. Without JavaScript or with reduced motion, the whole chat is simply shown.
 
 ### The Helper
 The signature character: a speech-bubble squircle with two white pill eyes, tilted −7° by default (−9° on the teammate card and −6° at the close).
@@ -454,6 +474,7 @@ The signature character: a speech-bubble squircle with two white pill eyes, tilt
 ### FAQ Accordion
 - **Style:** a hairline-ruled list of questions in 500 weight with 1.375rem vertical padding. Each question has a 34px linen circle holding a plus, which turns stone on hover.
 - **Open:** the plus rotates 45° into an × and the circle fills ink with a white icon. The answer appears in graphite at up to 60ch, and its height animates over 0.4s where the browser supports it. Only one question is open at a time.
+- **Links:** an answer may end in an underlined ink link to an outside source, such as the EIS grant conditions, which opens in a new tab.
 
 ## Do's and Don'ts
 

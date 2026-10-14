@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Art from "../components/Art.astro";
 import BookingPanel from "../components/BookingPanel.astro";
 import DemoWindow from "../components/DemoWindow.astro";
+import FounderChat from "../components/FounderChat.astro";
 import Helper from "../components/Helper.astro";
 import Icon from "../components/Icon.astro";
 import JobPicker from "../components/JobPicker.astro";
@@ -41,7 +42,7 @@ const booking = {
           charge: nothing important happens without your OK.
         </p>
         <div class="cta-row">
-          <a class="btn btn-primary" {...booking}>Book an intro call</a>
+          <a class="btn btn-primary" {...booking}>Book a free AI review</a>
           <a class="btn btn-secondary" href="#how">How it works</a>
         </div>
         <p class="hero-note">
@@ -71,7 +72,7 @@ const booking = {
               things done.
             </p>
             <ul class="teammate-chat" aria-label="Things you could ask a helper">
-              <li class="say">Chase the Corner Bakery invoice.</li>
+              <li class="say">Chase the café’s late invoice.</li>
               <li class="say">Reply to new reviews in my tone.</li>
               <li class="say">Always offer Thursday visits.</li>
             </ul>
@@ -114,12 +115,29 @@ const booking = {
       <div class="shell">
         <header class="section-head section-head--center">
           <h2 class="h2" id="how-title">Working with us is simple</h2>
-          <p class="lead">We start small, prove it works, then grow it with you.</p>
+          <p class="lead">We start small, prove it works, then grow it with you. Here’s what each step costs.</p>
         </header>
         <Process />
+        <p class="process-more">
+          Want AI across your whole company? As your <b>Partner</b>, from <span class="tnum">€1,200</span> a month, we
+          help every part of it adopt AI, well beyond the helpers.
+        </p>
+        <p class="process-note">
+          AI costs, such as an AI subscription, are paid separately. Everything we build is yours to keep.
+        </p>
         <div class="section-cta">
-          <a class="btn btn-primary" {...booking}>Book an intro call</a>
+          <a class="btn btn-primary" {...booking}>Book a free AI review</a>
         </div>
+      </div>
+    </section>
+
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="shell">
+        <header class="section-head section-head--center">
+          <h2 class="h2" id="about-title">Who’s behind Seestemic</h2>
+          <p class="lead">Short answer: me. Here’s the longer one.</p>
+        </header>
+        <FounderChat />
       </div>
     </section>
 
@@ -133,7 +151,7 @@ const booking = {
         </div>
         <div class="faq-list">
           {
-            faqs.map(([question, answer]) => (
+            faqs.map(({ question, answer, link }) => (
               <details class="faq-item" name="faq">
                 <summary>
                   {question}
@@ -141,7 +159,17 @@ const booking = {
                     <Icon name="plus" size={16} />
                   </span>
                 </summary>
-                <p>{answer}</p>
+                <p>
+                  {answer}
+                  {link && (
+                    <>
+                      {" "}
+                      <a href={link.href} target="_blank" rel="noreferrer">
+                        {link.label}
+                      </a>
+                    </>
+                  )}
+                </p>
               </details>
             ))
           }
@@ -153,13 +181,17 @@ const booking = {
       <div class="shell">
         <h2 class="h2 closing-title" id="book-title">What should AI take off your plate?</h2>
         <p class="closing-sub">
-          Bring one repetitive job to an intro call. We’ll tell you honestly whether AI can help, and what a first
-          helper could look like.
+          Bring one repetitive job to a free 30-minute AI review. We’ll tell you honestly whether AI can help, and what
+          a first helper could look like.
         </p>
         <div class="cta-row">
-          <a class="btn btn-primary" {...booking}>Book an intro call</a>
+          <a class="btn btn-primary" {...booking}>Book a free AI review</a>
           <a class="btn btn-secondary" href={`mailto:${email}`}>Email us</a>
         </div>
+        <p class="closing-note">
+          <Icon name="lock" size={16} />
+          Your data can stay in the EU, and we sign a data processing agreement with you.
+        </p>
         <BookingPanel />
       </div>
       <div class="closing-figure" data-draw>

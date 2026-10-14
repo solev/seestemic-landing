@@ -148,6 +148,7 @@ dd {
 
 .lead a,
 .jobs-more a,
+.faq-item p a,
 .footer-mail {
   color: var(--ink);
   font-weight: 500;
@@ -160,6 +161,7 @@ dd {
 
 .lead a:hover,
 .jobs-more a:hover,
+.faq-item p a:hover,
 .footer-mail:hover {
   text-decoration-color: currentColor;
 }
@@ -1948,12 +1950,15 @@ dd {
 .process {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.25rem;
+  column-gap: 1.25rem;
 }
 
+/* Each card shares the grid's five rows, so prices and mini UIs line up across cards. */
 .process-card {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-row: span 5;
+  grid-template-rows: subgrid;
+  row-gap: 0;
   overflow: hidden;
   padding: 2rem 2rem 0;
   border-radius: var(--r-xl);
@@ -2104,6 +2109,164 @@ dd {
   margin-left: auto;
   color: var(--ink-3);
   font-size: 0.72rem;
+}
+
+.process-card > .process-price {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0 0 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line-strong);
+  color: var(--ink);
+}
+
+.process-price b {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.process-price small {
+  color: var(--ink-2);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.process-price span {
+  color: var(--ink-2);
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+.process-more {
+  max-width: 38rem;
+  margin: 2.5rem auto 0;
+  color: var(--ink-2);
+  text-align: center;
+  text-wrap: balance;
+}
+
+.process-more b {
+  color: var(--ink);
+}
+
+.process-note {
+  max-width: 38rem;
+  margin: 0.5rem auto 0;
+  color: var(--ink-3);
+  font-size: 0.9375rem;
+  text-align: center;
+  text-wrap: balance;
+}
+
+/* Who's behind Seestemic */
+
+.founder {
+  padding: clamp(2rem, 6vw, 4.5rem) clamp(1rem, 5vw, 4rem);
+  border-radius: var(--r-xl);
+  background: var(--card);
+}
+
+.founder-thread {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+.founder-turn {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  align-items: start;
+  gap: 0.875rem;
+}
+
+.founder-turn--you {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.founder-photo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--card-strong);
+}
+
+.founder-msgs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.founder-name {
+  color: var(--ink-2);
+  font-size: 0.875rem;
+}
+
+.founder-name b {
+  margin-right: 0.25rem;
+  color: var(--ink);
+}
+
+.founder-msg {
+  max-width: 30em;
+  padding: 0.75rem 1.125rem;
+  border-radius: 20px;
+  background: #fff;
+  font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  line-height: 1.45;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
+}
+
+/* The first bubble of each of Martin's turns points its tight corner at his photo. */
+.founder-msgs .founder-msg:first-of-type {
+  border-top-left-radius: 6px;
+}
+
+.founder-msg--you {
+  max-width: 24em;
+  border-radius: 20px 20px 6px;
+  background: var(--ink);
+  color: #fff;
+  box-shadow: none;
+}
+
+.founder-replies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+  margin-top: 0.625rem;
+}
+
+/* Stone barely separates from linen, so the secondary quick reply is white here. */
+.founder-replies .btn-secondary {
+  background: #fff;
+}
+
+.founder-replies .btn-secondary:hover {
+  background: var(--card-strong);
+}
+
+.founder-thread[data-anim] :is(.founder-photo, .founder-name, .founder-msg, .founder-replies) {
+  opacity: 0;
+  translate: 0 12px;
+  transition:
+    opacity 0.5s var(--ease),
+    translate 0.6s var(--ease);
+  transition-delay: calc(var(--i, 0) * 650ms + 120ms);
+}
+
+.founder-thread[data-anim].is-in :is(.founder-photo, .founder-name, .founder-msg, .founder-replies) {
+  opacity: 1;
+  translate: 0 0;
 }
 
 /* Questions */
@@ -2268,6 +2431,22 @@ dd {
 
 .closing .cta-row {
   margin-top: 2rem;
+}
+
+.closing-note {
+  max-width: 40rem;
+  margin: 1rem auto 0;
+  color: var(--ink-2);
+  font-size: 0.9375rem;
+  text-wrap: balance;
+}
+
+/* Inline, so the lock stays beside the first word when the note wraps. */
+.closing-note svg {
+  display: inline-block;
+  margin-right: 0.375rem;
+  color: var(--ok);
+  vertical-align: -0.15em;
 }
 
 .cta-booking {
@@ -2735,8 +2914,15 @@ dd {
 
   .process {
     grid-template-columns: minmax(0, 1fr);
+    row-gap: 1.25rem;
     max-width: 560px;
     margin-inline: auto;
+  }
+
+  .process-card {
+    display: flex;
+    flex-direction: column;
+    grid-row: auto;
   }
 
   .faq {
@@ -2894,7 +3080,8 @@ dd {
     height: 92px;
   }
 
-  .process-card {
+  .process-card,
+  .founder {
     border-radius: var(--r-lg);
   }
 
@@ -2918,6 +3105,20 @@ dd {
 
   .v-tile-label {
     font-size: 0.72rem;
+  }
+
+  .founder-turn {
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 0.625rem;
+  }
+
+  .founder-photo {
+    width: 36px;
+    height: 36px;
+  }
+
+  .founder-replies .btn {
+    flex: 1 1 100%;
   }
 
   .footer-grid {

@@ -103,12 +103,12 @@ export interface DemoThread {
 export const demoThreads: DemoThread[] = [
   {
     helper: "quotes",
-    preview: "Quote for Harbor Dental is ready",
+    preview: "Quote for the dental clinic is ready",
     time: "9:41",
     subtitle: "Turns requests into ready-to-send quotes",
     intro: {
-      from: "Dana Whitfield",
-      org: "Harbor Dental",
+      from: "Dental clinic",
+      org: "New customer",
       via: "Email",
       viaIcon: "mail",
       time: "9:38",
@@ -126,22 +126,22 @@ export const demoThreads: DemoThread[] = [
       id: "Q-1042",
       status: "Sent",
       meta: [
-        { label: "For", value: "Harbor Dental", step: 1 },
+        { label: "For", value: "Dental clinic", step: 1 },
         { label: "Site visit", value: "Thu 10:00", step: 3 },
       ],
       rows: [
-        { label: "Vinyl plank flooring", note: "3 rooms", value: "$3,420", step: 2 },
-        { label: "Underlay and trims", value: "$540", step: 2 },
-        { label: "Removal and fitting", value: "$900", step: 2 },
+        { label: "Vinyl plank flooring", note: "3 rooms", value: "€3,420", step: 2 },
+        { label: "Underlay and trims", value: "€540", step: 2 },
+        { label: "Removal and fitting", value: "€900", step: 2 },
       ],
-      total: ["Total", "$4,860"],
+      total: ["Total", "€4,860"],
       actions: ["Approve & send", "Edit"],
-      sent: "Sent to Dana",
+      sent: "Sent to the clinic",
     },
-    ask: "Your quote for Harbor Dental is ready to check.",
+    ask: "Your quote for the dental clinic is ready to check.",
     owner: "Looks good. Send it, and always offer Thursday visits.",
-    system: "Sent to Dana · New rule saved",
-    reply: "Done. I’ll follow up on Monday if she hasn’t replied.",
+    system: "Sent to the clinic · New rule saved",
+    reply: "Done. I’ll follow up on Monday if they haven’t replied.",
   },
   {
     helper: "inbox",
@@ -165,9 +165,9 @@ export const demoThreads: DemoThread[] = [
       title: "Needs you",
       status: "3 emails",
       rows: [
-        { label: "Price increase", note: "Northline Timber" },
-        { label: "Refund over $500", note: "J. Okafor" },
-        { label: "Partnership idea", note: "Bloom Studio" },
+        { label: "Price increase", note: "Timber supplier" },
+        { label: "Refund over €500", note: "Online order" },
+        { label: "Partnership idea", note: "Design studio" },
       ],
       actions: ["Open all"],
     },
@@ -194,9 +194,9 @@ export const demoThreads: DemoThread[] = [
       title: "New bookings",
       status: "6 overnight",
       rows: [
-        { label: "Ana Ruiz", note: "First visit", value: "Tue 09:30" },
-        { label: "Tom Becker", note: "Follow-up", value: "Tue 11:00" },
-        { label: "Priya Shah", note: "Consultation", value: "Wed 14:15" },
+        { label: "First visit", note: "New customer", value: "Tue 09:30" },
+        { label: "Follow-up", note: "Returning customer", value: "Tue 11:00" },
+        { label: "Consultation", note: "Booked through chat", value: "Wed 14:15" },
         { label: "3 more", note: "Thu and Fri" },
       ],
     },
@@ -223,10 +223,10 @@ export const demoThreads: DemoThread[] = [
       title: "Overdue",
       status: "2 invoices",
       rows: [
-        { label: "Corner Bakery", note: "INV-2291 · 34 days", value: "$1,240" },
-        { label: "Rowan & Co", note: "INV-2304 · 31 days", value: "$860" },
+        { label: "Café", note: "INV-2291 · 34 days", value: "€1,240" },
+        { label: "Hardware store", note: "INV-2304 · 31 days", value: "€860" },
       ],
-      total: ["Outstanding", "$2,100"],
+      total: ["Outstanding", "€2,100"],
       actions: ["Send final reminder", "Call instead"],
     },
     reply: "Should I send a final reminder, or would you rather call?",
@@ -252,9 +252,9 @@ export const demoThreads: DemoThread[] = [
       title: "Needs a check",
       status: "3 receipts",
       rows: [
-        { label: "Fuel", note: "Business or personal?", value: "$86.40" },
-        { label: "Office chairs", note: "Which cost centre?", value: "$1,180.00" },
-        { label: "Client lunch", note: "Who attended?", value: "$64.90" },
+        { label: "Fuel", note: "Business or personal?", value: "€86.40" },
+        { label: "Office chairs", note: "Which cost centre?", value: "€1,180.00" },
+        { label: "Client lunch", note: "Who attended?", value: "€64.90" },
       ],
     },
     reply: "March is ready for your accountant once these 3 are sorted.",
@@ -280,13 +280,13 @@ export const demoThreads: DemoThread[] = [
       title: "Week 12",
       status: "Summary",
       rows: [
-        { label: "Sales", note: "Up 6% on last week", value: "$18,420" },
+        { label: "Sales", note: "Up 6% on last week", value: "€18,420" },
         { label: "New customers", value: "23" },
         { label: "New reviews", note: "Average 4.8", value: "11" },
         { label: "Busiest day", value: "Sat" },
       ],
     },
-    reply: "Sent to you and Maria. Two reviews mention slow replies. Want me to draft answers?",
+    reply: "Sent to you and your manager. Two reviews mention slow replies. Want me to draft answers?",
   },
 ];
 
@@ -325,10 +325,10 @@ export const jobs: Job[] = [
     phoneTitle: "Quotes",
     phoneSubtitle: "Your AI helper",
     convo: [
-      { from: "card", icon: "mail", title: "New request from Harbor Dental", lines: ["Flooring for 3 rooms · 4 photos"] },
-      { from: "helper", text: "Quote Q-1042 is ready: $4,860, with a site visit on Thursday at 10:00. Send it?" },
+      { from: "card", icon: "mail", title: "New request from a dental clinic", lines: ["Flooring for 3 rooms · 4 photos"] },
+      { from: "helper", text: "Quote Q-1042 is ready: €4,860, with a site visit on Thursday at 10:00. Send it?" },
       { from: "me", text: "Yes, send it." },
-      { from: "helper", text: "Sent. I’ll follow up on Monday if Dana hasn’t replied." },
+      { from: "helper", text: "Sent. I’ll follow up on Monday if the clinic hasn’t replied." },
     ],
   },
   {
@@ -346,9 +346,9 @@ export const jobs: Job[] = [
     phoneSubtitle: "Your AI helper",
     convo: [
       { from: "helper", text: "Good morning. 48 new emails: I answered 9 and filed 36." },
-      { from: "helper", text: "3 need you: a price increase, a refund over $500 and a partnership idea." },
+      { from: "helper", text: "3 need you: a price increase, a refund over €500 and a partnership idea." },
       { from: "me", text: "Show me the refund." },
-      { from: "card", icon: "receipt", title: "Refund request · J. Okafor", lines: ["Order 5127 · arrived damaged", "$640 · photos attached"] },
+      { from: "card", icon: "receipt", title: "Refund request · Order 5127", lines: ["Arrived damaged", "€640 · photos attached"] },
     ],
   },
   {
@@ -364,10 +364,10 @@ export const jobs: Job[] = [
     phoneTitle: "Front desk",
     phoneSubtitle: "Your AI helper",
     convo: [
-      { from: "helper", text: "6 new bookings overnight. Tomorrow is full until 2 PM." },
-      { from: "me", text: "Great. Can you move my 4 PM today to Friday?" },
-      { from: "helper", text: "Done. I’ve let Priya know and updated your calendar." },
-      { from: "card", icon: "calendar", title: "Fri 16:00 · Priya Shah", lines: ["Consultation · moved from today"] },
+      { from: "helper", text: "6 new bookings overnight. Tomorrow is full until 14:00." },
+      { from: "me", text: "Great. Can you move my 16:00 today to Friday?" },
+      { from: "helper", text: "Done. I’ve let the customer know and updated your calendar." },
+      { from: "card", icon: "calendar", title: "Fri 16:00 · Consultation", lines: ["Moved from today"] },
     ],
   },
   {
@@ -385,9 +385,9 @@ export const jobs: Job[] = [
     phoneSubtitle: "Your AI helper",
     convo: [
       { from: "helper", text: "Two invoices are more than 30 days late." },
-      { from: "card", icon: "receipt", title: "Overdue · $2,100", lines: ["Corner Bakery · $1,240", "Rowan & Co · $860"] },
-      { from: "me", text: "Send Corner Bakery a final reminder. I’ll call Rowan." },
-      { from: "helper", text: "Reminder sent. I’ve added “Call Rowan & Co” to today’s list." },
+      { from: "card", icon: "receipt", title: "Overdue · €2,100", lines: ["Café · €1,240", "Hardware store · €860"] },
+      { from: "me", text: "Send the café a final reminder. I’ll call the hardware store." },
+      { from: "helper", text: "Reminder sent. I’ve added “Call the hardware store” to today’s list." },
     ],
   },
   {
@@ -404,7 +404,7 @@ export const jobs: Job[] = [
     phoneTitle: "Bookkeeping",
     phoneSubtitle: "Your AI helper",
     convo: [
-      { from: "card", icon: "receipt", title: "Fuel · $86.40", lines: ["Mar 14 · card ending 4417"] },
+      { from: "card", icon: "receipt", title: "Fuel · €86.40", lines: ["Mar 14 · card ending 4417"] },
       { from: "helper", text: "Is this fuel receipt for the business?" },
       { from: "me", text: "Yes, business." },
       { from: "helper", text: "Got it. I’ll file fuel on that card as business from now on." },
@@ -425,9 +425,9 @@ export const jobs: Job[] = [
     phoneSubtitle: "Replies on your website",
     convo: [
       { from: "me", text: "Hi, do you deliver on Saturdays?" },
-      { from: "helper", text: "Yes. Saturday deliveries run from 9 AM to 1 PM. Want me to book one?" },
+      { from: "helper", text: "Yes. Saturday deliveries run from 9:00 to 13:00. Want me to book one?" },
       { from: "me", text: "Yes please, this Saturday." },
-      { from: "helper", text: "Booked for Saturday at 10 AM. You’ll get a text the day before." },
+      { from: "helper", text: "Booked for Saturday at 10:00. You’ll get a text the day before." },
     ],
   },
   {
@@ -443,7 +443,7 @@ export const jobs: Job[] = [
     phoneTitle: "Weekly report",
     phoneSubtitle: "Your AI helper",
     convo: [
-      { from: "card", icon: "doc", title: "Week 12 summary", lines: ["Sales $18,420 · up 6%", "23 new customers · 11 reviews"] },
+      { from: "card", icon: "doc", title: "Week 12 summary", lines: ["Sales €18,420 · up 6%", "23 new customers · 11 reviews"] },
       { from: "helper", text: "Saturday was your busiest day. Two reviews mention slow replies. Want me to draft answers?" },
       { from: "me", text: "Yes, draft them for me to check." },
     ],
@@ -463,7 +463,7 @@ export const jobs: Job[] = [
     phoneSubtitle: "Ask about any procedure",
     convo: [
       { from: "me", text: "How do I process a return without a receipt?" },
-      { from: "helper", text: "Store credit only, up to $100. Above that, a manager needs to approve it." },
+      { from: "helper", text: "Store credit only, up to €100. Above that, a manager needs to approve it." },
       { from: "card", icon: "doc", title: "Returns policy", lines: ["Section 4 · updated in January"] },
       { from: "me", text: "Perfect, thanks!" },
     ],
@@ -474,29 +474,57 @@ export const jobs: Job[] = [
 /* Questions                                                           */
 /* ------------------------------------------------------------------ */
 
-export const faqs: [string, string][] = [
-  [
-    "Do I need to be technical?",
-    "No. We handle the setup and explain everything in plain language. If you can write an email, you can work with an AI helper.",
-  ],
-  [
-    "Will it work with the software we already use?",
-    "Usually, yes. We build around what you have, such as Microsoft 365, Google Workspace, your CRM, help desk or accounting software, instead of asking you to switch.",
-  ],
-  [
-    "Is our information safe?",
-    "You decide what each helper can see and which actions need your approval. Its work is logged so you can check it, and we choose AI providers that meet your security requirements.",
-  ],
-  [
-    "Will AI replace my staff?",
-    "That isn’t the goal. Helpers take the repetitive parts of the job off people’s plates, so your team spends more time with customers and on decisions that need a person.",
-  ],
-  [
-    "How soon will we see results?",
-    "We start with one job, so your first helper can be useful early. Then we measure it with you and only expand what clearly works.",
-  ],
-  [
-    "Do you train our team?",
-    "Yes. Hands-on sessions and simple guides, so everyone knows when to use their helpers, how to check the work and when to step in.",
-  ],
+export interface Faq {
+  question: string;
+  answer: string;
+  link?: { href: string; label: string };
+}
+
+export const faqs: Faq[] = [
+  {
+    question: "Do I need to be technical?",
+    answer:
+      "No. We handle the setup and explain everything in plain language. If you can write an email, you can work with an AI helper.",
+  },
+  {
+    question: "Will it work with the software we already use?",
+    answer:
+      "Usually, yes. We build around what you have, such as Microsoft 365, Google Workspace, your CRM, help desk or accounting software, instead of asking you to switch.",
+  },
+  {
+    question: "Is our information safe?",
+    answer:
+      "You decide what each helper can see and which actions need your approval, and its work is logged so you can check it. We choose the AI provider that fits your needs, your data can stay in the EU, and we sign a data processing agreement with you.",
+  },
+  {
+    question: "Which languages do the helpers speak?",
+    answer:
+      "Your customers’ languages. A helper can talk to each customer in their own language. Our calls and training are in English.",
+  },
+  {
+    question: "What happens if we stop Care?",
+    answer:
+      "You keep everything we built. Care is simply hours from our team whenever you need help. AI costs, such as an AI subscription, are always paid separately.",
+  },
+  {
+    question: "Will AI replace my staff?",
+    answer:
+      "That isn’t the goal. Helpers take the repetitive parts of the job off people’s plates, so your team spends more time with customers and on decisions that need a person.",
+  },
+  {
+    question: "How soon will we see results?",
+    answer:
+      "We start with one job, so your first helper can be useful early. Then we measure it with you and only expand what clearly works.",
+  },
+  {
+    question: "Do you train our team?",
+    answer:
+      "Yes. Hands-on sessions and simple guides, so everyone knows when to use their helpers, how to check the work and when to step in.",
+  },
+  {
+    question: "Can we get funding for this?",
+    answer:
+      "Possibly. EIS (Enterprise Estonia) can cover half the cost of a software project for Estonian companies, from €2,000 to €5,000. The project needs to cost €4,000 or more, your revenue should average at least €50,000 a year, and you apply before the work starts. Monthly fees aren’t covered, and other conditions apply.",
+    link: { href: "https://eis.ee/en/services/rte-software/", label: "See the EIS grant" },
+  },
 ];

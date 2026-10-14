@@ -8,6 +8,7 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <!doctype html>
@@ -18,7 +19,9 @@ const { title, description } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#ffffff" />
+    <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content="Seestemic" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -31,7 +34,7 @@ const { title, description } = Astro.props;
     <!--
       THESIS: A business owner grasps in five seconds that Seestemic sets up AI helpers that take repetitive jobs off their plate, and that they stay in charge.
       OWN-WORLD: Grok Bot's product page, pinned by the brief, rebuilt with Seestemic's own assets: white ground, near-black Geist, warm gray cards, black pills, product UI floating on painted landscapes, an original speech-bubble helper whose eyes follow you.
-      STORY: meet the helper, watch one finish a job, talk to it, see how it fits, pick a job, three steps, questions, book a call.
+      STORY: meet the helper, watch one finish a job, talk to it, see how it fits, pick a job, three steps with prices, meet Martin, questions, book a free AI review.
       FIRST VIEWPORT: centred "Let [helper] AI handle the busywork" on white ground, with the painted stage below holding the example app already working.
       FORM: brief-pinned style over the seed roll (seed key c1d99fa6).
       FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
