@@ -1,0 +1,21 @@
+---
+// PROTOTYPE (dev only, throwaway): three "Who's behind Seestemic" sections. Pick with ?variant=A|B|C, the floating bar, or the arrow keys.
+import PrototypeSwitcher from "./PrototypeSwitcher.astro";
+import WhoChat from "./WhoChat.astro";
+import WhoLetter from "./WhoLetter.astro";
+import WhoPainting from "./WhoPainting.astro";
+
+const variants = [
+  { key: "A", name: "Letter" },
+  { key: "B", name: "On a painting" },
+  { key: "C", name: "Chat" },
+];
+---
+
+<div id="who">
+  <div data-proto-variant="A"><WhoLetter /></div>
+  <div data-proto-variant="B" hidden><WhoPainting /></div>
+  <div data-proto-variant="C" hidden><WhoChat /></div>
+</div>
+
+<PrototypeSwitcher variants={variants} target="#who" />

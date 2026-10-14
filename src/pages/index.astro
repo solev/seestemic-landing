@@ -10,6 +10,7 @@ import Process from "../components/Process.astro";
 import Showcase from "../components/Showcase.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
+import WhoPrototype from "../components/prototype/WhoPrototype.astro";
 import dawn from "../assets/art/hero-dawn.webp";
 import { faqs } from "../data/helpers";
 import { email, introCallUrl } from "../data/site";
@@ -122,6 +123,8 @@ const booking = {
         </div>
       </div>
     </section>
+
+    {import.meta.env.DEV && <WhoPrototype />}
 
     <section class="section" id="questions" aria-labelledby="questions-title">
       <div class="shell faq">

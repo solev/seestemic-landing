@@ -1,0 +1,154 @@
+---
+// PROTOTYPE switcher: floating dev-only bar that flips between variants (?variant=, arrows, or the left/right keys).
+interface Props {
+  variants: { key: string; name: string }[];
+  target: string;
+}
+
+const { variants, target } = Astro.props;
+const first = variants[0];
+---
+
+<div
+  class="proto-switch"
+  role="group"
+  aria-label="Prototype variant switcher"
+  data-variants={JSON.stringify(variants)}
+  data-target={target}
+>
+  <button type="button" class="proto-switch-arrow" data-dir="-1" aria-label="Previous variant">
+    <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M10 3 5 8l5 5"></path></svg>
+  </button>
+  <button type="button" class="proto-switch-label" title="Jump to the section">
+    <b data-key>{first.key}</b>
+    <span data-name>{first.name}</span>
+    <small data-count>1/{variants.length}</small>
+  </button>
+  <button type="button" class="proto-switch-arrow" data-dir="1" aria-label="Next variant">
+    <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="m6 3 5 5-5 5"></path></svg>
+  </button>
+</div>
+
+<script is:inline>
+  (() => {
+    const bar = document.querySelector(".proto-switch");
+    if (!bar) return;
+    const variants = JSON.parse(bar.dataset.variants);
+    const panels = [...document.querySelectorAll("[data-proto-variant]")];
+    const target = document.querySelector(bar.dataset.target);
+    const keyEl = bar.querySelector("[data-key]");
+    const nameEl = bar.querySelector("[data-name]");
+    const countEl = bar.querySelector("[data-count]");
+    const wanted = (new URLSearchParams(location.search).get("variant") || "").toUpperCase();
+    let index = Math.max(0, variants.findIndex((v) => v.key === wanted));
+
+    const show = (next) => {
+      index = (next + variants.length) % variants.length;
+      const current = variants[index];
+      panels.forEach((panel) => (panel.hidden = panel.dataset.protoVariant !== current.key));
+      keyEl.textContent = current.key;
+      nameEl.textContent = current.name;
+      countEl.textContent = `${index + 1}/${variants.length}`;
+      const url = new URL(location.href);
+      url.searchParams.set("variant", current.key);
+      history.replaceState(history.state, "", url);
+    };
+
+    show(index);
+
+    bar.addEventListener("click", (event) => {
+      const button = event.target.closest("button");
+      if (!button) return;
+      if (button.dataset.dir) show(index + Number(button.dataset.dir));
+      else target?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return;
+      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+      const active = document.activeElement;
+      if (
+        active instanceof HTMLElement &&
+        (active.isContentEditable ||
+          active.matches("input, textarea, select") ||
+          active.closest('[role="tablist"], [role="radiogroup"], [role="listbox"], [role="menu"], [role="slider"]'))
+      )
+        return;
+      show(index + (event.key === "ArrowLeft" ? -1 : 1));
+    });
+  })();
+</script>
+
+<style is:global>
+  .proto-switch {
+    position: fixed;
+    bottom: calc(env(safe-area-inset-bottom) + 64px);
+    left: 50%;
+    z-index: 2147483000;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px;
+    border-radius: 999px;
+    background: #111;
+    color: #fff;
+    box-shadow:
+      0 0 0 2px #ff2e88,
+      0 12px 30px rgb(0 0 0 / 0.35);
+    font: 600 13px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+    translate: -50% 0;
+  }
+
+  .proto-switch button {
+    all: unset;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+
+  .proto-switch button:focus-visible {
+    outline: 2px solid #ffe14d;
+    outline-offset: 2px;
+  }
+
+  .proto-switch-arrow {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #2a2a2a;
+  }
+
+  .proto-switch-arrow:hover {
+    background: #ff2e88;
+  }
+
+  .proto-switch-arrow path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .proto-switch-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 34px;
+    padding: 0 10px;
+    white-space: nowrap;
+  }
+
+  .proto-switch-label b {
+    padding: 4px 7px;
+    border-radius: 6px;
+    background: #ffe14d;
+    color: #111;
+  }
+
+  .proto-switch-label small {
+    color: #9a9a9a;
+    font-size: 12px;
+  }
+</style>

@@ -1,0 +1,177 @@
+---
+// PROTOTYPE A "Letter": warm card, big portrait with a name tag, first-person note, plain fact rows.
+import { Image } from "astro:assets";
+import Icon from "../Icon.astro";
+import martin from "./martin.jpg";
+import { booking, linkedInUrl } from "./facts";
+---
+
+<section class="section" aria-labelledby="who-a-title">
+  <div class="shell">
+    <div class="pw-letter">
+      <figure class="pw-letter-photo">
+        <Image
+          src={martin}
+          alt="Portrait of Martin Solev"
+          widths={[320, 460]}
+          sizes="(min-width: 861px) 440px, 100vw"
+          class="pw-letter-img"
+        />
+        <figcaption class="pw-letter-tag">
+          <b>Martin Solev</b>
+          <span>Founder, Seestemic</span>
+        </figcaption>
+      </figure>
+
+      <div class="pw-letter-copy">
+        <h2 class="h2" id="who-a-title">Hi, I’m Martin</h2>
+        <p class="lead">
+          I’m the person behind Seestemic. I’ve built software for over 12 years, including cloud services used by
+          millions of people. Now I help businesses hand their busywork to AI, one job at a time.
+        </p>
+        <p class="pw-letter-note">
+          You won’t be passed between people. I’m on your first call, I build your helper, and I’m the one you talk
+          to after.
+        </p>
+        <dl class="pw-facts">
+          <div>
+            <dt>Experience</dt>
+            <dd>12+ years building software</dd>
+          </div>
+          <div>
+            <dt>Based in</dt>
+            <dd>Tallinn, Estonia</dd>
+          </div>
+          <div>
+            <dt>You work with</dt>
+            <dd>Me, from the first call onwards</dd>
+          </div>
+        </dl>
+        <div class="pw-actions">
+          <a class="btn btn-primary" {...booking}>Book a call with Martin</a>
+          <a class="btn btn-secondary" href={linkedInUrl} target="_blank" rel="noreferrer">
+            LinkedIn
+            <Icon name="external" size={15} />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .pw-letter {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4.5rem);
+    padding: clamp(0.75rem, 1.6vw, 1.25rem) clamp(1.5rem, 5vw, 4.5rem) clamp(0.75rem, 1.6vw, 1.25rem)
+      clamp(0.75rem, 1.6vw, 1.25rem);
+    border-radius: var(--r-xl);
+    background: var(--card);
+  }
+
+  .pw-letter-photo {
+    position: relative;
+    margin: 0;
+  }
+
+  .pw-letter-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: 50% 30%;
+    border-radius: var(--r-lg);
+    background: var(--card-strong);
+  }
+
+  .pw-letter-tag {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    display: flex;
+    flex-direction: column;
+    padding: 0.625rem 1rem;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: var(--lift);
+    line-height: 1.3;
+  }
+
+  .pw-letter-tag b {
+    font-size: 0.9375rem;
+  }
+
+  .pw-letter-tag span {
+    color: var(--ink-2);
+    font-size: 0.8125rem;
+  }
+
+  .pw-letter-copy .lead,
+  .pw-letter-note {
+    max-width: 34rem;
+    margin-top: 1rem;
+  }
+
+  .pw-letter-note {
+    color: var(--ink-2);
+  }
+
+  .pw-facts {
+    max-width: 34rem;
+    margin-top: 1.75rem;
+    border-top: 1px solid var(--line-strong);
+  }
+
+  .pw-facts > div {
+    display: grid;
+    grid-template-columns: 8.5rem minmax(0, 1fr);
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .pw-facts dt {
+    color: var(--ink-3);
+  }
+
+  .pw-facts dd {
+    font-weight: 500;
+  }
+
+  .pw-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 860px) {
+    .pw-letter {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 2rem;
+      padding: 0.75rem 0.75rem 2rem;
+    }
+
+    .pw-letter-copy {
+      padding-inline: 0.75rem;
+    }
+
+    .pw-letter-img {
+      aspect-ratio: 1;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .pw-facts > div {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.125rem;
+    }
+
+    .pw-actions .btn {
+      flex: 1 1 100%;
+    }
+  }
+</style>
