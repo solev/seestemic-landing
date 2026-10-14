@@ -43,7 +43,9 @@ Engagements begin with a company's existing business processes, tools, data, doc
 
 There are currently no verified testimonials, case studies, benchmarks, customer names, or quantitative proof claims approved for publication.
 
-The current landing page's named testimonials, the `12+ years` experience claim, the `3–6 weeks` delivery claim, and all other proof-like statistics or attributed statements are placeholders. Future work must not treat them as factual evidence or invent replacements. They require explicit verification or approved content before publication.
+Approved founder facts, taken from Martin's CV and approved when he picked the founder chat: Martin Solev is the founder and runs Seestemic from Tallinn; he has built software for over 12 years, including cloud services used by millions of people; his LinkedIn is https://www.linkedin.com/in/martin-solev-a09b0061/. Do not name his employer or its products without his explicit approval.
+
+The previous landing page's named testimonials, the `3–6 weeks` delivery claim, and all other proof-like statistics or attributed statements are placeholders. Future work must not treat them as factual evidence or invent replacements. They require explicit verification or approved content before publication.
 
 ## Product Principles
 

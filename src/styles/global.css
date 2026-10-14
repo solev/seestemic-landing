@@ -2106,6 +2106,112 @@ dd {
   font-size: 0.72rem;
 }
 
+/* Who's behind Seestemic */
+
+.founder {
+  padding: clamp(2rem, 6vw, 4.5rem) clamp(1rem, 5vw, 4rem);
+  border-radius: var(--r-xl);
+  background: var(--card);
+}
+
+.founder-thread {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+.founder-turn {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  align-items: start;
+  gap: 0.875rem;
+}
+
+.founder-turn--you {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.founder-photo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--card-strong);
+}
+
+.founder-msgs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.founder-name {
+  color: var(--ink-2);
+  font-size: 0.875rem;
+}
+
+.founder-name b {
+  margin-right: 0.25rem;
+  color: var(--ink);
+}
+
+.founder-msg {
+  max-width: 30em;
+  padding: 0.75rem 1.125rem;
+  border-radius: 20px;
+  background: #fff;
+  font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  line-height: 1.45;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
+}
+
+/* The first bubble of each of Martin's turns points its tight corner at his photo. */
+.founder-msgs .founder-msg:first-of-type {
+  border-top-left-radius: 6px;
+}
+
+.founder-msg--you {
+  max-width: 24em;
+  border-radius: 20px 20px 6px;
+  background: var(--ink);
+  color: #fff;
+  box-shadow: none;
+}
+
+.founder-replies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+  margin-top: 0.625rem;
+}
+
+/* Stone barely separates from linen, so the secondary quick reply is white here. */
+.founder-replies .btn-secondary {
+  background: #fff;
+}
+
+.founder-replies .btn-secondary:hover {
+  background: var(--card-strong);
+}
+
+.founder-thread[data-anim] :is(.founder-photo, .founder-name, .founder-msg, .founder-replies) {
+  opacity: 0;
+  translate: 0 12px;
+  transition:
+    opacity 0.5s var(--ease),
+    translate 0.6s var(--ease);
+  transition-delay: calc(var(--i, 0) * 650ms + 120ms);
+}
+
+.founder-thread[data-anim].is-in :is(.founder-photo, .founder-name, .founder-msg, .founder-replies) {
+  opacity: 1;
+  translate: 0 0;
+}
+
 /* Questions */
 
 .faq {
@@ -2894,7 +3000,8 @@ dd {
     height: 92px;
   }
 
-  .process-card {
+  .process-card,
+  .founder {
     border-radius: var(--r-lg);
   }
 
@@ -2918,6 +3025,20 @@ dd {
 
   .v-tile-label {
     font-size: 0.72rem;
+  }
+
+  .founder-turn {
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 0.625rem;
+  }
+
+  .founder-photo {
+    width: 36px;
+    height: 36px;
+  }
+
+  .founder-replies .btn {
+    flex: 1 1 100%;
   }
 
   .footer-grid {

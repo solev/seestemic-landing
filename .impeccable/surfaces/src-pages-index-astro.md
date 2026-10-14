@@ -17,6 +17,7 @@ The single marketing page, in **Persuade** mode. The visitor should decide to bo
 
 ## Proof and content
 - There is no real proof yet: no testimonials, client logos or results. Product visuals are authored examples (Harbor Dental quote, Corner Bakery invoice, and others), and each carries an "Example" pill.
+- The one trust signal is Martin himself. The "Who's behind Seestemic" chat (`#about`, `src/components/FounderChat.astro`) uses only the founder facts approved in `PRODUCT.md`; every alternative layout tried is kept on the `prototype/who-section` branch.
 - Never invent claims, numbers or customers to fill the gap.
 - Copy is plain English for owners. Use "helpers", "busywork", "your OK", never "agents", "LLM" or "workflows".
 
@@ -34,4 +35,4 @@ The single marketing page, in **Persuade** mode. The visitor should decide to bo
 
 ## Unresolved
 - Real proof to add beside the examples once available.
-- LinkedIn and Privacy URLs. The old footer linked to dead `#` anchors, so they were left out until real URLs exist.
+- A Privacy URL. The old footer linked to a dead `#` anchor, so it was left out until a real page exists. LinkedIn is resolved: the founder chat links Martin's profile.

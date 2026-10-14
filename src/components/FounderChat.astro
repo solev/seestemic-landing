@@ -1,0 +1,73 @@
+---
+import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
+import martin from "../assets/martin.jpg";
+import { introCallUrl, linkedInUrl } from "../data/site";
+---
+
+<div class="founder">
+  <ol class="founder-thread" data-founder-thread>
+    <li class="founder-turn">
+      <Image src={martin} alt="" widths={[48, 96]} sizes="48px" class="founder-photo" style="--i:0" />
+      <div class="founder-msgs">
+        <span class="founder-name" style="--i:0"><b>Martin Solev</b> Founder, Seestemic</span>
+        <p class="founder-msg" style="--i:0">Hi, I’m Martin. I run Seestemic from Tallinn.</p>
+        <p class="founder-msg" style="--i:1">
+          I’ve built software for over 12 years, including cloud services used by millions of people.
+        </p>
+      </div>
+    </li>
+
+    <li class="founder-turn founder-turn--you">
+      <p class="founder-msg founder-msg--you" style="--i:2">
+        <span class="sr-only">You:</span> Who would I actually be working with?
+      </p>
+    </li>
+
+    <li class="founder-turn">
+      <Image src={martin} alt="" widths={[48, 96]} sizes="48px" class="founder-photo" style="--i:3" />
+      <div class="founder-msgs">
+        <p class="founder-msg" style="--i:3">
+          <span class="sr-only">Martin:</span> Me. I’m on your first call, I build your helper, and I’m the one you
+          message when something needs changing.
+        </p>
+        <div class="founder-replies" style="--i:4">
+          <a
+            class="btn btn-primary"
+            href={introCallUrl}
+            target="_blank"
+            rel="noreferrer"
+            data-booking-trigger
+            aria-expanded="false"
+            aria-controls="intro-call-calendar"
+          >
+            Book a call with Martin
+          </a>
+          <a class="btn btn-secondary" href={linkedInUrl} target="_blank" rel="noreferrer">
+            LinkedIn
+            <Icon name="external" size={15} />
+          </a>
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+
+<script is:inline>
+  // Inline so the chat is hidden before it paints; without JavaScript or with reduced motion it simply shows.
+  (() => {
+    const thread = document.querySelector("[data-founder-thread]");
+    if (!thread || !("IntersectionObserver" in window)) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    thread.setAttribute("data-anim", "");
+    const watcher = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        thread.classList.add("is-in");
+        watcher.disconnect();
+      },
+      { rootMargin: "0px 0px -20% 0px" },
+    );
+    watcher.observe(thread);
+  })();
+</script>
