@@ -475,6 +475,7 @@ export const jobs: Job[] = [
 /* ------------------------------------------------------------------ */
 
 export interface Faq {
+  id?: string;
   question: string;
   answer: string;
   link?: { href: string; label: string };
@@ -484,27 +485,27 @@ export const faqs: Faq[] = [
   {
     question: "Do I need to be technical?",
     answer:
-      "No. We handle the setup and explain everything in plain language. If you can write an email, you can work with an AI helper.",
+      "No. I handle the setup and explain everything in plain language. If you can write an email, you can work with an AI helper.",
   },
   {
     question: "Will it work with the software we already use?",
     answer:
-      "Usually, yes. We build around what you have, such as Microsoft 365, Google Workspace, your CRM, help desk or accounting software, instead of asking you to switch.",
+      "Usually, yes. I build around what you have, such as Microsoft 365, Google Workspace, your CRM, help desk or accounting software, instead of asking you to switch.",
   },
   {
     question: "Is our information safe?",
     answer:
-      "You decide what each helper can see and which actions need your approval, and its work is logged so you can check it. We choose the AI provider that fits your needs, your data can stay in the EU, and we sign a data processing agreement with you.",
+      "You decide what each helper can see and which actions need your approval, and its work is logged so you can check it. I pick an AI provider that fits your needs, your data can stay in the EU, and you get a signed data processing agreement.",
   },
   {
     question: "Which languages do the helpers speak?",
     answer:
-      "Your customers’ languages. A helper can talk to each customer in their own language. Our calls and training are in English.",
+      "Your customers’ languages. A helper can talk to each customer in their own language. Calls and training with me are in English.",
   },
   {
     question: "What happens if we stop Care?",
     answer:
-      "You keep everything we built. Care is simply hours from our team whenever you need help. AI costs, such as an AI subscription, are always paid separately.",
+      "You keep everything I built. Care is simply my time when you need it: up to 4 hours a month, plus a monthly check-in. AI costs, such as an AI subscription, are always paid separately.",
   },
   {
     question: "Will AI replace my staff?",
@@ -514,7 +515,7 @@ export const faqs: Faq[] = [
   {
     question: "How soon will we see results?",
     answer:
-      "We start with one job, so your first helper can be useful early. Then we measure it with you and only expand what clearly works.",
+      "You start with one job, so your first helper can be useful early. Then I measure it with you and only expand what clearly works.",
   },
   {
     question: "Do you train our team?",
@@ -522,9 +523,10 @@ export const faqs: Faq[] = [
       "Yes. Hands-on sessions and simple guides, so everyone knows when to use their helpers, how to check the work and when to step in.",
   },
   {
+    id: "funding",
     question: "Can we get funding for this?",
     answer:
-      "Possibly. EIS (Enterprise Estonia) can cover half the cost of a software project for Estonian companies, from €2,000 to €5,000. The project needs to cost €4,000 or more, your revenue should average at least €50,000 a year, and you apply before the work starts. Monthly fees aren’t covered, and other conditions apply.",
+      "Possibly, for larger setups. EIS (Enterprise Estonia) can cover up to half the cost of a software project for Estonian companies, with a grant of €2,000 to €5,000, so the project needs to cost at least €4,000. Your revenue should average at least €50,000 a year over the last two years, and you apply before the work starts. Care isn’t covered, and other conditions apply.",
     link: { href: "https://eis.ee/en/services/rte-software/", label: "See the EIS grant" },
   },
 ];

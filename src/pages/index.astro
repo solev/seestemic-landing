@@ -38,7 +38,7 @@ const booking = {
           Let <Helper follow class="h1-helper" reach={8} /> AI handle the busywork
         </h1>
         <p class="hero-sub">
-          We set up AI helpers that take repetitive jobs off your plate, inside the tools you already use. You stay in
+          I set up AI helpers that take repetitive jobs off your plate, inside the tools you already use. You stay in
           charge: nothing important happens without your OK.
         </p>
         <div class="cta-row">
@@ -106,7 +106,7 @@ const booking = {
         </header>
         <JobPicker />
         <p class="jobs-more">
-          Have a different job in mind? <a href={`mailto:${email}`}>Tell us about it</a>
+          Have a different job in mind? <a href={`mailto:${email}`}>Tell me about it</a>
         </p>
       </div>
     </section>
@@ -114,16 +114,16 @@ const booking = {
     <section class="section" id="how" aria-labelledby="how-title">
       <div class="shell">
         <header class="section-head section-head--center">
-          <h2 class="h2" id="how-title">Working with us is simple</h2>
-          <p class="lead">We start small, prove it works, then grow it with you. Here’s what each step costs.</p>
+          <h2 class="h2" id="how-title">Working with me is simple</h2>
+          <p class="lead">Start with one job, see it work, then grow from there. Here’s what each step costs.</p>
         </header>
         <Process />
-        <p class="process-more">
-          Want AI across your whole company? As your <b>Partner</b>, from <span class="tnum">€1,200</span> a month, we
-          help every part of it adopt AI, well beyond the helpers.
-        </p>
         <p class="process-note">
-          AI costs, such as an AI subscription, are paid separately. Everything we build is yours to keep.
+          Everything I build is yours to keep. AI costs, such as an AI subscription, are paid separately.
+        </p>
+        <p class="process-note">No VAT is added, as Seestemic isn’t <span class="nowrap">VAT-registered</span>.</p>
+        <p class="process-note">
+          Larger setups of <span class="tnum">€4,000</span> or more may qualify for <a href="#funding">EIS co-funding</a>.
         </p>
         <div class="section-cta">
           <a class="btn btn-primary" {...booking}>Book a free AI review</a>
@@ -146,13 +146,13 @@ const booking = {
         <div class="faq-intro">
           <h2 class="h2" id="questions-title">Questions, answered</h2>
           <p class="lead">
-            Something we didn’t cover? Email <a href={`mailto:${email}`}>{email}</a> and we’ll answer in plain English.
+            Something I didn’t cover? Email <a href={`mailto:${email}`}>{email}</a> and I’ll answer in plain English.
           </p>
         </div>
         <div class="faq-list">
           {
-            faqs.map(({ question, answer, link }) => (
-              <details class="faq-item" name="faq">
+            faqs.map(({ id, question, answer, link }) => (
+              <details class="faq-item" name="faq" id={id}>
                 <summary>
                   {question}
                   <span class="faq-icon" aria-hidden="true">
@@ -181,16 +181,16 @@ const booking = {
       <div class="shell">
         <h2 class="h2 closing-title" id="book-title">What should AI take off your plate?</h2>
         <p class="closing-sub">
-          Bring one repetitive job to a free 30-minute AI review. We’ll tell you honestly whether AI can help, and what
+          Bring one repetitive job to a free 30-minute AI review. I’ll tell you honestly whether AI can help, and what
           a first helper could look like.
         </p>
         <div class="cta-row">
           <a class="btn btn-primary" {...booking}>Book a free AI review</a>
-          <a class="btn btn-secondary" href={`mailto:${email}`}>Email us</a>
+          <a class="btn btn-secondary" href={`mailto:${email}`}>Email me</a>
         </div>
         <p class="closing-note">
           <Icon name="lock" size={16} />
-          Your data can stay in the EU, and we sign a data processing agreement with you.
+          Your data can stay in the EU, and you get a signed data processing agreement.
         </p>
         <BookingPanel />
       </div>
@@ -205,6 +205,20 @@ const booking = {
   <script>
     import { initHelpers } from "../scripts/helpers";
     initHelpers();
+  </script>
+
+  <script is:inline>
+    (() => {
+      // A link to a closed FAQ item opens it, so "EIS co-funding" lands on the answer.
+      const openTarget = (hash) => {
+        const target = hash.length > 1 ? document.getElementById(decodeURIComponent(hash.slice(1))) : null;
+        if (target instanceof HTMLDetailsElement) target.open = true;
+      };
+      document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener("click", () => openTarget(link.hash));
+      });
+      openTarget(location.hash);
+    })();
   </script>
 
   <script is:inline>

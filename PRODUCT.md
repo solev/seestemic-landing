@@ -35,13 +35,14 @@ Engagements begin with a company's existing business processes, tools, data, doc
 Offer and prices, approved by Martin in October 2026:
 - **Free AI review:** a free 30-minute call, booked through Cal.com. It is the page's main action.
 - **Setup:** from €1,500, one-time, for the first helper.
-- **Care:** from €300 a month. It is hours from the Seestemic team whenever the client needs help. Never price it per helper or say how many helpers it includes.
-- **Partner:** from €1,200 a month. Seestemic helps the whole company adopt AI in various ways, not only through helpers.
+- **Care:** from €300 a month: up to 4 hours of Martin's time and a check-in each month. The 4 hours came from review feedback in October 2026, so confirm it with Martin before building on it. Never price it per helper or say how many helpers it includes.
+- **Partner:** from €1,200 a month. Martin helps the whole company adopt AI in various ways, not only through helpers. The page shows it as its own card with three points: a plan for where AI can help, team by team; help picking AI tools, plus simple rules for using them safely; and hands-on training for every team. Partner's hours, and whether it includes Care, are not decided, so do not claim them.
 - AI costs, such as an AI subscription, are not included; the client pays them separately.
 - Clients keep everything Seestemic builds, including if they stop Care. Minimum terms and notice periods are not decided, so do not claim any.
-- Seestemic is not VAT-registered (exempt for now), so prices carry no VAT note.
+- Seestemic is not VAT-registered (exempt for now). The page says "No VAT is added, as Seestemic isn't VAT-registered." Do not write "prices exclude VAT" until it registers, because that reads as 24% on top; once it registers, switch to that line.
 - Helpers can talk to each customer in that customer's own language; do not list specific languages. Calls and training are in English.
 - Client data can stay in the EU, and Seestemic signs a data processing agreement with each client.
+- Larger setups of €4,000 or more may qualify for EIS co-funding (see Evidence on Hand); the page says so under the prices and links to the FAQ answer.
 - The company's legal name, registry code and address are pending a company rename. Leave them, and the Privacy page, off the site until Martin supplies them.
 - The site lives at seestemic.com. Older design proposals move to design.seestemic.com, and unknown paths on seestemic.com redirect there.
 
@@ -52,6 +53,7 @@ Offer and prices, approved by Martin in October 2026:
 - Emphasize partnership, measurable usefulness, integration with existing work, human control, and employee adoption.
 - Do not narrow the company to one industry or a single AI product without an explicit product decision.
 - Do not mention Microsoft Teams for now.
+- Seestemic is Martin working solo, and the page says so. Speak as Martin in the first person singular ("I", "me", "my") or as "Seestemic"; never "we", "us" or "our team" for Seestemic. Customers' own words, such as FAQ questions and example messages, may say "we".
 
 ## Evidence on Hand
 
@@ -63,7 +65,7 @@ The previous landing page's named testimonials, the `3–6 weeks` delivery claim
 
 The site's product examples are authored, not client work. They use euros, 24-hour times and plain roles (a dental clinic, a café) instead of invented people or company names.
 
-EIS funding, checked against eis.ee in October 2026: the RTE grant for software implementation and integration (https://eis.ee/en/services/rte-software/) is open until its budget runs out. It covers 50% of an eligible project, from €2,000 to €5,000, so the project must cost at least €4,000. The Estonian company applies itself, before work starts, with an itemised quote. It needs average revenue of at least €50,000 over its last two financial years, and a mandatory digital advisor with three similar engagements in the past four years. Monthly fees such as Care are not covered. There is no vendor registry. The EIS AI adoption grant closed on 24 August 2026; do not promote it.
+EIS funding, re-checked on 14 October 2026 against eis.ee and the grant regulation published there in August 2026: the RTE grant for software implementation and integration (https://eis.ee/en/services/rte-software/) takes applications on a rolling basis until its budget runs out. It covers up to 50% of eligible costs, with a grant of €2,000 to €5,000, so the project must cost at least €4,000. The company, registered in the Estonian Commercial Register, applies itself before committing to the work, with an itemised quote. It needs average sales revenue of at least €50,000 over its last two financial years and a mandatory digital advisor with three similar engagements in the past four years. Someone at the company must complete the free "Digitalising your company" course, the company must use e-invoicing by the end of the project, and the grant counts as de minimis aid. Monthly fees such as Care are not covered. There is no vendor registry. The EIS AI adoption grant closed on 24 August 2026; do not promote it.
 
 ## Product Principles
 
