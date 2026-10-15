@@ -1,0 +1,188 @@
+---
+// PROTOTYPE: a copy of Process.astro with the founding-client pilot added three ways (dev only, throwaway).
+import Art from "../Art.astro";
+import Helper from "../Helper.astro";
+import Icon from "../Icon.astro";
+import { helpers } from "../../data/helpers";
+import { introCallUrl } from "../../data/site";
+import harvest from "./pilot-harvest.webp";
+
+interface Props {
+  variant: "A" | "B" | "C";
+}
+
+const { variant } = Astro.props;
+const places = 5;
+const booking = {
+  href: introCallUrl,
+  target: "_blank",
+  rel: "noreferrer",
+  "data-booking-trigger": "",
+  "aria-expanded": "false",
+  "aria-controls": "intro-call-calendar",
+};
+---
+
+<ol class="process">
+  <li class="process-card">
+    <span class="process-num" aria-hidden="true">1</span>
+    <h3>Tell us what eats your week</h3>
+    <p>A relaxed call about the jobs that take too long. We’ll be honest about where AI helps, and where it doesn’t.</p>
+    <p class="process-price">
+      <b>Free</b>
+      <span>30-minute AI review</span>
+    </p>
+    <div class="process-mini mini-list" aria-hidden="true">
+      <span class="mini-row is-picked">
+        <Icon name="check" size={13} />
+        Typing up quotes
+        <em>Start here</em>
+      </span>
+      <span class="mini-row">Chasing late invoices</span>
+      <span class="mini-row">Answering the same emails</span>
+    </div>
+  </li>
+
+  <li class:list={["process-card", variant === "B" && "ppB-card"]}>
+    <span class="process-num" aria-hidden="true">2</span>
+    {variant === "B" && <span class="ppB-flag">First 5 clients</span>}
+    <h3>We set up your first helper</h3>
+    <p>One job, done well, inside the tools you already use, with your approval rules built in.</p>
+    {
+      variant === "B" ? (
+        <p class="process-price ppB-price">
+          <b>
+            €500
+            <s>
+              <span class="sr-only">normally from </span>€1,500
+            </s>
+          </b>
+          <span>
+            Founding-client pilot: one small helper, set up. In return, we ask for a short written case study after{" "}
+            <span class="nowrap">6 to 8 weeks.</span>
+          </span>
+        </p>
+      ) : (
+        <p class="process-price">
+          <b>
+            <small>from</small> €1,500
+          </b>
+          <span>One-time setup</span>
+        </p>
+      )
+    }
+    <div class="process-mini mini-setup" aria-hidden="true">
+      <span class="mini-setup-head">
+        <Helper variant="avatar" color={helpers.quotes.color} class="mini-avatar" />
+        <b>Quotes</b>
+        <small>Ready</small>
+      </span>
+      <span class="mini-setup-row">
+        <Icon name="mail" size={14} />
+        Email
+        <i class="mini-on"></i>
+      </span>
+      <span class="mini-setup-row">
+        <Icon name="sheet" size={14} />
+        Price list
+        <i class="mini-on"></i>
+      </span>
+      <span class="mini-setup-row">
+        <Icon name="lock" size={14} />
+        Ask me before sending
+        <i class="mini-on"></i>
+      </span>
+    </div>
+  </li>
+
+  <li class="process-card">
+    <span class="process-num" aria-hidden="true">3</span>
+    <h3>We train your team and stay</h3>
+    <p>Hands-on training for the people who’ll use it. Then we measure, fix and add what works.</p>
+    <p class="process-price">
+      <b><small>from</small> €300 <small>a month</small></b>
+      <span>Care: up to 4 hours of our time and a check-in each month</span>
+    </p>
+    <div class="process-mini mini-team" aria-hidden="true">
+      <span class="mini-faces">
+        <i style="--c:#F2D2B6">S</i>
+        <i style="--c:#CFE3F7">M</i>
+        <i style="--c:#D8EBCF">J</i>
+        <i style="--c:#E7DDF8">+4</i>
+      </span>
+      <span class="mini-event">
+        <Icon name="calendar" size={14} />
+        Team training
+        <span class="tnum">Tue 10:00</span>
+      </span>
+      <span class="mini-event">
+        <Icon name="replay" size={14} />
+        Monthly check-in
+        <span class="tnum">1st Mon</span>
+      </span>
+    </div>
+  </li>
+</ol>
+
+{
+  variant === "A" && (
+    <p class="ppA-note">
+      <b>Founding-client pilot:</b> our first 5 clients get one small AI helper set up for <b class="tnum">€500</b>{" "}
+      (normally from <span class="tnum">€1,500</span>). In return, we ask for a short written case study after{" "}
+      <span class="nowrap">6 to 8 weeks.</span>
+    </p>
+  )
+}
+
+{
+  variant === "C" && (
+    <div class="ppC-band">
+      <Art src={harvest} sizes="(min-width: 1280px) 1200px, 100vw" widths={[960, 1400]} class="ppC-art" />
+      <div class="ppC-figure" aria-hidden="true">
+        <Helper follow class="ppC-helper" reach={8} tilt={-8} />
+        <p class="say-reply ppC-reply">I could be your first helper.</p>
+      </div>
+      <div class="ppC-card">
+        <h3>Be one of our first 5 clients</h3>
+        <p>
+          Founding-client pilot: we set up one small AI helper for you at a founding price. In return, we ask for a
+          short written case study after <span class="nowrap">6 to 8 weeks.</span>
+        </p>
+        <p class="process-price ppC-price">
+          <b>
+            €500
+            <s>
+              <span class="sr-only">normally from </span>€1,500
+            </s>
+          </b>
+          <span>One small helper, set up</span>
+        </p>
+        <div class="ppC-foot">
+          <span class="ppC-places">
+            <span class="ppC-seats" aria-hidden="true">
+              {Array.from({ length: places }, () => <i />)}
+            </span>
+            {places} founding places
+          </span>
+          <a class="btn btn-secondary ppC-cta" {...booking}>Ask about a place</a>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+<div class="partner">
+  <div class="partner-intro">
+    <h3>Want AI across your whole company?</h3>
+    <p>As your Partner, we help every team adopt AI in the ways that fit, not only through helpers.</p>
+  </div>
+  <ul class="partner-list">
+    <li><Icon name="check" size={16} />A plan for where AI can help, team by team</li>
+    <li><Icon name="check" size={16} />Help picking AI tools, plus simple rules for using them safely</li>
+    <li><Icon name="check" size={16} />Hands-on training for every team</li>
+  </ul>
+  <p class="process-price">
+    <b><small>from</small> €1,200 <small>a month</small></b>
+    <span>Partner</span>
+  </p>
+</div>

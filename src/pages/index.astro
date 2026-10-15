@@ -8,6 +8,7 @@ import Helper from "../components/Helper.astro";
 import Icon from "../components/Icon.astro";
 import JobPicker from "../components/JobPicker.astro";
 import Process from "../components/Process.astro";
+import PilotPrototype from "../components/prototype/PilotPrototype.astro";
 import Showcase from "../components/Showcase.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
@@ -117,7 +118,7 @@ const booking = {
           <h2 class="h2" id="how-title">Working with us is simple</h2>
           <p class="lead">We start small, prove it works, then grow it with you. Here’s what each step costs.</p>
         </header>
-        <Process />
+        {import.meta.env.DEV ? <PilotPrototype /> : <Process />}
         <p class="process-note">
           Everything we build is yours to keep. AI costs, such as an AI subscription, are paid separately.
         </p>

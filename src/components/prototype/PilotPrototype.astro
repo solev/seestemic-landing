@@ -1,0 +1,221 @@
+---
+// PROTOTYPE: three ways to show the founding-client pilot in "How working with us goes" (dev only, throwaway).
+// Switch with ?variant=A|B|C, the floating bar, or the left/right keys.
+import ProcessPilot from "./ProcessPilot.astro";
+import PrototypeSwitcher from "./PrototypeSwitcher.astro";
+
+const variants = [
+  { key: "A", name: "Bubble under step 2" },
+  { key: "B", name: "Pilot price in step 2" },
+  { key: "C", name: "Painted pilot band" },
+] as const;
+---
+
+{
+  variants.map((v, i) => (
+    <div data-proto-variant={v.key} hidden={i > 0}>
+      <ProcessPilot variant={v.key} />
+    </div>
+  ))
+}
+
+<PrototypeSwitcher variants={[...variants]} target="#how" />
+
+<style is:global>
+  /* A: the line itself, as an ink bubble pointing up at the setup step */
+  .ppA-note {
+    position: relative;
+    max-width: 38rem;
+    margin: 1.75rem auto 0;
+    padding: 1.125rem 1.625rem;
+    border-radius: 20px;
+    background: var(--ink);
+    color: rgb(255 255 255 / 0.8);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    text-align: center;
+    text-wrap: pretty;
+  }
+
+  .ppA-note::before {
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    background: var(--ink);
+    translate: -50% 0;
+    rotate: 45deg;
+  }
+
+  .ppA-note b {
+    color: #fff;
+    font-weight: 500;
+  }
+
+  .ppA-note + .partner {
+    margin-top: 1.75rem;
+  }
+
+  /* B: the setup step's own price becomes the pilot price */
+  .ppB-card {
+    position: relative;
+  }
+
+  .ppB-flag {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    display: inline-flex;
+    align-items: center;
+    height: 36px;
+    padding: 0 0.9375rem;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--ink);
+    font-size: 0.8125rem;
+    font-weight: 500;
+  }
+
+  .ppB-price b,
+  .ppC-price b {
+    display: flex;
+    align-items: baseline;
+    gap: 0.625rem;
+  }
+
+  .ppB-price s,
+  .ppC-price s {
+    color: var(--ink-3);
+    font-size: 1.0625rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-decoration-thickness: 1px;
+  }
+
+  /* C: a separate pilot band, a white card floating on the harvest painting */
+  .ppC-band {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    min-height: 440px;
+    margin-top: 1.25rem;
+    padding: clamp(1rem, 4vw, 3rem);
+    overflow: hidden;
+    border-radius: var(--r-xl);
+    background: #bdaa8a;
+  }
+
+  .ppC-art {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 72%;
+  }
+
+  /* Giant helper rises from the band's bottom edge, the one edge that crops it */
+  .ppC-figure {
+    position: absolute;
+    right: 9%;
+    bottom: -96px;
+    width: 300px;
+    height: 300px;
+  }
+
+  .ppC-helper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .ppC-reply {
+    top: -18%;
+    left: -46%;
+    white-space: nowrap;
+  }
+
+  .ppC-card {
+    width: min(100%, 31rem);
+    padding: 2rem;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: var(--float);
+  }
+
+  .ppC-card h3 {
+    font-size: clamp(1.5rem, 1.35rem + 0.5vw, 1.75rem);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
+
+  .ppC-card > p:not(.process-price) {
+    margin-top: 0.625rem;
+    color: var(--ink-2);
+  }
+
+  .ppC-price {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line-strong);
+  }
+
+  .ppC-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .ppC-places {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--ink-2);
+    font-size: 0.9375rem;
+  }
+
+  .ppC-seats {
+    display: flex;
+    gap: 6px;
+  }
+
+  .ppC-seats i {
+    width: 22px;
+    height: 22px;
+    border: 1.5px dashed #a9a8a3;
+    border-radius: 50%;
+  }
+
+  @media (max-width: 900px) {
+    .ppA-note,
+    .ppC-band {
+      max-width: 560px;
+      margin-inline: auto;
+    }
+
+    .ppC-band {
+      min-height: 0;
+      padding-top: 9rem;
+    }
+
+    .ppC-card {
+      width: 100%;
+      padding: 1.5rem;
+    }
+
+    .ppC-figure {
+      display: none;
+    }
+  }
+</style>
