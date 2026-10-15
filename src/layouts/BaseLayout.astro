@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import geist from "../assets/fonts/geist.woff2?url";
+import { analytics } from "../data/site";
 
 interface Props {
   title: string;
@@ -29,6 +30,36 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preload" href={geist} as="font" type="font/woff2" crossorigin />
     <title>{title}</title>
+    {
+      import.meta.env.PROD && (
+        <>
+          <script is:inline define:vars={{ analytics }}>
+            window.op =
+              window.op ||
+              (() => {
+                const queue = [];
+                return new Proxy(
+                  function () {
+                    if (arguments.length) queue.push([].slice.call(arguments));
+                  },
+                  {
+                    get: (_, key) => (key === "q" ? queue : (...args) => queue.push([key, ...args])),
+                    has: (_, key) => key === "q",
+                  },
+                );
+              })();
+            window.op("init", {
+              apiUrl: analytics.apiUrl,
+              clientId: analytics.clientId,
+              trackScreenViews: true,
+              trackOutgoingLinks: true,
+              trackAttributes: true,
+            });
+          </script>
+          <script is:inline src={analytics.scriptUrl} defer async />
+        </>
+      )
+    }
   </head>
   <body>
     <!--

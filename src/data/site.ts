@@ -2,6 +2,13 @@ export const introCallUrl = "https://cal.com/martinsolev/intro-call-with-martin"
 export const email = "hello@seestemic.com";
 export const linkedInUrl = "https://www.linkedin.com/in/martin-solev-a09b0061/";
 
+// Self-hosted OpenPanel on Coolify, project "Seestemic". The client ID is public; never put the client secret here.
+export const analytics = {
+  apiUrl: "https://openpanel-api.coolify.seestemic.com",
+  scriptUrl: "https://openpanel.coolify.seestemic.com/op1.js",
+  clientId: "6778a55c-1541-4b50-92d6-514ea63b3cfd",
+} as const;
+
 // Founding-client pilot. Raise `taken` as clients sign; the offer disappears once every place is taken.
 export const founding = { places: 5, taken: 0 } as const;
 

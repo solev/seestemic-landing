@@ -274,6 +274,10 @@ const booking = {
           callback: () => status?.setAttribute("hidden", ""),
         });
         Cal.ns["intro-call-with-martin"]("on", {
+          action: "bookingSuccessfulV2",
+          callback: () => window.op?.("track", "booking_completed"),
+        });
+        Cal.ns["intro-call-with-martin"]("on", {
           action: "linkFailed",
           callback: () => {
             status?.classList.add("is-error");
@@ -296,6 +300,14 @@ const booking = {
         const clickedTrigger = event.currentTarget;
         if (!(clickedTrigger instanceof HTMLAnchorElement)) return;
         lastTrigger = clickedTrigger;
+        const from = clickedTrigger.closest(".pilot")
+          ? "pilot"
+          : clickedTrigger.closest("header")
+            ? "header"
+            : clickedTrigger.closest("footer")
+              ? "footer"
+              : (clickedTrigger.closest("section[id]")?.id ?? "page");
+        window.op?.("track", "booking_opened", { from });
         const mobileNav = clickedTrigger.closest("details.mobile-nav");
         if (mobileNav instanceof HTMLDetailsElement) mobileNav.open = false;
         panel.hidden = false;
