@@ -100,7 +100,10 @@ const booking = {
     <h3>We train your team and stay</h3>
     <p>Hands-on training for the people who’ll use it. Then we measure, fix and add what works.</p>
     <p class="process-price">
-      <b><small>from</small> €300 <small>a month</small></b>
+      <b>
+        <small>from</small> €300 <small class="nowrap">a month,</small>{" "}
+        <small class="nowrap">{pilotOpen ? "after the pilot, optional" : "after setup, optional"}</small>
+      </b>
       <span>Care: up to 4 hours of our time and a check-in each month</span>
     </p>
     <div class="process-mini mini-team" aria-hidden="true">
@@ -148,16 +151,20 @@ const booking = {
           <span>One small helper, set up for one task</span>
         </p>
         <div class="pilot-foot">
-          <span class="pilot-places">
-            <span class="pilot-seats" aria-hidden="true">
-              {Array.from({ length: founding.places }, (_, i) => (
-                <i class:list={[i < founding.taken && "is-taken"]} />
-              ))}
-            </span>
-            {founding.taken === 0 ? `${founding.places} founding places` : `${placesLeft} of ${founding.places} places left`}
+          <span class="pilot-seats" aria-hidden="true">
+            {Array.from({ length: founding.places }, (_, i) => (
+              <i class:list={[i < founding.taken && "is-taken"]} />
+            ))}
           </span>
-          <a class="btn btn-secondary" {...booking}>
-            Ask about a place
+          <p class="pilot-claim">
+            {
+              founding.taken === 0
+                ? `Book a free AI review to claim one of ${founding.places} places.`
+                : `Book a free AI review to claim one of the ${placesLeft} places left.`
+            }
+          </p>
+          <a class="btn btn-primary" {...booking}>
+            Book a free AI review
           </a>
         </div>
       </div>
