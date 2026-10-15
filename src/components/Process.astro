@@ -1,7 +1,21 @@
 ---
+import Art from "./Art.astro";
 import Helper from "./Helper.astro";
 import Icon from "./Icon.astro";
+import harvest from "../assets/art/harvest.webp";
 import { helpers } from "../data/helpers";
+import { founding, introCallUrl } from "../data/site";
+
+const pilotOpen = founding.taken < founding.places;
+const placesLeft = founding.places - founding.taken;
+const booking = {
+  href: introCallUrl,
+  target: "_blank",
+  rel: "noreferrer",
+  "data-booking-trigger": "",
+  "aria-expanded": "false",
+  "aria-controls": "intro-call-calendar",
+};
 ---
 
 <ol class="process">
@@ -25,13 +39,38 @@ import { helpers } from "../data/helpers";
   </li>
 
   <li class="process-card">
-    <span class="process-num" aria-hidden="true">2</span>
+    {
+      pilotOpen ? (
+        <span class="process-head">
+          <span class="process-num" aria-hidden="true">2</span>
+          <span class="process-flag">First {founding.places} clients</span>
+        </span>
+      ) : (
+        <span class="process-num" aria-hidden="true">2</span>
+      )
+    }
     <h3>We set up your first helper</h3>
     <p>One job, done well, inside the tools you already use, with your approval rules built in.</p>
-    <p class="process-price">
-      <b><small>from</small> €1,500</b>
-      <span>One-time setup</span>
-    </p>
+    {
+      pilotOpen ? (
+        <p class="process-price">
+          <b>
+            €500 <small>one-time</small>
+            <s>
+              <span class="sr-only">normally from </span>€1,500
+            </s>
+          </b>
+          <span>Founding-client pilot: one small helper, set up for one task</span>
+        </p>
+      ) : (
+        <p class="process-price">
+          <b>
+            <small>from</small> €1,500
+          </b>
+          <span>One-time setup</span>
+        </p>
+      )
+    }
     <div class="process-mini mini-setup" aria-hidden="true">
       <span class="mini-setup-head">
         <Helper variant="avatar" color={helpers.quotes.color} class="mini-avatar" />
@@ -84,6 +123,47 @@ import { helpers } from "../data/helpers";
     </div>
   </li>
 </ol>
+
+{
+  pilotOpen && (
+    <aside class="pilot" aria-labelledby="pilot-title">
+      <Art src={harvest} sizes="(min-width: 1280px) 1200px, 100vw" widths={[640, 960, 1400]} class="pilot-art" />
+      <div class="pilot-figure" aria-hidden="true">
+        <Helper follow class="pilot-helper" reach={8} tilt={-8} />
+        <p class="say-reply pilot-reply">I could be your first helper.</p>
+      </div>
+      <div class="pilot-card">
+        <h3 id="pilot-title">Be one of our first {founding.places} clients</h3>
+        <p>
+          Founding-client pilot: we set up one small AI helper for you at a one-time founding price. In return, we ask
+          for a short written case study after <span class="nowrap">6 to 8 weeks.</span>
+        </p>
+        <p class="process-price pilot-price">
+          <b>
+            €500 <small>one-time</small>
+            <s>
+              <span class="sr-only">normally from </span>€1,500
+            </s>
+          </b>
+          <span>One small helper, set up for one task</span>
+        </p>
+        <div class="pilot-foot">
+          <span class="pilot-places">
+            <span class="pilot-seats" aria-hidden="true">
+              {Array.from({ length: founding.places }, (_, i) => (
+                <i class:list={[i < founding.taken && "is-taken"]} />
+              ))}
+            </span>
+            {founding.taken === 0 ? `${founding.places} founding places` : `${placesLeft} of ${founding.places} places left`}
+          </span>
+          <a class="btn btn-secondary" {...booking}>
+            Ask about a place
+          </a>
+        </div>
+      </div>
+    </aside>
+  )
+}
 
 <div class="partner">
   <div class="partner-intro">
