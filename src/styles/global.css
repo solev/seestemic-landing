@@ -2299,19 +2299,18 @@ dd {
 
 .pilot-foot {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.625rem;
   margin-top: 1.5rem;
 }
 
-.pilot-places {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+.pilot-claim {
+  margin: 0 0 0.5rem;
   color: var(--ink-2);
   font-size: 0.9375rem;
+  line-height: 1.4;
+  text-wrap: balance;
 }
 
 .pilot-seats {
@@ -3393,19 +3392,6 @@ dd {
   .pilot-reply {
     max-width: 8.75rem;
     font-size: 0.9375rem;
-  }
-
-  .pilot-places {
-    gap: 0.625rem;
-  }
-
-  .pilot-seats {
-    gap: 4px;
-  }
-
-  .pilot-seats i {
-    width: 18px;
-    height: 18px;
   }
 }
 

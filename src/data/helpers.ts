@@ -526,7 +526,7 @@ export const faqs: Faq[] = [
     id: "funding",
     question: "Can we get funding for this?",
     answer:
-      "Possibly, for larger setups. EIS (Enterprise Estonia) can cover up to half the cost of a software project for Estonian companies, with a grant of €2,000 to €5,000, so the project needs to cost at least €4,000. Your revenue should average at least €50,000 a year over the last two years, and you apply before the work starts. Care isn’t covered, and other conditions apply.",
+      "Possibly, for larger setups. EIS (the Estonian Business and Innovation Agency, formerly Enterprise Estonia) can cover up to half the cost of a software project for Estonian companies, with a grant of €2,000 to €5,000, so the project needs to cost at least €4,000. Your revenue should average at least €50,000 a year over the last two years, and you apply before the work starts. Care isn’t covered, and other conditions apply.",
     link: { href: "https://eis.ee/en/services/rte-software/", label: "See the EIS grant" },
   },
 ];
