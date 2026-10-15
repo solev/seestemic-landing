@@ -36,6 +36,7 @@ colors:
   art-dawn: "#d8c6b5"
   art-vignette: "#cbbfae"
   art-field: "#c9c4a6"
+  art-harvest: "#bdaa8a"
   shadow: "#000000"
 typography:
   display:
@@ -307,7 +308,7 @@ An ink-on-white interface with warm, faintly yellowed grays. Hue lives in the pa
 - **Oat** (#e6dfd3): the avatar disc of a person in the demo, such as the example customer. People stay neutral, and only helpers wear a hue.
 - **Shadow Black** (#000000): the base of every shadow and edge in Elevation & Depth, always at 0.04–0.45 alpha and never opaque.
 
-Each painted frame also carries a flat load-in fill in its own painting's mean tone, so a frame never flashes white while the image loads: **Dawn Sand** (#d8c6b5) behind the hero, **Vignette Putty** (#cbbfae) behind both showcase paintings and **Field Sage** (#c9c4a6) behind the job stage. These tones belong to their paintings and never appear as interface colour.
+Each painted frame also carries a flat load-in fill in its own painting's mean tone, so a frame never flashes white while the image loads: **Dawn Sand** (#d8c6b5) behind the hero, **Vignette Putty** (#cbbfae) behind both showcase paintings **Field Sage** (#c9c4a6) behind the job stage and **Harvest Straw** (#bdaa8a) behind the pilot band. These tones belong to their paintings and never appear as interface colour.
 
 ### Named Rules
 **The Ink-on-Paper Rule.** The interface itself is achromatic: ink, warm grays and white. Saturation enters only through the paintings, the helper avatars and the tool icons, and status colour stays small and local: blue for new, green for done and brick for a failed load. Buttons, headings and section backgrounds never take a hue.
@@ -358,13 +359,13 @@ The page runs in a single centred column: a 1200px content shell, and a wider 13
   - At 1180px and below, the app window's sidebar collapses to a 72px avatar rail.
   - At 1024px and below, the teammate card stacks. The giant helper shrinks to clamp(340px, 86vw, 500px) and sits below the copy, still breaking out to the right.
   - Between 761 and 1279px, the chips form a four-column grid.
-  - At 900px and below, the showcase, process (capped at 560px), Partner card and FAQ go single-column. The window stacks: its sidebar becomes horizontal pill tabs and the thread reorders. The phone shortens and drops below the job card.
+  - At 900px and below, the showcase, process (capped at 560px), pilot band, Partner card and FAQ go single-column. The pilot band stacks its card under a strip of painting, and its helper peeks over the card. The window stacks: its sidebar becomes horizontal pill tabs and the thread reorders. The phone shortens and drops below the job card.
   - At 860px and below, the header nav collapses into a round menu button.
   - At 760px and below, frames step down one radius, chips scroll edge to edge and the window dots hide.
   - At 480px and below, tool pills drop out of demo steps, the founder chat's photos shrink to 36px and its quick replies stack full width, and the footer becomes one column.
 
 ### Named Rules
-**The One Crop Rule.** A giant helper is cropped by exactly one edge. The teammate helper rises through its card's top edge and runs off the right of the viewport, and only the card's bottom edge cuts it. The closing outline helper is cut at the waist by the footer's top rule. Never box a giant helper inside its container.
+**The One Crop Rule.** A giant helper is cropped by exactly one edge. The teammate helper rises through its card's top edge and runs off the right of the viewport, and only the card's bottom edge cuts it. The pilot helper rises from the pilot band's bottom edge; when the band stacks, it peeks over the white card instead, and the card's top edge cuts it. The closing outline helper is cut at the waist by the footer's top rule. Never box a giant helper inside its container.
 
 ## Elevation & Depth
 
@@ -422,13 +423,14 @@ Pills you can't misread: one black, one gray.
 - **Border:** none.
 - **Internal Padding:** clamp(1.5rem, 3vw, 2.25rem) on showcase cards and 2rem on step cards.
 - **Showcase (2×2):** copy sits on top as a small title and graphite text. Two cards end in painted insets that bleed off the bottom, at least 360px tall. The two quiet cards hold white 14px rows on linen, up to 420px wide and centred. A pending row gets a dashed hairline outline, and a 2px Connector line joins consecutive rows.
-- **Step cards:** a 36px ink circle with a white numeral, a title and graphite text, then the step's price, then a white mini UI rising from the card bottom. The price sits under a Strong Hairline rule: the figure at 1.5rem, weight 500 and tabular figures, with "from" and "a month" in graphite at 0.9375rem, over a short graphite label. Care's label says what it includes: up to 4 hours of Seestemic's time and a check-in each month. The mini UI has 18px top corners, a soft upward shadow and a minimum height of 184px. In three columns the cards share the grid's five rows through subgrid, so the price rules and mini UIs line up whatever wraps above them.
-- **Partner card:** a linen 32px card 1.25rem under the steps that borrows their three columns, each padded like a step card. The question "Want AI across your whole company?" and a graphite line sit under step 1. Three graphite points with Done Green checks sit under step 2. The price ("from €1,200 a month", labelled "Partner") sits under step 3, level with the question, so it reads beside Care's price. At 900px and below it stacks to 560px, and the price takes its Strong Hairline rule back.
+- **Step cards:** a 36px ink circle with a white numeral, a title and graphite text, then the step's price, then a white mini UI rising from the card bottom. The price sits under a Strong Hairline rule: the figure at 1.5rem, weight 500 and tabular figures, with "from" and "a month" in graphite at 0.9375rem, over a short graphite label. Care's label says what it includes: up to 4 hours of Seestemic's time and a check-in each month. While the founding-client pilot is open, step 2 carries a white 36px "First 5 clients" pill level with its numeral, its figure reads "€500 one-time" with "€1,500" struck through in pebble at 1.0625rem, and its label says the pilot covers one small helper for one task. "One-time" sits where Care says "a month", so the pilot never reads as a monthly price. The mini UI has 18px top corners, a soft upward shadow and a minimum height of 184px. In three columns the cards share the grid's five rows through subgrid, so the price rules and mini UIs line up whatever wraps above them.
+- **Pilot band:** while founding places remain (`founding` in `src/data/site.ts`), a painted stage on the harvest painting sits 1.25rem under the steps, at least 440px tall. A white 20px card with Float holds the heading "Be one of our first 5 clients", the graphite terms (a one-time founding price, a short written case study after 6 to 8 weeks), the price ("€500 one-time", "€1,500" struck, labelled "One small helper, set up for one task"), five 22px seat circles with a 1.5px dashed outline that fill ink as places are taken, and a stone "Ask about a place" pill that opens the booking panel. A 300px giant ink helper rises from the band's bottom edge on the right, saying "I could be your first helper." in a white reply bubble with Lift. The band and the step 2 flag disappear once every place is taken.
+- **Partner card:** a linen 32px card 1.25rem under the steps (under the pilot band while it shows) that borrows their three columns, each padded like a step card. The question "Want AI across your whole company?" and a graphite line sit under step 1. Three graphite points with Done Green checks sit under step 2. The price ("from €1,200 a month", labelled "Partner") sits under step 3, level with the question, so it reads beside Care's price. At 900px and below it stacks to 560px, and the price takes its Strong Hairline rule back.
 - **Fine print:** three centred pebble lines at 0.9375rem, held to 40rem and set 2rem under the Partner card. One sentence group per line: everything built is the client's to keep and AI costs are separate; no VAT is added; larger setups of €4,000 or more may qualify for EIS co-funding. "EIS co-funding" links to the funding answer in the FAQ.
 - **Teammate card:** a linen card that holds the headline, the lead and three black "you" bubbles on the left, with the giant solid helper and its "On it." reply on the right.
 
 ### Painted Stage
-The signature frame: a 32px-radius frame filled edge to edge with an original impressionist landscape in dabbed brushwork, aerial perspective and broken colour. The four paintings are dawn, coast, meadow and field, and each appears on one stage only. White product UI floats on the painting with Float. The hero stage pads its window in from the sides and bottom. The jobs stage is 640px tall and crops the phone at its bottom bezel.
+The signature frame: a 32px-radius frame filled edge to edge with an original impressionist landscape in dabbed brushwork, aerial perspective and broken colour. The five paintings are dawn, coast, meadow, field and harvest, and each appears on one stage only. White product UI floats on the painting with Float. The hero stage pads its window in from the sides and bottom. The jobs stage is 640px tall and crops the phone at its bottom bezel.
 
 **The Words on White Rule.** No running text sits bare on a painting. Every word over art sits on white: the window, a panel, a tile label or the Example pill. Paintings are never scrimmed, tinted or blurred for legibility.
 

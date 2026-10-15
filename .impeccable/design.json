@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-14T13:14:00.000+03:00",
+  "generatedAt": "2026-10-15T14:50:00.000+03:00",
   "title": "Design System: Seestemic",
   "extensions": {
     "colorMeta": {
@@ -38,6 +38,7 @@
       "art-dawn": { "role": "neutral", "displayName": "Dawn Sand", "canonical": "#d8c6b5", "tonalRamp": ["#140801", "#2f2215", "#4e3f31", "#6e5e4f", "#907f6f", "#b3a291", "#d8c6b5", "#feebd9"] },
       "art-vignette": { "role": "neutral", "displayName": "Vignette Putty", "canonical": "#cbbfae", "tonalRamp": ["#110901", "#2d2316", "#4a4032", "#6a5f50", "#8c8171", "#afa393", "#d3c7b6", "#f9eddb"] },
       "art-field": { "role": "neutral", "displayName": "Field Sage", "canonical": "#c9c4a6", "tonalRamp": ["#0e0b00", "#2a250c", "#474329", "#676247", "#888367", "#aba689", "#cfcaac", "#f5f0d1"] },
+      "art-harvest": { "role": "neutral", "displayName": "Harvest Straw", "canonical": "#bdaa8a", "tonalRamp": ["#050100", "#1f1100", "#3d2d10", "#5c4b2e", "#7c6b4d", "#9f8d6e", "#c3b090", "#e9d5b4"] },
       "shadow": { "role": "neutral", "displayName": "Shadow Black", "canonical": "#000000", "tonalRamp": ["#0b0b0b", "#252525", "#424242", "#616161", "#828282", "#a5a5a5", "#c9c9c9", "#eeeeee"] }
     },
     "typographyMeta": {
@@ -187,7 +188,7 @@
       { "name": "The One Family Rule", "section": "typography", "body": "Geist is the only typeface. Geist Mono was removed on purpose, so times, prices and IDs use Geist with tabular figures. The world pins Geist, so the detector's \"overused font\" flag on it is expected and is not a defect." },
       { "name": "The Medium Voice Rule", "section": "typography", "body": "Display, headline, titles and questions are weight 500. Weight 600 is reserved for the wordmark and for small labels at 1.125rem and below: names in UI, card titles and step numbers. Nothing at heading size is bold." },
       { "name": "The Tighten-with-Size Rule", "section": "typography", "body": "Tracking is only ever negative, and it grows with size: −0.01em on buttons, −0.012em on small titles and questions, −0.02em on titles, −0.022em on headlines and −0.028em on display. The wordmark is a logotype outside this scale, at −0.035em. Everything is set in sentence case. Headings take no trailing period, though a question keeps its question mark." },
-      { "name": "The One Crop Rule", "section": "layout", "body": "A giant helper is cropped by exactly one edge. The teammate helper rises through its card's top edge and runs off the right of the viewport, and only the card's bottom edge cuts it. The closing outline helper is cut at the waist by the footer's top rule. Never box a giant helper inside its container." },
+      { "name": "The One Crop Rule", "section": "layout", "body": "A giant helper is cropped by exactly one edge. The teammate helper rises through its card's top edge and runs off the right of the viewport, and only the card's bottom edge cuts it. The pilot helper rises from the pilot band's bottom edge; when the band stacks, it peeks over the white card instead, and the card's top edge cuts it. The closing outline helper is cut at the waist by the footer's top rule. Never box a giant helper inside its container." },
       { "name": "The Flat Gray, Floating White Rule", "section": "elevation", "body": "Warm gray cards never cast shadows and never carry borders. Shadows belong to white UI, and Float-level shadows appear only where UI sits on a painting." },
       { "name": "The Speech-Bubble Corner Rule", "section": "shapes", "body": "The house silhouette is a rounded rectangle with one tighter corner. The helper's body is a continuous-curvature squircle with three wide corners and a tighter bottom-right tail (48, 48, 20 and 48 units on a 100-unit body). Every chat bubble is an 18–20px rounded rectangle with a single 6px corner pointing at whoever is speaking. When one speaker sends a run of bubbles beside a single photo, as Martin does in the founder chat, only the first bubble takes the corner. The logo echoes the idea: its two large tiles meet at the centre with a square corner." },
       { "name": "The Nested Corners Rule", "section": "shapes", "body": "Radii step down as you go inward: a 32px frame, a 20px window or panel, 16px cards, 12–14px rows, 10px fields and mini rows, 8px attachment chips and focus rings, then pills. A child never has a larger radius than its parent. At 760px and below the outer frames step down a notch: frames to 24px, and the window and tool tiles to 14px. Two shapes keep their own geometry: the composer is 22px, so a one-line reply reads as a pill and a wrapped reply stays a soft rectangle, and the depicted phone is a 54px frame around a 44px screen, concentric across its 10px bezel." },

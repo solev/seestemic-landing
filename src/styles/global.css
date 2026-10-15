@@ -2195,6 +2195,143 @@ dd {
   border-top: 0;
 }
 
+/* Founding-client pilot: a flag and a struck price on step 2, then the band below the steps */
+.process-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.process-flag {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 0.9375rem;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.process-price s {
+  margin-left: 0.375rem;
+  color: var(--ink-3);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-decoration-thickness: 1px;
+}
+
+.pilot {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: 440px;
+  margin-top: 1.25rem;
+  padding: clamp(1rem, 4vw, 3rem);
+  overflow: hidden;
+  border-radius: var(--r-xl);
+  background: #bdaa8a;
+}
+
+.pilot-art {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 72%;
+}
+
+/* The giant helper rises from the band's bottom edge, the one edge that crops it. */
+.pilot-figure {
+  position: absolute;
+  right: 9%;
+  bottom: -96px;
+  width: 300px;
+  height: 300px;
+}
+
+.pilot-helper {
+  width: 100%;
+  height: 100%;
+}
+
+.pilot-reply {
+  top: -18%;
+  left: -46%;
+  white-space: nowrap;
+}
+
+.pilot-card {
+  position: relative;
+  width: min(100%, 31rem);
+  padding: 2rem;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: var(--float);
+}
+
+.pilot-card h3 {
+  font-size: clamp(1.5rem, 1.35rem + 0.5vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.pilot-card > p:not(.process-price) {
+  margin-top: 0.625rem;
+  color: var(--ink-2);
+}
+
+.pilot-card > .process-price {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line-strong);
+}
+
+.pilot-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.pilot-places {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--ink-2);
+  font-size: 0.9375rem;
+}
+
+.pilot-seats {
+  display: flex;
+  gap: 6px;
+}
+
+.pilot-seats i {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  outline: 1.5px dashed #c9c7c1;
+  outline-offset: -1.5px;
+}
+
+.pilot-seats i.is-taken {
+  background: var(--ink);
+  outline: 0;
+}
+
 .process-note {
   max-width: 40rem;
   margin: 0.375rem auto 0;
@@ -2784,6 +2921,19 @@ dd {
   .teammate-copy {
     max-width: 30rem;
   }
+
+  .pilot-figure {
+    right: 6%;
+    bottom: -76px;
+    width: 240px;
+    height: 240px;
+  }
+
+  .pilot-reply {
+    top: -24%;
+    right: 0;
+    left: auto;
+  }
 }
 
 @media (min-width: 1025px) and (max-width: 1100px) {
@@ -3016,6 +3166,37 @@ dd {
   .footer-brand {
     grid-column: 1 / -1;
   }
+
+  /* The band stacks: painting on top, the helper peeking over the card's top edge, which crops it */
+  .pilot {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 560px;
+    min-height: 0;
+    margin-inline: auto;
+    padding-top: 8.5rem;
+  }
+
+  .pilot-figure {
+    top: calc(8.5rem - 100px);
+    right: 10%;
+    bottom: auto;
+    width: 150px;
+    height: 150px;
+  }
+
+  .pilot-reply {
+    top: 12%;
+    right: 92%;
+    left: auto;
+    width: max-content;
+    max-width: 9.5rem;
+    white-space: normal;
+  }
+
+  .pilot-card {
+    padding: 1.75rem 1.5rem;
+  }
 }
 
 @media (max-width: 860px) {
@@ -3158,6 +3339,7 @@ dd {
 
   .process-card,
   .partner,
+  .pilot,
   .founder {
     border-radius: var(--r-lg);
   }
@@ -3200,6 +3382,30 @@ dd {
 
   .footer-grid {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pilot-figure {
+    top: calc(8.5rem - 88px);
+    width: 130px;
+    height: 130px;
+  }
+
+  .pilot-reply {
+    max-width: 8.75rem;
+    font-size: 0.9375rem;
+  }
+
+  .pilot-places {
+    gap: 0.625rem;
+  }
+
+  .pilot-seats {
+    gap: 4px;
+  }
+
+  .pilot-seats i {
+    width: 18px;
+    height: 18px;
   }
 }
 
