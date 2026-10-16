@@ -284,7 +284,7 @@ An ink-on-white interface with warm, faintly yellowed grays. Hue lives in the pa
 - **Soft Black** (#2b2b2a): the hover state of primary pills, and nothing else.
 
 ### Secondary
-- **Seestemic Blue** (#0c79d8): the logo mark, the 2px focus ring and the back chevron in the depicted phone. The logo's tiles mix this blue with two lighter blues that live only in the mark.
+- **Seestemic Blue** (#0c79d8): the 2px focus ring and the back chevron in the depicted phone.
 - **Deep Signal Blue** (#0a6bc2): unread counts and the "New" badge inside product UI. It is the only filled blue.
 - **Selection Wash** (#cde4fa) and **New Ring** (#b9d5f2): pale brand tints. Selection Wash is the text-selection highlight, and New Ring is the 1.5px inset ring on a memory row the helper has just learned. Neither fills a control.
 - **Done Green** (#157a48) on **Done Wash** (#eaf5ee): completion. It covers step checks, "Sent", "Ready", switched-on toggles, system confirmations, the check beside the hero note, the checks on the Partner card's points and the lock beside the closing data note.
@@ -313,7 +313,7 @@ Each painted frame also carries a flat load-in fill in its own painting's mean t
 ### Named Rules
 **The Ink-on-Paper Rule.** The interface itself is achromatic: ink, warm grays and white. Saturation enters only through the paintings, the helper avatars and the tool icons, and status colour stays small and local: blue for new, green for done and brick for a failed load. Buttons, headings and section backgrounds never take a hue.
 
-**The Blue Is a Signal Rule.** Brand blue appears only in the logo, the focus ring, the phone's back chevron, text selection and marks of something new: unread counts, the "New" badge and the New Ring. It never fills a button, colours a heading or styles a link. Links are ink with a 1px warm gray underline that darkens on hover.
+**The Blue Is a Signal Rule.** Brand blue appears only in the focus ring, the phone's back chevron, text selection and marks of something new: unread counts, the "New" badge and the New Ring. It never fills a button, colours a heading or styles a link. Links are ink with a 1px warm gray underline that darkens on hover.
 
 **The One Hue per Helper Rule.** A helper keeps its hue everywhere, and the hue appears only as its avatar body. Any helper larger than an avatar is ink. A tool icon may borrow a helper's hue, always as a glyph on a white tile and never as a body.
 
@@ -388,7 +388,9 @@ The system is a hybrid. The page itself is flat and tonal, built from white grou
 The form language is soft, generous and concentric. Frames, cards and panels are rounded rectangles, every control is a full pill, and avatars, toggles and step numbers are circles. Rules and rings are 1px hairlines. Small marks inside UI, such as spinner tracks, the hand-off connector and dashed or inset rings, go to 1.5–2px, and the outline helper keeps its own line.
 
 ### Named Rules
-**The Speech-Bubble Corner Rule.** The house silhouette is a rounded rectangle with one tighter corner. The helper's body is a continuous-curvature squircle with three wide corners and a tighter bottom-right tail (48, 48, 20 and 48 units on a 100-unit body). Every chat bubble is an 18–20px rounded rectangle with a single 6px corner pointing at whoever is speaking. When one speaker sends a run of bubbles beside a single photo, as Martin does in the founder chat, only the first bubble takes the corner. The logo echoes the idea: its two large tiles meet at the centre with a square corner.
+**The Speech-Bubble Corner Rule.** The house silhouette is a rounded rectangle with one tighter corner. The helper's body is a continuous-curvature squircle with three wide corners and a tighter bottom-right tail (48, 48, 20 and 48 units on a 100-unit body). Every chat bubble is an 18–20px rounded rectangle with a single 6px corner pointing at whoever is speaking. When one speaker sends a run of bubbles beside a single photo, as Martin does in the founder chat, only the first bubble takes the corner.
+
+**The Woven Mark Rule.** The logo mark is a six-lobed rosette woven from a single ribbon, drawn in ink (`currentColor`) with no fill colour of its own. It comes in two cuts that share one silhouette. The original three-band cut (`src/assets/brand/seestemic-mark.svg`) is for 64px and above. The two-band small cut (`seestemic-mark-small.svg`) is for the header, the footer and anything at 48px or below. On a dark ground the mark turns white and its gaps stay open. The 16px favicon frame swaps to a solid silhouette, because the ribbon gaps close up at that size.
 
 **The Nested Corners Rule.** Radii step down as you go inward: a 32px frame, a 20px window or panel, 16px cards, 12–14px rows, 10px fields and mini rows, 8px attachment chips and focus rings, then pills. A child never has a larger radius than its parent. At 760px and below the outer frames step down a notch: frames to 24px, and the window and tool tiles to 14px. Two shapes keep their own geometry: the composer is 22px, so a one-line reply reads as a pill and a wrapped reply stays a soft rectangle, and the depicted phone is a 54px frame around a 44px screen, concentric across its 10px bezel.
 
