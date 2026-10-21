@@ -45,7 +45,7 @@ Offer and prices, approved by Martin in October 2026:
 - Client data can stay in the EU, and Seestemic signs a data processing agreement with each client.
 - Larger setups of €4,000 or more may qualify for EIS co-funding (see Evidence on Hand); the page says so under the prices and links to the FAQ answer.
 - The company's legal name, registry code and address are pending a company rename. Leave them, and the Privacy page, off the site until Martin supplies them.
-- The site lives at seestemic.com. Older design proposals move to design.seestemic.com, and unknown paths on seestemic.com redirect there.
+- The site lives at https://www.seestemic.com (the primary domain; the apex redirects to www). Canonicals, og:url and the sitemap all use www. Older design proposals live on design.seestemic.com; only their known paths (listed in `vercel.json`) redirect there, and any other unknown path gets the site's own 404 page.
 - Analytics: OpenPanel, self-hosted on Seestemic's Coolify (dashboard https://openpanel.coolify.seestemic.com, project "Seestemic"). It is cookieless, so the page has no cookie banner. The tracker loads only in production builds, from the config in `analytics` in `src/data/site.ts`. It records page views, outgoing links, `booking_opened` (with `from`: header, top, pilot, how, about, book or footer) and `booking_completed`, and nothing the visitor types into Cal.com. OpenPanel accepts events only from seestemic.com, www.seestemic.com and seestemic-landing.vercel.app; add any new domain to the project's allowed domains. The client ID is public, but the client secret must never be committed.
 
 ## Brand Commitments

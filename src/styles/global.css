@@ -754,14 +754,14 @@ dd {
   flex: none;
 }
 
-.thread-title h3 {
+.thread-name {
   font-size: 0.9375rem;
   font-weight: 600;
   line-height: 1.25;
   letter-spacing: -0.01em;
 }
 
-.thread-title p {
+.thread-sub {
   color: var(--ink-3);
   font-size: 0.8125rem;
 }
