@@ -1,0 +1,75 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Helper from "../components/Helper.astro";
+import Logo from "../components/Logo.astro";
+import { email, introCallUrl } from "../data/site";
+---
+
+<BaseLayout
+  title="Page not found | Seestemic"
+  description="This page doesn't exist. Go to the Seestemic homepage or book a free AI review."
+  noindex
+>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="header-logo" href="/" aria-label="Seestemic home"><Logo /></a>
+    </div>
+  </header>
+
+  <main id="main" class="not-found">
+    <div class="shell">
+      <Helper follow class="not-found-helper" reach={8} />
+      <h1 class="hero-title">We couldn’t find that page</h1>
+      <p class="hero-sub">
+        The link may be old, or the address may have a typo. Everything about Seestemic is on the homepage.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="/">Go to the homepage</a>
+        <a class="btn btn-secondary" href={introCallUrl} target="_blank" rel="noreferrer">Book a free AI review</a>
+      </div>
+      <p class="not-found-note">
+        Looking for something specific? Email <a href={`mailto:${email}`}>{email}</a>
+      </p>
+    </div>
+  </main>
+
+  <script>
+    import { initHelpers } from "../scripts/helpers";
+    initHelpers();
+  </script>
+</BaseLayout>
+
+<style>
+  .not-found {
+    padding-block: clamp(2.5rem, 8vw, 6rem);
+    text-align: center;
+  }
+
+  .not-found :global(.not-found-helper) {
+    width: clamp(88px, 12vw, 120px);
+    height: clamp(88px, 12vw, 120px);
+    margin: 0 auto 1.5rem;
+  }
+
+  .not-found .cta-row {
+    margin-top: 1.75rem;
+  }
+
+  .not-found-note {
+    margin-top: 1.5rem;
+    color: var(--ink-2);
+    font-size: 0.9375rem;
+  }
+
+  .not-found-note a {
+    color: var(--ink);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: #c7c6c1;
+    text-underline-offset: 3px;
+  }
+
+  .not-found-note a:hover {
+    text-decoration-color: currentColor;
+  }
+</style>

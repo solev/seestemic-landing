@@ -6,10 +6,20 @@ import { analytics } from "../data/site";
 interface Props {
   title: string;
   description: string;
+  /** Share image for og:image and twitter:image, 1200x630, as a path under public/ or an absolute URL. */
+  image?: { src: string; alt: string };
+  /** For pages that must stay out of search, such as the 404 page. Also drops the canonical link. */
+  noindex?: boolean;
 }
 
-const { title, description } = Astro.props;
+const {
+  title,
+  description,
+  image = { src: "/og.png", alt: "Seestemic: AI helpers for the busywork in your business" },
+  noindex = false,
+} = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const imageUrl = new URL(image.src, Astro.site).href;
 ---
 
 <!doctype html>
@@ -20,18 +30,26 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#ffffff" />
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonical} />
+    {!noindex && <meta property="og:url" content={canonical} />}
     <meta property="og:site_name" content="Seestemic" />
+    <meta property="og:locale" content="en_GB" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={image.alt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta name="twitter:image:alt" content={image.alt} />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preload" href={geist} as="font" type="font/woff2" crossorigin />
     <title>{title}</title>
+    <slot name="head" />
     {
       import.meta.env.PROD && (
         <>

@@ -13,6 +13,7 @@ import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import dawn from "../assets/art/hero-dawn.webp";
 import { faqs } from "../data/helpers";
+import { homeSchema, toJsonLd } from "../data/schema";
 import { email, introCallUrl } from "../data/site";
 
 const booking = {
@@ -26,9 +27,10 @@ const booking = {
 ---
 
 <BaseLayout
-  title="Seestemic · AI helpers for the busywork in your business"
-  description="Seestemic sets up AI helpers that take repetitive jobs off your plate, inside the tools you already use. You stay in charge: nothing important happens without your OK."
+  title="AI Helpers for Small Businesses in Estonia | Seestemic"
+  description="We set up AI helpers for quotes, email, bookings and invoices inside your own tools. You approve first. EU data. Book a free 30-min AI review."
 >
+  <script slot="head" type="application/ld+json" is:inline set:html={toJsonLd(homeSchema)} />
   <SiteHeader />
 
   <main id="main">

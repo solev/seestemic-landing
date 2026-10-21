@@ -10,13 +10,17 @@ interface Props {
   widths?: number[];
 }
 
-const { src, sizes, class: className, eager = false, widths = [640, 960, 1280, 1600, 2000, 2400] } = Astro.props;
-const usable = widths.filter((w) => w <= src.width);
+const { src, sizes, class: className, eager = false, widths = [640, 960, 1280, 1440, 1600, 2000, 2400] } = Astro.props;
+// Only real downscales: the painted art is grainy, so a copy at the source's own width weighs 2–4× the next size down.
+const usable = widths.filter((w) => w < src.width);
+// The fallback src (for crawlers and old browsers) uses the largest of those widths, not the full-size original.
+const fallbackWidth = usable.at(-1) ?? src.width;
 ---
 
 <Image
   src={src}
   alt=""
+  width={fallbackWidth}
   widths={usable}
   sizes={sizes}
   class:list={["art", className]}
