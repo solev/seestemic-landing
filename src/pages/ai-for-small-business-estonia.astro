@@ -1,20 +1,33 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Art from "../components/Art.astro";
 import BookingPanel from "../components/BookingPanel.astro";
 import BookingScript from "../components/BookingScript.astro";
-import DemoWindow from "../components/DemoWindow.astro";
-import FounderChat from "../components/FounderChat.astro";
 import Helper from "../components/Helper.astro";
 import Icon from "../components/Icon.astro";
-import Showcase from "../components/Showcase.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
-import dawn from "../assets/art/hero-dawn.webp";
+import coast from "../assets/art/coast.webp";
 import field from "../assets/art/field.webp";
+import martin from "../assets/martin.jpg";
 import { helpers } from "../data/helpers";
 import { email, estoniaPage, founding, introCallUrl, linkedInUrl } from "../data/site";
-import { eisGrantUrl, faqs, feed, grantChecked, grantFacts, lastUpdated, pilotOpen } from "../data/estonia";
+import {
+  answers,
+  comparison,
+  eisGrantUrl,
+  faqs,
+  fitSigns,
+  glance,
+  grantChecked,
+  grantFacts,
+  jobs,
+  lastUpdated,
+  pilotOpen,
+  safety,
+  steps,
+} from "../data/estonia";
 
 const title = "AI for Small Business in Estonia | Seestemic";
 const description =
@@ -30,11 +43,16 @@ const booking = {
 };
 
 const links = [
-  { label: "Examples", href: "#jobs" },
-  { label: "Pricing", href: "#pricing" },
+  { label: "Examples", href: "#what" },
+  { label: "Prices", href: "#cost" },
   { label: "Funding", href: "#funding" },
-  { label: "Questions", href: "#questions" },
+  { label: "Questions", href: "#faq" },
 ] as const;
+
+const contents = [
+  ...Object.entries(answers).map(([id, { nav }]) => ({ id, nav })),
+  { id: "faq", nav: "Questions" },
+];
 
 // Structured data. Street address and phone stay out until Martin confirms them.
 const site = Astro.site!.href.replace(/\/$/, "");
@@ -80,6 +98,9 @@ const offers = [
   },
 ];
 
+// Every question here is on the page with exactly this answer text: the section answers, then the FAQ.
+const questions = [...Object.values(answers), ...faqs];
+
 const schema = {
   "@context": "https://schema.org",
   "@graph": [
@@ -88,6 +109,8 @@ const schema = {
       "@id": orgId,
       name: "Seestemic",
       url: `${site}/`,
+      description:
+        "Seestemic sets up AI helpers for small businesses, inside the tools they already use, with anything important waiting for the owner's OK. Run from Tallinn, Estonia.",
       email,
       logo: `${site}/apple-touch-icon.png`,
       image: `${site}/apple-touch-icon.png`,
@@ -97,7 +120,7 @@ const schema = {
         { "@type": "Place", name: "European Union" },
       ],
       knowsLanguage: "en",
-      founder: { "@type": "Person", name: "Martin Solev", sameAs: linkedInUrl },
+      founder: { "@type": "Person", name: "Martin Solev", jobTitle: "Founder", sameAs: linkedInUrl },
       hasOfferCatalog: { "@type": "OfferCatalog", name: "AI helpers for small businesses", itemListElement: offers },
     },
     {
@@ -122,8 +145,8 @@ const schema = {
     },
     {
       "@type": "FAQPage",
-      "@id": `${pageUrl}#faq`,
-      mainEntity: faqs.map(({ question, answer }) => ({
+      "@id": `${pageUrl}#questions`,
+      mainEntity: questions.map(({ question, answer }) => ({
         "@type": "Question",
         name: question,
         acceptedAnswer: { "@type": "Answer", text: answer },
@@ -142,399 +165,351 @@ const schemaJson = JSON.stringify(schema).replace(/</g, "\\u003c");
   <SiteHeader home="/" links={links} />
 
   <main id="main">
-    <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="shell">
-        <h1 class="hero-title" id="hero-title">AI for small businesses in Estonia, set up for you</h1>
-        <p class="hero-sub">
-          We set up AI helpers that take repetitive jobs off your plate, inside the tools you already use. Nothing
-          important happens without your OK.
-        </p>
-        <div class="cta-row">
-          <a class="btn btn-primary" {...booking}>Book a free 30-minute AI review</a>
-          <a class="btn btn-secondary" href="#jobs">See what a helper does</a>
-        </div>
-        <p class="hero-note">
-          <Icon name="check" size={16} />
-          Run from Tallinn. No tech skills needed.
-        </p>
-      </div>
-
-      <figure class="shell shell-wide stage-wrap">
-        <div class="stage">
-          <Art src={dawn} eager widths={[960, 1400, 2000]} sizes="(min-width: 1400px) 1320px, 100vw" class="stage-art" />
-          <DemoWindow />
-        </div>
-        <figcaption class="stage-caption">
-          An example of a helper at work, not a client’s data. Yours are set up around your own jobs and tools.
-        </figcaption>
-      </figure>
-    </section>
-
-    <section class="section" id="who" aria-labelledby="who-title">
-      <div class="shell">
-        <div class="fit">
-          <div class="fit-copy">
-            <h2 class="h2" id="who-title">For owners whose week disappears into admin</h2>
-            <p class="lead">
-              This is for Estonian small businesses of roughly 1 to 20 people: trades, clinics, salons, shops, service
-              firms and small accountancies. If quotes, email, bookings, late invoices and receipts eat your evenings,
-              a helper can take the repetitive part.
-            </p>
-            <p class="lead">You don’t need an IT team. If you can write an email, you can work with a helper.</p>
-          </div>
-          <div class="fit-chat">
-            <ul class="fit-says" aria-label="Sound familiar?">
-              <li class="say">Writing quotes after closing again.</li>
-              <li class="say">The inbox never empties.</li>
-              <li class="say">Who still hasn’t paid us?</li>
-              <li class="say">The accountant needs last month’s receipts.</li>
-            </ul>
-            <p class="fit-reply">
-              <Helper follow class="fit-helper" reach={7} tilt={-8} />
-              <span>I can take the repetitive part.</span>
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="jobs" aria-labelledby="jobs-title">
-      <div class="shell">
-        <header class="section-head section-head--center">
-          <h2 class="h2" id="jobs-title">What an AI helper can take off your plate</h2>
-          <p class="lead">
-            Give each helper one job. Here’s what a day of their work could look like. These are examples, not client
-            results.
+    <section class="guide-hero" id="top" aria-labelledby="page-title">
+      <div class="shell guide-hero-grid">
+        <div class="guide-hero-copy">
+          <h1 class="guide-title" id="page-title">AI for small businesses in Estonia, <span class="nowrap">set up for you</span></h1>
+          <p class="lead guide-hero-lead">
+            We set up AI helpers that take repetitive jobs off your plate, inside the tools you already use. Nothing
+            important happens without your OK.
           </p>
-        </header>
+          <div class="cta-row guide-hero-ctas">
+            <a class="btn btn-primary" {...booking}>Book a free 30-minute AI review</a>
+            <a class="btn btn-secondary" href="#what">See what a helper does</a>
+          </div>
+          <p class="hero-note">
+            <Icon name="check" size={16} />
+            Run from Tallinn. No tech skills needed.
+          </p>
+        </div>
 
-        <figure class="feed-stage">
-          <Art src={field} sizes="(min-width: 1280px) 1200px, 100vw" widths={[640, 960, 1400]} class="stage-art" />
-          <div class="feed">
-            <div class="feed-bar">
-              <span class="feed-title">Your helpers · Today</span>
-              <span class="window-tag">Example</span>
-            </div>
-            <ul class="feed-list" aria-label="Example helper updates">
+        <div class="guide-hero-art">
+          <Art src={coast} sizes="(min-width: 900px) 540px, 100vw" eager />
+          <section class="glance" aria-labelledby="glance-title">
+            <h2 class="glance-title" id="glance-title">Seestemic at a glance</h2>
+            <dl class="guide-dl">
               {
-                feed.map((item) => {
-                  const helper = helpers[item.helper];
-                  return (
-                    <li class="feed-item">
-                      <Helper variant="avatar" color={helper.color} class="feed-avatar" />
-                      <div class="feed-body">
-                        <span class="feed-head">
-                          <b>{helper.name}</b>
-                          <span class:list={["feed-status", item.done && "is-done"]}>
-                            {item.done && <Icon name="check" size={12} />}
-                            {item.status}
-                          </span>
-                        </span>
-                        <p>{item.text}</p>
-                      </div>
-                    </li>
-                  );
-                })
+                glance.map(({ label, value }) => (
+                  <div>
+                    <dt>{label}</dt>
+                    <dd>{value}</dd>
+                  </div>
+                ))
               }
-            </ul>
-          </div>
-        </figure>
-        <p class="stage-caption">Examples only. The figures are illustrations, not results from clients.</p>
-        <p class="jobs-more">
-          <a href="/#examples">See every helper at work</a> or <a href={`mailto:${email}`}>tell us about your job</a>
-        </p>
-      </div>
-    </section>
-
-    <section class="section" id="control" aria-labelledby="control-title">
-      <div class="shell">
-        <header class="section-head">
-          <h2 class="h2" id="control-title">Safe, and under your control</h2>
-          <p class="lead">
-            You decide what each helper can see and which actions need your approval. Its work is logged so you can
-            check it, your data can stay in the EU, and we sign a data processing agreement (DPA) with you.
-          </p>
-          <!-- TODO: link "data processing agreement" to the GDPR checklist page (board #4) once it is live. -->
-        </header>
-        <Showcase />
-        <p class="process-note control-note">Everything we build is yours to keep.</p>
-      </div>
-    </section>
-
-    <section class="section" id="pricing" aria-labelledby="pricing-title">
-      <div class="shell">
-        <header class="section-head">
-          <h2 class="h2" id="pricing-title">What it costs</h2>
-          <p class="lead">
-            Start with a free review, pay once for your first helper, and add monthly Care only if you want it.
-          </p>
-          <!-- TODO: link to the AI cost guide (board #3) and the founding pilot page (board #14) once they are live. -->
-        </header>
-
-        <div class="prices">
-          <table>
-            <caption class="sr-only">Seestemic prices</caption>
-            <thead>
-              <tr>
-                <th scope="col">Step</th>
-                <th scope="col">Price</th>
-                <th scope="col">What you get</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">Free AI review</th>
-                <td class="price"><b>Free</b></td>
-                <td>
-                  A 30-minute call about the jobs that eat your week. We’ll be honest about where AI helps, and where it
-                  doesn’t.
-                </td>
-              </tr>
-              {
-                pilotOpen ? (
-                  <tr>
-                    <th scope="row">
-                      Founding-client pilot
-                      <span class="price-flag">First {founding.places} clients</span>
-                    </th>
-                    <td class="price">
-                      <b>
-                        €500 <small>one-time</small>
-                      </b>
-                      <s>
-                        <span class="sr-only">normally </span>from €1,500
-                      </s>
-                    </td>
-                    <td>
-                      One small helper, set up for one task, with your approval rules built in. In return, we ask for a
-                      short written case study after <span class="nowrap">6 to 8 weeks.</span>
-                    </td>
-                  </tr>
-                ) : (
-                  <tr>
-                    <th scope="row">Your first helper</th>
-                    <td class="price">
-                      <b>
-                        <small>from</small> €1,500 <small>one-time</small>
-                      </b>
-                    </td>
-                    <td>One job, done well, inside the tools you already use, with your approval rules built in.</td>
-                  </tr>
-                )
-              }
-              <tr>
-                <th scope="row">
-                  Care
-                  <span class="price-flag">Optional</span>
-                </th>
-                <td class="price">
-                  <b>
-                    <small>from</small> €300 <small>a month</small>
-                  </b>
-                  <span class="price-when">{pilotOpen ? "after the pilot" : "after setup"}</span>
-                </td>
-                <td>Up to 4 hours of our team’s time and a check-in each month.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <p class="process-note prices-note">
-          AI costs, such as an AI subscription, are paid separately. If you stop Care, you keep everything we built.
-        </p>
-        <p class="process-note">No VAT is added, as Seestemic isn’t <span class="nowrap">VAT-registered</span>.</p>
-        <p class="process-note">
-          Larger setups of <span class="tnum">€4,000</span> or more may qualify for <a href="#funding">EIS co-funding</a>.
-        </p>
-        <div class="section-cta">
-          <a class="btn btn-primary" {...booking}>Book a free AI review</a>
+            </dl>
+            <p class="glance-updated">Updated <time datetime={lastUpdated.iso}>{lastUpdated.label}</time></p>
+          </section>
         </div>
       </div>
     </section>
 
-    <section class="section" id="funding" aria-labelledby="funding-title">
-      <div class="shell">
-        <header class="section-head">
-          <h2 class="h2" id="funding-title">Can an Estonian company get funding?</h2>
-          <p class="lead">
-            Possibly, for larger setups. The grant that fits most small companies is EIS’s RTE Grant for Software
-            Implementation and Integration.
-          </p>
-          <!-- TODO: link to the EIS grant guide (board #2) once it is live. -->
-        </header>
-
-        <div class="grant">
-          <div class="grant-intro">
-            <h3>What the grant looks like</h3>
-            <p>
-              A company may qualify if it meets EIS’s conditions. Nothing is guaranteed: other conditions apply, and EIS
-              decides. You apply before the work starts.
-            </p>
-            <p>The separate EIS grant for adopting AI closed on 24 August 2026.</p>
-            <div class="grant-foot">
-              <a class="btn btn-secondary" href={eisGrantUrl} target="_blank" rel="noreferrer">
-                See the grant on eis.ee
-                <Icon name="external" size={15} />
-              </a>
-              <p class="grant-checked">
-                <Icon name="clock" size={15} />
-                Last checked: <time datetime={grantChecked.iso}>{grantChecked.label}</time>
-              </p>
-            </div>
-          </div>
-          <dl class="grant-facts">
+    <div class="shell guide-body">
+      <aside class="guide-aside">
+        <nav class="guide-toc" aria-labelledby="toc-title">
+          <p class="guide-toc-title" id="toc-title">On this page</p>
+          <ol>
             {
-              grantFacts.map((fact) => (
+              contents.map(({ id, nav }) => (
+                <li>
+                  <a href={`#${id}`}>{nav}</a>
+                </li>
+              ))
+            }
+          </ol>
+        </nav>
+        <a class="btn btn-primary btn-sm guide-toc-cta" {...booking} data-booking-from="contents">
+          Book a free AI review
+        </a>
+      </aside>
+
+      <div class="guide-main">
+        <section class="guide-section" id="who" aria-labelledby="who-title">
+          <h2 class="guide-h2" id="who-title">{answers.who.question}</h2>
+          <p class="guide-answer">{answers.who.answer}</p>
+          <p class="guide-text">It’s usually a good fit if:</p>
+          <ul class="guide-checks">
+            {
+              fitSigns.map((sign) => (
+                <li>
+                  <Icon name="check" size={18} />
+                  <span>{sign}</span>
+                </li>
+              ))
+            }
+          </ul>
+          <p class="guide-text">
+            Not sure? Bring the job to the free AI review, and we’ll tell you honestly whether AI is a good fit.
+          </p>
+        </section>
+
+        <section class="guide-section" id="what" aria-labelledby="what-title">
+          <h2 class="guide-h2" id="what-title">{answers.what.question}</h2>
+          <p class="guide-answer">{answers.what.answer}</p>
+          <p class="guide-jobs-note">
+            <span class="example-tag">Example</span>
+            The messages below are examples, not client results.
+          </p>
+          <ul class="guide-jobs">
+            {
+              jobs.map(({ helper, job, example }) => (
+                <li class="guide-job">
+                  <Helper variant="avatar" color={helpers[helper].color} class="guide-job-avatar" />
+                  <div>
+                    <h3>{helpers[helper].name}</h3>
+                    <p>{job}</p>
+                    <p class="guide-job-msg tnum">{example}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+          <p class="guide-more">
+            <a href="/#examples">
+              See the helpers at work
+              <Icon name="arrowRight" size={16} />
+            </a>
+          </p>
+        </section>
+
+        <section class="guide-section" id="safe" aria-labelledby="safe-title">
+          <h2 class="guide-h2" id="safe-title">{answers.safe.question}</h2>
+          <p class="guide-answer">{answers.safe.answer}</p>
+          <figure class="guide-figure">
+            <div class="guide-figure-art" aria-hidden="true">
+              <Art src={field} sizes="(min-width: 1100px) 880px, 100vw" />
+              <span class="example-tag">Example</span>
+              <div class="v-panel v-approve">
+                <header class="v-approve-head">
+                  <Helper variant="avatar" color={helpers.quotes.color} class="v-avatar" />
+                  <span><b>Quotes</b> wants to send a quote</span>
+                  <span class="tnum">9:41</span>
+                </header>
+                <div class="v-approve-body">
+                  <span>Q-1042 · Dental clinic</span>
+                  <b class="tnum">€4,860</b>
+                </div>
+                <div class="v-approve-actions">
+                  <span class="pill pill-dark">Approve</span>
+                  <span class="pill pill-light">Edit</span>
+                  <span class="pill pill-ghost">Not now</span>
+                </div>
+                <p class="v-approve-rule">
+                  <Icon name="lock" size={14} />
+                  Quotes over €1,000 always need your OK
+                </p>
+              </div>
+            </div>
+            <figcaption>The Quotes helper waits for your OK before it sends a quote over €1,000.</figcaption>
+          </figure>
+          <ul class="guide-points">
+            {
+              safety.map(({ title, text }) => (
+                <li>
+                  <b>{title}</b> {text}
+                </li>
+              ))
+            }
+          </ul>
+          {/* TODO: link to the GDPR checklist page (board #4) once it is live. */}
+        </section>
+
+        <section class="guide-section" id="cost" aria-labelledby="cost-title">
+          <h2 class="guide-h2" id="cost-title">{answers.cost.question}</h2>
+          <p class="guide-answer">{answers.cost.answer}</p>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-prices" role="table">
+              <caption class="sr-only">Seestemic prices</caption>
+              <thead role="rowgroup">
+                <tr role="row">
+                  <th scope="col" role="columnheader">What</th>
+                  <th scope="col" role="columnheader">Price</th>
+                  <th scope="col" role="columnheader">What you get</th>
+                </tr>
+              </thead>
+              <tbody role="rowgroup">
+                <tr role="row">
+                  <th scope="row" role="rowheader">Free AI review</th>
+                  <td role="cell" class="guide-price tnum"><b>€0</b></td>
+                  <td role="cell">A 30-minute call about the jobs that take up your week, and an honest view of where AI can help.</td>
+                </tr>
+                {
+                  pilotOpen ? (
+                    <tr role="row">
+                      <th scope="row" role="rowheader">
+                        First helper
+                        <span class="pill pill-light guide-pill">First {founding.places} clients</span>
+                      </th>
+                      <td role="cell" class="guide-price tnum">
+                        <b>€500</b> one-time
+                        <s>
+                          <span class="sr-only">normally from </span>€1,500
+                        </s>
+                      </td>
+                      <td role="cell">One small helper, set up for one task. In return, you write a short case study after 6 to 8 weeks.</td>
+                    </tr>
+                  ) : (
+                    <tr role="row">
+                      <th scope="row" role="rowheader">First helper</th>
+                      <td role="cell" class="guide-price tnum">
+                        from <b>€1,500</b> one-time
+                      </td>
+                      <td role="cell">Your first helper, set up for one job inside your tools, with your approval rules built in.</td>
+                    </tr>
+                  )
+                }
+                <tr role="row">
+                  <th scope="row" role="rowheader">Care <small>optional</small></th>
+                  <td role="cell" class="guide-price tnum">from <b>€300</b> a month</td>
+                  <td role="cell">
+                    Up to 4 hours of our team’s time each month, plus a monthly check-in. It starts after {
+                      pilotOpen ? "the pilot" : "setup"
+                    }.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ul class="guide-notes">
+            <li>AI costs, such as an AI subscription, are paid separately.</li>
+            <li>No VAT is added, as Seestemic isn’t <span class="nowrap">VAT-registered</span>.</li>
+            <li>You keep everything we build, even if you stop Care.</li>
+            <li>
+              Setups of <span class="tnum">€4,000</span> or more may qualify for <a href="#funding">EIS co-funding</a>.
+            </li>
+          </ul>
+          {/* TODO: link to the AI cost guide (board #3) and the founding pilot page (board #14) once they are live. */}
+          <div class="guide-cta">
+            <a class="btn btn-primary" {...booking}>Book a free AI review</a>
+          </div>
+        </section>
+
+        <section class="guide-section" id="funding" aria-labelledby="funding-title">
+          <h2 class="guide-h2" id="funding-title">{answers.funding.question}</h2>
+          <p class="guide-answer">{answers.funding.answer}</p>
+          <dl class="guide-dl guide-facts">
+            {
+              grantFacts.map(({ label, value }) => (
                 <div>
-                  <dt>{fact.label}</dt>
-                  <dd>{fact.value}</dd>
+                  <dt>{label}</dt>
+                  <dd>{value}</dd>
                 </div>
               ))
             }
           </dl>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="how" aria-labelledby="how-title">
-      <div class="shell">
-        <header class="section-head section-head--center">
-          <h2 class="h2" id="how-title">How working with us goes</h2>
-          <p class="lead">We start small and only expand what clearly works.</p>
-        </header>
-        <ol class="steps">
-          <li>
-            <span class="process-num" aria-hidden="true">1</span>
-            <h3>Tell us what eats your week</h3>
-            <p>On a free 30-minute call, pick one repetitive job. We’ll tell you honestly whether AI can help.</p>
-          </li>
-          <li>
-            <span class="process-num" aria-hidden="true">2</span>
-            <h3>We set up your first helper</h3>
-            <p>One job, done well, inside the tools you already use, with your approval rules built in.</p>
-          </li>
-          <li>
-            <span class="process-num" aria-hidden="true">3</span>
-            <h3>We train your team and stay</h3>
-            <p>Hands-on training for the people who’ll use it. Then we measure it with you and add the next job only once the first one works.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <section class="section" id="about" aria-labelledby="about-title">
-      <div class="shell">
-        <header class="section-head section-head--center">
-          <h2 class="h2" id="about-title">Who’s behind Seestemic</h2>
-          <p class="lead">A company run from Tallinn, with a real person on your first call.</p>
-        </header>
-        <FounderChat />
-      </div>
-    </section>
-
-    <section class="section" id="why" aria-labelledby="why-title">
-      <div class="shell why">
-        <div class="why-intro">
-          <h2 class="h2" id="why-title">Why a local, done-for-you setup</h2>
-          <p class="lead">
-            Because you shouldn’t have to become your own IT department. Instead of learning a new tool, you get a
-            helper built around the way you already work.
+          <p class="guide-text">
+            Other conditions apply, so read them on eis.ee before you plan around the grant. The separate EIS AI
+            adoption grant closed on 24 August 2026.
           </p>
-        </div>
-        <ul class="why-list">
-          <li>
-            <Icon name="check" size={18} />
-            <div>
-              <b>Nothing new to learn</b>
-              <p>It works in your Microsoft 365 or Google Workspace, your email, calendar and accounting software.</p>
-            </div>
-          </li>
-          <li>
-            <Icon name="check" size={18} />
-            <div>
-              <b>Approval rules from day one</b>
-              <p>You choose what needs your OK, and anything important waits for it.</p>
-            </div>
-          </li>
-          <li>
-            <Icon name="check" size={18} />
-            <div>
-              <b>Your customers’ languages</b>
-              <p>A helper can talk to each customer in their own language. Calls and training with us are in English.</p>
-            </div>
-          </li>
-          <li>
-            <Icon name="check" size={18} />
-            <div>
-              <b>EU data and a DPA</b>
-              <p>Your data can stay in the EU, and we sign a data processing agreement with you.</p>
-            </div>
-          </li>
-          <li>
-            <Icon name="check" size={18} />
-            <div>
-              <b>Someone in Tallinn</b>
-              <p>You start with Martin on the first call. Then our team builds your helper and looks after it.</p>
-            </div>
-          </li>
-          <li>
-            <Icon name="check" size={18} />
-            <div>
-              <b>Yours to keep</b>
-              <p>Everything we build stays yours, even if you stop Care.</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section" id="questions" aria-labelledby="questions-title">
-      <div class="shell faq">
-        <div class="faq-intro">
-          <h2 class="h2" id="questions-title">Questions Estonian owners ask</h2>
-          <p class="lead">
-            Something we didn’t cover? Email <a href={`mailto:${email}`}>{email}</a> and we’ll answer in plain English.
+          <p class="guide-source">
+            <a href={eisGrantUrl} target="_blank" rel="noreferrer">
+              See the grant on eis.ee
+              <Icon name="external" size={15} />
+            </a>
+            <span>Checked on <time datetime={grantChecked.iso}>{grantChecked.label}</time></span>
           </p>
-          <p class="page-updated">Last updated <time datetime={lastUpdated.iso}>{lastUpdated.label}</time></p>
-        </div>
-        <div class="faq-list">
-          {
-            faqs.map(({ question, answer }) => (
-              <details class="faq-item" name="faq">
-                <summary>
-                  {question}
-                  <span class="faq-icon" aria-hidden="true">
-                    <Icon name="plus" size={16} />
+          {/* TODO: link to the EIS grant guide (board #2) once it is live. */}
+        </section>
+
+        <section class="guide-section" id="how" aria-labelledby="how-title">
+          <h2 class="guide-h2" id="how-title">{answers.how.question}</h2>
+          <p class="guide-answer">{answers.how.answer}</p>
+          <ol class="guide-steps">
+            {
+              steps.map(({ title, text }, index) => (
+                <li>
+                  <span class="guide-step-num tnum" aria-hidden="true">
+                    {index + 1}
                   </span>
-                </summary>
-                <p>{answer}</p>
-              </details>
-            ))
-          }
-        </div>
-      </div>
-    </section>
+                  <div>
+                    <h3>{title}</h3>
+                    <p>{text}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ol>
+        </section>
 
-    <section class="closing" id="book" aria-labelledby="book-title">
-      <div class="shell">
-        <h2 class="h2 closing-title" id="book-title">Start with one job</h2>
-        <p class="closing-sub">
-          Bring one repetitive job to a free 30-minute AI review. We’ll tell you honestly whether AI can help.
-        </p>
-        <div class="cta-row">
-          <a class="btn btn-primary" {...booking}>Book a free AI review</a>
-          <a class="btn btn-secondary" href={`mailto:${email}`}>Email us</a>
-        </div>
-        <p class="closing-note">
-          <Icon name="lock" size={16} />
-          Your data can stay in the EU, and we sign a data processing agreement with you. Prefer email? Write to <a
-            href={`mailto:${email}`}>{email}</a
-          >.
-        </p>
-        <BookingPanel />
+        <section class="guide-section" id="about" aria-labelledby="about-title">
+          <h2 class="guide-h2" id="about-title">{answers.about.question}</h2>
+          <p class="guide-answer">{answers.about.answer}</p>
+          <div class="guide-founder">
+            <Image src={martin} alt="" widths={[64, 128]} sizes="64px" class="guide-founder-photo" />
+            <p>
+              <b>Martin Solev</b>
+              <span>Founder, Seestemic</span>
+            </p>
+            <a href={linkedInUrl} target="_blank" rel="noreferrer">
+              Martin on LinkedIn
+              <Icon name="external" size={15} />
+            </a>
+          </div>
+        </section>
+
+        <section class="guide-section" id="why" aria-labelledby="why-title">
+          <h2 class="guide-h2" id="why-title">{answers.why.question}</h2>
+          <p class="guide-answer">{answers.why.answer}</p>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-compare" role="table">
+              <caption class="sr-only">Setting up AI yourself compared with a done-for-you setup</caption>
+              <thead role="rowgroup">
+                <tr role="row">
+                  <td role="cell"></td>
+                  <th scope="col" role="columnheader">Doing it yourself</th>
+                  <th scope="col" role="columnheader">With Seestemic</th>
+                </tr>
+              </thead>
+              <tbody role="rowgroup">
+                {
+                  comparison.map(({ topic, diy, us }) => (
+                    <tr role="row">
+                      <th scope="row" role="rowheader">{topic}</th>
+                      <td role="cell" data-label="Doing it yourself">{diy}</td>
+                      <td role="cell" data-label="With Seestemic">{us}</td>
+                    </tr>
+                  ))
+                }
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="guide-section" id="faq" aria-labelledby="faq-title">
+          <h2 class="guide-h2" id="faq-title">Frequently asked questions</h2>
+          <div class="guide-qa">
+            {
+              faqs.map(({ question, answer }) => (
+                <div class="guide-qa-item">
+                  <h3>{question}</h3>
+                  <p>{answer}</p>
+                </div>
+              ))
+            }
+          </div>
+          <p class="guide-updated">Last updated <time datetime={lastUpdated.iso}>{lastUpdated.label}</time></p>
+        </section>
       </div>
-      <div class="closing-figure" data-draw>
-        <Helper variant="outline" follow class="closing-helper" reach={6} tilt={-6} />
+    </div>
+
+    <section class="guide-close" id="book" aria-labelledby="book-title">
+      <div class="shell">
+        <div class="guide-close-inner">
+          <h2 class="h2 guide-close-title" id="book-title">Bring one repetitive job to a free AI review</h2>
+          <p class="closing-sub">
+            It’s a 30-minute call. We’ll tell you honestly whether AI can help, and where to start.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" {...booking}>Book a free 30-minute AI review</a>
+            <a class="btn btn-secondary" href={`mailto:${email}`}>Email us</a>
+          </div>
+          <p class="closing-note">
+            <Icon name="lock" size={16} />
+            Your data can stay in the EU, and we sign a data processing agreement with you. Prefer email? Write to <a
+              href={`mailto:${email}`}>{email}</a
+            >.
+          </p>
+          <BookingPanel />
+        </div>
       </div>
     </section>
   </main>
@@ -542,8 +517,27 @@ const schemaJson = JSON.stringify(schema).replace(/</g, "\\u003c");
   <SiteFooter base="/" />
 
   <script>
-    import { initHelpers } from "../scripts/helpers";
-    initHelpers();
+    // Marks the section being read in the "On this page" list.
+    const tocLinks = new Map(
+      [...document.querySelectorAll<HTMLAnchorElement>(".guide-toc a")].map((link) => [link.hash.slice(1), link]),
+    );
+    let currentLink: HTMLAnchorElement | undefined;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const link = tocLinks.get(entry.target.id);
+          if (!entry.isIntersecting || !link || link === currentLink) continue;
+          currentLink?.removeAttribute("aria-current");
+          link.setAttribute("aria-current", "location");
+          currentLink = link;
+        }
+      },
+      { rootMargin: "-25% 0px -65% 0px" },
+    );
+    tocLinks.forEach((_, id) => {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    });
   </script>
 
   <BookingScript />

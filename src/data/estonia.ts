@@ -1,11 +1,13 @@
-// Copy for /ai-for-small-business-estonia. The FAQ answers here feed both the visible accordion and the
-// FAQPage JSON-LD, so the two always match. The feed rows are illustrative examples, not client results.
+// Copy for /ai-for-small-business-estonia, a search page that answers one question per section.
+// Each section opens with a short answer that makes sense on its own, so search snippets and AI
+// assistants can quote it. Those answers and the FAQ feed both the page and the FAQPage JSON-LD,
+// so the two always match. Helper messages are illustrative examples, not client results.
 import type { HelperId } from "./helpers";
 import { founding } from "./site";
 
 export const pilotOpen = founding.taken < founding.places;
 
-/** Shown on the page as "Last updated" and used as the page's dateModified. */
+/** Shown on the page as "Updated" and used as the page's dateModified. */
 export const lastUpdated = { iso: "2026-10-21", label: "21 October 2026" } as const;
 
 /** When the EIS grant facts below were last checked against eis.ee. */
@@ -13,67 +15,190 @@ export const grantChecked = { iso: "2026-10-21", label: "21 October 2026" } as c
 
 export const eisGrantUrl = "https://eis.ee/en/services/rte-software/";
 
-export interface FeedItem {
-  helper: HelperId;
-  text: string;
-  status: string;
-  done?: boolean;
+export type SectionId = "who" | "what" | "safe" | "cost" | "funding" | "how" | "about" | "why";
+
+export interface Answer {
+  /** Short label for the "On this page" list. */
+  nav: string;
+  /** The section heading, phrased the way people search or ask. */
+  question: string;
+  /** The section's first paragraph: a complete answer on its own. */
+  answer: string;
 }
 
-export const feed: FeedItem[] = [
+/** In page order. */
+export const answers: Record<SectionId, Answer> = {
+  who: {
+    nav: "Is it worth it?",
+    question: "Is AI worth it for a small business?",
+    answer:
+      "Usually, if one repetitive job eats hours of your week, such as writing quotes, answering the same emails or chasing unpaid invoices. You don’t need an IT team or a big budget. We start with one job, set it up in the tools you already use and only add more once it clearly helps.",
+  },
+  what: {
+    nav: "What AI can do",
+    question: "What can AI do for a small business?",
+    answer:
+      "It can take over the repetitive parts of your week: drafting quotes, sorting email, booking appointments, chasing late invoices, filing receipts, answering everyday customer questions and summing up your numbers. Each AI helper does one job inside your own tools and asks before anything important happens.",
+  },
+  safe: {
+    nav: "Data and GDPR",
+    question: "Is AI safe for your customer data?",
+    answer:
+      "It can be, when it’s set up with clear limits. Each helper only sees the tools and data you allow, anything important waits for your OK, and its work is logged so you can check it. Your data can stay in the EU, and we sign a data processing agreement with you, as GDPR requires.",
+  },
+  cost: {
+    nav: "Prices",
+    question: "How much does AI cost for a small business?",
+    answer: pilotOpen
+      ? `At Seestemic, you start with a free 30-minute AI review. Setting up your first helper costs from €1,500, one-time, or €500 for our first ${founding.places} clients. Care, our optional monthly support, starts at €300 a month. AI costs, such as an AI subscription, are paid separately.`
+      : "At Seestemic, you start with a free 30-minute AI review. Setting up your first helper costs from €1,500, one-time. Care, our optional monthly support, starts at €300 a month. AI costs, such as an AI subscription, are paid separately.",
+  },
+  funding: {
+    nav: "EIS funding",
+    question: "Can an Estonian company get funding for AI?",
+    answer:
+      "Possibly, for larger setups. EIS (the Estonian Business and Innovation Agency, formerly Enterprise Estonia) can cover up to half the cost of a software project for Estonian companies, with a grant of €2,000 to €5,000, so the project needs to cost at least €4,000.",
+  },
+  how: {
+    nav: "Getting started",
+    question: "How do you start using AI in a small business?",
+    answer:
+      "Start with one job, not a big AI project. At Seestemic, we look at your week on a free call, set up one helper for the job that takes the most time, train the people who’ll use it and only add more once it clearly works.",
+  },
+  about: {
+    nav: "Who we are",
+    question: "Who is behind Seestemic?",
+    answer:
+      "Seestemic is run from Tallinn by Martin Solev, who has built software for over 12 years, including cloud services used by millions of people. Martin is your first contact, on the free AI review. After that, he and our team build your helper, train your people and look after it.",
+  },
+  why: {
+    nav: "DIY or done for you",
+    question: "Should you set up AI yourself or get help?",
+    answer:
+      "If you enjoy tinkering with software and have the time, you can start with off-the-shelf AI tools yourself. If you’d rather keep running your business, a done-for-you setup skips the trial and error.",
+  },
+};
+
+/** The "at a glance" card in the first screen. Keep values short: the card sits beside the H1. */
+export const glance: { label: string; value: string }[] = [
+  { label: "What we do", value: "Set up AI helpers for repetitive jobs, like quotes, email and invoice reminders" },
+  { label: "Where they work", value: "Inside the tools you already use, such as Microsoft 365 or Google Workspace" },
+  { label: "Who decides", value: "You. Anything important waits for your OK" },
+  { label: "Your data", value: "Can stay in the EU, under a data processing agreement" },
+  { label: "First step", value: "A free 30-minute AI review" },
+  {
+    label: "First helper",
+    value: pilotOpen
+      ? `€500 one-time for our first ${founding.places} clients, normally from €1,500`
+      : "From €1,500, one-time",
+  },
+  { label: "Funding", value: "Setups of €4,000 or more may qualify for EIS co-funding" },
+  { label: "Based in", value: "Tallinn, Estonia. Calls and training are in English" },
+];
+
+export const fitSigns = [
+  "You or your team type the same things into emails, quotes or spreadsheets every week.",
+  "Customers wait for replies, quotes or bookings while you’re busy doing the work itself.",
+  "You’d rather have AI set up for you than learn new software.",
+];
+
+export const jobs: { helper: HelperId; job: string; example: string }[] = [
   {
     helper: "quotes",
-    text: "Drafted a €4,860 flooring quote for a dental clinic, with a site visit on Thursday at 10:00.",
-    status: "Waiting for your OK",
+    job: "Drafts quotes from your price list",
+    example: "Drafted a €4,860 flooring quote for a dental clinic. Waiting for your OK.",
   },
   {
     helper: "inbox",
-    text: "Sorted 48 new emails, answered 9 with your saved replies and flagged 3 that need you.",
-    status: "3 need you",
+    job: "Sorts your email and answers the routine ones",
+    example: "Answered 9 of 48 new emails with your saved replies. 3 need you.",
   },
   {
     helper: "frontDesk",
-    text: "Booked 6 appointments overnight and sent reminders for tomorrow.",
-    status: "Done",
-    done: true,
+    job: "Books appointments and sends reminders",
+    example: "Booked 6 appointments overnight and sent tomorrow’s reminders.",
   },
   {
     helper: "invoices",
-    text: "Matched this week’s payments. 2 invoices are over 30 days late: send a final reminder, or will you call?",
-    status: "Your call",
+    job: "Matches payments and chases late invoices",
+    example: "2 invoices are over 30 days late. Send a final reminder, or will you call?",
   },
   {
     helper: "bookkeeping",
-    text: "Read 61 receipts, filed 58 in your accounts and set aside 3 with a quick question.",
-    status: "3 to check",
+    job: "Reads receipts and files them in your accounts",
+    example: "Filed 58 of 61 receipts. 3 have a quick question for you.",
   },
   {
     helper: "questions",
-    text: "Told a customer you deliver on Saturdays, using your own prices and policies, and booked one for 10:00.",
-    status: "Done",
-    done: true,
+    job: "Answers customers from your own prices and policies",
+    example: "Told a customer you deliver on Saturdays and booked them in for 10:00.",
   },
   {
     helper: "report",
-    text: "Put your week on one page, from this week’s sales, bookings and new reviews.",
-    status: "Sent",
-    done: true,
+    job: "Sums up your week on one page",
+    example: "Your week is ready: sales, bookings and new reviews on one page.",
   },
   {
     helper: "handbook",
-    text: "Showed a new colleague how to handle a return without a receipt, straight from your returns policy.",
-    status: "Done",
-    done: true,
+    job: "Answers your team from your own procedures",
+    example: "Showed a new colleague how to handle a return without a receipt.",
   },
 ];
 
+export const safety: { title: string; text: string }[] = [
+  { title: "You set the limits.", text: "Decide what each helper may do on its own and what always needs your OK." },
+  { title: "We pick the AI provider with you.", text: "We choose the one that fits your needs, so your data can stay in the EU." },
+  { title: "You keep what we build.", text: "Everything we set up is yours, even if you stop Care." },
+];
+
+/** Repeats the homepage FAQ's wording. Re-check against eis.ee before changing it, and update grantChecked. */
 export const grantFacts: { label: string; value: string }[] = [
-  { label: "Run by", value: "EIS, the Estonian Business and Innovation Agency (formerly Enterprise Estonia)" },
-  { label: "Covers", value: "Up to half the cost of a software project for an Estonian company" },
-  { label: "Grant size", value: "€2,000 to €5,000, so the project needs to cost at least €4,000" },
+  { label: "Grant", value: "Grant for implementing or linking software" },
+  { label: "Grant size", value: "€2,000 to €5,000, up to half the project cost" },
   { label: "Your revenue", value: "An average of at least €50,000 a year over the last two years" },
   { label: "When to apply", value: "Before the work starts" },
-  { label: "Not covered", value: "Monthly fees such as Care" },
+  { label: "Not covered", value: "Monthly fees, such as Care" },
+  { label: "Applications", value: "Open, on a rolling basis until the budget runs out" },
+];
+
+export const steps: { title: string; text: string }[] = [
+  {
+    title: "Free AI review",
+    text: "A 30-minute call. Tell us which jobs take too long, and we’ll be honest about where AI can help.",
+  },
+  {
+    title: "One helper, set up for you",
+    text: "We set it up inside the tools you already use, with your approval rules built in.",
+  },
+  {
+    title: "Training, then results",
+    text: "Hands-on training for the people who’ll use it. Then we measure with you, fix what isn’t right and add what works.",
+  },
+];
+
+export const comparison: { topic: string; diy: string; us: string }[] = [
+  {
+    topic: "Where to start",
+    diy: "You work out which job is worth automating",
+    us: "We look at your week with you and pick the job worth doing first",
+  },
+  {
+    topic: "Setup",
+    diy: "You connect the tools and write the instructions",
+    us: "We set it up inside the tools you already use",
+  },
+  {
+    topic: "Safety",
+    diy: "You decide the limits and test them yourself",
+    us: "Approval rules and logging come built in",
+  },
+  { topic: "Your team", diy: "Everyone learns on their own", us: "Hands-on training for the people who’ll use it" },
+  { topic: "Afterwards", diy: "You fix things when they change", us: "Optional Care: our team’s time when you need it" },
+  {
+    topic: "Cost",
+    diy: "Your time, plus AI subscriptions",
+    us: "A free review, then a one-time setup. AI costs are separate",
+  },
 ];
 
 export interface Faq {
@@ -81,61 +206,41 @@ export interface Faq {
   answer: string;
 }
 
+/** Questions the sections above don't already answer. */
 export const faqs: Faq[] = [
   {
-    question: "What can AI do for a small business in Estonia?",
+    question: "Do I need to be technical to use AI?",
     answer:
-      "It can take over repetitive jobs: drafting quotes, sorting email, booking appointments, reminding customers about invoices, filing receipts, answering everyday customer questions and writing a weekly report. A helper does this inside the tools you already use, and you approve anything important before it happens. You start with one job and add more only when it clearly works.",
-  },
-  {
-    question: "How much does AI automation cost for a small business?",
-    answer: pilotOpen
-      ? `At Seestemic, the first step is a free 30-minute AI review. Our founding-client pilot, for our first ${founding.places} clients, is €500 one-time for one small helper set up for one task, normally from €1,500. Care is optional after the pilot, from €300 a month. AI costs, such as an AI subscription, are paid separately, and no VAT is added.`
-      : "At Seestemic, the first step is a free 30-minute AI review. Setting up your first helper costs from €1,500, one-time. Care is optional after setup, from €300 a month. AI costs, such as an AI subscription, are paid separately, and no VAT is added, as Seestemic isn’t VAT-registered.",
-  },
-  {
-    question: "Do I need to be technical?",
-    answer:
-      "No. We set everything up and explain it in plain language, so you don’t need an IT team. If you can write an email, you can work with an AI helper. We also train the people who’ll use it, so everyone knows how to check its work and when to step in.",
-  },
-  {
-    question: "Is it GDPR-safe?",
-    answer:
-      "We set it up so you stay in control of your data. You decide what each helper can see and which actions need your approval, and its work is logged so you can check it. We choose the AI provider that fits your needs, your data can stay in the EU, and we sign a data processing agreement with you.",
+      "No. We set everything up and explain it in plain language, so you don’t need an IT team. If you can write an email, you can work with an AI helper, and we train the people who’ll use it.",
   },
   {
     question: "Will AI replace my staff?",
     answer:
-      "That isn’t the goal. Helpers take the repetitive parts of the job off people’s plates, so your team spends more time with customers and on decisions that need a person. Anything important still waits for someone’s OK, and we train your team to check a helper’s work and step in when needed.",
+      "That isn’t the goal. Helpers take the repetitive parts of the job off people’s plates, so your team spends more time with customers and on decisions that need a person. Anything important still waits for someone’s OK.",
   },
   {
     question: "Does it work with Microsoft 365, Google Workspace and my accounting software?",
     answer:
-      "Usually, yes. We build around what you already have, such as Microsoft 365, Google Workspace, your CRM, help desk or accounting software, instead of asking you to switch. On the free AI review we look at the tools you use and tell you honestly if something won’t fit.",
-  },
-  {
-    question: "Can I get an EIS grant for AI?",
-    answer:
-      "Possibly, for larger setups. EIS’s grant for software implementation and integration can cover up to half the cost of a project, with a grant of €2,000 to €5,000, so the project needs to cost at least €4,000. Your revenue should average at least €50,000 a year over the last two years, and you apply before the work starts. The separate EIS AI adoption grant closed in August 2026.",
+      "Usually, yes. We build around the tools you already have, such as Microsoft 365, Google Workspace, your CRM, help desk or accounting software, instead of asking you to switch. If something won’t fit, we’ll tell you on the free AI review.",
   },
   {
     question: "Which languages do the helpers speak?",
     answer:
-      "Your customers’ languages. A helper can talk to each customer in their own language, using your prices, policies and saved replies. Our calls, training and guides with you are in English. On the free AI review, tell us which languages your customers write in.",
+      "Your customers’ languages. A helper can reply to each customer in their own language, using your prices, policies and saved replies. Our calls and training with you are in English.",
   },
   {
     question: "How quickly will I see results?",
     answer:
-      "You start with one job, so your first helper can be useful early. We don’t promise a fixed timeline: we measure the helper with you, fix what isn’t right and only expand what clearly works. If AI isn’t a good fit for a job, we’ll tell you on the free AI review.",
+      "You start with one job, so your first helper can be useful early. We don’t promise a fixed timeline. We measure the helper with you, fix what isn’t right and only expand what clearly works.",
   },
   {
     question: "What happens if I stop paying for Care?",
     answer:
-      "You keep everything we built. Care is optional, and it’s simply our team’s time when you need it: up to 4 hours a month, plus a monthly check-in. Without Care, your helpers are still yours, and AI costs, such as an AI subscription, are paid separately as before.",
+      "You keep everything we built. Care is optional: up to 4 hours of our team’s time each month, plus a monthly check-in. Without it, your helpers are still yours, and you keep paying any AI costs, such as an AI subscription, directly.",
   },
   {
-    question: "Who would I actually work with?",
+    question: "What do I need to prepare for the free AI review?",
     answer:
-      "Martin Solev, Seestemic’s founder, on your first call. He runs Seestemic from Tallinn and has built software for over 12 years, including cloud services used by millions of people. After that call, Martin and our team build your helper, train your people and look after it.",
+      "Nothing formal. Bring one or two jobs that take too long and a rough idea of the tools you use for them. You don’t need to know anything about AI. We’ll be honest about where it helps and where it doesn’t.",
   },
 ];

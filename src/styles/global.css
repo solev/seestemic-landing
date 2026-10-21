@@ -2804,439 +2804,211 @@ dd {
 }
 
 /* ------------------------------------------------------------------ */
-/* Landing page: AI for small business in Estonia                      */
+/* Search page: AI for small business in Estonia                       */
 /* ------------------------------------------------------------------ */
 
-/* Who it's for: copy on the left, the owner's week in "you" bubbles on the right, and a helper answering. */
-.fit {
-  display: grid;
-  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-  align-items: center;
-  gap: 2.5rem clamp(2rem, 6vw, 5rem);
-  padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 5.5vw, 4.5rem);
-  border-radius: var(--r-xl);
-  background: var(--card);
+/* An answer page: a question heading per section, a short answer that stands on its own, then the detail.
+   The guide-* pieces are meant to be reused by the next search pages. */
+
+.guide-hero {
+  padding-top: clamp(2.5rem, 5vw, 4.5rem);
 }
 
-.fit-copy .lead {
-  max-width: 34rem;
-  margin-top: 1rem;
-}
-
-.fit-chat {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 1rem;
-}
-
-.fit-says {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.5rem;
-}
-
-.fit-says .say {
-  border-radius: 20px 20px 6px 20px;
-}
-
-.fit-reply {
-  display: flex;
-  align-items: flex-end;
-  gap: 0.75rem;
-  align-self: flex-start;
-}
-
-.fit-helper {
-  width: 64px;
-  height: 64px;
-  flex: none;
-}
-
-.fit-reply span {
-  margin-bottom: 1.5rem;
-  padding: 0.5rem 1rem;
-  border-radius: 20px 20px 20px 6px;
-  background: #fff;
-  font-size: 1rem;
-  font-weight: 500;
-  box-shadow: var(--lift);
-}
-
-/* Example jobs: one day of helper updates on a painting, every word on white. */
-.feed-stage {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  padding: clamp(0.75rem, 4.5vw, 4rem);
-  border-radius: var(--r-xl);
-  background: #c9c4a6;
-}
-
-.feed {
-  max-width: 1040px;
-  margin-inline: auto;
-  overflow: hidden;
-  border-radius: 20px;
-  background: #fff;
-  box-shadow:
-    0 0 0 1px rgb(0 0 0 / 0.05),
-    var(--float);
-}
-
-.feed-bar {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  height: 44px;
-  padding: 0 0.75rem 0 1rem;
-  border-bottom: 1px solid var(--line);
-  background: #fafaf9;
-}
-
-.feed-title {
-  grid-column: 2;
-  color: var(--ink-2);
-  font-size: 0.8125rem;
-  font-weight: 600;
-}
-
-.feed-bar .window-tag {
-  justify-self: end;
-}
-
-/* The list's own fill shows through 1px gaps as hairlines between the rows. */
-.feed-list {
+.guide-hero-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1px;
-  background: var(--line);
-}
-
-.feed-item {
-  display: grid;
-  grid-template-columns: 36px minmax(0, 1fr);
-  align-items: start;
-  gap: 0.875rem;
-  padding: 1.125rem 1.25rem 1.25rem;
-  background: #fff;
-}
-
-.feed-avatar {
-  width: 36px;
-  height: 36px;
-}
-
-.feed-head {
-  display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.25rem 0.75rem;
-  font-size: 0.9375rem;
+  gap: 2.5rem clamp(2.5rem, 5vw, 5rem);
 }
 
-.feed-head b {
-  font-weight: 600;
-}
-
-.feed-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  padding: 0.1875rem 0.5625rem;
-  border-radius: 999px;
-  background: var(--card-strong);
-  color: var(--ink);
-  font-size: 0.72rem;
+.guide-title {
+  font-size: clamp(2.375rem, 1.5rem + 2.6vw, 3.5rem);
   font-weight: 500;
-  line-height: 1.4;
-  white-space: nowrap;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
 }
 
-.feed-status.is-done {
-  background: var(--ok-soft);
-  color: var(--ok);
-}
-
-.feed-body p {
-  margin-top: 0.25rem;
-  color: var(--ink-2);
-  font-size: 0.9375rem;
-  line-height: 1.5;
-}
-
-.control-note {
-  margin-top: 2rem;
-}
-
-/* Prices: a real table, so the figures can be read and quoted. */
-.prices {
-  padding: 0.5rem clamp(1.5rem, 3vw, 2.25rem);
-  border-radius: var(--r-xl);
-  background: var(--card);
-}
-
-.prices table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-}
-
-.prices thead th {
-  padding: 1.25rem 1.5rem 1rem 0;
-  color: var(--ink-3);
-  font-size: 0.875rem;
-  font-weight: 600;
-}
-
-.prices tbody tr {
-  border-top: 1px solid var(--line-strong);
-}
-
-.prices tbody th,
-.prices tbody td {
-  padding: 1.5rem 1.5rem 1.5rem 0;
-  vertical-align: top;
-}
-
-.prices tbody th {
-  width: 30%;
-  font-size: clamp(1.3125rem, 1.2rem + 0.35vw, 1.5rem);
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-}
-
-.prices tbody td {
-  color: var(--ink-2);
-}
-
-.prices tbody td:last-child {
-  padding-right: 0;
-}
-
-.price {
-  width: 25%;
-}
-
-.price b {
-  display: block;
-  color: var(--ink);
-  font-size: 1.5rem;
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-
-.price small {
-  color: var(--ink-2);
-  font-size: 0.9375rem;
-  font-weight: 400;
-  letter-spacing: 0;
-}
-
-.price s,
-.price-when {
-  display: block;
-  margin-top: 0.25rem;
-  font-size: 0.9375rem;
-}
-
-.price s {
-  color: var(--ink-3);
-  font-variant-numeric: tabular-nums;
-}
-
-.price-flag {
-  display: block;
-  width: fit-content;
-  margin-top: 0.625rem;
-  padding: 0.1875rem 0.625rem;
-  border-radius: 999px;
-  background: #fff;
-  color: var(--ink);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  letter-spacing: 0;
-  line-height: 1.4;
-}
-
-.prices-note {
-  margin-top: 2rem;
-}
-
-/* Funding: the grant's facts as a dated sheet, linked to the source. */
-.grant {
-  display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: 2rem clamp(2rem, 5vw, 4.5rem);
-  padding: clamp(1.75rem, 4vw, 3rem);
-  border-radius: var(--r-xl);
-  background: var(--card);
-}
-
-.grant-intro h3 {
-  font-size: clamp(1.3125rem, 1.2rem + 0.35vw, 1.5rem);
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-}
-
-.grant-intro p {
-  margin-top: 0.75rem;
-  color: var(--ink-2);
-}
-
-.grant-foot {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem 1.25rem;
-  margin-top: 1.75rem;
-}
-
-/* Stone barely separates from linen, so the link pill is white here, as in the founder chat. */
-.grant .btn-secondary {
-  background: #fff;
-}
-
-.grant .btn-secondary:hover {
-  background: var(--card-strong);
-}
-
-.grant-intro .grant-checked {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  margin: 0;
-  color: var(--ink-3);
-  font-size: 0.875rem;
-}
-
-.grant-facts {
-  border-top: 1px solid var(--line-strong);
-}
-
-.grant-facts div {
-  display: grid;
-  grid-template-columns: minmax(7.5rem, 2fr) minmax(0, 5fr);
-  gap: 0.25rem 1.5rem;
-  padding: 0.9375rem 0;
-  border-bottom: 1px solid var(--line-strong);
-}
-
-.grant-facts dt {
-  color: var(--ink-3);
-  font-size: 0.9375rem;
-}
-
-.grant-facts dd {
-  color: var(--ink);
-}
-
-/* Steps: three numerals on one hairline, read left to right. */
-.steps {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 2rem 1.25rem;
-}
-
-.steps li {
-  position: relative;
-  padding-right: 1.5rem;
-}
-
-.steps li::before {
-  content: "";
-  position: absolute;
-  top: 18px;
-  left: 0;
-  right: -1.25rem;
-  height: 1px;
-  background: var(--line-strong);
-}
-
-.steps li:last-child::before {
-  right: 0;
-}
-
-.steps .process-num {
-  position: relative;
-  box-shadow: 0 0 0 10px #fff;
-}
-
-.steps h3 {
-  margin-top: 1.5rem;
-  font-size: clamp(1.3125rem, 1.2rem + 0.35vw, 1.5rem);
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-}
-
-.steps p {
-  margin-top: 0.625rem;
-  color: var(--ink-2);
-}
-
-/* Why local: a sticky argument on the left, checked reasons on the right. */
-.why {
-  display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  align-items: start;
-  gap: 2.5rem clamp(2.5rem, 7vw, 7rem);
-}
-
-.why-intro {
-  position: sticky;
-  top: calc(var(--header-h) + 2rem);
-}
-
-.why-intro .lead {
-  max-width: 28rem;
+.guide-hero-lead {
+  max-width: 34rem;
   margin-top: 1.25rem;
 }
 
-.why-list {
-  border-top: 1px solid var(--line);
+.guide-hero-ctas {
+  justify-content: flex-start;
+  margin-top: 2rem;
 }
 
-.why-list li {
-  display: grid;
-  grid-template-columns: 18px minmax(0, 1fr);
-  gap: 1rem;
-  padding: 1.25rem 0;
-  border-bottom: 1px solid var(--line);
+/* The fact card sits on a painting, like the homepage's cards; no words go straight onto the paint. */
+.guide-hero-art,
+.guide-figure-art {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
 }
 
-.why-list svg {
-  margin-top: 0.1875rem;
-  color: var(--ok);
+.guide-hero-art {
+  padding: clamp(1.25rem, 2.6vw, 2rem);
+  border-radius: var(--r-xl);
+  background: #b9bfd6;
 }
 
-.why-list b {
-  font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+.guide-hero-art > .art,
+.guide-figure-art > .art {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.glance {
+  padding: 1.25rem 1.5rem 1rem;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: var(--float);
+  animation: fade-up 0.7s var(--ease) 0.15s both;
+}
+
+.glance-title {
+  font-size: 1.0625rem;
   font-weight: 500;
-  line-height: 1.3;
   letter-spacing: -0.012em;
 }
 
-.why-list p {
-  max-width: 52ch;
-  margin-top: 0.25rem;
+.glance .guide-dl {
+  margin-top: 0.75rem;
+}
+
+.guide-dl > div {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: 0.25rem 1rem;
+  padding-block: 0.625rem;
+  border-top: 1px solid var(--line);
+}
+
+.guide-dl dt {
+  color: var(--ink-3);
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.guide-dl dd {
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+}
+
+.glance-updated {
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--line);
+  color: var(--ink-3);
+  font-size: 0.8125rem;
+}
+
+/* Contents rail beside the reading column */
+
+.guide-body {
+  display: grid;
+  grid-template-columns: 12.5rem minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(2.5rem, 6vw, 6rem);
+  margin-top: clamp(4.5rem, 9vw, 7.5rem);
+}
+
+.guide-aside {
+  position: sticky;
+  top: calc(var(--header-h) + 2rem);
+  display: grid;
+  justify-items: start;
+  gap: 1.75rem;
+}
+
+.guide-toc-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.guide-toc ol {
+  margin-top: 0.75rem;
+  border-left: 1px solid var(--line-strong);
+}
+
+.guide-toc a {
+  position: relative;
+  display: block;
+  padding: 0.3125rem 0 0.3125rem 1rem;
+  color: var(--ink-2);
+  font-size: 0.9375rem;
+  line-height: 1.35;
+  transition: color 0.2s var(--ease);
+}
+
+/* The current section gets a dot on the rail's hairline. */
+.guide-toc a::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -3px;
+  width: 5px;
+  height: 5px;
+  margin-top: -2.5px;
+  border-radius: 50%;
+  background: var(--ink);
+  opacity: 0;
+  scale: 0.2;
+  transition:
+    opacity 0.25s var(--ease),
+    scale 0.35s var(--ease);
+}
+
+.guide-toc a:hover,
+.guide-toc a[aria-current] {
+  color: var(--ink);
+}
+
+.guide-toc a[aria-current]::before {
+  opacity: 1;
+  scale: 1;
+}
+
+/* Sections */
+
+.guide-section + .guide-section {
+  margin-top: clamp(3.5rem, 7vw, 5rem);
+  padding-top: clamp(3.5rem, 7vw, 5rem);
+  border-top: 1px solid var(--line);
+}
+
+.guide-h2 {
+  max-width: 40rem;
+  font-size: clamp(1.75rem, 1.4rem + 1.1vw, 2.25rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.024em;
+}
+
+/* The answer: complete on its own, so it reads well when quoted. */
+.guide-answer {
+  max-width: 40rem;
+  margin-top: 1.25rem;
+  font-size: clamp(1.125rem, 1.06rem + 0.25vw, 1.25rem);
+  line-height: 1.55;
+  letter-spacing: -0.006em;
+}
+
+.guide-text {
+  max-width: 40rem;
+  margin-top: 1.75rem;
   color: var(--ink-2);
 }
 
-.page-updated {
-  margin-top: 1rem;
-  color: var(--ink-3);
-  font-size: 0.875rem;
-}
-
-.closing-note a {
+.guide-more a,
+.guide-source a,
+.guide-founder a,
+.guide-notes a,
+.guide-close .closing-note a {
   color: var(--ink);
   font-weight: 500;
   text-decoration: underline;
@@ -3246,100 +3018,589 @@ dd {
   transition: text-decoration-color 0.2s;
 }
 
-.closing-note a:hover {
+.guide-more a,
+.guide-source a,
+.guide-founder a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.guide-more a:hover,
+.guide-source a:hover,
+.guide-founder a:hover,
+.guide-notes a:hover,
+.guide-close .closing-note a:hover {
   text-decoration-color: currentColor;
 }
 
-@media (max-width: 900px) {
-  .fit,
-  .grant,
-  .why {
-    grid-template-columns: minmax(0, 1fr);
+.guide-checks {
+  display: grid;
+  gap: 0.625rem;
+  max-width: 40rem;
+  margin-top: 0.875rem;
+}
+
+.guide-checks li {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 0.75rem;
+}
+
+.guide-checks svg {
+  margin-top: 0.2em;
+  color: var(--ok);
+}
+
+.guide-checks + .guide-text {
+  margin-top: 1.25rem;
+}
+
+/* What a helper does: the cast, each with an example message */
+
+.guide-jobs-note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.625rem;
+  margin-top: 2.25rem;
+  color: var(--ink-3);
+  font-size: 0.875rem;
+}
+
+.guide-jobs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(1.5rem, 4vw, 3rem);
+  margin-top: 1rem;
+}
+
+.guide-job {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  align-items: start;
+  gap: 0.875rem;
+  padding-block: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
+.guide-job-avatar {
+  width: 32px;
+  height: 32px;
+}
+
+.guide-job h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.guide-job p {
+  color: var(--ink-2);
+  font-size: 0.9375rem;
+  line-height: 1.45;
+}
+
+.guide-job .guide-job-msg {
+  width: fit-content;
+  margin-top: 0.625rem;
+  padding: 0.5rem 0.8125rem;
+  border-radius: 4px 16px 16px;
+  background: var(--card);
+  color: var(--ink);
+  font-size: 0.875rem;
+}
+
+.guide-more {
+  margin-top: 1.25rem;
+  font-size: 0.9375rem;
+}
+
+/* Safety: one painted example, then the points */
+
+.guide-figure {
+  margin-top: 2.25rem;
+}
+
+.guide-figure-art {
+  display: grid;
+  place-items: center;
+  min-height: clamp(340px, 34vw, 420px);
+  padding: 3.25rem 1.25rem 2.5rem;
+  border-radius: var(--r-lg);
+  background: #c9c58f;
+}
+
+.guide-figure-art > .example-tag {
+  position: absolute;
+  top: 0.875rem;
+  left: 0.875rem;
+  z-index: 1;
+  background: rgb(255 255 255 / 0.9);
+}
+
+.guide-figure figcaption {
+  margin-top: 0.75rem;
+  color: var(--ink-3);
+  font-size: 0.875rem;
+}
+
+.guide-points {
+  max-width: 40rem;
+  margin-top: 2rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.guide-points li {
+  padding-block: 0.875rem;
+  border-top: 1px solid var(--line);
+  color: var(--ink-2);
+}
+
+.guide-points b {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* Tables: prices and the comparison */
+
+.guide-table-wrap {
+  margin-top: 2.25rem;
+}
+
+.guide-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  text-align: left;
+}
+
+.guide-table th,
+.guide-table td {
+  padding: 1.125rem 1.5rem 1.125rem 0;
+  border-bottom: 1px solid var(--line);
+  vertical-align: baseline;
+}
+
+.guide-table :is(th, td):last-child {
+  padding-right: 0;
+}
+
+.guide-table thead :is(th, td) {
+  padding-block: 0 0.75rem;
+  border-bottom-color: var(--line-strong);
+  color: var(--ink-3);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.guide-table tbody th {
+  font-weight: 500;
+}
+
+.guide-table td {
+  color: var(--ink-2);
+}
+
+.guide-prices tbody th {
+  width: 30%;
+}
+
+.guide-prices small {
+  margin-left: 0.25rem;
+  color: var(--ink-3);
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.guide-pill {
+  height: 24px;
+  margin-left: 0.5rem;
+  padding: 0 0.625rem;
+  font-size: 0.75rem;
+  vertical-align: 1px;
+}
+
+.guide-price {
+  width: 24%;
+  white-space: nowrap;
+}
+
+.guide-price b {
+  color: var(--ink);
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.guide-price s {
+  margin-left: 0.25rem;
+  color: var(--ink-3);
+  text-decoration-thickness: 1px;
+}
+
+.guide-notes {
+  display: grid;
+  gap: 0.375rem;
+  max-width: 40rem;
+  margin-top: 1.5rem;
+  color: var(--ink-2);
+  font-size: 0.9375rem;
+}
+
+.guide-notes li {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.guide-notes li::before {
+  content: "";
+  position: absolute;
+  top: 0.65em;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--ink-3);
+}
+
+.guide-cta {
+  margin-top: 2rem;
+}
+
+.guide-compare tbody th {
+  width: 22%;
+}
+
+.guide-compare tbody td {
+  width: 39%;
+}
+
+.guide-compare thead th:last-child,
+.guide-compare td:last-child {
+  color: var(--ink);
+}
+
+/* Funding facts and their source */
+
+.guide-facts {
+  max-width: 44rem;
+  margin-top: 2rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.guide-facts > div {
+  grid-template-columns: 10rem minmax(0, 1fr);
+  padding-block: 0.875rem;
+}
+
+.guide-facts dd {
+  font-size: 1rem;
+}
+
+.guide-source {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.25rem;
+  margin-top: 1.25rem;
+  font-size: 0.9375rem;
+}
+
+.guide-source span {
+  color: var(--ink-3);
+}
+
+/* Getting started: three steps on a hairline */
+
+.guide-steps {
+  display: grid;
+  gap: 1.75rem;
+  max-width: 40rem;
+  margin-top: 2.25rem;
+}
+
+.guide-steps li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  gap: 1.125rem;
+}
+
+.guide-steps li:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  top: 2.75rem;
+  bottom: -1.25rem;
+  left: calc(1.125rem - 0.5px);
+  width: 1px;
+  background: var(--line-strong);
+}
+
+.guide-step-num {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+/* Step 1 is the one a reader can take today. */
+.guide-steps li:first-child .guide-step-num {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: #fff;
+}
+
+.guide-steps h3 {
+  padding-top: 0.375rem;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.guide-steps p {
+  margin-top: 0.25rem;
+  color: var(--ink-2);
+}
+
+.guide-founder {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  margin-top: 1.75rem;
+  font-size: 0.9375rem;
+}
+
+.guide-founder-photo {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.guide-founder p {
+  display: grid;
+  margin-right: 0.75rem;
+  line-height: 1.35;
+}
+
+.guide-founder p b {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.guide-founder p span {
+  color: var(--ink-3);
+}
+
+/* Questions, all open so every answer is readable and quotable */
+
+.guide-qa {
+  max-width: 44rem;
+  margin-top: 1.75rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.guide-qa-item {
+  padding-block: 1.375rem;
+  border-top: 1px solid var(--line);
+}
+
+.guide-qa-item h3 {
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.012em;
+}
+
+.guide-qa-item p {
+  max-width: 40rem;
+  margin-top: 0.5rem;
+  color: var(--ink-2);
+}
+
+.guide-updated {
+  margin-top: 1.25rem;
+  color: var(--ink-3);
+  font-size: 0.875rem;
+}
+
+.guide-close {
+  padding-block: clamp(5rem, 10vw, 8rem) clamp(4rem, 8vw, 6rem);
+}
+
+.guide-close-inner {
+  padding: clamp(3rem, 7vw, 5.5rem) clamp(1.25rem, 5vw, 4rem);
+  border-radius: var(--r-xl);
+  background: var(--card);
+  text-align: center;
+}
+
+.guide-close-title {
+  max-width: 20ch;
+  margin-inline: auto;
+}
+
+.guide-close .cta-row {
+  margin-top: 2rem;
+}
+
+.guide-close .cta-booking {
+  background: #fff;
+}
+
+@media (max-width: 1024px) {
+  .guide-body {
+    display: block;
+    margin-top: clamp(3rem, 7vw, 4.5rem);
   }
 
-  .fit-chat {
-    align-items: stretch;
-  }
-
-  .why-intro {
+  .guide-aside {
     position: static;
+    display: block;
+    justify-items: normal;
+    margin-bottom: 3.5rem;
   }
 
-  .steps {
+  .guide-toc-cta {
+    display: none;
+  }
+
+  /* The contents become a row of chips that scrolls sideways. */
+  .guide-toc ol {
+    display: flex;
+    gap: 0.5rem;
+    margin-inline: calc(-1 * var(--gutter));
+    padding-inline: var(--gutter);
+    border-left: 0;
+    overflow-x: auto;
+    scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+  }
+
+  .guide-toc ol::-webkit-scrollbar {
+    display: none;
+  }
+
+  .guide-toc li {
+    flex: none;
+  }
+
+  .guide-toc a {
+    display: inline-flex;
+    align-items: center;
+    height: 36px;
+    padding: 0 0.875rem;
+    border-radius: 999px;
+    background: var(--card-strong);
+    color: var(--ink);
+    font-size: 0.875rem;
+    transition: background-color 0.2s var(--ease);
+  }
+
+  .guide-toc a:hover {
+    background: var(--card-hover);
+  }
+
+  .guide-toc a::before {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .guide-hero-grid {
     grid-template-columns: minmax(0, 1fr);
-    max-width: 560px;
-    margin-inline: auto;
-  }
-
-  .steps li::before {
-    right: 0;
   }
 }
 
 @media (max-width: 760px) {
-  .fit,
-  .feed-stage,
-  .prices,
-  .grant {
-    border-radius: var(--r-lg);
-  }
-
-  .feed {
-    border-radius: 14px;
-  }
-
-  .feed-bar {
-    grid-template-columns: 1fr auto;
-    height: 40px;
-  }
-
-  .feed-title {
-    grid-column: 1;
-  }
-
-  .feed-list {
+  .guide-jobs {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  /* The table becomes one block per step. */
-  .prices thead {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-  }
-
-  .prices tbody tr {
-    display: grid;
-    gap: 0.75rem;
-    padding: 1.5rem 0;
-  }
-
-  .prices tbody tr:first-child {
-    border-top: 0;
-  }
-
-  .prices tbody th,
-  .prices tbody td {
+  /* Tables stack into one block per row; the roles in the markup keep them tables for screen readers. */
+  .guide-table,
+  .guide-table tbody,
+  .guide-table tr,
+  .guide-table th,
+  .guide-table td {
+    display: block;
     width: auto;
-    padding: 0;
   }
 
-  .grant-facts div {
-    grid-template-columns: minmax(0, 1fr);
+  .guide-table thead {
+    display: none;
+  }
+
+  .guide-table tr {
+    padding-block: 1.125rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .guide-table tbody tr:first-child {
+    border-top: 1px solid var(--line);
+  }
+
+  .guide-table th,
+  .guide-table td {
+    padding: 0;
+    border: 0;
+  }
+
+  .guide-table tbody :is(th, td) {
+    width: auto;
+  }
+
+  .guide-table tbody th {
+    font-size: 1rem;
+  }
+
+  .guide-table td {
+    margin-top: 0.375rem;
+  }
+
+  .guide-price {
+    white-space: normal;
+  }
+
+  .guide-compare td {
+    margin-top: 0.75rem;
+  }
+
+  .guide-compare td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 0.125rem;
+    color: var(--ink-3);
+    font-size: 0.8125rem;
+  }
+
+  .guide-facts > div {
+    grid-template-columns: 8rem minmax(0, 1fr);
   }
 }
 
-@media (max-width: 480px) {
-  .feed-item {
-    grid-template-columns: 32px minmax(0, 1fr);
-    padding: 1rem;
+@media (max-width: 560px) {
+  .guide-dl > div,
+  .guide-facts > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.125rem;
   }
 
-  .feed-avatar {
-    width: 32px;
-    height: 32px;
+  .glance {
+    padding-inline: 1.125rem;
+  }
+
+  .guide-hero-ctas .btn {
+    flex: 1 1 100%;
   }
 }
 

@@ -1,6 +1,7 @@
 ---
 // Opens the inline Cal.com panel (BookingPanel) from every [data-booking-trigger] on the page.
 // Place it at the end of the page, after the footer, so the footer's trigger is wired too.
+// booking_opened reports where the click came from: a trigger's data-booking-from if set, else its section.
 ---
 
 <script is:inline>
@@ -82,13 +83,15 @@
       const clickedTrigger = event.currentTarget;
       if (!(clickedTrigger instanceof HTMLAnchorElement)) return;
       lastTrigger = clickedTrigger;
-      const from = clickedTrigger.closest(".pilot")
-        ? "pilot"
-        : clickedTrigger.closest("header")
-          ? "header"
-          : clickedTrigger.closest("footer")
-            ? "footer"
-            : (clickedTrigger.closest("section[id]")?.id ?? "page");
+      const from =
+        clickedTrigger.dataset.bookingFrom ??
+        (clickedTrigger.closest(".pilot")
+          ? "pilot"
+          : clickedTrigger.closest("header")
+            ? "header"
+            : clickedTrigger.closest("footer")
+              ? "footer"
+              : (clickedTrigger.closest("section[id]")?.id ?? "page"));
       window.op?.("track", "booking_opened", { from });
       const mobileNav = clickedTrigger.closest("details.mobile-nav");
       if (mobileNav instanceof HTMLDetailsElement) mobileNav.open = false;
