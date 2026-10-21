@@ -1,7 +1,15 @@
 ---
 import Logo from "./Logo.astro";
-import { email, introCallUrl, navLinks } from "../data/site";
+import { email, estoniaPage, introCallUrl, navLinks } from "../data/site";
 
+interface Props {
+  /** Prefix for the homepage's section links, such as "/" on pages other than the homepage. */
+  base?: string;
+}
+
+const { base = "" } = Astro.props;
+const home = base || "#top";
+const onEstoniaPage = Astro.url.pathname.replace(/\/$/, "") === estoniaPage.href;
 const year = new Date().getFullYear();
 ---
 
@@ -9,13 +17,14 @@ const year = new Date().getFullYear();
   <div class="shell">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="#top" aria-label="Seestemic home"><Logo /></a>
+        <a href={home} aria-label="Seestemic home"><Logo /></a>
         <p>AI helpers for the everyday work of running a business.</p>
         <a class="footer-mail" href={`mailto:${email}`}>{email}</a>
       </div>
       <nav class="footer-col" aria-label="Footer">
         <b>Explore</b>
-        {navLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+        {navLinks.map((link) => <a href={`${base}${link.href}`}>{link.label}</a>)}
+        <a href={estoniaPage.href} aria-current={onEstoniaPage ? "page" : undefined}>{estoniaPage.label}</a>
       </nav>
       <div class="footer-col">
         <b>Get in touch</b>

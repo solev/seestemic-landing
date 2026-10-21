@@ -1,0 +1,111 @@
+---
+// Opens the inline Cal.com panel (BookingPanel) from every [data-booking-trigger] on the page.
+// Place it at the end of the page, after the footer, so the footer's trigger is wired too.
+---
+
+<script is:inline>
+  (() => {
+    const triggers = [...document.querySelectorAll("[data-booking-trigger]")];
+    const panel = document.querySelector(".cta-booking");
+    const closeButton = document.querySelector(".booking-close");
+    const status = document.querySelector(".booking-status");
+    const statusText = status?.querySelector("span");
+    let calendarInitialized = false;
+    let lastTrigger = triggers[0];
+
+    if (triggers.length === 0 || !(panel instanceof HTMLElement) || !(closeButton instanceof HTMLButtonElement)) return;
+
+    const initializeCalendar = () => {
+      if (calendarInitialized) return;
+      calendarInitialized = true;
+
+      (function (C, A, L) {
+        const push = function (api, args) { api.q.push(args); };
+        const doc = C.document;
+        C.Cal = C.Cal || function () {
+          const cal = C.Cal;
+          const args = arguments;
+          if (!cal.loaded) {
+            cal.ns = {};
+            cal.q = cal.q || [];
+            doc.head.appendChild(doc.createElement("script")).src = A;
+            cal.loaded = true;
+          }
+          if (args[0] === L) {
+            const api = function () { push(api, arguments); };
+            const namespace = args[1];
+            api.q = api.q || [];
+            if (typeof namespace === "string") {
+              cal.ns[namespace] = cal.ns[namespace] || api;
+              push(cal.ns[namespace], args);
+              push(cal, ["initNamespace", namespace]);
+            } else {
+              push(cal, args);
+            }
+            return;
+          }
+          push(cal, args);
+        };
+      })(window, "https://app.cal.com/embed/embed.js", "init");
+
+      Cal("init", "intro-call-with-martin", { origin: "https://app.cal.com" });
+      Cal.config = Cal.config || {};
+      Cal.config.forwardQueryParams = true;
+      Cal.ns["intro-call-with-martin"]("on", {
+        action: "linkReady",
+        callback: () => status?.setAttribute("hidden", ""),
+      });
+      Cal.ns["intro-call-with-martin"]("on", {
+        action: "bookingSuccessfulV2",
+        callback: () => window.op?.("track", "booking_completed"),
+      });
+      Cal.ns["intro-call-with-martin"]("on", {
+        action: "linkFailed",
+        callback: () => {
+          status?.classList.add("is-error");
+          if (statusText) statusText.textContent = "Availability could not load. Use the direct Cal.com link above.";
+        },
+      });
+      Cal.ns["intro-call-with-martin"]("inline", {
+        elementOrSelector: "#my-cal-inline-intro-call-with-martin",
+        config: { layout: "month_view", useSlotsViewOnSmallScreen: true },
+        calLink: "martinsolev/intro-call-with-martin",
+      });
+      Cal.ns["intro-call-with-martin"]("ui", {
+        hideEventTypeDetails: false,
+        layout: "month_view",
+      });
+    };
+
+    const openCalendar = (event) => {
+      event.preventDefault();
+      const clickedTrigger = event.currentTarget;
+      if (!(clickedTrigger instanceof HTMLAnchorElement)) return;
+      lastTrigger = clickedTrigger;
+      const from = clickedTrigger.closest(".pilot")
+        ? "pilot"
+        : clickedTrigger.closest("header")
+          ? "header"
+          : clickedTrigger.closest("footer")
+            ? "footer"
+            : (clickedTrigger.closest("section[id]")?.id ?? "page");
+      window.op?.("track", "booking_opened", { from });
+      const mobileNav = clickedTrigger.closest("details.mobile-nav");
+      if (mobileNav instanceof HTMLDetailsElement) mobileNav.open = false;
+      panel.hidden = false;
+      triggers.forEach((item) => item.setAttribute("aria-expanded", "true"));
+      initializeCalendar();
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      requestAnimationFrame(() => panel.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" }));
+    };
+
+    const closeCalendar = () => {
+      panel.hidden = true;
+      triggers.forEach((item) => item.setAttribute("aria-expanded", "false"));
+      if (lastTrigger instanceof HTMLElement) lastTrigger.focus({ preventScroll: true });
+    };
+
+    triggers.forEach((item) => item.addEventListener("click", openCalendar));
+    closeButton.addEventListener("click", closeCalendar);
+  })();
+</script>

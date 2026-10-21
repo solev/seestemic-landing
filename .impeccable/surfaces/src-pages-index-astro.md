@@ -25,7 +25,7 @@ The single marketing page, in **Persuade** mode. The visitor should decide to bo
 
 ## Constraints
 - The style is pinned to xAI's Grok Bot page (x.ai/bot), but every asset is Seestemic's own: an original speech-bubble helper and paintings generated for this site. Never ship xAI marks or art.
-- The booking script at the end of `src/pages/index.astro` is ported verbatim; change it only alongside the Cal.com setup.
+- The booking script lives in `src/components/BookingScript.astro` (ported verbatim, shared with `/ai-for-small-business-estonia`) and is placed at the end of each page, after the footer; change it only alongside the Cal.com setup.
 
 ## Direction and memorable moments
 - The direction contract is the first comment in `<body>` in `src/layouts/BaseLayout.astro`.
@@ -38,4 +38,4 @@ The single marketing page, in **Persuade** mode. The visitor should decide to bo
 ## Unresolved
 - Real proof to add beside the examples once available.
 - A Privacy URL, plus the company's legal name, registry code and address. All wait for the company rename. LinkedIn is resolved: the founder chat links Martin's profile.
-- The Cal.com event still has the slug `intro-call-with-martin`; Martin is renaming it to a 30-minute "Free AI review". If the slug changes, update the namespace, link and URL in `src/pages/index.astro`.
+- The Cal.com event still has the slug `intro-call-with-martin`; Martin is renaming it to a 30-minute "Free AI review". If the slug changes, update the namespace in `src/components/BookingScript.astro`, the inline element id in `src/components/BookingPanel.astro` and `introCallUrl` in `src/data/site.ts`.

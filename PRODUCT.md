@@ -29,7 +29,7 @@ Engagements begin with a company's existing business processes, tools, data, doc
 - Integrate AI into the software and processes a company already uses.
 - Define human oversight, access boundaries, ownership, and success measures appropriate to each workflow.
 - Train employees and support adoption after delivery.
-- The current website is a static Astro and Tailwind CSS landing page; it does not require application or backend functionality.
+- The current website is a static Astro and Tailwind CSS landing page; it does not require application or backend functionality. It also has one search landing page, `/ai-for-small-business-estonia` (copy and FAQ in `src/data/estonia.ts`). Each new page needs its own route in `vercel.json`, because every other path redirects to design.seestemic.com.
 - The target market is not currently constrained to a particular industry, company size, department, or geography.
 
 Offer and prices, approved by Martin in October 2026:
@@ -46,7 +46,7 @@ Offer and prices, approved by Martin in October 2026:
 - Larger setups of €4,000 or more may qualify for EIS co-funding (see Evidence on Hand); the page says so under the prices and links to the FAQ answer.
 - The company's legal name, registry code and address are pending a company rename. Leave them, and the Privacy page, off the site until Martin supplies them.
 - The site lives at https://www.seestemic.com (the primary domain; the apex redirects to www). Canonicals, og:url and the sitemap all use www. Older design proposals live on design.seestemic.com; only their known paths (listed in `vercel.json`) redirect there, and any other unknown path gets the site's own 404 page.
-- Analytics: OpenPanel, self-hosted on Seestemic's Coolify (dashboard https://openpanel.coolify.seestemic.com, project "Seestemic"). It is cookieless, so the page has no cookie banner. The tracker loads only in production builds, from the config in `analytics` in `src/data/site.ts`. It records page views, outgoing links, `booking_opened` (with `from`: header, top, pilot, how, about, book or footer) and `booking_completed`, and nothing the visitor types into Cal.com. OpenPanel accepts events only from seestemic.com, www.seestemic.com and seestemic-landing.vercel.app; add any new domain to the project's allowed domains. The client ID is public, but the client secret must never be committed.
+- Analytics: OpenPanel, self-hosted on Seestemic's Coolify (dashboard https://openpanel.coolify.seestemic.com, project "Seestemic"). It is cookieless, so the page has no cookie banner. The tracker loads only in production builds, from the config in `analytics` in `src/data/site.ts`. It records page views, outgoing links, `booking_opened` (with `from`: the id of the section holding the button, such as header, top, pilot, how, about, book or footer on the homepage, and top, pricing, about or book on `/ai-for-small-business-estonia`) and `booking_completed`, and nothing the visitor types into Cal.com. OpenPanel accepts events only from seestemic.com, www.seestemic.com and seestemic-landing.vercel.app; add any new domain to the project's allowed domains. The client ID is public, but the client secret must never be committed.
 
 ## Brand Commitments
 

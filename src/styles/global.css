@@ -2804,6 +2804,546 @@ dd {
 }
 
 /* ------------------------------------------------------------------ */
+/* Landing page: AI for small business in Estonia                      */
+/* ------------------------------------------------------------------ */
+
+/* Who it's for: copy on the left, the owner's week in "you" bubbles on the right, and a helper answering. */
+.fit {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  align-items: center;
+  gap: 2.5rem clamp(2rem, 6vw, 5rem);
+  padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 5.5vw, 4.5rem);
+  border-radius: var(--r-xl);
+  background: var(--card);
+}
+
+.fit-copy .lead {
+  max-width: 34rem;
+  margin-top: 1rem;
+}
+
+.fit-chat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.fit-says {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.fit-says .say {
+  border-radius: 20px 20px 6px 20px;
+}
+
+.fit-reply {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  align-self: flex-start;
+}
+
+.fit-helper {
+  width: 64px;
+  height: 64px;
+  flex: none;
+}
+
+.fit-reply span {
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px 20px 20px 6px;
+  background: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: var(--lift);
+}
+
+/* Example jobs: one day of helper updates on a painting, every word on white. */
+.feed-stage {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(0.75rem, 4.5vw, 4rem);
+  border-radius: var(--r-xl);
+  background: #c9c4a6;
+}
+
+.feed {
+  max-width: 1040px;
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 0.05),
+    var(--float);
+}
+
+.feed-bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  height: 44px;
+  padding: 0 0.75rem 0 1rem;
+  border-bottom: 1px solid var(--line);
+  background: #fafaf9;
+}
+
+.feed-title {
+  grid-column: 2;
+  color: var(--ink-2);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.feed-bar .window-tag {
+  justify-self: end;
+}
+
+/* The list's own fill shows through 1px gaps as hairlines between the rows. */
+.feed-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+}
+
+.feed-item {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  align-items: start;
+  gap: 0.875rem;
+  padding: 1.125rem 1.25rem 1.25rem;
+  background: #fff;
+}
+
+.feed-avatar {
+  width: 36px;
+  height: 36px;
+}
+
+.feed-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem 0.75rem;
+  font-size: 0.9375rem;
+}
+
+.feed-head b {
+  font-weight: 600;
+}
+
+.feed-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.1875rem 0.5625rem;
+  border-radius: 999px;
+  background: var(--card-strong);
+  color: var(--ink);
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.feed-status.is-done {
+  background: var(--ok-soft);
+  color: var(--ok);
+}
+
+.feed-body p {
+  margin-top: 0.25rem;
+  color: var(--ink-2);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.control-note {
+  margin-top: 2rem;
+}
+
+/* Prices: a real table, so the figures can be read and quoted. */
+.prices {
+  padding: 0.5rem clamp(1.5rem, 3vw, 2.25rem);
+  border-radius: var(--r-xl);
+  background: var(--card);
+}
+
+.prices table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.prices thead th {
+  padding: 1.25rem 1.5rem 1rem 0;
+  color: var(--ink-3);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.prices tbody tr {
+  border-top: 1px solid var(--line-strong);
+}
+
+.prices tbody th,
+.prices tbody td {
+  padding: 1.5rem 1.5rem 1.5rem 0;
+  vertical-align: top;
+}
+
+.prices tbody th {
+  width: 30%;
+  font-size: clamp(1.3125rem, 1.2rem + 0.35vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.prices tbody td {
+  color: var(--ink-2);
+}
+
+.prices tbody td:last-child {
+  padding-right: 0;
+}
+
+.price {
+  width: 25%;
+}
+
+.price b {
+  display: block;
+  color: var(--ink);
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.price small {
+  color: var(--ink-2);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.price s,
+.price-when {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.9375rem;
+}
+
+.price s {
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.price-flag {
+  display: block;
+  width: fit-content;
+  margin-top: 0.625rem;
+  padding: 0.1875rem 0.625rem;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.4;
+}
+
+.prices-note {
+  margin-top: 2rem;
+}
+
+/* Funding: the grant's facts as a dated sheet, linked to the source. */
+.grant {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 2rem clamp(2rem, 5vw, 4.5rem);
+  padding: clamp(1.75rem, 4vw, 3rem);
+  border-radius: var(--r-xl);
+  background: var(--card);
+}
+
+.grant-intro h3 {
+  font-size: clamp(1.3125rem, 1.2rem + 0.35vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.grant-intro p {
+  margin-top: 0.75rem;
+  color: var(--ink-2);
+}
+
+.grant-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.25rem;
+  margin-top: 1.75rem;
+}
+
+/* Stone barely separates from linen, so the link pill is white here, as in the founder chat. */
+.grant .btn-secondary {
+  background: #fff;
+}
+
+.grant .btn-secondary:hover {
+  background: var(--card-strong);
+}
+
+.grant-intro .grant-checked {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin: 0;
+  color: var(--ink-3);
+  font-size: 0.875rem;
+}
+
+.grant-facts {
+  border-top: 1px solid var(--line-strong);
+}
+
+.grant-facts div {
+  display: grid;
+  grid-template-columns: minmax(7.5rem, 2fr) minmax(0, 5fr);
+  gap: 0.25rem 1.5rem;
+  padding: 0.9375rem 0;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.grant-facts dt {
+  color: var(--ink-3);
+  font-size: 0.9375rem;
+}
+
+.grant-facts dd {
+  color: var(--ink);
+}
+
+/* Steps: three numerals on one hairline, read left to right. */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem 1.25rem;
+}
+
+.steps li {
+  position: relative;
+  padding-right: 1.5rem;
+}
+
+.steps li::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: 0;
+  right: -1.25rem;
+  height: 1px;
+  background: var(--line-strong);
+}
+
+.steps li:last-child::before {
+  right: 0;
+}
+
+.steps .process-num {
+  position: relative;
+  box-shadow: 0 0 0 10px #fff;
+}
+
+.steps h3 {
+  margin-top: 1.5rem;
+  font-size: clamp(1.3125rem, 1.2rem + 0.35vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.steps p {
+  margin-top: 0.625rem;
+  color: var(--ink-2);
+}
+
+/* Why local: a sticky argument on the left, checked reasons on the right. */
+.why {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: start;
+  gap: 2.5rem clamp(2.5rem, 7vw, 7rem);
+}
+
+.why-intro {
+  position: sticky;
+  top: calc(var(--header-h) + 2rem);
+}
+
+.why-intro .lead {
+  max-width: 28rem;
+  margin-top: 1.25rem;
+}
+
+.why-list {
+  border-top: 1px solid var(--line);
+}
+
+.why-list li {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.why-list svg {
+  margin-top: 0.1875rem;
+  color: var(--ok);
+}
+
+.why-list b {
+  font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.012em;
+}
+
+.why-list p {
+  max-width: 52ch;
+  margin-top: 0.25rem;
+  color: var(--ink-2);
+}
+
+.page-updated {
+  margin-top: 1rem;
+  color: var(--ink-3);
+  font-size: 0.875rem;
+}
+
+.closing-note a {
+  color: var(--ink);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: #c7c6c1;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s;
+}
+
+.closing-note a:hover {
+  text-decoration-color: currentColor;
+}
+
+@media (max-width: 900px) {
+  .fit,
+  .grant,
+  .why {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fit-chat {
+    align-items: stretch;
+  }
+
+  .why-intro {
+    position: static;
+  }
+
+  .steps {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 560px;
+    margin-inline: auto;
+  }
+
+  .steps li::before {
+    right: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .fit,
+  .feed-stage,
+  .prices,
+  .grant {
+    border-radius: var(--r-lg);
+  }
+
+  .feed {
+    border-radius: 14px;
+  }
+
+  .feed-bar {
+    grid-template-columns: 1fr auto;
+    height: 40px;
+  }
+
+  .feed-title {
+    grid-column: 1;
+  }
+
+  .feed-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* The table becomes one block per step. */
+  .prices thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .prices tbody tr {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1.5rem 0;
+  }
+
+  .prices tbody tr:first-child {
+    border-top: 0;
+  }
+
+  .prices tbody th,
+  .prices tbody td {
+    width: auto;
+    padding: 0;
+  }
+
+  .grant-facts div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .feed-item {
+    grid-template-columns: 32px minmax(0, 1fr);
+    padding: 1rem;
+  }
+
+  .feed-avatar {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* ------------------------------------------------------------------ */
 /* Motion                                                              */
 /* ------------------------------------------------------------------ */
 

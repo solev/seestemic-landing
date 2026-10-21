@@ -18,7 +18,8 @@ const {
   image = { src: "/og.png", alt: "Seestemic: AI helpers for the busywork in your business" },
   noindex = false,
 } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site).href;
+// Canonical URLs have no trailing slash, so /ai-for-small-business-estonia/ and the bare path count as one page.
+const canonical = new URL(Astro.url.pathname.replace(/(.)\/$/, "$1"), Astro.site).href;
 const imageUrl = new URL(image.src, Astro.site).href;
 ---
 
