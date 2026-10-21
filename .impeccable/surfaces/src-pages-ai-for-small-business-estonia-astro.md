@@ -39,5 +39,5 @@ The first of a short list of search pages, each answering one question a small b
 
 ## Unresolved
 - Links to the next pages once they are live (TODO comments in the source): the EIS grant guide (board #2), the AI cost guide (#3), the GDPR checklist (#4) and the founding pilot page (#14).
-- Google Search Console and a sitemap are not set up yet.
+- The page is in the sitemap; Google Search Console is not set up yet.
 - Re-check the EIS facts every few months and update the "Checked on" date.
