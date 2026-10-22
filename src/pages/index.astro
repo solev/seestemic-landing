@@ -14,6 +14,7 @@ import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import dawn from "../assets/art/hero-dawn.webp";
 import { faqs } from "../data/helpers";
+import { review } from "../data/offer";
 import { homeSchema, toJsonLd } from "../data/schema";
 import { email, estoniaPage, introCallUrl } from "../data/site";
 
@@ -29,7 +30,7 @@ const booking = {
 
 <BaseLayout
   title="AI Helpers for Small Businesses in Estonia | Seestemic"
-  description="We set up AI helpers for quotes, email, bookings and invoices inside your own tools. You approve first. EU data. Book a free 30-min AI review."
+  description={`We set up AI helpers for quotes, email, bookings and invoices inside your own tools. You approve first. EU data. Book a free ${review.minutes}-min AI review.`}
 >
   <script slot="head" type="application/ld+json" is:inline set:html={toJsonLd(homeSchema)} />
   <SiteHeader />
@@ -188,7 +189,7 @@ const booking = {
       <div class="shell">
         <h2 class="h2 closing-title" id="book-title">What should AI take off your plate?</h2>
         <p class="closing-sub">
-          Bring one repetitive job to a free 30-minute AI review. We’ll tell you honestly whether AI can help, and what
+          Bring one repetitive job to a free {review.minutes}-minute AI review. We’ll tell you honestly whether AI can help, and what
           a first helper could look like.
         </p>
         <div class="cta-row">

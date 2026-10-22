@@ -3,9 +3,7 @@
 // assistants can quote it. Those answers and the FAQ feed both the page and the FAQPage JSON-LD,
 // so the two always match. Helper messages are illustrative examples, not client results.
 import type { HelperId } from "./helpers";
-import { founding } from "./site";
-
-export const pilotOpen = founding.taken < founding.places;
+import { care, eur, founding, pilot, pilotOpen, review, setup } from "./offer";
 
 /** Shown on the page as "Updated" and used as the page's dateModified. */
 export const lastUpdated = { iso: "2026-10-22", label: "22 October 2026" } as const;
@@ -58,9 +56,9 @@ export const answers: Record<SectionId, Answer> = {
   cost: {
     nav: "Prices",
     question: "How much does AI cost for a small business?",
-    answer: pilotOpen
-      ? `At Seestemic, you start with a free 30-minute AI review. Setting up your first helper costs from €1,500, one-time, or €500 for our first ${founding.places} clients. Care, our optional monthly support, starts at €300 a month. AI costs, such as an AI subscription, are paid separately.`
-      : "At Seestemic, you start with a free 30-minute AI review. Setting up your first helper costs from €1,500, one-time. Care, our optional monthly support, starts at €300 a month. AI costs, such as an AI subscription, are paid separately.",
+    answer: `At Seestemic, you start with a free ${review.minutes}-minute AI review. Setting up your first helper costs from ${eur(setup.from)}, one-time${
+      pilotOpen ? `, or ${eur(pilot.price)} for our first ${founding.places} clients` : ""
+    }. Care, our optional monthly support, starts at ${eur(care.from)} a month. AI costs, such as an AI subscription, are paid separately.`,
   },
   funding: {
     nav: "EIS funding",
@@ -88,12 +86,12 @@ export const glance: { label: string; value: string }[] = [
   { label: "Where they work", value: "Inside the tools you already use, such as Microsoft 365 or Google Workspace" },
   { label: "Who decides", value: "You. Anything important waits for your OK" },
   { label: "Your data", value: "Can stay in the EU, under a data processing agreement" },
-  { label: "First step", value: "A free 30-minute AI review" },
+  { label: "First step", value: `A free ${review.minutes}-minute AI review` },
   {
     label: "First helper",
     value: pilotOpen
-      ? `€500 one-time for our first ${founding.places} clients, normally from €1,500`
-      : "From €1,500, one-time",
+      ? `${eur(pilot.price)} one-time for our first ${founding.places} clients, normally from ${eur(setup.from)}`
+      : `From ${eur(setup.from)}, one-time`,
   },
   { label: "Funding", value: "Setups of €4,000 or more may qualify for EIS co-funding" },
   { label: "Based in", value: "Tallinn, Estonia. Calls and training are in English" },
@@ -186,7 +184,7 @@ export const grantFacts: { label: string; value: string }[] = [
 export const steps: { title: string; text: string }[] = [
   {
     title: "Free AI review",
-    text: "A 30-minute call. Tell us which jobs take too long, and we’ll be honest about where AI can help.",
+    text: `A ${review.minutes}-minute call. Tell us which jobs take too long, and we’ll be honest about where AI can help.`,
   },
   {
     title: "One helper, set up for you",
@@ -257,8 +255,7 @@ export const faqs: Faq[] = [
   },
   {
     question: "What happens if I stop paying for Care?",
-    answer:
-      "You keep everything we built. Care is optional: up to 4 hours of our team’s time each month, plus a monthly check-in. Without it, your helpers are still yours, and you keep paying any AI costs, such as an AI subscription, directly.",
+    answer: `You keep everything we built. Care is optional: up to ${care.hours} hours of our team’s time each month, plus a monthly check-in. Without it, your helpers are still yours, and you keep paying any AI costs, such as an AI subscription, directly.`,
   },
   {
     question: "What do I need to prepare for the free AI review?",

@@ -20,7 +20,7 @@ The first of a short list of search pages, each answering one question a small b
 - The first section, "Who is Seestemic for?", names the audience (1 to 20 people, such as trades, clinics and shops) in a three-row list whose lines only name jobs the helpers already do. They are examples, not a limit (Martin's decision, October 2026), so it ends "What matters is the job, not the industry."
 - A sticky "On this page" rail on desktop (a dot marks the current section). Below 1024px it becomes a sideways-scrolling row of chips.
 - Each section has an H2 that is the searcher's question, then `.guide-answer`: 40 to 70 words that make sense quoted on their own and name Seestemic where it matters. The detail follows: a table, the cast of helpers, one painted example, steps or a comparison.
-- A visible FAQ for long-tail questions, all answers open. The section answers and the FAQ make up the FAQPage schema with exactly the visible wording; both come from `src/data/estonia.ts`. The JSON-LD also has a Service with the audience and the prices (`offers` in `src/data/schema.ts`, shared with the homepage).
+- A visible FAQ for long-tail questions, all answers open. The section answers and the FAQ make up the FAQPage schema with exactly the visible wording; both come from `src/data/estonia.ts`. The JSON-LD also has a Service with the audience and the prices (`offers` in `src/data/schema.ts`, shared with the homepage; the figures come from `src/data/offer.ts`).
 - Dated facts: "Updated" in the glance card and the FAQ, and "Checked on" beside the EIS source link. Update both whenever a fact is re-checked.
 - Closing linen band with the booking panel.
 
