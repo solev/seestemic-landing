@@ -15,7 +15,7 @@ import SiteHeader from "../components/SiteHeader.astro";
 import dawn from "../assets/art/hero-dawn.webp";
 import { faqs } from "../data/helpers";
 import { homeSchema, toJsonLd } from "../data/schema";
-import { email, introCallUrl } from "../data/site";
+import { email, estoniaPage, introCallUrl } from "../data/site";
 
 const booking = {
   href: introCallUrl,
@@ -150,6 +150,10 @@ const booking = {
           <h2 class="h2" id="questions-title">Questions, answered</h2>
           <p class="lead">
             Something we didn’t cover? Email <a href={`mailto:${email}`}>{email}</a> and we’ll answer in plain English.
+          </p>
+          <p class="lead">
+            For longer answers on prices, EIS funding and data safety, read our guide to{" "}
+            <a href={estoniaPage.href}>{estoniaPage.label}</a>.
           </p>
         </div>
         <div class="faq-list">

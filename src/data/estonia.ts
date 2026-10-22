@@ -8,14 +8,17 @@ import { founding } from "./site";
 export const pilotOpen = founding.taken < founding.places;
 
 /** Shown on the page as "Updated" and used as the page's dateModified. */
-export const lastUpdated = { iso: "2026-10-21", label: "21 October 2026" } as const;
+export const lastUpdated = { iso: "2026-10-22", label: "22 October 2026" } as const;
 
-/** When the EIS grant facts below were last checked against eis.ee. */
-export const grantChecked = { iso: "2026-10-21", label: "21 October 2026" } as const;
+/** When the EIS grant facts below, and the AI grant's closure, were last checked against eis.ee. */
+export const grantChecked = { iso: "2026-10-22", label: "22 October 2026" } as const;
 
 export const eisGrantUrl = "https://eis.ee/en/services/rte-software/";
 
-export type SectionId = "who" | "what" | "safe" | "cost" | "funding" | "how" | "about" | "why";
+/** EIS's separate AI grant, closed since 24 August 2026. The page only says it closed; don't promote it. */
+export const eisAiGrantUrl = "https://eis.ee/en/services/adopting-artificial-intelligence/";
+
+export type SectionId = "who" | "worth" | "what" | "safe" | "cost" | "funding" | "how" | "about" | "why";
 
 export interface Answer {
   /** Short label for the "On this page" list. */
@@ -29,6 +32,12 @@ export interface Answer {
 /** In page order. */
 export const answers: Record<SectionId, Answer> = {
   who: {
+    nav: "Who it’s for",
+    question: "Who is Seestemic for?",
+    answer:
+      "Seestemic is built for small businesses in Estonia with 1 to 20 people, such as trades, clinics and shops. Most have no IT team, so the owner or someone in the office handles the quotes, bookings, emails and invoices. Our AI helpers take on those repetitive jobs, inside the tools the business already uses.",
+  },
+  worth: {
     nav: "Is it worth it?",
     question: "Is AI worth it for a small business?",
     answer:
@@ -96,6 +105,25 @@ export const glance: { label: string; value: string }[] = [
   { label: "Based in", value: "Tallinn, Estonia. Calls and training are in English" },
 ];
 
+/**
+ * "Who is Seestemic for?": examples, not a limit (Martin's decision for this page, October 2026).
+ * Each line only names jobs the helpers in `jobs` below already do.
+ */
+export const businessTypes: { type: string; text: string }[] = [
+  {
+    type: "Trades",
+    text: "Electricians, plumbers, builders and cleaners. Helpers draft quotes from your price list, book jobs and chase late invoices.",
+  },
+  {
+    type: "Clinics",
+    text: "Dental, physio, beauty and vet clinics. Helpers book appointments, send reminders and answer everyday questions.",
+  },
+  {
+    type: "Shops",
+    text: "Local and online shops. Helpers answer questions about prices, delivery and returns, and sum up the week’s sales.",
+  },
+];
+
 export const fitSigns = [
   "You or your team type the same things into emails, quotes or spreadsheets every week.",
   "Customers wait for replies, quotes or bookings while you’re busy doing the work itself.",
@@ -158,7 +186,7 @@ export const grantFacts: { label: string; value: string }[] = [
   { label: "Your revenue", value: "An average of at least €50,000 a year over the last two years" },
   { label: "When to apply", value: "Before the work starts" },
   { label: "Not covered", value: "Monthly fees, such as Care" },
-  { label: "Applications", value: "Open, on a rolling basis until the budget runs out" },
+  { label: "Applications", value: "Open. Apply any time until the budget runs out" },
 ];
 
 export const steps: { title: string; text: string }[] = [

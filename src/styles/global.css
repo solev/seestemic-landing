@@ -3008,6 +3008,7 @@ dd {
 .guide-source a,
 .guide-founder a,
 .guide-notes a,
+.guide-text a,
 .guide-close .closing-note a {
   color: var(--ink);
   font-weight: 500;
@@ -3030,6 +3031,7 @@ dd {
 .guide-source a:hover,
 .guide-founder a:hover,
 .guide-notes a:hover,
+.guide-text a:hover,
 .guide-close .closing-note a:hover {
   text-decoration-color: currentColor;
 }

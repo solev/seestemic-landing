@@ -17,21 +17,22 @@ The first of a short list of search pages, each answering one question a small b
 
 ## Structure (the pattern for the next search pages)
 - Hero: the H1 that matches the search, one lead, the CTAs, and a "Seestemic at a glance" fact card on a painting (no words directly on paint).
+- The first section, "Who is Seestemic for?", names the audience (1 to 20 people, such as trades, clinics and shops) in a three-row list whose lines only name jobs the helpers already do. They are examples, not a limit (Martin's decision, October 2026), so it ends "What matters is the job, not the industry."
 - A sticky "On this page" rail on desktop (a dot marks the current section). Below 1024px it becomes a sideways-scrolling row of chips.
 - Each section has an H2 that is the searcher's question, then `.guide-answer`: 40 to 70 words that make sense quoted on their own and name Seestemic where it matters. The detail follows: a table, the cast of helpers, one painted example, steps or a comparison.
-- A visible FAQ for long-tail questions, all answers open. The section answers and the FAQ make up the FAQPage schema with exactly the visible wording; both come from `src/data/estonia.ts`.
+- A visible FAQ for long-tail questions, all answers open. The section answers and the FAQ make up the FAQPage schema with exactly the visible wording; both come from `src/data/estonia.ts`. The JSON-LD also has a Service with the audience and the prices (`offers` in `src/data/schema.ts`, shared with the homepage).
 - Dated facts: "Updated" in the glance card and the FAQ, and "Checked on" beside the EIS source link. Update both whenever a fact is re-checked.
 - Closing linen band with the booking panel.
 
 ## Proof and content
-- Facts come only from `PRODUCT.md`. The EIS grant claims are the homepage FAQ's, plus the official grant name and its open, rolling status, checked on eis.ee. Never name or describe Seestemic as the grant's digital consultant, and leave the other conditions to "other conditions apply" with the link.
+- Facts come only from `PRODUCT.md`. The EIS grant claims are the homepage FAQ's, plus the official grant name, that applications are open until the budget runs out, and that the separate AI grant closed on 24 August 2026 (linked to its EIS page), all checked on eis.ee. Never name or describe Seestemic as the grant's digital consultant, and leave the other conditions to "other conditions apply" with the link.
 - Example messages and the approval card carry "Example" labels; there are no clients or results yet.
 - Speak as "we". No team size, no languages listed, and calls and training are in English.
 
 ## Constraints
 - Use the `guide-*` classes in `src/styles/global.css`, not homepage section classes. No eyebrows, icon card grids or hero metrics.
 - Tables stack below 760px and keep explicit ARIA table roles so they stay tables for screen readers.
-- The canonical is `https://www.seestemic.com/ai-for-small-business-estonia`, and the page is linked from the homepage footer.
+- The canonical is `https://www.seestemic.com/ai-for-small-business-estonia`, and the page is linked from the homepage FAQ intro and footer.
 
 ## Direction and memorable moments
 - It should be remembered for the fact card floating on the coast painting, and the Quotes approval card on the field painting answering "Is AI safe for your customer data?".
