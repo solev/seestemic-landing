@@ -18,3 +18,6 @@ export const navLinks = [
   { label: "About", href: "#about" },
   { label: "Questions", href: "#questions" },
 ] as const;
+
+// Landing pages beyond the homepage. Linked from the footer on every page.
+export const estoniaPage = { label: "AI for small business in Estonia", href: "/ai-for-small-business-estonia" } as const;

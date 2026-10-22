@@ -1,14 +1,22 @@
 ---
 import Logo from "./Logo.astro";
 import { email, introCallUrl, navLinks } from "../data/site";
+
+interface Props {
+  /** Where the logo points. On the homepage it scrolls to the top; other pages link home. */
+  home?: string;
+  links?: readonly { label: string; href: string }[];
+}
+
+const { home = "#top", links = navLinks } = Astro.props;
 ---
 
 <header class="site-header" data-header>
   <div class="shell header-inner">
-    <a class="header-logo" href="#top" aria-label="Seestemic home"><Logo /></a>
+    <a class="header-logo" href={home} aria-label="Seestemic home"><Logo /></a>
 
     <nav class="header-nav" aria-label="Main">
-      {navLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+      {links.map((link) => <a href={link.href}>{link.label}</a>)}
     </nav>
 
     <div class="header-actions">
@@ -30,7 +38,7 @@ import { email, introCallUrl, navLinks } from "../data/site";
           <span></span>
         </summary>
         <div class="mobile-nav-panel">
-          {navLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+          {links.map((link) => <a href={link.href}>{link.label}</a>)}
           <a href={`mailto:${email}`}>Email us</a>
         </div>
       </details>
