@@ -1,5 +1,6 @@
 // Everything in this file is illustrative example content for the landing page.
 // None of it describes a real customer, result, or measurement.
+import { care } from "./offer";
 
 export type IconName =
   | "check"
@@ -504,8 +505,7 @@ export const faqs: Faq[] = [
   },
   {
     question: "What happens if we stop Care?",
-    answer:
-      "You keep everything we built. Care is simply our team’s time when you need it: up to 4 hours a month, plus a monthly check-in. AI costs, such as an AI subscription, are always paid separately.",
+    answer: `You keep everything we built. Care is simply our team’s time when you need it: up to ${care.hours} hours a month, plus a monthly check-in. AI costs, such as an AI subscription, are always paid separately.`,
   },
   {
     question: "Will AI replace my staff?",

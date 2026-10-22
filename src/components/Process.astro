@@ -4,10 +4,9 @@ import Helper from "./Helper.astro";
 import Icon from "./Icon.astro";
 import harvest from "../assets/art/harvest.webp";
 import { helpers } from "../data/helpers";
-import { founding, introCallUrl } from "../data/site";
+import { care, eur, founding, partner, pilot, pilotOpen, placesLeft, review, setup } from "../data/offer";
+import { introCallUrl } from "../data/site";
 
-const pilotOpen = founding.taken < founding.places;
-const placesLeft = founding.places - founding.taken;
 const booking = {
   href: introCallUrl,
   target: "_blank",
@@ -25,7 +24,7 @@ const booking = {
     <p>A relaxed call about the jobs that take too long. We’ll be honest about where AI helps, and where it doesn’t.</p>
     <p class="process-price">
       <b>Free</b>
-      <span>30-minute AI review</span>
+      <span>{review.minutes}-minute AI review</span>
     </p>
     <div class="process-mini mini-list" aria-hidden="true">
       <span class="mini-row is-picked">
@@ -55,9 +54,9 @@ const booking = {
       pilotOpen ? (
         <p class="process-price">
           <b>
-            €500 <small>one-time</small>
+            {eur(pilot.price)} <small>one-time</small>
             <s>
-              <span class="sr-only">normally from </span>€1,500
+              <span class="sr-only">normally from </span>{eur(setup.from)}
             </s>
           </b>
           <span>Founding-client pilot: one small helper, set up for one task</span>
@@ -65,7 +64,7 @@ const booking = {
       ) : (
         <p class="process-price">
           <b>
-            <small>from</small> €1,500
+            <small>from</small> {eur(setup.from)}
           </b>
           <span>One-time setup</span>
         </p>
@@ -101,10 +100,10 @@ const booking = {
     <p>Hands-on training for the people who’ll use it. Then we measure, fix and add what works.</p>
     <p class="process-price">
       <b>
-        <small>from</small> €300 <small class="nowrap">a month,</small>{" "}
-        <small class="nowrap">{pilotOpen ? "after the pilot, optional" : "after setup, optional"}</small>
+        <small>from</small> {eur(care.from)} <small class="nowrap">a month,</small>{" "}
+        <small class="nowrap">after {care.startsAfter}, optional</small>
       </b>
-      <span>Care: up to 4 hours of our time and a check-in each month</span>
+      <span>Care: up to {care.hours} hours of our time and a check-in each month</span>
     </p>
     <div class="process-mini mini-team" aria-hidden="true">
       <span class="mini-faces">
@@ -139,13 +138,13 @@ const booking = {
         <h3 id="pilot-title">Be one of our first {founding.places} clients</h3>
         <p>
           Founding-client pilot: we set up one small AI helper for you at a one-time founding price. In return, we ask
-          for a short written case study after <span class="nowrap">6 to 8 weeks.</span>
+          for a short written case study after <span class="nowrap">{pilot.caseStudyAfter}.</span>
         </p>
         <p class="process-price pilot-price">
           <b>
-            €500 <small>one-time</small>
+            {eur(pilot.price)} <small>one-time</small>
             <s>
-              <span class="sr-only">normally from </span>€1,500
+              <span class="sr-only">normally from </span>{eur(setup.from)}
             </s>
           </b>
           <span>One small helper, set up for one task</span>
@@ -183,7 +182,7 @@ const booking = {
     <li><Icon name="check" size={16} />Hands-on training for every team</li>
   </ul>
   <p class="process-price">
-    <b><small>from</small> €1,200 <small>a month</small></b>
+    <b><small>from</small> {eur(partner.from)} <small>a month</small></b>
     <span>Partner</span>
   </p>
 </div>

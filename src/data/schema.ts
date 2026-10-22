@@ -1,46 +1,64 @@
 // Structured data (JSON-LD) for search and AI answer engines. Other pages can point at the organisation by its @id.
 import { faqs } from "./helpers";
-import { email, founding, linkedInUrl } from "./site";
+import { care, eur, founding, partner, pilot, pilotOpen, review, setup } from "./offer";
+import { email, linkedInUrl } from "./site";
 
 export const siteUrl = "https://www.seestemic.com/";
 export const orgId = `${siteUrl}#org`;
 export const websiteId = `${siteUrl}#site`;
 
-const pilotOpen = founding.taken < founding.places;
-
 /**
  * The prices shown on the homepage steps and the Estonia page's price table; the descriptions use the table's wording.
- * While founding places remain, the first helper is the €500 pilot; after that, the setup from €1,500.
+ * While founding places remain, the first helper is the pilot; after that, the setup. The figures come from offer.ts.
  */
 export const offers = [
   {
     "@type": "Offer",
-    name: "Free 30-minute AI review",
-    description: "A 30-minute call about the jobs that take up your week, and an honest view of where AI can help.",
-    price: "0",
+    name: `Free ${review.minutes}-minute AI review`,
+    description: `A ${review.minutes}-minute call about the jobs that take up your week, and an honest view of where AI can help.`,
+    price: String(review.price),
     priceCurrency: "EUR",
   },
   pilotOpen
     ? {
         "@type": "Offer",
         name: "Founding-client pilot: one AI helper for one task",
-        description: `One small helper, set up for one task, for our first ${founding.places} clients. One-time, normally from €1,500. In return, you write a short case study after 6 to 8 weeks.`,
-        price: "500",
+        description: `One small helper, set up for one task, for our first ${founding.places} clients. One-time, normally from ${eur(setup.from)}. In return, you write a short case study after ${pilot.caseStudyAfter}.`,
+        price: String(pilot.price),
         priceCurrency: "EUR",
       }
     : {
         "@type": "Offer",
         name: "First helper setup",
         description: "Your first helper, set up for one job inside your tools, with your approval rules built in. One-time.",
-        priceSpecification: { "@type": "PriceSpecification", minPrice: "1500", priceCurrency: "EUR" },
+        priceSpecification: { "@type": "PriceSpecification", minPrice: String(setup.from), priceCurrency: "EUR" },
       },
   {
     "@type": "Offer",
     name: "Care",
-    description: `Optional: up to 4 hours of our team’s time each month, plus a monthly check-in. It starts after ${pilotOpen ? "the pilot" : "setup"}.`,
-    priceSpecification: { "@type": "UnitPriceSpecification", minPrice: "300", priceCurrency: "EUR", unitText: "MONTH" },
+    description: `Optional: up to ${care.hours} hours of our team’s time each month, plus a monthly check-in. It starts after ${care.startsAfter}.`,
+    priceSpecification: {
+      "@type": "UnitPriceSpecification",
+      minPrice: String(care.from),
+      priceCurrency: "EUR",
+      unitText: "MONTH",
+    },
   },
 ];
+
+/** Only the homepage shows Partner, so only the organisation offers it. The description follows its Partner card. */
+const partnerOffer = {
+  "@type": "Offer",
+  name: "Partner",
+  description:
+    "We help every team adopt AI in the ways that fit, not only through helpers: a plan for where AI can help, team by team; help picking AI tools, plus simple rules for using them safely; and hands-on training for every team.",
+  priceSpecification: {
+    "@type": "UnitPriceSpecification",
+    minPrice: String(partner.from),
+    priceCurrency: "EUR",
+    unitText: "MONTH",
+  },
+};
 
 export const organization = {
   "@type": "ProfessionalService",
@@ -57,7 +75,7 @@ export const organization = {
   knowsLanguage: "en",
   founder: { "@type": "Person", name: "Martin Solev", sameAs: [linkedInUrl] },
   sameAs: [linkedInUrl],
-  makesOffer: offers,
+  makesOffer: [...offers, partnerOffer],
 };
 
 export const website = {
