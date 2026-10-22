@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Art from "../components/Art.astro";
 import BookingPanel from "../components/BookingPanel.astro";
@@ -10,10 +9,9 @@ import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import coast from "../assets/art/coast.webp";
 import field from "../assets/art/field.webp";
-import martin from "../assets/martin.jpg";
 import { helpers } from "../data/helpers";
 import { offers, orgId, siteUrl, toJsonLd, websiteId } from "../data/schema";
-import { email, estoniaPage, founding, introCallUrl, linkedInUrl } from "../data/site";
+import { email, estoniaPage, founding, introCallUrl } from "../data/site";
 import {
   answers,
   businessTypes,
@@ -401,22 +399,6 @@ const schema = {
               ))
             }
           </ol>
-        </section>
-
-        <section class="guide-section" id="about" aria-labelledby="about-title">
-          <h2 class="guide-h2" id="about-title">{answers.about.question}</h2>
-          <p class="guide-answer">{answers.about.answer}</p>
-          <div class="guide-founder">
-            <Image src={martin} alt="" widths={[64, 128]} sizes="64px" class="guide-founder-photo" />
-            <p>
-              <b>Martin Solev</b>
-              <span>Founder, Seestemic</span>
-            </p>
-            <a href={linkedInUrl} target="_blank" rel="noreferrer">
-              Martin on LinkedIn
-              <Icon name="external" size={15} />
-            </a>
-          </div>
         </section>
 
         <section class="guide-section" id="why" aria-labelledby="why-title">

@@ -33,6 +33,7 @@ The first of a short list of search pages, each answering one question a small b
 - Use the `guide-*` classes in `src/styles/global.css`, not homepage section classes. No eyebrows, icon card grids or hero metrics.
 - Tables stack below 760px and keep explicit ARIA table roles so they stay tables for screen readers.
 - The canonical is `https://www.seestemic.com/ai-for-small-business-estonia`, and the page is linked from the homepage FAQ intro and footer.
+- No "Who's behind Seestemic" section: the homepage founder chat (`/#about`) covers it, so this page doesn't repeat it (Martin, October 2026). The organisation's JSON-LD still names the founder.
 
 ## Direction and memorable moments
 - It should be remembered for the fact card floating on the coast painting, and the Quotes approval card on the field painting answering "Is AI safe for your customer data?".

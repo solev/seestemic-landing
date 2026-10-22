@@ -18,7 +18,7 @@ export const eisGrantUrl = "https://eis.ee/en/services/rte-software/";
 /** EIS's separate AI grant, closed since 24 August 2026. The page only says it closed; don't promote it. */
 export const eisAiGrantUrl = "https://eis.ee/en/services/adopting-artificial-intelligence/";
 
-export type SectionId = "who" | "worth" | "what" | "safe" | "cost" | "funding" | "how" | "about" | "why";
+export type SectionId = "who" | "worth" | "what" | "safe" | "cost" | "funding" | "how" | "why";
 
 export interface Answer {
   /** Short label for the "On this page" list. */
@@ -73,12 +73,6 @@ export const answers: Record<SectionId, Answer> = {
     question: "How do you start using AI in a small business?",
     answer:
       "Start with one job, not a big AI project. At Seestemic, we look at your week on a free call, set up one helper for the job that takes the most time, train the people who’ll use it and only add more once it clearly works.",
-  },
-  about: {
-    nav: "Who we are",
-    question: "Who is behind Seestemic?",
-    answer:
-      "Seestemic is run from Tallinn by Martin Solev, who has built software for over 12 years, including cloud services used by millions of people. Martin is your first contact, on the free AI review. After that, he and our team build your helper, train your people and look after it.",
   },
   why: {
     nav: "DIY or done for you",

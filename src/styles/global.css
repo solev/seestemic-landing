@@ -3006,7 +3006,6 @@ dd {
 
 .guide-more a,
 .guide-source a,
-.guide-founder a,
 .guide-notes a,
 .guide-text a,
 .guide-close .closing-note a {
@@ -3020,8 +3019,7 @@ dd {
 }
 
 .guide-more a,
-.guide-source a,
-.guide-founder a {
+.guide-source a {
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
@@ -3029,7 +3027,6 @@ dd {
 
 .guide-more a:hover,
 .guide-source a:hover,
-.guide-founder a:hover,
 .guide-notes a:hover,
 .guide-text a:hover,
 .guide-close .closing-note a:hover {
@@ -3370,37 +3367,6 @@ dd {
 .guide-steps p {
   margin-top: 0.25rem;
   color: var(--ink-2);
-}
-
-.guide-founder {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.75rem 1rem;
-  margin-top: 1.75rem;
-  font-size: 0.9375rem;
-}
-
-.guide-founder-photo {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.guide-founder p {
-  display: grid;
-  margin-right: 0.75rem;
-  line-height: 1.35;
-}
-
-.guide-founder p b {
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-.guide-founder p span {
-  color: var(--ink-3);
 }
 
 /* Questions, all open so every answer is readable and quotable */
