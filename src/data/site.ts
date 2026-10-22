@@ -9,9 +9,6 @@ export const analytics = {
   clientId: "6778a55c-1541-4b50-92d6-514ea63b3cfd",
 } as const;
 
-// Founding-client pilot. Raise `taken` as clients sign; the offer disappears once every place is taken.
-export const founding = { places: 5, taken: 0 } as const;
-
 export const navLinks = [
   { label: "How it works", href: "#how" },
   { label: "Examples", href: "#examples" },

@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Art from "../components/Art.astro";
 import BookingPanel from "../components/BookingPanel.astro";
@@ -10,13 +9,15 @@ import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import coast from "../assets/art/coast.webp";
 import field from "../assets/art/field.webp";
-import martin from "../assets/martin.jpg";
 import { helpers } from "../data/helpers";
-import { orgId, siteUrl, toJsonLd, websiteId } from "../data/schema";
-import { email, estoniaPage, founding, introCallUrl, linkedInUrl } from "../data/site";
+import { care, eur, founding, pilot, pilotOpen, review, setup } from "../data/offer";
+import { offers, orgId, siteUrl, toJsonLd, websiteId } from "../data/schema";
+import { email, estoniaPage, introCallUrl } from "../data/site";
 import {
   answers,
+  businessTypes,
   comparison,
+  eisAiGrantUrl,
   eisGrantUrl,
   faqs,
   fitSigns,
@@ -25,14 +26,14 @@ import {
   grantFacts,
   jobs,
   lastUpdated,
-  pilotOpen,
   safety,
   steps,
 } from "../data/estonia";
 
 const title = "AI for Small Business in Estonia | Seestemic";
-const description =
-  "Tallinn-based AI setup for small businesses: quotes, inbox, bookings, invoices, inside your own tools. You approve first. Free 30-min AI review.";
+const description = `Tallinn-based AI setup for small businesses: quotes, inbox, bookings, invoices, inside your own tools. You approve first. Free ${review.minutes}-min AI review.`;
+const lead =
+  "We set up AI helpers that take repetitive jobs off your plate, inside the tools you already use. Nothing important happens without your OK.";
 
 const booking = {
   href: introCallUrl,
@@ -57,6 +58,7 @@ const contents = [
 
 // Structured data. The organisation and website are defined once, in src/data/schema.ts; this page points at them by @id.
 const pageUrl = new URL(estoniaPage.href, siteUrl).href;
+const serviceId = `${pageUrl}#service`;
 
 // Every question here is on the page with exactly this answer text: the section answers, then the FAQ.
 const questions = [...Object.values(answers), ...faqs];
@@ -74,7 +76,23 @@ const schema = {
       dateModified: lastUpdated.iso,
       isPartOf: { "@id": websiteId },
       about: { "@id": orgId },
+      mainEntity: { "@id": serviceId },
       breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
+    },
+    // What the page sells, to whom and for how much: the hero lead, "Who is Seestemic for?" and the price table.
+    {
+      "@type": "Service",
+      "@id": serviceId,
+      name: "AI helpers for small businesses in Estonia",
+      description: lead,
+      provider: { "@id": orgId },
+      areaServed: { "@type": "Country", name: "Estonia" },
+      audience: {
+        "@type": "BusinessAudience",
+        audienceType: "Small businesses with 1 to 20 people, such as trades, clinics and shops",
+        numberOfEmployees: { "@type": "QuantitativeValue", minValue: 1, maxValue: 20 },
+      },
+      offers,
     },
     {
       "@type": "BreadcrumbList",
@@ -107,12 +125,9 @@ const schema = {
       <div class="shell guide-hero-grid">
         <div class="guide-hero-copy">
           <h1 class="guide-title" id="page-title">AI for small businesses in Estonia, <span class="nowrap">set up for you</span></h1>
-          <p class="lead guide-hero-lead">
-            We set up AI helpers that take repetitive jobs off your plate, inside the tools you already use. Nothing
-            important happens without your OK.
-          </p>
+          <p class="lead guide-hero-lead">{lead}</p>
           <div class="cta-row guide-hero-ctas">
-            <a class="btn btn-primary" {...booking}>Book a free 30-minute AI review</a>
+            <a class="btn btn-primary" {...booking}>Book a free {review.minutes}-minute AI review</a>
             <a class="btn btn-secondary" href="#what">See what a helper does</a>
           </div>
           <p class="hero-note">
@@ -164,6 +179,22 @@ const schema = {
         <section class="guide-section" id="who" aria-labelledby="who-title">
           <h2 class="guide-h2" id="who-title">{answers.who.question}</h2>
           <p class="guide-answer">{answers.who.answer}</p>
+          <dl class="guide-dl guide-facts">
+            {
+              businessTypes.map(({ type, text }) => (
+                <div>
+                  <dt>{type}</dt>
+                  <dd>{text}</dd>
+                </div>
+              ))
+            }
+          </dl>
+          <p class="guide-text">Another kind of business? What matters is the job, not the industry.</p>
+        </section>
+
+        <section class="guide-section" id="worth" aria-labelledby="worth-title">
+          <h2 class="guide-h2" id="worth-title">{answers.worth.question}</h2>
+          <p class="guide-answer">{answers.worth.answer}</p>
           <p class="guide-text">It’s usually a good fit if:</p>
           <ul class="guide-checks">
             {
@@ -267,8 +298,8 @@ const schema = {
               <tbody role="rowgroup">
                 <tr role="row">
                   <th scope="row" role="rowheader">Free AI review</th>
-                  <td role="cell" class="guide-price tnum"><b>€0</b></td>
-                  <td role="cell">A 30-minute call about the jobs that take up your week, and an honest view of where AI can help.</td>
+                  <td role="cell" class="guide-price tnum"><b>{eur(review.price)}</b></td>
+                  <td role="cell">A {review.minutes}-minute call about the jobs that take up your week, and an honest view of where AI can help.</td>
                 </tr>
                 {
                   pilotOpen ? (
@@ -278,18 +309,18 @@ const schema = {
                         <span class="pill pill-light guide-pill">First {founding.places} clients</span>
                       </th>
                       <td role="cell" class="guide-price tnum">
-                        <b>€500</b> one-time
+                        <b>{eur(pilot.price)}</b> one-time
                         <s>
-                          <span class="sr-only">normally from </span>€1,500
+                          <span class="sr-only">normally from </span>{eur(setup.from)}
                         </s>
                       </td>
-                      <td role="cell">One small helper, set up for one task. In return, you write a short case study after 6 to 8 weeks.</td>
+                      <td role="cell">One small helper, set up for one task. In return, you write a short case study after {pilot.caseStudyAfter}.</td>
                     </tr>
                   ) : (
                     <tr role="row">
                       <th scope="row" role="rowheader">First helper</th>
                       <td role="cell" class="guide-price tnum">
-                        from <b>€1,500</b> one-time
+                        from <b>{eur(setup.from)}</b> one-time
                       </td>
                       <td role="cell">Your first helper, set up for one job inside your tools, with your approval rules built in.</td>
                     </tr>
@@ -297,11 +328,9 @@ const schema = {
                 }
                 <tr role="row">
                   <th scope="row" role="rowheader">Care <small>optional</small></th>
-                  <td role="cell" class="guide-price tnum">from <b>€300</b> a month</td>
+                  <td role="cell" class="guide-price tnum">from <b>{eur(care.from)}</b> a month</td>
                   <td role="cell">
-                    Up to 4 hours of our team’s time each month, plus a monthly check-in. It starts after {
-                      pilotOpen ? "the pilot" : "setup"
-                    }.
+                    Up to {care.hours} hours of our team’s time each month, plus a monthly check-in. It starts after {care.startsAfter}.
                   </td>
                 </tr>
               </tbody>
@@ -335,12 +364,13 @@ const schema = {
             }
           </dl>
           <p class="guide-text">
-            Other conditions apply, so read them on eis.ee before you plan around the grant. The separate EIS AI
-            adoption grant closed on 24 August 2026.
+            Other conditions apply, so read them on eis.ee before you plan around the grant. EIS’s separate{" "}
+            <a href={eisAiGrantUrl} target="_blank" rel="noreferrer">grant for adopting artificial intelligence</a> closed
+            on 24 August 2026, once applications exceeded its remaining budget.
           </p>
           <p class="guide-source">
             <a href={eisGrantUrl} target="_blank" rel="noreferrer">
-              See the grant on eis.ee
+              See the software grant on eis.ee
               <Icon name="external" size={15} />
             </a>
             <span>Checked on <time datetime={grantChecked.iso}>{grantChecked.label}</time></span>
@@ -366,22 +396,6 @@ const schema = {
               ))
             }
           </ol>
-        </section>
-
-        <section class="guide-section" id="about" aria-labelledby="about-title">
-          <h2 class="guide-h2" id="about-title">{answers.about.question}</h2>
-          <p class="guide-answer">{answers.about.answer}</p>
-          <div class="guide-founder">
-            <Image src={martin} alt="" widths={[64, 128]} sizes="64px" class="guide-founder-photo" />
-            <p>
-              <b>Martin Solev</b>
-              <span>Founder, Seestemic</span>
-            </p>
-            <a href={linkedInUrl} target="_blank" rel="noreferrer">
-              Martin on LinkedIn
-              <Icon name="external" size={15} />
-            </a>
-          </div>
         </section>
 
         <section class="guide-section" id="why" aria-labelledby="why-title">
@@ -434,10 +448,10 @@ const schema = {
         <div class="guide-close-inner">
           <h2 class="h2 guide-close-title" id="book-title">Bring one repetitive job to a free AI review</h2>
           <p class="closing-sub">
-            It’s a 30-minute call. We’ll tell you honestly whether AI can help, and where to start.
+            It’s a {review.minutes}-minute call. We’ll tell you honestly whether AI can help, and where to start.
           </p>
           <div class="cta-row">
-            <a class="btn btn-primary" {...booking}>Book a free 30-minute AI review</a>
+            <a class="btn btn-primary" {...booking}>Book a free {review.minutes}-minute AI review</a>
             <a class="btn btn-secondary" href={`mailto:${email}`}>Email us</a>
           </div>
           <p class="closing-note">
