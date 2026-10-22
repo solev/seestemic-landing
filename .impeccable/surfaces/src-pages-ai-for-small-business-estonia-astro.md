@@ -40,6 +40,7 @@ The first of a short list of search pages, each answering one question a small b
 - One authored motion: the glance card fades up on load.
 
 ## Unresolved
-- Links to the next pages once they are live (TODO comments in the source): the EIS grant guide (board #2), the AI cost guide (#3), the GDPR checklist (#4) and the founding pilot page (#14).
+- The EIS grant guide (board #2) is live at `/eis-grants-ai-software-small-business`, linked from the funding section; it links back from its Seestemic section and FAQ.
+- Links to the next pages once they are live (TODO comments in the source): the AI cost guide (#3), the GDPR checklist (#4) and the founding pilot page (#14).
 - The page is in the sitemap; Google Search Console is not set up yet.
 - Re-check the EIS facts every few months and update the "Checked on" date.

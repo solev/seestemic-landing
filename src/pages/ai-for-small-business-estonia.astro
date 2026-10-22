@@ -12,7 +12,7 @@ import field from "../assets/art/field.webp";
 import { helpers } from "../data/helpers";
 import { care, eur, founding, pilot, pilotOpen, review, setup } from "../data/offer";
 import { offers, orgId, siteUrl, toJsonLd, websiteId } from "../data/schema";
-import { email, estoniaPage, introCallUrl } from "../data/site";
+import { eisGrantsPage, email, estoniaPage, introCallUrl } from "../data/site";
 import {
   answers,
   businessTypes,
@@ -375,7 +375,12 @@ const schema = {
             </a>
             <span>Checked on <time datetime={grantChecked.iso}>{grantChecked.label}</time></span>
           </p>
-          {/* TODO: link to the EIS grant guide (board #2) once it is live. */}
+          <p class="guide-more">
+            <a href={eisGrantsPage.href}>
+              Read our guide to EIS grants for AI and software
+              <Icon name="arrowRight" size={16} />
+            </a>
+          </p>
         </section>
 
         <section class="guide-section" id="how" aria-labelledby="how-title">

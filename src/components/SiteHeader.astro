@@ -6,9 +6,11 @@ interface Props {
   /** Where the logo points. On the homepage it scrolls to the top; other pages link home. */
   home?: string;
   links?: readonly { label: string; href: string }[];
+  /** The "Free AI review" button. Guide pages that keep to one call to action turn it off. */
+  booking?: boolean;
 }
 
-const { home = "#top", links = navLinks } = Astro.props;
+const { home = "#top", links = navLinks, booking = true } = Astro.props;
 ---
 
 <header class="site-header" data-header>
@@ -21,17 +23,21 @@ const { home = "#top", links = navLinks } = Astro.props;
 
     <div class="header-actions">
       <a class="btn btn-secondary btn-sm header-email" href={`mailto:${email}`}>Email us</a>
-      <a
-        class="btn btn-primary btn-sm"
-        href={introCallUrl}
-        target="_blank"
-        rel="noreferrer"
-        data-booking-trigger
-        aria-expanded="false"
-        aria-controls="intro-call-calendar"
-      >
-        Free AI review
-      </a>
+      {
+        booking && (
+          <a
+            class="btn btn-primary btn-sm"
+            href={introCallUrl}
+            target="_blank"
+            rel="noreferrer"
+            data-booking-trigger
+            aria-expanded="false"
+            aria-controls="intro-call-calendar"
+          >
+            Free AI review
+          </a>
+        )
+      }
       <details class="mobile-nav">
         <summary aria-label="Menu">
           <span></span>

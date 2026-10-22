@@ -18,3 +18,8 @@ export const navLinks = [
 
 // Landing pages beyond the homepage. Linked from the footer on every page.
 export const estoniaPage = { label: "AI for small business in Estonia", href: "/ai-for-small-business-estonia" } as const;
+export const eisGrantsPage = { label: "EIS grants for AI and software", href: "/eis-grants-ai-software-small-business" } as const;
+export const guidePages = [estoniaPage, eisGrantsPage] as const;
+
+/** Lists the guides; the EIS guide's breadcrumb (Home → Guides → EIS grants) points here. */
+export const guidesPage = { label: "Guides", href: "/guides" } as const;
