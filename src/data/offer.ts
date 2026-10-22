@@ -22,5 +22,14 @@ export const care = { from: 300, hours: 4, startsAfter: pilotOpen ? "the pilot" 
 /** Company-wide AI adoption, shown on the homepage only. */
 export const partner = { from: 1200 } as const;
 
+/**
+ * The AI subscription behind a helper: about $30 a month, excl. VAT, which the client pays the provider directly.
+ * It isn't part of setup or Care. Never name the product or its vendor on the site; call it "an AI subscription".
+ */
+export const aiSubscription = { usdPerMonth: 30 } as const;
+
 /** Writes a whole-euro amount the way the site shows prices, such as €1,500. */
 export const eur = (amount: number) => `€${amount.toLocaleString("en-GB")}`;
+/** Writes a US-dollar amount, with cents only when there are some, such as $30 or $19.99. */
+export const usd = (amount: number) =>
+  `$${amount.toLocaleString("en-GB", { minimumFractionDigits: Number.isInteger(amount) ? 0 : 2, maximumFractionDigits: 2 })}`;

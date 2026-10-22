@@ -29,6 +29,7 @@ import {
   safety,
   steps,
 } from "../data/estonia";
+import { costGuidePage } from "../data/cost-guide";
 
 const title = "AI for Small Business in Estonia | Seestemic";
 const description = `Tallinn-based AI setup for small businesses: quotes, inbox, bookings, invoices, inside your own tools. You approve first. Free ${review.minutes}-min AI review.`;
@@ -344,7 +345,13 @@ const schema = {
               Setups of <span class="tnum">€4,000</span> or more may qualify for <a href="#funding">EIS co-funding</a>.
             </li>
           </ul>
-          {/* TODO: link to the AI cost guide (board #3) and the founding pilot page (board #14) once they are live. */}
+          <p class="guide-more">
+            <a href={costGuidePage.href}>
+              Read our guide to what AI automation costs a small business
+              <Icon name="arrowRight" size={16} />
+            </a>
+          </p>
+          {/* TODO: link to the founding pilot page (board #14) once it is live. */}
           <div class="guide-cta">
             <a class="btn btn-primary" {...booking}>Book a free AI review</a>
           </div>
