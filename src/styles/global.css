@@ -3425,10 +3425,346 @@ dd {
   background: #fff;
 }
 
+/* ------------------------------------------------------------------ */
+/* Guide articles: /eis-grants-ai-software-small-business and /guides  */
+/* ------------------------------------------------------------------ */
+
+/* An article rather than a pitch: no painting or hero CTAs. The head lines up with the reading column. */
+
+.guide-article-head {
+  display: grid;
+  grid-template-columns: 12.5rem minmax(0, 1fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
+  padding-top: clamp(2rem, 4vw, 3.5rem);
+}
+
+.guide-article-intro {
+  grid-column: 2;
+}
+
+.guide-crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.5rem;
+  color: var(--ink-3);
+  font-size: 0.875rem;
+}
+
+.guide-crumbs li + li::before {
+  content: "/";
+  margin-right: 0.5rem;
+  color: var(--line-connector);
+}
+
+.guide-crumbs a {
+  color: var(--ink-2);
+  transition: color 0.2s var(--ease);
+}
+
+.guide-crumbs a:hover {
+  color: var(--ink);
+}
+
+.guide-article-title {
+  max-width: 24ch;
+  margin-top: 1.25rem;
+  font-size: clamp(2.25rem, 1.45rem + 2.3vw, 3.25rem);
+  text-wrap: balance;
+}
+
+.guide-byline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  margin-top: 1.25rem;
+  color: var(--ink-2);
+  font-size: 0.9375rem;
+}
+
+.guide-summary {
+  max-width: 44rem;
+  margin-top: 2rem;
+  padding: clamp(1.25rem, 3vw, 1.75rem) clamp(1.25rem, 3vw, 2rem);
+  border-radius: var(--r-lg);
+  background: var(--card);
+}
+
+.guide-summary-text {
+  font-size: clamp(1.125rem, 1.06rem + 0.25vw, 1.25rem);
+  line-height: 1.55;
+  letter-spacing: -0.006em;
+}
+
+.guide-summary-checked {
+  margin-top: 1rem;
+  padding-top: 0.875rem;
+  border-top: 1px solid var(--line-strong);
+  color: var(--ink-3);
+  font-size: 0.875rem;
+}
+
+.guide-byline a,
+.guide-summary a,
+.guide-facts a,
+.guide-points a,
+.guide-sources a,
+.guide-status a,
+.guide-hub-list a {
+  color: var(--ink);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: #c7c6c1;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s;
+}
+
+.guide-byline a:hover,
+.guide-summary a:hover,
+.guide-facts a:hover,
+.guide-points a:hover,
+.guide-sources a:hover,
+.guide-status a:hover,
+.guide-hub-list a:hover {
+  text-decoration-color: currentColor;
+}
+
+.guide-article-body {
+  margin-top: clamp(3.5rem, 7vw, 5rem);
+  padding-bottom: clamp(5rem, 10vw, 8rem);
+}
+
+.guide-h3 {
+  max-width: 40rem;
+  margin-top: 3rem;
+  font-size: clamp(1.1875rem, 1.12rem + 0.3vw, 1.375rem);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.016em;
+}
+
+.guide-h3 + .guide-text,
+.guide-h3 + .guide-checks {
+  margin-top: 0.875rem;
+}
+
+.guide-h3 + .guide-points,
+.guide-h3 + .guide-steps {
+  margin-top: 1.25rem;
+}
+
+/* The status table: seven columns, so it scrolls sideways on mid-size screens before it stacks. */
+
+.guide-status-wrap {
+  overflow-x: auto;
+}
+
+.guide-status {
+  min-width: 54rem;
+  font-size: 0.875rem;
+}
+
+.guide-status caption {
+  padding-bottom: 1rem;
+  color: var(--ink-3);
+  font-size: 0.875rem;
+  text-align: left;
+}
+
+.guide-status th,
+.guide-status td {
+  padding-right: 1rem;
+}
+
+.guide-status tbody th {
+  width: 17%;
+  color: var(--ink);
+}
+
+.guide-status a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+}
+
+.guide-state {
+  display: inline-grid;
+  grid-template-columns: 8px minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.guide-state::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ink-3);
+  translate: 0 -1px;
+}
+
+.guide-state.is-open {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.guide-state.is-open::before {
+  background: var(--ok);
+}
+
+.guide-state.is-closed::before {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--ink-3);
+}
+
+.guide-muted {
+  color: var(--ink-3);
+}
+
+/* Which grant fits: revenue bands read first. */
+.guide-path > div {
+  grid-template-columns: 12rem minmax(0, 1fr);
+  padding-block: 1.125rem;
+}
+
+.guide-path dt {
+  color: var(--ink);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.guide-path dd {
+  color: var(--ink-2);
+}
+
+.guide-split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem clamp(1.5rem, 4vw, 3rem);
+  max-width: 44rem;
+}
+
+.guide-split .guide-h3 {
+  margin-top: 2.5rem;
+}
+
+.guide-crosses svg {
+  color: var(--ink-3);
+}
+
+.guide-split + .guide-text {
+  margin-top: 1.25rem;
+}
+
+.guide-steps h4 {
+  padding-top: 0.375rem;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.guide-sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem 1.5rem;
+  max-width: 44rem;
+  margin-top: 2.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.9375rem;
+}
+
+.guide-sources a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.guide-checklist {
+  counter-reset: check;
+}
+
+.guide-checklist li {
+  position: relative;
+  padding-left: 1.75rem;
+  counter-increment: check;
+}
+
+.guide-checklist li::before {
+  content: counter(check);
+  position: absolute;
+  left: 0;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.guide-review .guide-cta {
+  margin-top: 1.75rem;
+}
+
+.guide-review .cta-booking {
+  max-width: none;
+}
+
+.guide-qa-item .guide-more {
+  margin-top: 0.625rem;
+}
+
+/* /guides */
+
+.guide-hub {
+  padding-block: clamp(2rem, 4vw, 3.5rem) clamp(4rem, 8vw, 6rem);
+}
+
+.guide-hub .guide-title {
+  margin-top: 1.25rem;
+}
+
+.guide-hub-list {
+  max-width: 44rem;
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.guide-hub-list li {
+  padding-block: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.guide-hub-list h2 {
+  font-size: clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.018em;
+}
+
+.guide-hub-list a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.guide-hub-list a:hover {
+  text-decoration: underline;
+}
+
+.guide-hub-list p {
+  margin-top: 0.375rem;
+  color: var(--ink-2);
+}
+
 @media (max-width: 1024px) {
   .guide-body {
     display: block;
     margin-top: clamp(3rem, 7vw, 4.5rem);
+  }
+
+  .guide-article-head {
+    display: block;
   }
 
   .guide-aside {
@@ -3554,6 +3890,35 @@ dd {
   .guide-facts > div {
     grid-template-columns: 8rem minmax(0, 1fr);
   }
+
+  .guide-status {
+    min-width: 0;
+  }
+
+  .guide-status tbody th {
+    width: auto;
+  }
+
+  .guide-status td {
+    display: grid;
+    grid-template-columns: 8.5rem minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .guide-status td::before {
+    content: attr(data-label);
+    color: var(--ink-3);
+    font-size: 0.8125rem;
+  }
+
+  .guide-status caption {
+    display: block;
+  }
+
+  .guide-path > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.25rem;
+  }
 }
 
 @media (max-width: 560px) {
@@ -3569,6 +3934,15 @@ dd {
 
   .guide-hero-ctas .btn {
     flex: 1 1 100%;
+  }
+
+  .guide-split {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .guide-status td {
+    grid-template-columns: 7rem minmax(0, 1fr);
   }
 }
 

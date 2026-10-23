@@ -1,0 +1,546 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BookingPanel from "../components/BookingPanel.astro";
+import BookingScript from "../components/BookingScript.astro";
+import Icon from "../components/Icon.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import { eur, founding, pilot, pilotOpen, review, setup } from "../data/offer";
+import { orgId, siteUrl, toJsonLd, websiteId } from "../data/schema";
+import { eisGrantsPage, estoniaPage, guidesPage, introCallUrl, linkedInUrl } from "../data/site";
+import { answers, eisContact, faqs, h1, lastChecked, published, statuses, summary, urls } from "../data/eis-grants";
+
+// An answer page, not a sales page: one short mention of Seestemic near the end and one call to action.
+const title = "EIS Grants for AI and Software in 2026: What’s Open Now";
+const description = `The EIS AI grant closed 24 Aug 2026. What small Estonian firms can still apply for: the €2k–5k RTE software grant, RAISE and more. Checked ${lastChecked.label}.`;
+
+const links = [
+  { label: "What’s open", href: "#status" },
+  { label: "Software grant", href: "#rte" },
+  { label: "AI grant", href: "#ai-grant" },
+  { label: "Questions", href: "#faq" },
+] as const;
+
+const contents = [...Object.values(answers).map(({ id, nav }) => ({ id, nav })), { id: "faq", nav: "Questions" }];
+
+const booking = {
+  href: introCallUrl,
+  target: "_blank",
+  rel: "noreferrer",
+  "data-booking-trigger": "",
+  "aria-expanded": "false",
+  "aria-controls": "intro-call-calendar",
+};
+
+const external = { target: "_blank", rel: "noreferrer" };
+const notes = statuses.filter((grant) => grant.note);
+
+// Structured data. The organisation and website are defined once, in src/data/schema.ts; this page points at them by @id.
+const pageUrl = new URL(eisGrantsPage.href, siteUrl).href;
+const guidesUrl = new URL(guidesPage.href, siteUrl).href;
+const author = {
+  "@type": "Person",
+  name: "Martin Solev",
+  url: linkedInUrl,
+  sameAs: [linkedInUrl],
+  jobTitle: "Founder",
+  worksFor: { "@id": orgId },
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": `${pageUrl}#webpage`,
+      url: pageUrl,
+      name: title,
+      description,
+      inLanguage: "en",
+      datePublished: published.iso,
+      dateModified: lastChecked.iso,
+      isPartOf: { "@id": websiteId },
+      mainEntity: { "@id": `${pageUrl}#article` },
+      breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
+    },
+    {
+      "@type": "Article",
+      "@id": `${pageUrl}#article`,
+      headline: h1,
+      description,
+      inLanguage: "en",
+      image: new URL("/og.png", siteUrl).href,
+      datePublished: published.iso,
+      dateModified: lastChecked.iso,
+      author,
+      publisher: { "@type": "Organization", "@id": orgId, name: "Seestemic", url: siteUrl },
+      mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
+      isAccessibleForFree: true,
+      about: ["EIS grants", "Grants for AI and software in Estonia", "RAISE AI programme"],
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${pageUrl}#breadcrumb`,
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+        { "@type": "ListItem", position: 2, name: guidesPage.label, item: guidesUrl },
+        { "@type": "ListItem", position: 3, name: "EIS grants", item: pageUrl },
+      ],
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${pageUrl}#questions`,
+      mainEntity: faqs.map(({ question, answer }) => ({
+        "@type": "Question",
+        name: question,
+        acceptedAnswer: { "@type": "Answer", text: answer },
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} article={{ published: published.iso, modified: lastChecked.iso }}>
+  <script slot="head" type="application/ld+json" is:inline set:html={toJsonLd(schema)} />
+
+  <SiteHeader home="/" links={links} booking={false} />
+
+  <main id="main">
+    <article aria-labelledby="page-title">
+      <header class="shell guide-article-head">
+        <div class="guide-article-intro">
+          <nav class="guide-crumbs" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/">Home</a></li>
+              <li><a href={guidesPage.href}>{guidesPage.label}</a></li>
+              <li><span aria-current="page">EIS grants</span></li>
+            </ol>
+          </nav>
+          <h1 class="guide-title guide-article-title" id="page-title">{h1}</h1>
+          <p class="guide-byline">
+            <span>By <a href={linkedInUrl} rel="author noreferrer" target="_blank">Martin Solev</a>, Tallinn</span>
+            <span>Last checked: <time datetime={lastChecked.iso}>{lastChecked.label}</time></span>
+          </p>
+
+          <div class="guide-summary">
+            <p class="guide-summary-text">{summary}</p>
+            <p class="guide-summary-checked">
+              Last checked: <time datetime={lastChecked.iso}>{lastChecked.label}</time>. Grant statuses change when budgets
+              run out, so confirm on <a href={urls.rteEn} {...external}>eis.ee</a> before you apply.
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div class="shell guide-body guide-article-body">
+        <aside class="guide-aside">
+          <nav class="guide-toc" aria-labelledby="toc-title">
+            <p class="guide-toc-title" id="toc-title">On this page</p>
+            <ol>
+              {
+                contents.map(({ id, nav }) => (
+                  <li>
+                    <a href={`#${id}`}>{nav}</a>
+                  </li>
+                ))
+              }
+            </ol>
+          </nav>
+        </aside>
+
+        <div class="guide-main">
+          <section class="guide-section" id={answers.status.id} aria-labelledby="status-title">
+            <h2 class="guide-h2" id="status-title">{answers.status.question}</h2>
+            <p class="guide-answer">{answers.status.answer}</p>
+            <div class="guide-table-wrap guide-status-wrap">
+              <table class="guide-table guide-status" role="table">
+                <caption>
+                  Grants for AI and software in Estonia, status as of <time datetime={lastChecked.iso}>{lastChecked.label}</time>
+                </caption>
+                <thead role="rowgroup">
+                  <tr role="row">
+                    <th scope="col" role="columnheader">Grant</th>
+                    <th scope="col" role="columnheader">Status ({lastChecked.label})</th>
+                    <th scope="col" role="columnheader">Amount</th>
+                    <th scope="col" role="columnheader">Self-financing</th>
+                    <th scope="col" role="columnheader">Revenue minimum</th>
+                    <th scope="col" role="columnheader">Key condition</th>
+                    <th scope="col" role="columnheader">Official link</th>
+                  </tr>
+                </thead>
+                <tbody role="rowgroup">
+                  {
+                    statuses.map((grant) => (
+                      <tr role="row">
+                        <th scope="row" role="rowheader">
+                          {grant.name}
+                        </th>
+                        <td role="cell" data-label="Status">
+                          <span class:list={["guide-state", grant.open ? "is-open" : "is-closed"]}>{grant.status}</span>
+                        </td>
+                        <td role="cell" data-label="Amount" class="tnum">
+                          {grant.amount}
+                        </td>
+                        <td role="cell" data-label="Self-financing" class="tnum">
+                          {grant.selfFinancing}
+                        </td>
+                        <td role="cell" data-label="Revenue minimum" class="tnum">
+                          {grant.revenue}
+                        </td>
+                        <td role="cell" data-label="Key condition">
+                          {grant.condition}
+                        </td>
+                        <td role="cell" data-label="Official link">
+                          {grant.link ? (
+                            <a href={grant.link.href} {...external}>
+                              {grant.link.label}
+                              <span class="sr-only">: {grant.name}</span>
+                              <Icon name="external" size={14} />
+                            </a>
+                          ) : (
+                            <span class="guide-muted">None yet, see the note</span>
+                          )}
+                        </td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </table>
+            </div>
+            <ul class="guide-notes">
+              {
+                notes.map((grant) => (
+                  <li>
+                    {grant.name}: {grant.note}
+                  </li>
+                ))
+              }
+              <li>Revenue minimums are measured differently for each grant, so check the official page.</li>
+            </ul>
+          </section>
+
+          <section class="guide-section" id={answers.fit.id} aria-labelledby="fit-title">
+            <h2 class="guide-h2" id="fit-title">{answers.fit.question}</h2>
+            <p class="guide-answer">{answers.fit.answer}</p>
+            <dl class="guide-dl guide-facts guide-path">
+              <div>
+                <dt>Under <span class="tnum">€50,000</span></dt>
+                <dd>
+                  No current EIS digital grant fits, as of {lastChecked.long}. Look at <a href="#raise">RAISE</a> if your
+                  company is growth-stage and generally up to five years old, or fund a small first step yourself.
+                </dd>
+              </div>
+              <div>
+                <dt><span class="tnum">€50,000</span> to <span class="tnum">€200,000</span></dt>
+                <dd>
+                  The <a href="#rte">RTE software grant</a>: <span class="tnum">€2,000–€5,000</span> towards new business software
+                  or an integration, if you meet its other conditions.
+                </dd>
+              </div>
+              <div>
+                <dt><span class="tnum">€200,000</span> or more</dt>
+                <dd>
+                  With a digitalisation roadmap, the <a href={urls.roadmapAdvisory} {...external}>roadmap advisory and development
+                  grant</a>, up to <span class="tnum">€35,000</span>. The RTE software grant may fit too.
+                </dd>
+              </div>
+            </dl>
+            <p class="guide-text">
+              As of {lastChecked.long}, two other EIS grants are open: <span lang="et">Arendusosak</span> (up to <span class="tnum">€35,000</span>, for R&D and
+              prototypes, not routine internal software) and <span lang="et">Innovatsiooniosak</span> (up to{" "}
+              <span class="tnum">€7,500</span>). Neither is aimed at adopting AI or business software.
+            </p>
+          </section>
+
+          <section class="guide-section" id={answers.rte.id} aria-labelledby="rte-title">
+            <h2 class="guide-h2" id="rte-title">{answers.rte.question}</h2>
+            <p class="guide-answer">{answers.rte.answer}</p>
+            <p class="guide-text">
+              In Estonian, it’s the <span lang="et">tarkvara kasutusele võtmise või liidestamise toetus</span>. It opened on 2 March
+              2026 and is paid as a fixed sum.
+            </p>
+
+            <div class="guide-split">
+              <div>
+                <h3 class="guide-h3">What it covers</h3>
+                <ul class="guide-checks">
+                  <li><Icon name="check" size={18} /><span>A one-off software licence purchase or joining fee</span></li>
+                  <li><Icon name="check" size={18} /><span>Developing the integration with your other systems</span></li>
+                  <li>
+                    <Icon name="check" size={18} /><span>The digital consultant’s fee, up to 50% of the grant</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3 class="guide-h3">What it doesn’t cover</h3>
+                <ul class="guide-checks guide-crosses">
+                  <li><Icon name="close" size={18} /><span>Upgrading software you already use</span></li>
+                  <li><Icon name="close" size={18} /><span>Hardware</span></li>
+                  <li><Icon name="close" size={18} /><span>VAT</span></li>
+                </ul>
+              </div>
+            </div>
+            <p class="guide-text">Monthly subscriptions beyond the one-off cost aren’t listed as eligible.</p>
+
+            <h3 class="guide-h3">Who can apply</h3>
+            <ul class="guide-points">
+              <li><b>Registered in Estonia.</b> Your company is in the Estonian Commercial Register.</li>
+              <li>
+                <b>Revenue.</b> At least <span class="tnum">€50,000</span> average sales revenue over your last two financial
+                years.
+              </li>
+              <li>
+                <b>Training.</b> Someone at the company has completed the free course “<span lang="et"
+                  >Ettevõtte digitaliseerimise koolitus</span
+                >”.
+              </li>
+              <li><b>E-invoicing.</b> You use e-invoices (<span lang="et">e-arve</span>) by the end of the project.</li>
+              <li>
+                <b>De minimis.</b> The grant counts as de minimis aid (<span lang="et">VTA</span>), which is capped at{" "}
+                <span class="tnum">€300,000</span> over three years.
+              </li>
+              <li>
+                <b>A digital consultant.</b> Involving a <span lang="et">diginõustaja</span> is mandatory. They must have done at
+                least three similar advisory projects in the four years before yours.
+              </li>
+              <li><b>One at a time.</b> You can have only one RTE grant at a time.</li>
+            </ul>
+
+            <h3 class="guide-h3">How big does the project need to be?</h3>
+            <p class="guide-text">
+              Because the grant covers half the cost, a project needs to cost about <span class="tnum">€4,000</span> or more to
+              reach the minimum grant, and about <span class="tnum">€10,000</span> or more for the maximum. The exact rules are in
+              the <a href={urls.rteRegulation} {...external} hreflang="et">grant regulation</a>.
+            </p>
+            <dl class="guide-dl guide-facts">
+              <div>
+                <dt>Project of about <span class="tnum">€4,000</span></dt>
+                <dd>A grant of about <span class="tnum">€2,000</span>, the minimum</dd>
+              </div>
+              <div>
+                <dt>Project of about <span class="tnum">€10,000</span> or more</dt>
+                <dd>A grant of about <span class="tnum">€5,000</span>, the maximum</dd>
+              </div>
+            </dl>
+
+            <h3 class="guide-h3">How to apply, step by step</h3>
+            <ol class="guide-steps">
+              <li>
+                <span class="guide-step-num tnum" aria-hidden="true">1</span>
+                <div>
+                  <h4>Take the training course</h4>
+                  <p>Someone at the company completes the free digitalisation course.</p>
+                </div>
+              </li>
+              <li>
+                <span class="guide-step-num tnum" aria-hidden="true">2</span>
+                <div>
+                  <h4>Get a digital consultant’s quote</h4>
+                  <p>Find a consultant with the required experience and get their quote.</p>
+                </div>
+              </li>
+              <li>
+                <span class="guide-step-num tnum" aria-hidden="true">3</span>
+                <div>
+                  <h4>Apply in E-toetus, in Estonian</h4>
+                  <p>Submit the application in EIS’s E-toetus environment before the work starts.</p>
+                </div>
+              </li>
+              <li>
+                <span class="guide-step-num tnum" aria-hidden="true">4</span>
+                <div>
+                  <h4>Run the project</h4>
+                  <p>Set up the software or integration, and use e-invoicing by the end.</p>
+                </div>
+              </li>
+              <li>
+                <span class="guide-step-num tnum" aria-hidden="true">5</span>
+                <div>
+                  <h4>Report to EIS</h4>
+                  <p>Report on the finished project.</p>
+                </div>
+              </li>
+            </ol>
+
+            <ul class="guide-sources">
+              <li><a href={urls.rteEn} {...external}>RTE software grant on eis.ee<Icon name="external" size={14} /></a></li>
+              <li>
+                <a href={urls.rteEt} {...external} hreflang="et">Same page in Estonian<Icon name="external" size={14} /></a>
+              </li>
+              <li>
+                <a href={urls.rteNews} {...external} hreflang="et">EIS announcement, 2 Mar 2026<Icon name="external" size={14} /></a>
+              </li>
+              <li>
+                <a href={urls.rteRegulation} {...external} hreflang="et">Regulation on Riigi Teataja<Icon name="external" size={14} /></a>
+              </li>
+            </ul>
+          </section>
+
+          <section class="guide-section" id={answers.aiGrant.id} aria-labelledby="ai-grant-title">
+            <h2 class="guide-h2" id="ai-grant-title">{answers.aiGrant.question}</h2>
+            <p class="guide-answer">{answers.aiGrant.answer}</p>
+            <p class="guide-text">
+              In Estonian: <span lang="et">tehisaru kasutuselevõtu toetus</span>. What it offered:
+            </p>
+            <dl class="guide-dl guide-facts">
+              <div><dt>Grant</dt><dd><span class="tnum">€20,000</span> per project</dd></div>
+              <div><dt>Self-financing</dt><dd>20%</dd></div>
+              <div><dt>Budget</dt><dd><span class="tnum">€2 million</span> in total</dd></div>
+              <div><dt>Revenue</dt><dd>At least <span class="tnum">€200,000</span> in the previous year</dd></div>
+              <div><dt>Project length</dt><dd>Up to 9 months</dd></div>
+              <div><dt>Proof of results</dt><dd>A prototype or a test video</dd></div>
+              <div><dt>Applications</dt><dd>In Estonian</dd></div>
+            </dl>
+            <p class="guide-text">
+              If you were planning around it, the <a href="#rte">RTE software grant</a> is the closest open option. AI tools may
+              qualify there if they’re new business software or an integration.
+            </p>
+            <ul class="guide-sources">
+              <li><a href={urls.aiEn} {...external}>AI grant on eis.ee<Icon name="external" size={14} /></a></li>
+              <li><a href={urls.aiEt} {...external} hreflang="et">Same page in Estonian<Icon name="external" size={14} /></a></li>
+              <li>
+                <a href={urls.aiNews} {...external} hreflang="et">EIS announcement, 24 Aug 2026<Icon name="external" size={14} /></a>
+              </li>
+              <li>
+                <a href={urls.aiRegulation} {...external} hreflang="et">Regulation on Riigi Teataja<Icon name="external" size={14} /></a>
+              </li>
+              <li>
+                <a href={urls.aiGuide} {...external} hreflang="et">EIS guide and sample cases (PDF)<Icon name="external" size={14} /></a>
+              </li>
+            </ul>
+          </section>
+
+          <section class="guide-section" id={answers.raise.id} aria-labelledby="raise-title">
+            <h2 class="guide-h2" id="raise-title">{answers.raise.question}</h2>
+            <p class="guide-answer">{answers.raise.answer}</p>
+            <dl class="guide-dl guide-facts">
+              <div><dt>Cost to you</dt><dd>Free</dd></div>
+              <div>
+                <dt>What you get</dt>
+                <dd>Mentoring, and up to <span class="tnum">€14,000</span> of funded AI development support with a matched provider</dd>
+              </div>
+              <div><dt>Places</dt><dd>16 companies across Estonia, Latvia, Finland and Sweden</dd></div>
+              <div>
+                <dt>Who it’s for</dt>
+                <dd>Growth-stage SMEs, generally up to five years old, with market presence and some revenue</dd>
+              </div>
+              <div><dt>Deadline</dt><dd>20 November 2026</dd></div>
+            </dl>
+            <ul class="guide-sources">
+              <li><a href={urls.raise} {...external}>RAISE on tehnopol.ee<Icon name="external" size={14} /></a></li>
+              <li><a href={urls.raiseNews} {...external}>Tehnopol announcement<Icon name="external" size={14} /></a></li>
+            </ul>
+          </section>
+
+          <section class="guide-section" id={answers.checks.id} aria-labelledby="checks-title">
+            <h2 class="guide-h2" id="checks-title">{answers.checks.question}</h2>
+            <p class="guide-answer">{answers.checks.answer}</p>
+            <ol class="guide-points guide-checklist">
+              <li>
+                <b>Revenue.</b> At least <span class="tnum">€50,000</span> on average for the software grant, or{" "}
+                <span class="tnum">€200,000</span> for the larger grants.
+              </li>
+              <li>
+                <b>De minimis balance.</b> Your de minimis aid over three years, including the new grant, stays under{" "}
+                <span class="tnum">€300,000</span>.
+              </li>
+              <li><b>E-invoicing.</b> You’ll use e-invoices by the end of the project.</li>
+              <li><b>Training course.</b> Someone at the company has completed the free digitalisation course.</li>
+              <li>
+                <b>Nothing started yet.</b> Generally, apply first and don’t sign binding orders before you submit. Check the
+                regulation for your grant.
+              </li>
+            </ol>
+          </section>
+
+          <section class="guide-section" id={answers.seestemic.id} aria-labelledby="seestemic-title">
+            <h2 class="guide-h2" id="seestemic-title">{answers.seestemic.question}</h2>
+            <p class="guide-answer">{answers.seestemic.answer}</p>
+            <p class="guide-text">
+              {
+                pilotOpen ? (
+                  <>
+                    Our <a href="/#how">founding pilot</a> is <span class="tnum">{eur(pilot.price)}</span> one-time for our first{" "}
+                    {founding.places} clients (normally from <span class="tnum">{eur(setup.from)}</span>).
+                  </>
+                ) : (
+                  <>
+                    Setting up a <a href="/#how">first helper</a> starts at <span class="tnum">{eur(setup.from)}</span>, one-time.
+                  </>
+                )
+              }{" "}
+              See <a href={`${estoniaPage.href}#what`}>what an AI helper does</a>. We don’t apply for grants on anyone’s behalf; your
+              company applies itself. In a <a href="#review">free {review.minutes}-minute review</a>, we’ll tell you honestly whether
+              a grant is worth it for your case.
+            </p>
+          </section>
+
+          <section class="guide-section" id="faq" aria-labelledby="faq-title">
+            <h2 class="guide-h2" id="faq-title">Frequently asked questions</h2>
+            <div class="guide-qa">
+              {
+                faqs.map(({ question, answer, link }) => (
+                  <div class="guide-qa-item">
+                    <h3>{question}</h3>
+                    <p>{answer}</p>
+                    {link && (
+                      <p class="guide-more">
+                        <a href={link.href}>
+                          {link.label}
+                          <Icon name="arrowRight" size={16} />
+                        </a>
+                      </p>
+                    )}
+                  </div>
+                ))
+              }
+            </div>
+            <p class="guide-updated">Last checked: <time datetime={lastChecked.iso}>{lastChecked.label}</time></p>
+          </section>
+
+          <section class="guide-section guide-review" id="review" aria-labelledby="review-title">
+            <h2 class="guide-h2" id="review-title">Not sure if you qualify?</h2>
+            <p class="guide-answer">Bring it to a free {review.minutes}-minute AI review.</p>
+            <div class="guide-cta">
+              <a class="btn btn-primary" {...booking}>Book a free {review.minutes}-minute AI review</a>
+            </div>
+            <p class="guide-text">
+              For official answers about EIS grants, contact EIS customer service at <a
+                href={`mailto:${eisContact.email}`}>{eisContact.email}</a
+              > or <a href={`tel:${eisContact.tel}`} class="nowrap">{eisContact.phone}</a>.
+            </p>
+            <BookingPanel />
+          </section>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <SiteFooter base="/" />
+
+  <script>
+    // Marks the section being read in the "On this page" list.
+    const tocLinks = new Map(
+      [...document.querySelectorAll<HTMLAnchorElement>(".guide-toc a")].map((link) => [link.hash.slice(1), link]),
+    );
+    let currentLink: HTMLAnchorElement | undefined;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const link = tocLinks.get(entry.target.id);
+          if (!entry.isIntersecting || !link || link === currentLink) continue;
+          currentLink?.removeAttribute("aria-current");
+          link.setAttribute("aria-current", "location");
+          currentLink = link;
+        }
+      },
+      { rootMargin: "-25% 0px -65% 0px" },
+    );
+    tocLinks.forEach((_, id) => {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    });
+  </script>
+
+  <BookingScript />
+</BaseLayout>

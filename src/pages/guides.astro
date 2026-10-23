@@ -1,0 +1,88 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import { siteUrl, toJsonLd, websiteId } from "../data/schema";
+import { eisGrantsPage, estoniaPage, guidesPage } from "../data/site";
+
+// The guides hub. It exists so guide breadcrumbs (Home → Guides → guide) point at a real page.
+const title = "Guides for Small Businesses on AI in Estonia | Seestemic";
+const description =
+  "Plain-English guides for small businesses in Estonia: what AI can do for you, what it costs, and which EIS grants for AI and software are open.";
+
+const guides = [
+  {
+    ...estoniaPage,
+    title: "AI for small businesses in Estonia",
+    text: "What AI can do for a business with 1 to 20 people, whether it’s safe for customer data, and what it costs.",
+  },
+  {
+    ...eisGrantsPage,
+    title: "Can an EIS grant pay for AI or new software?",
+    text: "Which EIS grants for AI and software are open, who qualifies, and what to check before you apply.",
+  },
+];
+
+const pageUrl = new URL(guidesPage.href, siteUrl).href;
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": `${pageUrl}#webpage`,
+      url: pageUrl,
+      name: title,
+      description,
+      inLanguage: "en",
+      isPartOf: { "@id": websiteId },
+      breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
+      hasPart: guides.map(({ href, title }) => ({ "@type": "WebPage", url: new URL(href, siteUrl).href, name: title })),
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${pageUrl}#breadcrumb`,
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+        { "@type": "ListItem", position: 2, name: guidesPage.label, item: pageUrl },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <script slot="head" type="application/ld+json" is:inline set:html={toJsonLd(schema)} />
+
+  <SiteHeader home="/" links={[]} booking={false} />
+
+  <main id="main">
+    <div class="shell guide-hub">
+      <nav class="guide-crumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li><span aria-current="page">{guidesPage.label}</span></li>
+        </ol>
+      </nav>
+      <h1 class="guide-title" id="page-title">Guides</h1>
+      <p class="lead guide-hero-lead">Plain-English answers for small businesses in Estonia about AI, its costs and funding.</p>
+      <ul class="guide-hub-list">
+        {
+          guides.map(({ href, title, text }) => (
+            <li>
+              <h2>
+                <a href={href}>
+                  {title}
+                  <Icon name="arrowRight" size={18} />
+                </a>
+              </h2>
+              <p>{text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </main>
+
+  <SiteFooter base="/" />
+</BaseLayout>
