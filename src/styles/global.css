@@ -3688,19 +3688,17 @@ dd {
 }
 
 .guide-checklist li {
-  display: grid;
-  grid-template-columns: 1.75rem minmax(0, 1fr);
+  position: relative;
+  padding-left: 1.75rem;
   counter-increment: check;
 }
 
 .guide-checklist li::before {
   content: counter(check);
+  position: absolute;
+  left: 0;
   color: var(--ink-3);
   font-variant-numeric: tabular-nums;
-}
-
-.guide-checklist li > * {
-  grid-column: 2;
 }
 
 .guide-review .guide-cta {
