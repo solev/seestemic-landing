@@ -6,6 +6,7 @@
 // Never say or imply that Seestemic is an EIS digital consultant (diginõustaja), or that its work qualifies
 // for a grant; both are open decisions for Martin (October 2026).
 import { review } from "./offer";
+import { costGuidePage } from "./site";
 
 /** When every status and figure below was last checked. Shown on the page and used as the Article's dateModified. */
 export const lastChecked = { iso: "2026-10-22", label: "22 Oct 2026", long: "22 October 2026" } as const;
@@ -217,7 +218,7 @@ export const faqs: Faq[] = [
     question: "What if my revenue is under €50,000?",
     answer:
       "Then none of EIS’s current digital grants fit, as of 22 October 2026. Options are RAISE (if your company is growth-stage and generally up to five years old) or starting small with your own budget. A single AI helper often costs less than the paperwork of a grant.",
-    link: { href: "/ai-for-small-business-estonia#cost", label: "What AI costs for a small business in Estonia" },
+    link: { href: costGuidePage.href, label: "What AI automation costs a small business" },
   },
   {
     question: "What is RAISE and when is the deadline?",

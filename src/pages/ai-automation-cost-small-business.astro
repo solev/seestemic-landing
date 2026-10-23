@@ -1,0 +1,714 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BookingPanel from "../components/BookingPanel.astro";
+import BookingScript from "../components/BookingScript.astro";
+import Icon from "../components/Icon.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import { aiSubscription, care, eur, founding, pilot, pilotOpen, review, setup, usd } from "../data/offer";
+import { orgId, siteUrl, toJsonLd, websiteId } from "../data/schema";
+import { costGuidePage, eisGrantsPage, estoniaPage, guidesPage, introCallUrl, linkedInUrl } from "../data/site";
+import { eisAiGrantUrl, eisGrantUrl, grantChecked } from "../data/estonia";
+import {
+  answers,
+  comparison,
+  costs,
+  dataNote,
+  faqs,
+  h1,
+  hiddenCosts,
+  pricesChecked,
+  published,
+  routes,
+  savings,
+  subscription,
+  summary,
+  tips,
+  tools,
+  urls,
+  wage,
+} from "../data/cost-guide";
+
+// An answer page, not a sales page: one labelled Seestemic example, no Offer schema and one call to action.
+const title = "AI Automation Cost for Small Businesses (2026, in Euros)";
+const description = `What AI automation costs a small business in 2026: one-off setup, an AI subscription, upkeep and your time, with a worked example. Checked ${pricesChecked.label}.`;
+
+const links = [
+  { label: "The four costs", href: "#costs" },
+  { label: "Tool prices", href: "#tools" },
+  { label: "Example", href: "#example" },
+  { label: "Questions", href: "#faq" },
+] as const;
+
+const contents = [...Object.values(answers).map(({ id, nav }) => ({ id, nav })), { id: "faq", nav: "Questions" }];
+
+const booking = {
+  href: introCallUrl,
+  target: "_blank",
+  rel: "noreferrer",
+  "data-booking-trigger": "",
+  "aria-expanded": "false",
+  "aria-controls": "intro-call-calendar",
+};
+
+const external = { target: "_blank", rel: "noreferrer" };
+const firstYear = 12 * aiSubscription.usdPerMonth;
+const [exampleA, exampleB] = savings.scenarios;
+const setupLabel = pilotOpen ? eur(pilot.price) : `from ${eur(setup.from)}`;
+
+// Structured data. The organisation and website are defined once, in src/data/schema.ts; this page points at them by @id.
+const pageUrl = new URL(costGuidePage.href, siteUrl).href;
+const guidesUrl = new URL(guidesPage.href, siteUrl).href;
+const author = {
+  "@type": "Person",
+  name: "Martin Solev",
+  url: linkedInUrl,
+  sameAs: [linkedInUrl],
+  jobTitle: "Founder",
+  worksFor: { "@id": orgId },
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": `${pageUrl}#webpage`,
+      url: pageUrl,
+      name: title,
+      description,
+      inLanguage: "en",
+      datePublished: published.iso,
+      dateModified: pricesChecked.iso,
+      isPartOf: { "@id": websiteId },
+      mainEntity: { "@id": `${pageUrl}#article` },
+      breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
+    },
+    {
+      "@type": "Article",
+      "@id": `${pageUrl}#article`,
+      headline: h1,
+      description,
+      inLanguage: "en",
+      image: new URL("/og.png", siteUrl).href,
+      datePublished: published.iso,
+      dateModified: pricesChecked.iso,
+      author,
+      publisher: { "@type": "Organization", "@id": orgId, name: "Seestemic", url: siteUrl },
+      mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
+      isAccessibleForFree: true,
+      about: ["Cost of AI automation for small businesses", "AI assistant pricing", "AI automation pricing in Europe"],
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${pageUrl}#breadcrumb`,
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+        { "@type": "ListItem", position: 2, name: guidesPage.label, item: guidesUrl },
+        { "@type": "ListItem", position: 3, name: "AI automation cost", item: pageUrl },
+      ],
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${pageUrl}#questions`,
+      mainEntity: faqs.map(({ question, answer }) => ({
+        "@type": "Question",
+        name: question,
+        acceptedAnswer: { "@type": "Answer", text: answer },
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} article={{ published: published.iso, modified: pricesChecked.iso }}>
+  <script slot="head" type="application/ld+json" is:inline set:html={toJsonLd(schema)} />
+
+  <SiteHeader home="/" links={links} booking={false} />
+
+  <main id="main">
+    <article aria-labelledby="page-title">
+      <header class="shell guide-article-head">
+        <div class="guide-article-intro">
+          <nav class="guide-crumbs" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/">Home</a></li>
+              <li><a href={guidesPage.href}>{guidesPage.label}</a></li>
+              <li><span aria-current="page">AI automation cost</span></li>
+            </ol>
+          </nav>
+          <h1 class="guide-title guide-article-title" id="page-title">{h1}</h1>
+          <p class="guide-byline">
+            <span>By <a href={linkedInUrl} rel="author noreferrer" target="_blank">Martin Solev</a>, Tallinn</span>
+            <span>Prices last checked: <time datetime={pricesChecked.iso}>{pricesChecked.label}</time></span>
+          </p>
+
+          <div class="guide-summary">
+            <p class="guide-summary-text">{summary}</p>
+            <p class="guide-summary-checked">
+              Prices last checked: <time datetime={pricesChecked.iso}>{pricesChecked.label}</time>. Tool prices are vendor list
+              prices in US dollars ($) or euros (€) as marked, excl. VAT.
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div class="shell guide-body guide-article-body">
+        <aside class="guide-aside">
+          <nav class="guide-toc" aria-labelledby="toc-title">
+            <p class="guide-toc-title" id="toc-title">On this page</p>
+            <ol>
+              {
+                contents.map(({ id, nav }) => (
+                  <li>
+                    <a href={`#${id}`}>{nav}</a>
+                  </li>
+                ))
+              }
+            </ol>
+          </nav>
+        </aside>
+
+        <div class="guide-main">
+          <section class="guide-section" id={answers.costs.id} aria-labelledby="costs-title">
+            <h2 class="guide-h2" id="costs-title">{answers.costs.question}</h2>
+            <p class="guide-answer">{answers.costs.answer}</p>
+            <div class="guide-table-wrap">
+              <table class="guide-table cost-table" role="table">
+                <caption>The four costs of AI automation for a small business</caption>
+                <thead role="rowgroup">
+                  <tr role="row">
+                    <th scope="col" role="columnheader">Cost</th>
+                    <th scope="col" role="columnheader">What it is</th>
+                    <th scope="col" role="columnheader">What it costs</th>
+                    <th scope="col" role="columnheader">Who you pay</th>
+                  </tr>
+                </thead>
+                <tbody role="rowgroup">
+                  {
+                    costs.map(({ cost, what, price, payee }) => (
+                      <tr role="row">
+                        <th scope="row" role="rowheader">
+                          {cost}
+                        </th>
+                        <td role="cell" data-label="What it is">
+                          {what}
+                        </td>
+                        <td role="cell" data-label="What it costs">
+                          {price}
+                        </td>
+                        <td role="cell" data-label="Who you pay">
+                          {payee}
+                        </td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="guide-section" id={answers.tools.id} aria-labelledby="tools-title">
+            <h2 class="guide-h2" id="tools-title">{answers.tools.question}</h2>
+            <p class="guide-answer">{answers.tools.answer}</p>
+            <p class="guide-text">
+              Most small businesses need one AI seat for each person who uses it, and sometimes one automation platform. These are
+              tools you can set up yourself, in no particular order.
+            </p>
+            <div class="guide-table-wrap">
+              <table class="guide-table cost-table cost-tools" role="table">
+                <caption>
+                  AI tool list prices in US dollars ($) or euros (€) as marked, excl. VAT, checked on <time
+                    datetime={pricesChecked.iso}>{pricesChecked.label}</time
+                  >
+                </caption>
+                <thead role="rowgroup">
+                  <tr role="row">
+                    <th scope="col" role="columnheader">Tool</th>
+                    <th scope="col" role="columnheader">Plan</th>
+                    <th scope="col" role="columnheader">List price</th>
+                    <th scope="col" role="columnheader">Billing</th>
+                    <th scope="col" role="columnheader">Official source</th>
+                  </tr>
+                </thead>
+                <tbody role="rowgroup">
+                  {
+                    tools.map(({ tool, plan, price, billing, source }) => (
+                      <tr role="row">
+                        <th scope="row" role="rowheader">
+                          {tool}
+                        </th>
+                        <td role="cell" data-label="Plan">
+                          {plan}
+                        </td>
+                        <td role="cell" data-label="List price" class="tnum">
+                          {price}
+                        </td>
+                        <td role="cell" data-label="Billing">
+                          {billing}
+                        </td>
+                        <td role="cell" data-label="Official source">
+                          <a href={source.href} {...external}>
+                            {source.label}
+                            <span class="sr-only">: {tool} pricing</span>
+                            <Icon name="external" size={14} />
+                          </a>
+                        </td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </table>
+            </div>
+            <ul class="guide-notes">
+              <li>Prices can vary by country and currency (<a href={urls.chatgptHelp} {...external}>OpenAI help</a>).</li>
+              <li>None of these is the AI subscription in the example below.</li>
+            </ul>
+          </section>
+
+          <section class="guide-section" id={answers.compare.id} aria-labelledby="compare-title">
+            <h2 class="guide-h2" id="compare-title">{answers.compare.question}</h2>
+            <p class="guide-answer">{answers.compare.answer}</p>
+            <div class="guide-table-wrap">
+              <table class="guide-table cost-table cost-routes" role="table">
+                <caption>DIY, a custom-built agency project and a done-for-you setup, compared</caption>
+                <thead role="rowgroup">
+                  <tr role="row">
+                    <td role="cell"></td>
+                    {routes.map(({ label }) => <th scope="col" role="columnheader">{label}</th>)}
+                  </tr>
+                </thead>
+                <tbody role="rowgroup">
+                  {
+                    comparison.map((row) => (
+                      <tr role="row">
+                        <th scope="row" role="rowheader">
+                          {row.topic}
+                        </th>
+                        {routes.map(({ key, label }) => (
+                          <td role="cell" data-label={label}>
+                            {row[key]}
+                          </td>
+                        ))}
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="guide-section" id={answers.hidden.id} aria-labelledby="hidden-title">
+            <h2 class="guide-h2" id="hidden-title">{answers.hidden.question}</h2>
+            <p class="guide-answer">{answers.hidden.answer}</p>
+            <ul class="guide-points">
+              {
+                hiddenCosts.map(({ title, text }) => (
+                  <li>
+                    <b>{title}</b> {text}
+                  </li>
+                ))
+              }
+            </ul>
+          </section>
+
+          <section class="guide-section" id={answers.example.id} aria-labelledby="example-title">
+            <p class="cost-label"><span class="example-tag">Example</span></p>
+            <h2 class="guide-h2" id="example-title">{answers.example.question}</h2>
+            <p class="guide-answer">{answers.example.answer}</p>
+            <dl class="guide-dl guide-facts">
+              <div>
+                <dt>Free AI review</dt>
+                <dd><span class="tnum">{eur(review.price)}</span>, {review.minutes} minutes</dd>
+              </div>
+              {
+                pilotOpen ? (
+                  <div>
+                    <dt>Founding pilot</dt>
+                    <dd>
+                      <span class="tnum">{eur(pilot.price)}</span> one-time, first {founding.places} clients (normally from{" "}
+                      <span class="tnum">{eur(setup.from)}</span>)
+                    </dd>
+                  </div>
+                ) : (
+                  <div>
+                    <dt>Setup</dt>
+                    <dd>
+                      From <span class="tnum">{eur(setup.from)}</span> one-time
+                    </dd>
+                  </div>
+                )
+              }
+              <div>
+                <dt>AI subscription</dt>
+                <dd>About <span class="tnum">{subscription}</span> a month, excl. VAT, paid directly to the provider</dd>
+              </div>
+              <div>
+                <dt>Care, optional</dt>
+                <dd>
+                  From <span class="tnum">{eur(care.from)}</span> a month for Seestemic’s team time only (up to {care.hours} hours plus a
+                  check-in), not the AI subscription. Stop it and you keep everything built.
+                </dd>
+              </div>
+              <div>
+                <dt>Your data</dt>
+                <dd>{dataNote}</dd>
+              </div>
+            </dl>
+            <h3 class="guide-h3">The first year</h3>
+            <ul class="guide-points cost-sums tnum">
+              <li>
+                <b>Without Care:</b> {setupLabel} + 12 × {subscription} = {setupLabel} + {usd(firstYear)} (subscription excl. VAT)
+              </li>
+              <li><b>With Care:</b> add 12 × {eur(care.from)} = {eur(12 * care.from)}</li>
+            </ul>
+            <p class="guide-text">
+              <a href="/">Seestemic</a> adds no VAT, as it isn’t VAT-registered. This is one example. Compare it with the other options
+              above, or see <a href={`${estoniaPage.href}#what`}>what an AI helper does</a>.
+            </p>
+          </section>
+
+          <section class="guide-section" id={answers.savings.id} aria-labelledby="savings-title">
+            <h2 class="guide-h2" id="savings-title">{answers.savings.question}</h2>
+            <p class="guide-answer">{answers.savings.answer}</p>
+            <div class="cost-calc" role="group" aria-labelledby="calc-title">
+              <p class="cost-calc-title" id="calc-title">
+                <span class="example-tag">Example</span>
+                Example calculation, not a result.
+              </p>
+              <h3 class="guide-h3">The assumptions</h3>
+              <ul class="guide-points tnum">
+                <li>
+                  <b>Wage:</b>{" "}
+                  {eur(wage.monthly)} average gross monthly wage in Estonia, {wage.quarter} (<a href={urls.wages} {...external}
+                    >{wage.source}</a
+                  >).
+                </li>
+                <li><b>Hours in a working month:</b> 40 hours a week × 52 ÷ 12 ≈ {savings.fullTimeHours} hours.</li>
+                <li>
+                  <b>Value of an hour:</b>{" "}
+                  {eur(wage.monthly)} ÷ {savings.fullTimeHours} ≈ {eur(savings.hourly)} an hour. That’s the gross wage only:
+                  employer taxes aren’t included, so the real cost of an hour is higher.
+                </li>
+                <li>
+                  <b>AI subscription:</b> about {subscription} a month. For this example, it’s treated as about {
+                    eur(savings.subscriptionEur)
+                  }, with no exchange rate applied.
+                </li>
+              </ul>
+              <h3 class="guide-h3">The maths</h3>
+              <div class="guide-table-wrap">
+                <table class="guide-table cost-table cost-maths tnum" role="table">
+                  <caption class="sr-only">Example calculation: admin hours covered, their value and payback</caption>
+                  <thead role="rowgroup">
+                    <tr role="row">
+                      <td role="cell"></td>
+                      {
+                        savings.scenarios.map(({ label, perWeek }) => (
+                          <th scope="col" role="columnheader">
+                            {label}: {perWeek} hours a week
+                          </th>
+                        ))
+                      }
+                    </tr>
+                  </thead>
+                  <tbody role="rowgroup">
+                    <tr role="row">
+                      <th scope="row" role="rowheader">Hours covered a month</th>
+                      {
+                        savings.scenarios.map(({ label, perWeek, hours }) => (
+                          <td role="cell" data-label={label}>
+                            {perWeek} × 52 ÷ 12 ≈ {hours} hours
+                          </td>
+                        ))
+                      }
+                    </tr>
+                    <tr role="row">
+                      <th scope="row" role="rowheader">Value of that time</th>
+                      {
+                        savings.scenarios.map(({ label, hours, value }) => (
+                          <td role="cell" data-label={label}>
+                            {hours} × {eur(savings.hourly)} ≈ {eur(value)} a month
+                          </td>
+                        ))
+                      }
+                    </tr>
+                    <tr role="row">
+                      <th scope="row" role="rowheader">Minus the AI subscription</th>
+                      {
+                        savings.scenarios.map(({ label, value, net }) => (
+                          <td role="cell" data-label={label}>
+                            {eur(value)} − {eur(savings.subscriptionEur)} ≈ <b>{eur(net)} a month</b>
+                          </td>
+                        ))
+                      }
+                    </tr>
+                    {
+                      exampleA.payback.map(({ price }, index) => (
+                        <tr role="row">
+                          <th scope="row" role="rowheader">
+                            Payback on a {eur(price)} setup
+                          </th>
+                          {savings.scenarios.map(({ label, net, payback }) => (
+                            <td role="cell" data-label={label}>
+                              {payback[index].months ? (
+                                <>
+                                  {eur(price)} ÷ {eur(net)} ≈ {payback[index].months}{" "}
+                                  {payback[index].months === 1 ? "month" : "months"}
+                                </>
+                              ) : (
+                                "Doesn’t pay back"
+                              )}
+                            </td>
+                          ))}
+                        </tr>
+                      ))
+                    }
+                    <tr role="row">
+                      <th scope="row" role="rowheader">With Care on top</th>
+                      {
+                        savings.scenarios.map(({ label, net, withCare }) => (
+                          <td role="cell" data-label={label}>
+                            {eur(net)} − {eur(care.from)} ≈ {withCare < 0 ? `−${eur(-withCare)}` : `+${eur(withCare)}`} a month
+                          </td>
+                        ))
+                      }
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="guide-text">
+                {
+                  exampleA.withCare < 0 && exampleB.withCare > 0
+                    ? `With Care, ${exampleA.label} doesn’t pay at ${exampleA.perWeek} hours a week, and ${exampleB.label} comes out about ${eur(exampleB.withCare)} a month ahead.`
+                    : `With Care, the result is ${exampleA.withCare < 0 ? "negative" : "positive"} at ${exampleA.perWeek} hours a week and ${exampleB.withCare < 0 ? "negative" : "positive"} at ${exampleB.perWeek}.`
+                }{" "}
+                Care makes sense when the helper covers more hours, or when you value someone keeping it running.
+              </p>
+              <p class="guide-text cost-calc-end">
+                <b>Plug in your own hours and hourly cost. These are example inputs, not typical results.</b>
+              </p>
+            </div>
+            <p class="guide-source">
+              <a href={urls.wagesMethod} {...external}>
+                How Statistics Estonia measures average wages
+                <Icon name="external" size={15} />
+              </a>
+            </p>
+          </section>
+
+          <section class="guide-section" id={answers.grant.id} aria-labelledby="grant-title">
+            <h2 class="guide-h2" id="grant-title">{answers.grant.question}</h2>
+            <p class="guide-answer">{answers.grant.answer}</p>
+            <p class="guide-text">
+              The main conditions: an average revenue of at least <span class="tnum">€50,000</span> a year over the last two years,
+              and you apply before the work starts. Monthly fees, such as Care or an AI subscription, aren’t covered, and other
+              conditions apply. EIS’s separate <a href={eisAiGrantUrl} {...external}>grant for adopting AI</a> closed on 24 August
+              2026.
+            </p>
+            <p class="guide-more">
+              <a href={eisGrantsPage.href}>
+                Read our EIS grants guide
+                <Icon name="arrowRight" size={16} />
+              </a>
+            </p>
+            <p class="guide-source">
+              <a href={eisGrantUrl} {...external}>
+                See the software grant on eis.ee
+                <Icon name="external" size={15} />
+              </a>
+              <span>Checked on <time datetime={grantChecked.iso}>{grantChecked.label}</time></span>
+            </p>
+          </section>
+
+          <section class="guide-section" id={answers.tips.id} aria-labelledby="tips-title">
+            <h2 class="guide-h2" id="tips-title">{answers.tips.question}</h2>
+            <p class="guide-answer">{answers.tips.answer}</p>
+            <ul class="guide-points">
+              {
+                tips.map(({ title, text }) => (
+                  <li>
+                    <b>{title}</b> {text}
+                  </li>
+                ))
+              }
+            </ul>
+          </section>
+
+          <section class="guide-section" id="faq" aria-labelledby="faq-title">
+            <h2 class="guide-h2" id="faq-title">Frequently asked questions</h2>
+            <div class="guide-qa">
+              {
+                faqs.map(({ question, answer, link }) => (
+                  <div class="guide-qa-item">
+                    <h3>{question}</h3>
+                    <p>{answer}</p>
+                    {link && (
+                      <p class="guide-more">
+                        <a href={link.href}>
+                          {link.label}
+                          <Icon name="arrowRight" size={16} />
+                        </a>
+                      </p>
+                    )}
+                  </div>
+                ))
+              }
+            </div>
+            <p class="guide-updated">Prices last checked: <time datetime={pricesChecked.iso}>{pricesChecked.label}</time></p>
+          </section>
+
+          <section class="guide-section guide-review" id="review" aria-labelledby="review-title">
+            <h2 class="guide-h2" id="review-title">Want a second opinion on your own numbers?</h2>
+            <p class="guide-answer">Bring one job to a free {review.minutes}-minute AI review.</p>
+            <div class="guide-cta">
+              <a class="btn btn-primary" {...booking}>Book a free {review.minutes}-minute AI review</a>
+            </div>
+            <BookingPanel />
+          </section>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <SiteFooter base="/" />
+
+  <script>
+    // Marks the section being read in the "On this page" list.
+    const tocLinks = new Map(
+      [...document.querySelectorAll<HTMLAnchorElement>(".guide-toc a")].map((link) => [link.hash.slice(1), link]),
+    );
+    let currentLink: HTMLAnchorElement | undefined;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const link = tocLinks.get(entry.target.id);
+          if (!entry.isIntersecting || !link || link === currentLink) continue;
+          currentLink?.removeAttribute("aria-current");
+          link.setAttribute("aria-current", "location");
+          currentLink = link;
+        }
+      },
+      { rootMargin: "-25% 0px -65% 0px" },
+    );
+    tocLinks.forEach((_, id) => {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    });
+  </script>
+
+  <BookingScript />
+</BaseLayout>
+
+<style>
+  /* This guide's own pieces: links in its tables, four- and five-column tables, the example label and the example calculation. */
+
+  .cost-table a {
+    color: var(--ink);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: #c7c6c1;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s;
+  }
+
+  .cost-table a:hover {
+    text-decoration-color: currentColor;
+  }
+
+  .cost-table caption {
+    margin-bottom: 1rem;
+    color: var(--ink-3);
+    font-size: 0.875rem;
+    text-align: left;
+  }
+
+  .cost-table tbody th {
+    width: 18%;
+    color: var(--ink);
+  }
+
+  .cost-tools a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    white-space: nowrap;
+  }
+
+  .cost-routes thead th {
+    color: var(--ink-2);
+  }
+
+  .cost-label + .guide-h2 {
+    margin-top: 0.75rem;
+  }
+
+  .cost-sums b {
+    font-weight: 500;
+  }
+
+  .cost-calc {
+    margin-top: 2.25rem;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border-radius: var(--r-lg);
+    background: var(--card);
+  }
+
+  .cost-calc-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+    font-size: 1.0625rem;
+    font-weight: 500;
+  }
+
+  .cost-calc .guide-h3 {
+    margin-top: 2rem;
+  }
+
+  .cost-calc .guide-table-wrap {
+    margin-top: 1.25rem;
+  }
+
+  .cost-maths tbody th {
+    width: 28%;
+  }
+
+  .cost-maths b {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .cost-calc-end {
+    margin-top: 1.25rem;
+    color: var(--ink);
+  }
+
+  .cost-calc-end b {
+    font-weight: 500;
+  }
+
+  @media (max-width: 760px) {
+    .cost-table caption {
+      display: block;
+    }
+
+    .cost-table tbody th {
+      width: auto;
+    }
+
+    .cost-table td {
+      margin-top: 0.75rem;
+    }
+
+    .cost-table td::before {
+      content: attr(data-label);
+      display: block;
+      margin-bottom: 0.125rem;
+      color: var(--ink-3);
+      font-size: 0.8125rem;
+    }
+  }
+</style>
