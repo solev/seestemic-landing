@@ -14,11 +14,7 @@
 // update `wage`, and the savings example follows.
 import { aiSubscription, care, eur, founding, pilot, pilotOpen, review, setup, usd } from "./offer";
 import { grantChecked } from "./estonia";
-
-export const costGuidePage = { label: "What AI automation costs", href: "/ai-automation-cost-small-business" } as const;
-
-/** The guides hub, the breadcrumb's middle step. It arrives with the EIS grants guide, as `guidesPage` in site.ts. */
-export const guidesHub = { label: "Guides", href: "/guides" } as const;
+import { eisGrantsPage } from "./site";
 
 /** Shown as "Prices last checked" and used as the Article's dateModified. */
 export const pricesChecked = { iso: "2026-10-22", label: "22 Oct 2026", long: "22 October 2026" } as const;
@@ -396,7 +392,7 @@ export const faqs: Faq[] = [
   {
     question: "Can an EIS grant pay for AI automation in Estonia?",
     answer: `Possibly, for larger setups. EIS’s software grant covers up to half of a software project’s cost, from €2,000 to €5,000, so the project needs to cost at least €4,000. You need at least €50,000 average yearly revenue over the last two years, and you must apply before the work starts. Monthly fees aren’t covered. Checked ${grantChecked.label}.`,
-    link: { href: "/eis-grants-ai-software-small-business", label: "Read our EIS grants guide" },
+    link: { href: eisGrantsPage.href, label: "Read our EIS grants guide" },
   },
   {
     question: "What does Seestemic charge?",

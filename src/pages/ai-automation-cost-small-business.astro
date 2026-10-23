@@ -7,16 +7,14 @@ import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import { aiSubscription, care, eur, founding, pilot, pilotOpen, review, setup, usd } from "../data/offer";
 import { orgId, siteUrl, toJsonLd, websiteId } from "../data/schema";
-import { estoniaPage, introCallUrl, linkedInUrl } from "../data/site";
+import { costGuidePage, eisGrantsPage, estoniaPage, guidesPage, introCallUrl, linkedInUrl } from "../data/site";
 import { eisAiGrantUrl, eisGrantUrl, grantChecked } from "../data/estonia";
 import {
   answers,
   comparison,
-  costGuidePage,
   costs,
   dataNote,
   faqs,
-  guidesHub,
   h1,
   hiddenCosts,
   pricesChecked,
@@ -60,7 +58,7 @@ const setupLabel = pilotOpen ? eur(pilot.price) : `from ${eur(setup.from)}`;
 
 // Structured data. The organisation and website are defined once, in src/data/schema.ts; this page points at them by @id.
 const pageUrl = new URL(costGuidePage.href, siteUrl).href;
-const guidesUrl = new URL(guidesHub.href, siteUrl).href;
+const guidesUrl = new URL(guidesPage.href, siteUrl).href;
 const author = {
   "@type": "Person",
   name: "Martin Solev",
@@ -106,7 +104,7 @@ const schema = {
       "@id": `${pageUrl}#breadcrumb`,
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
-        { "@type": "ListItem", position: 2, name: guidesHub.label, item: guidesUrl },
+        { "@type": "ListItem", position: 2, name: guidesPage.label, item: guidesUrl },
         { "@type": "ListItem", position: 3, name: "AI automation cost", item: pageUrl },
       ],
     },
@@ -135,7 +133,7 @@ const schema = {
           <nav class="guide-crumbs" aria-label="Breadcrumb">
             <ol>
               <li><a href="/">Home</a></li>
-              <li><a href={guidesHub.href}>{guidesHub.label}</a></li>
+              <li><a href={guidesPage.href}>{guidesPage.label}</a></li>
               <li><span aria-current="page">AI automation cost</span></li>
             </ol>
           </nav>
@@ -509,7 +507,7 @@ const schema = {
               2026.
             </p>
             <p class="guide-more">
-              <a href="/eis-grants-ai-software-small-business">
+              <a href={eisGrantsPage.href}>
                 Read our EIS grants guide
                 <Icon name="arrowRight" size={16} />
               </a>
@@ -603,84 +601,8 @@ const schema = {
 </BaseLayout>
 
 <style>
-  /*
-    The article head, byline, answer box, sources and closing review match the EIS grants guide's guide-article styles,
-    which aren't on main yet. Once that guide is merged, delete this first block; global.css then covers it.
-  */
-  .guide-article-head {
-    display: grid;
-    grid-template-columns: 12.5rem minmax(0, 1fr);
-    gap: clamp(2.5rem, 6vw, 6rem);
-    padding-top: clamp(2rem, 4vw, 3.5rem);
-  }
+  /* This guide's own pieces: links in its tables, four- and five-column tables, the example label and the example calculation. */
 
-  .guide-article-intro {
-    grid-column: 2;
-  }
-
-  .guide-crumbs ol {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem 0.5rem;
-    color: var(--ink-3);
-    font-size: 0.875rem;
-  }
-
-  .guide-crumbs li + li::before {
-    content: "/";
-    margin-right: 0.5rem;
-    color: var(--line-connector);
-  }
-
-  .guide-crumbs a {
-    color: var(--ink-2);
-    transition: color 0.2s var(--ease);
-  }
-
-  .guide-crumbs a:hover {
-    color: var(--ink);
-  }
-
-  .guide-article-title {
-    max-width: 24ch;
-    margin-top: 1.25rem;
-    font-size: clamp(2.25rem, 1.45rem + 2.3vw, 3.25rem);
-    text-wrap: balance;
-  }
-
-  .guide-byline {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem 1.25rem;
-    margin-top: 1.25rem;
-    color: var(--ink-2);
-    font-size: 0.9375rem;
-  }
-
-  .guide-summary {
-    max-width: 44rem;
-    margin-top: 2rem;
-    padding: clamp(1.25rem, 3vw, 1.75rem) clamp(1.25rem, 3vw, 2rem);
-    border-radius: var(--r-lg);
-    background: var(--card);
-  }
-
-  .guide-summary-text {
-    font-size: clamp(1.125rem, 1.06rem + 0.25vw, 1.25rem);
-    line-height: 1.55;
-    letter-spacing: -0.006em;
-  }
-
-  .guide-summary-checked {
-    margin-top: 1rem;
-    padding-top: 0.875rem;
-    border-top: 1px solid var(--line-strong);
-    color: var(--ink-3);
-    font-size: 0.875rem;
-  }
-
-  .guide-byline a,
-  .guide-points a,
   .cost-table a {
     color: var(--ink);
     font-weight: 500;
@@ -691,43 +613,9 @@ const schema = {
     transition: text-decoration-color 0.2s;
   }
 
-  .guide-byline a:hover,
-  .guide-points a:hover,
   .cost-table a:hover {
     text-decoration-color: currentColor;
   }
-
-  .guide-article-body {
-    margin-top: clamp(3.5rem, 7vw, 5rem);
-    padding-bottom: clamp(5rem, 10vw, 8rem);
-  }
-
-  .guide-h3 {
-    max-width: 40rem;
-    margin-top: 3rem;
-    font-size: clamp(1.1875rem, 1.12rem + 0.3vw, 1.375rem);
-    font-weight: 500;
-    line-height: 1.25;
-    letter-spacing: -0.016em;
-  }
-
-  .guide-h3 + .guide-points {
-    margin-top: 1.25rem;
-  }
-
-  .guide-qa-item .guide-more {
-    margin-top: 0.625rem;
-  }
-
-  .guide-review .guide-cta {
-    margin-top: 1.75rem;
-  }
-
-  .guide-review :global(.cta-booking) {
-    max-width: none;
-  }
-
-  /* This guide's own pieces: four- and five-column tables, the example label and the example calculation. */
 
   .cost-table caption {
     margin-bottom: 1rem;
@@ -800,12 +688,6 @@ const schema = {
 
   .cost-calc-end b {
     font-weight: 500;
-  }
-
-  @media (max-width: 1024px) {
-    .guide-article-head {
-      display: block;
-    }
   }
 
   @media (max-width: 760px) {

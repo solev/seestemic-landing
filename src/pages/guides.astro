@@ -4,7 +4,7 @@ import Icon from "../components/Icon.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import { siteUrl, toJsonLd, websiteId } from "../data/schema";
-import { eisGrantsPage, estoniaPage, guidesPage } from "../data/site";
+import { costGuidePage, eisGrantsPage, estoniaPage, guidesPage } from "../data/site";
 
 // The guides hub. It exists so guide breadcrumbs (Home → Guides → guide) point at a real page.
 const title = "Guides for Small Businesses on AI in Estonia | Seestemic";
@@ -21,6 +21,11 @@ const guides = [
     ...eisGrantsPage,
     title: "Can an EIS grant pay for AI or new software?",
     text: "Which EIS grants for AI and software are open, who qualifies, and what to check before you apply.",
+  },
+  {
+    ...costGuidePage,
+    title: "How much does AI automation cost a small business?",
+    text: "Setup, AI subscriptions, upkeep and your own time, with official tool prices and a worked example.",
   },
 ];
 
