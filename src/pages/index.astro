@@ -31,6 +31,11 @@ const booking = {
 <BaseLayout
   title="AI Helpers for Small Businesses in Estonia | Seestemic"
   description={`We set up AI helpers for quotes, email, bookings and invoices inside your own tools. You approve first. EU data. Book a free ${review.minutes}-min AI review.`}
+  image={{
+    src: "/og/home.jpg",
+    alt: "Seestemic: Let AI handle the busywork, above an example window where the Quotes teammate gets a new request from a dental clinic",
+  }}
+  video={{ src: "/og/home.mp4", width: 1280, height: 720 }}
 >
   <script slot="head" type="application/ld+json" is:inline set:html={toJsonLd(homeSchema)} />
   <SiteHeader />
