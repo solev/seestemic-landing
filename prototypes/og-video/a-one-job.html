@@ -1,0 +1,616 @@
+<!doctype html>
+<!--
+THESIS: The hero in miniature: the promise stays on white, and one real job runs start to finish in the window, set large enough to read where it plays.
+OWN-WORLD: Painted Showroom. The hero's own layout: logo and headline with the ink helper on white, dawn untouched as the rounded stage, the window with its Example pill and avatar rail, spinner then check, one ink action, the site's rise and blink.
+STORY: A request waits → the window rises → four steps check in → the quote is ready → Approve & send → sent, the helper smiles → the window drops away and the next request rises in.
+FIRST VIEWPORT: Frame 0 is a finished card: logo, headline, the dawn stage with the window peeking. The centre is painting only.
+FORM: One job, start to finish (3 of 7 · ae877dd0).
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>og:video A · One job, start to finish</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="./shared/og.css" />
+    <style>
+      .top {
+        position: absolute;
+        top: 46px;
+        left: 0;
+        right: 0;
+        display: grid;
+        justify-items: center;
+        gap: 14px;
+      }
+
+      .top .logo {
+        font-size: 28px;
+      }
+
+      .title {
+        font-size: 80px;
+        font-weight: 500;
+        line-height: 1.06;
+        letter-spacing: -0.028em;
+        white-space: nowrap;
+      }
+
+      .h1-helper {
+        display: inline-block;
+        width: 0.98em;
+        height: 0.98em;
+        margin: 0 0.02em;
+        vertical-align: -0.17em;
+      }
+
+      /* The hero stage as a band: dawn untouched, rounded on top, running off the bottom. */
+      .stage {
+        position: absolute;
+        top: 232px;
+        left: 40px;
+        right: 40px;
+        bottom: -40px;
+        isolation: isolate;
+        overflow: hidden;
+        border-radius: 32px;
+        background: #d8c6b5;
+      }
+
+      /* Larger than the band so the dawn's ridge (54% down the painting)
+         lands near band-y 90, above the window's peek edge at 168. */
+      .stage-art {
+        position: absolute;
+        top: -431px;
+        left: 0;
+        z-index: -1;
+        width: 100%;
+        height: 975px;
+        object-fit: cover;
+      }
+
+      /* Working position; frame 0 holds it lower, peeking. */
+      .window {
+        position: absolute;
+        top: 20px;
+        left: 64px;
+        right: 64px;
+        height: 640px;
+        overflow: hidden;
+        border-radius: 24px;
+        background: #fff;
+        box-shadow:
+          0 0 0 1px rgb(0 0 0 / 0.05),
+          var(--float);
+      }
+
+      .window-bar {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        height: 52px;
+        padding: 0 16px 0 22px;
+        border-bottom: 1px solid var(--line);
+        background: var(--chrome);
+      }
+
+      .window-dots {
+        display: flex;
+        gap: 9px;
+      }
+
+      .window-dots i {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: var(--line-strong);
+      }
+
+      .window-title {
+        color: var(--ink-2);
+        font-size: 19px;
+        font-weight: 600;
+      }
+
+      .window-bar .tag {
+        justify-self: end;
+        font-size: 16px;
+      }
+
+      .window-body {
+        display: grid;
+        grid-template-columns: 88px minmax(0, 1fr);
+        height: calc(100% - 52px);
+      }
+
+      /* The sidebar's narrow-width collapse: an avatar rail. */
+      .rail {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 14px 10px;
+        border-right: 1px solid var(--line);
+        background: var(--chrome);
+      }
+
+      .rail li {
+        display: grid;
+        place-items: center;
+        height: 64px;
+        border-radius: 16px;
+      }
+
+      .rail li[aria-selected] {
+        background: #fff;
+        box-shadow:
+          0 0 0 1px var(--line),
+          0 1px 3px rgb(0 0 0 / 0.05);
+      }
+
+      .rail .helper {
+        width: 42px;
+        height: 42px;
+      }
+
+      .pane {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+      }
+
+      .pane-head {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        height: 80px;
+        padding: 0 30px;
+        border-bottom: 1px solid var(--line);
+        white-space: nowrap;
+      }
+
+      .pane-head .helper {
+        width: 48px;
+        height: 48px;
+        flex: none;
+      }
+
+      .pair {
+        display: flex;
+        align-items: baseline;
+        gap: 14px;
+        min-width: 0;
+      }
+
+      .pair b {
+        font-size: 40px;
+        font-weight: 600;
+        line-height: 1.1;
+        letter-spacing: -0.022em;
+      }
+
+      .pair span {
+        color: var(--ink-3);
+        font-size: 26px;
+        line-height: 1.2;
+      }
+
+      .pane-view {
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+        /* Messages scroll softly under the pane header. */
+        mask-image: linear-gradient(#0000, #000 22px);
+      }
+
+      .stream {
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+        padding: 22px 30px;
+        white-space: nowrap;
+      }
+
+      .mail {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        padding: 20px 22px;
+        border-radius: 16px;
+        background: var(--card);
+      }
+
+      .mail-avatar {
+        display: grid;
+        place-items: center;
+        width: 52px;
+        height: 52px;
+        flex: none;
+        border-radius: 50%;
+        background: #e6dfd3;
+        font-size: 24px;
+        font-weight: 600;
+      }
+
+      .attach {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-left: auto;
+        padding: 8px 18px;
+        border-radius: 12px;
+        background: #fff;
+        box-shadow: 0 0 0 1px var(--line);
+        color: var(--ink-2);
+        font-size: 26px;
+        font-weight: 500;
+      }
+
+      .steps {
+        display: grid;
+        gap: 14px;
+        padding: 0 4px;
+      }
+
+      .step {
+        display: grid;
+        grid-template-columns: 48px minmax(0, 1fr);
+        align-items: center;
+        gap: 20px;
+        font-size: 40px;
+        font-weight: 500;
+        line-height: 1.2;
+        letter-spacing: -0.015em;
+      }
+
+      .step-mark {
+        position: relative;
+        width: 48px;
+        height: 48px;
+      }
+
+      .step-spin {
+        position: absolute;
+        inset: 6px;
+        border: 4px solid var(--line-strong);
+        border-top-color: var(--ink);
+        border-radius: 50%;
+      }
+
+      .step-done,
+      .sent .icon {
+        color: var(--ok);
+      }
+
+      .step-done {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--ok-soft);
+      }
+
+      .step-done .icon,
+      .sent .icon {
+        stroke-width: 2.4;
+      }
+
+      .doc {
+        display: grid;
+        gap: 14px;
+        padding: 22px 24px;
+        border-radius: 16px;
+        background: #fff;
+        box-shadow:
+          0 0 0 1px var(--line),
+          0 16px 40px -20px rgb(0 0 0 / 0.22);
+      }
+
+      .doc-head {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .doc-icon {
+        display: grid;
+        place-items: center;
+        width: 52px;
+        height: 52px;
+        flex: none;
+        border-radius: 12px;
+        background: var(--card);
+      }
+
+      .doc-status {
+        display: grid;
+        justify-items: end;
+        margin-left: auto;
+      }
+
+      .doc-status > span {
+        grid-area: 1 / 1;
+        padding: 8px 18px;
+        border-radius: 999px;
+        background: var(--card-strong);
+        color: var(--ink-2);
+        font-size: 24px;
+        font-weight: 600;
+      }
+
+      .doc-status > .is-sent {
+        background: var(--ok-soft);
+        color: var(--ok);
+      }
+
+      .doc-total {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        padding-top: 12px;
+        border-top: 1px solid var(--line);
+      }
+
+      .doc-total span {
+        color: var(--ink-2);
+        font-size: 30px;
+        font-weight: 500;
+      }
+
+      .doc-total b {
+        font-size: 46px;
+        font-weight: 600;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+      }
+
+      .doc-end {
+        display: grid;
+      }
+
+      .doc-end > * {
+        grid-area: 1 / 1;
+      }
+
+      .actions {
+        display: flex;
+        gap: 12px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        height: 64px;
+        padding: 0 30px;
+        border-radius: 999px;
+        font-size: 30px;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+      }
+
+      .btn-primary {
+        background: var(--ink);
+        color: #fff;
+      }
+
+      .btn-secondary {
+        background: var(--card-strong);
+      }
+
+      .sent {
+        justify-self: start;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        height: 64px;
+        padding: 0 24px;
+        border-radius: 12px;
+        background: var(--ok-soft);
+        color: var(--ok);
+        font-size: 30px;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="og">
+      <header class="top">
+        <div class="logo"><span data-logo-mark></span><span class="logo-word">Seestemic</span></div>
+        <h1 class="title">Let <span data-helper="h1"></span> AI handle the busywork</h1>
+      </header>
+
+      <section class="stage">
+        <img class="stage-art" src="/src/assets/art/hero-dawn.webp" alt="" />
+
+        <div class="window">
+          <header class="window-bar">
+            <span class="window-dots"><i></i><i></i><i></i></span>
+            <span class="window-title">Your helpers</span>
+            <span class="tag">Example</span>
+          </header>
+          <div class="window-body">
+            <ul class="rail"></ul>
+            <div class="pane">
+              <div class="pane-head">
+                <span data-helper="pane"></span>
+                <p class="pair"><b>Quotes</b><span>Turns requests into ready-to-send quotes</span></p>
+              </div>
+              <div class="pane-view">
+                <div class="stream">
+                  <article class="mail">
+                    <span class="mail-avatar">D</span>
+                    <p class="pair"><b>Dental clinic</b><span>New customer</span></p>
+                    <span class="attach" data-icon="photo">4 photos</span>
+                  </article>
+
+                  <ol class="steps">
+                    <li class="step">
+                      <span class="step-mark"><span class="step-spin"></span><span class="step-done" data-icon="check"></span></span>
+                      <span class="step-text">Read the email and the 4 photos</span>
+                    </li>
+                    <li class="step">
+                      <span class="step-mark"><span class="step-spin"></span><span class="step-done" data-icon="check"></span></span>
+                      <span class="step-text">Matched 3 items on your price list</span>
+                    </li>
+                    <li class="step">
+                      <span class="step-mark"><span class="step-spin"></span><span class="step-done" data-icon="check"></span></span>
+                      <span class="step-text">Found a free site visit: Thu <span class="tnum">10:00</span></span>
+                    </li>
+                    <li class="step">
+                      <span class="step-mark"><span class="step-spin"></span><span class="step-done" data-icon="check"></span></span>
+                      <span class="step-text">Drafted the quote in your template</span>
+                    </li>
+                  </ol>
+
+                  <article class="doc">
+                    <div class="doc-head">
+                      <span class="doc-icon" data-icon="doc"></span>
+                      <p class="pair"><b>Quote</b><span class="tnum">Q-1042</span></p>
+                      <span class="doc-status">
+                        <span class="is-drafting">Drafting…</span>
+                        <span class="is-ready">Ready for you</span>
+                        <span class="is-sent">Sent</span>
+                      </span>
+                    </div>
+                    <div class="doc-total"><span>Total</span><b class="tnum">€4,860</b></div>
+                    <div class="doc-end">
+                      <div class="actions">
+                        <span class="btn btn-primary">Approve &amp; send</span>
+                        <span class="btn btn-secondary">Edit</span>
+                      </div>
+                      <div class="sent" data-icon="check">Sent to the clinic</div>
+                    </div>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module">
+      import { blink, boot, happy, helperSVG, icon, look, offsetIn, pop, show } from "./shared/og.js";
+
+      const D = 10;
+      const $ = (s, root = document) => root.querySelector(s);
+      const $$ = (s, root = document) => [...root.querySelectorAll(s)];
+      const FADE = { from: { opacity: 0 }, to: { opacity: 1 } };
+
+      // Hues from src/data/helpers.ts, in the hero sidebar's order.
+      const RAIL = ["#F07C3A", "#2FB39A", "#7A5CFA", "#E9558B", "#6BAF4B", "#E8B22F"];
+      $(".rail").innerHTML = RAIL.map(
+        (color, i) => `<li${i === 0 ? " aria-selected" : ""}>${helperSVG({ color, happy: false })}</li>`,
+      ).join("");
+      $('[data-helper="h1"]').outerHTML = helperSVG({ cls: "h1-helper" });
+      $('[data-helper="pane"]').outerHTML = helperSVG({ color: RAIL[0], happy: false });
+      $$("[data-icon]").forEach((el) => {
+        const name = el.dataset.icon;
+        el.insertAdjacentHTML("afterbegin", icon(name, name === "check" ? 30 : 28));
+      });
+
+      function build(tl) {
+        const win = $(".window");
+        const stream = $(".stream");
+        const helper = $(".h1-helper");
+
+        // Beats (seconds).
+        const RISE_AT = 1.0;
+        const RISE = 1.1; // the site's window rise
+        const STEP_AT = [1.7, 2.25, 2.8, 3.55];
+        const STEP_WORK = [0.45, 0.45, 0.45, 0.85];
+        const SCROLL_AT = 3.45;
+        const DOC = 3.65;
+        const READY = STEP_AT[3] + STEP_WORK[3];
+        const PRESS = 5.15;
+        const SENT = 5.45;
+        const SINK = 7.7;
+        const RESET = SINK + 0.6; // the window is below the frame from here
+        const BACK = D - RISE;
+
+        // 1. The window peeks at rest, rises to work, drops away when done, and the next request rises in.
+        const PEEK = 148;
+        const AWAY = 488;
+        const y = (px) => ({ transform: `translateY(${px}px)` });
+        tl.track(win, [
+          [0, y(PEEK)],
+          [RISE_AT, y(PEEK), "out"],
+          [RISE_AT + RISE, y(0)],
+          [SINK, y(0), "in"],
+          [RESET, y(AWAY)],
+          [BACK, y(AWAY), "out"],
+          [D, y(PEEK)],
+        ]);
+
+        // 2. Steps rise with a spinner, then the check pops; the last one waits on the quote.
+        $$(".step").forEach((step, i) => {
+          const done = STEP_AT[i] + STEP_WORK[i];
+          show(tl, step, [[STEP_AT[i], RESET]], { out: 0 });
+          show(tl, $(".step-spin", step), [[0, done]], { ...FADE, out: 0 });
+          pop(tl, $(".step-done", step), [[done, RESET]], { out: 0 });
+          tl.track($(".step-text", step), [
+            [0, { color: "#5d5d5a" }],
+            [done, { color: "#5d5d5a" }],
+            [done + 0.3, { color: "#0b0b0b" }],
+            [RESET, { color: "#0b0b0b" }],
+            [RESET, { color: "#5d5d5a" }],
+          ]);
+        });
+        tl.cycle($$(".step-spin"), [{ transform: "rotate(0turn)" }, { transform: "rotate(1turn)" }], D / 12);
+
+        // 3. The stream scrolls once, so the last step and the quote share the view:
+        // the quote's action row ends just above the frame's bottom edge.
+        const doc = $(".doc");
+        const docBottom = offsetIn(doc, $(".og")).y + doc.offsetHeight;
+        const scroll = Math.max(0, docBottom - 22 - (720 - 18));
+        tl.track(stream, [
+          [0, y(0)],
+          [SCROLL_AT, y(0), "inout"],
+          [SCROLL_AT + 0.6, y(-scroll)],
+          [RESET, y(-scroll)],
+          [RESET, y(0)],
+        ]);
+
+        // 4. The quote: drafting, ready, one ink action, sent.
+        show(tl, doc, [[DOC, RESET]], { out: 0 });
+        const status = (cls, spans, out = 0.2) => show(tl, $(`.doc-status .${cls}`), spans, { ...FADE, dur: 0.25, out });
+        status("is-drafting", [[0, READY]]);
+        status("is-ready", [[READY + 0.05, SENT]]);
+        status("is-sent", [[SENT + 0.05, RESET]], 0);
+        const press = (s) => ({ transform: `scale(${s})` });
+        tl.track($(".btn-primary"), [
+          [0, press(1)],
+          [PRESS, press(1), "out"],
+          [PRESS + 0.12, press(0.94), "out"],
+          [PRESS + 0.4, press(1)],
+        ]);
+        // Like the live demo's data-after-step: the OK is asked for only once there is something to approve.
+        show(tl, $(".actions"), [[READY, SENT]], { ...FADE, out: 0.2 });
+        show(tl, $(".sent"), [[SENT + 0.1, RESET]], { out: 0 });
+
+        // The headline helper watches the work, smiles when it's sent, looks at you while the stage is empty, then watches the next one arrive.
+        look(tl, helper, [
+          [0, 0, 6],
+          [1.2, 1, 7],
+          [READY - 0.1, 5, 6],
+          [PRESS - 0.35, 0, 7, 0.35],
+          [SINK, 0, 8, 0.5],
+          [RESET + 0.1, 0, 0, 0.4],
+          [BACK + 0.2, 0, 6, 0.5],
+        ]);
+        happy(tl, helper, [[SENT + 0.1, 7.35]]);
+        const pose = (lift) => ({ transform: lift ? "translateY(-3%) rotate(-2deg)" : "translateY(0%) rotate(0deg)" });
+        tl.track(helper, [
+          [0, pose(false)],
+          [SENT + 0.1, pose(false), "out"],
+          [SENT + 0.55, pose(true)],
+          [7.25, pose(true), "out"],
+          [7.7, pose(false)],
+        ]);
+        blink(tl, helper, [0.4, 8.75]);
+      }
+
+      boot(build, { duration: D, poster: 0 });
+    </script>
+  </body>
+</html>

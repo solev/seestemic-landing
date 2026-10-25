@@ -1,0 +1,26 @@
+{
+  "a": {
+    "video": "a.mp4",
+    "bytes": 962737,
+    "duration": 10,
+    "fps": 30,
+    "width": 1280,
+    "height": 720
+  },
+  "b": {
+    "video": "b.mp4",
+    "bytes": 368349,
+    "duration": 10,
+    "fps": 30,
+    "width": 1280,
+    "height": 720
+  },
+  "c": {
+    "video": "c.mp4",
+    "bytes": 1859438,
+    "duration": 10,
+    "fps": 30,
+    "width": 1280,
+    "height": 720
+  }
+}

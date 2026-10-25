@@ -1,0 +1,4 @@
+node_modules/
+# Regenerable review frames; the contact sheets stay
+out/review/*-[0-9][0-9][0-9].png
+out/*@2x.png

@@ -1,0 +1,11 @@
+{
+  "name": "seestemic-og-video-prototype",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "render": "node render.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.56.0"
+  }
+}

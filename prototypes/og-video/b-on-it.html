@@ -1,0 +1,218 @@
+<!doctype html>
+<!--
+THESIS: Seestemic in one exchange: you say it in plain words, a helper with a face answers "On it."
+OWN-WORLD: Painted Showroom's teammate section at poster scale. Linen card, giant ink helper rising above the card and cropped only by the bottom edge, ink "say" bubbles, the white lift reply, Geist, the site's happy pose and blink.
+STORY: Asks arrive one at a time; each time the helper looks at it, types, says "On it." and brightens. Three asks, three replies, and the stack lands back where it started.
+FIRST VIEWPORT: Frame 0 is a finished card (logo, heading, three asks, helper answering); the centre holds no words a play button could cover.
+FORM: The helper says "On it." (2 of 7 · ae877dd0).
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>og:video B · On it.</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="./shared/og.css" />
+    <style>
+      .top-logo {
+        position: absolute;
+        top: 44px;
+        left: 48px;
+        font-size: 28px;
+      }
+
+      /* As on the site: the helper rises through the card's top edge and runs off the right,
+         and only the card's bottom edge cuts it. */
+      .card {
+        position: absolute;
+        inset: 156px 40px 76px;
+        border-radius: 32px;
+        background: var(--card);
+        clip-path: inset(-1000px -1000px 0 -1000px);
+      }
+
+      .copy {
+        position: absolute;
+        top: 54px;
+        left: 64px;
+      }
+
+      .heading {
+        font-size: 66px;
+        font-weight: 500;
+        line-height: 1.04;
+        letter-spacing: -0.028em;
+      }
+
+      .asks {
+        position: relative;
+        height: 214px;
+        margin-top: 40px;
+      }
+
+      .say {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 13px 24px 14px;
+        border-radius: 28px 28px 28px 8px;
+        background: var(--ink);
+        color: #fff;
+        font-size: 27px;
+        line-height: 1.35;
+        white-space: nowrap;
+      }
+
+      .figure {
+        position: absolute;
+        top: -136px;
+        left: 630px;
+        width: 760px;
+        height: 760px;
+      }
+
+      .figure .helper {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* "On it." and the typing bubble before it share one cell, so both grow from the tail
+         corner by the helper's eye, clear of a centred play button. */
+      .voice {
+        position: absolute;
+        top: 44px;
+        left: 664px;
+        display: grid;
+      }
+
+      .voice > * {
+        grid-area: 1 / 1;
+        place-self: end;
+        border-radius: 30px 30px 8px;
+        background: #fff;
+        box-shadow: var(--lift);
+        transform-origin: 100% 100%;
+      }
+
+      .reply {
+        padding: 14px 28px 16px;
+        font-size: 40px;
+        font-weight: 500;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+      }
+
+      /* The site's typing bubble at poster scale. */
+      .typing {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        height: 78px;
+        padding: 0 30px;
+      }
+
+      .typing i {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: #a3a29d;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="og">
+      <div class="logo top-logo"><span data-logo-mark></span><span class="logo-word">Seestemic</span></div>
+
+      <div class="card">
+        <div class="copy">
+          <h1 class="heading">Just tell it<br />what you need</h1>
+          <ul class="asks">
+            <li class="say">Chase the café’s late invoice.</li>
+            <li class="say">Reply to new reviews in my tone.</li>
+            <li class="say">Always offer Thursday visits.</li>
+          </ul>
+        </div>
+        <div class="figure"><span data-helper="giant"></span></div>
+        <div class="voice">
+          <p class="typing" aria-hidden="true"><i></i><i></i><i></i></p>
+          <p class="reply">On it.</p>
+        </div>
+      </div>
+    </main>
+
+    <script type="module">
+      import { blink, boot, happy, helperSVG, look, pop } from "./shared/og.js";
+
+      const D = 10;
+      const $ = (s) => document.querySelector(s);
+
+      $('[data-helper="giant"]').outerHTML = helperSVG({ tilt: -9 });
+
+      function build(tl) {
+        const helper = $(".figure .helper");
+        const asks = [...document.querySelectorAll(".say")];
+        const SLOT = 76; // bubble height + gap
+        const at = (slot, dy = 0, opacity = 1) => ({ transform: `translateY(${slot * SLOT + dy}px)`, opacity });
+
+        // Three beats; each moves the stack up one slot, so after three the order is back where it began.
+        const BEATS = [0.5, 3.6, 6.7];
+        const keys = asks.map((_, i) => [[0, at(i)]]);
+        BEATS.forEach((T, k) => {
+          asks.forEach((_, i) => {
+            const slot = (((i - k) % 3) + 3) % 3;
+            if (slot === 0) {
+              keys[i].push(
+                [T + 0.1, at(0), "inout"],
+                [T + 0.45, at(0, -18, 0)],
+                [T + 0.45, at(2, 18, 0)],
+                [T + 0.6, at(2, 18, 0), "out"],
+                [T + 1.05, at(2)],
+              );
+            } else {
+              keys[i].push([T + 0.25, at(slot), "inout"], [T + 0.75, at(slot - 1)]);
+            }
+          });
+        });
+        asks.forEach((el, i) => tl.track(el, keys[i]));
+
+        // "On it." steps aside for each new ask; typing dots hold its corner while the helper reads,
+        // then the reply grows back out of the same corner.
+        const TYPE = 0.5;
+        const REPLY = 1.15;
+        pop(
+          tl,
+          $(".typing"),
+          BEATS.map((T) => [T + TYPE, T + REPLY]),
+          { gone: { opacity: 0, transform: "scale(0.9)" }, out: 0.12 },
+        );
+        const dot = (opacity, y) => ({ opacity, transform: `translateY(${y}px)`, easing: "ease-in-out" });
+        tl.cycle(".typing i", [{ ...dot(0.4, 0), offset: 0 }, { ...dot(1, -7), offset: 0.3 }, { ...dot(0.4, 0), offset: 0.6 }, { ...dot(0.4, 0), offset: 1 }], 1, {
+          stagger: 0.15,
+        });
+        pop(
+          tl,
+          $(".reply"),
+          BEATS.map((T, k) => [k === 0 ? 0 : BEATS[k - 1] + REPLY, T]).concat([[BEATS.at(-1) + REPLY, D]]),
+          { from: { opacity: 0, transform: "scale(0.8)" }, gone: { opacity: 0, transform: "scale(0.9)" }, out: 0.2 },
+        );
+
+        // The helper glances at each new ask, brightens as it answers, then looks back at you.
+        const gaze = [[0, 0, 0]];
+        BEATS.forEach((T) => gaze.push([T + 0.45, -7, 6], [T + 2.25, 0, 0]));
+        look(tl, helper, gaze);
+        happy(
+          tl,
+          helper,
+          BEATS.map((T) => [T + REPLY + 0.05, T + 2.15]),
+        );
+        const pose = (lift) => ({ transform: lift ? "translateY(-3%) rotate(-2deg)" : "translateY(0%) rotate(0deg)" });
+        const bob = [[0, pose(false)]];
+        BEATS.forEach((T) => bob.push([T + REPLY, pose(false), "out"], [T + REPLY + 0.45, pose(true)], [T + 2.1, pose(true), "out"], [T + 2.55, pose(false)]));
+        tl.track(helper, bob);
+        blink(tl, helper, [2.95, 9.4]);
+      }
+
+      boot(build, { duration: D, poster: 0 });
+    </script>
+  </body>
+</html>

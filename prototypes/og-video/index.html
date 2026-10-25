@@ -1,0 +1,510 @@
+<!doctype html>
+<!-- PROTOTYPE (throwaway): gallery for the og:video variants. Serve with `npm run render -- --serve`. -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>og:video prototypes · Seestemic</title>
+    <link rel="icon" href="data:," />
+    <style>
+      @font-face {
+        font-family: "Geist";
+        src: url("/src/assets/fonts/geist.woff2") format("woff2");
+        font-weight: 100 900;
+        font-display: swap;
+      }
+
+      :root {
+        --ink: #0b0b0b;
+        --ink-2: #5d5d5a;
+        --ink-3: #6b6b67;
+        --card: #f6f5f3;
+        --line: #e8e7e3;
+        --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      body {
+        background: #fff;
+        color: var(--ink);
+        font: 16px/1.55 "Geist", ui-sans-serif, system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      main {
+        width: min(100% - 48px, 1080px);
+        margin: 0 auto;
+        padding: 56px 0 180px;
+      }
+
+      h1 {
+        font-size: 40px;
+        font-weight: 500;
+        line-height: 1.1;
+        letter-spacing: -0.025em;
+      }
+
+      .intro {
+        max-width: 46rem;
+        margin-top: 14px;
+        color: var(--ink-2);
+        font-size: 18px;
+      }
+
+      .variant {
+        margin-top: 48px;
+      }
+
+      .variant-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 8px 24px;
+      }
+
+      h2 {
+        font-size: 28px;
+        font-weight: 500;
+        letter-spacing: -0.02em;
+      }
+
+      .links {
+        display: flex;
+        gap: 16px;
+        font-size: 14px;
+      }
+
+      .links a {
+        color: var(--ink-2);
+      }
+
+      .thesis {
+        max-width: 50rem;
+        margin-top: 6px;
+        color: var(--ink-2);
+      }
+
+      .player {
+        margin-top: 20px;
+        overflow: hidden;
+        border-radius: 20px;
+        background: var(--card);
+        aspect-ratio: 16 / 9;
+      }
+
+      .player video {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .spec {
+        margin-top: 12px;
+        color: var(--ink-3);
+        font: 500 13px/1.4 var(--mono);
+      }
+
+      h3 {
+        margin-top: 40px;
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      .wild {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
+        gap: 24px;
+        margin-top: 16px;
+      }
+
+      .wild figcaption {
+        margin-top: 10px;
+        color: var(--ink-2);
+        font-size: 14px;
+      }
+
+      /* A generic dark chat embed, roughly at the width chat apps give link previews. */
+      .chat {
+        padding: 16px;
+        border-radius: 12px;
+        background: #313338;
+      }
+
+      .embed {
+        max-width: 432px;
+        padding: 10px 14px 14px 12px;
+        border-left: 4px solid #fff;
+        border-radius: 4px;
+        background: #2b2d31;
+        color: #dbdee1;
+        font-size: 14px;
+        line-height: 1.35;
+      }
+
+      .embed small {
+        display: block;
+        color: #b5bac1;
+        font-size: 12px;
+      }
+
+      .embed b {
+        display: block;
+        margin-top: 6px;
+        color: #00a8fc;
+        font-weight: 600;
+      }
+
+      .embed p {
+        margin-top: 6px;
+      }
+
+      .embed .media {
+        position: relative;
+        margin-top: 12px;
+        overflow: hidden;
+        border-radius: 4px;
+        aspect-ratio: 16 / 9;
+        background: #1e1f22;
+      }
+
+      .embed .media :is(video, img) {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .play {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: grid;
+        place-items: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: rgb(0 0 0 / 0.6);
+        translate: -50% -50%;
+      }
+
+      .play::before {
+        content: "";
+        margin-left: 4px;
+        border-block: 9px solid transparent;
+        border-left: 15px solid #fff;
+      }
+
+      /* A generic light link card that only shows og:image. */
+      .card {
+        max-width: 340px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+        font-size: 14px;
+        line-height: 1.35;
+      }
+
+      .card img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 1200 / 630;
+        object-fit: cover;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .card div {
+        padding: 10px 12px 12px;
+        background: var(--card);
+      }
+
+      .card small {
+        color: var(--ink-3);
+        font-size: 12px;
+      }
+
+      .card b {
+        display: block;
+        margin-top: 2px;
+        font-weight: 600;
+      }
+
+      pre {
+        margin-top: 16px;
+        padding: 18px 20px;
+        overflow-x: auto;
+        border-radius: 14px;
+        background: var(--card);
+        font: 13px/1.6 var(--mono);
+      }
+
+      .notes {
+        display: grid;
+        gap: 6px;
+        max-width: 50rem;
+        margin-top: 12px;
+        padding-left: 1.2em;
+        color: var(--ink-2);
+      }
+
+      /* Switcher: same as the earlier PrototypeSwitcher (7d84598). */
+      .proto-switch {
+        position: fixed;
+        bottom: calc(env(safe-area-inset-bottom) + 64px);
+        left: 50%;
+        z-index: 2147483000;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 5px;
+        border-radius: 999px;
+        background: #111;
+        color: #fff;
+        box-shadow:
+          0 0 0 2px #ff2e88,
+          0 12px 30px rgb(0 0 0 / 0.35);
+        font: 600 13px/1 var(--mono);
+        translate: -50% 0;
+      }
+
+      .proto-switch button {
+        all: unset;
+        box-sizing: border-box;
+        cursor: pointer;
+      }
+
+      .proto-switch button:focus-visible {
+        outline: 2px solid #ffe14d;
+        outline-offset: 2px;
+      }
+
+      .proto-switch-arrow {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: #2a2a2a;
+      }
+
+      .proto-switch-arrow:hover {
+        background: #ff2e88;
+      }
+
+      .proto-switch-arrow path {
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .proto-switch-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        height: 34px;
+        padding: 0 10px;
+        white-space: nowrap;
+      }
+
+      .proto-switch-label b {
+        padding: 4px 7px;
+        border-radius: 6px;
+        background: #ffe14d;
+        color: #111;
+      }
+
+      .proto-switch-label small {
+        color: #9a9a9a;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>A moving share card for seestemic.com</h1>
+      <p class="intro">
+        Three looping 1280×720 cards in the site’s own look. Discord and Telegram play og:video inline, muted;
+        Facebook sometimes does. Everywhere else shows og:image, so frame 0 doubles as the poster and has to work on its own.
+      </p>
+
+      <div id="variants"></div>
+    </main>
+
+    <div class="proto-switch" role="group" aria-label="Prototype variant switcher">
+      <button type="button" class="proto-switch-arrow" data-dir="-1" aria-label="Previous variant">
+        <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M10 3 5 8l5 5"></path></svg>
+      </button>
+      <button type="button" class="proto-switch-label" title="Jump to the video">
+        <b data-key>A</b>
+        <span data-name></span>
+        <small data-count></small>
+      </button>
+      <button type="button" class="proto-switch-arrow" data-dir="1" aria-label="Next variant">
+        <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="m6 3 5 5-5 5"></path></svg>
+      </button>
+    </div>
+
+    <script type="module">
+      const VARIANTS = [
+        {
+          key: "A",
+          id: "a",
+          page: "a-one-job.html",
+          name: "One job, start to finish",
+          thesis:
+            "The hero in miniature: the promise on white, the dawn painting below, and the helpers window rising into it to run one real quote from email to “Sent”, big enough to read in a chat.",
+        },
+        {
+          key: "B",
+          id: "b",
+          page: "b-on-it.html",
+          name: "On it.",
+          thesis:
+            "Seestemic in one exchange: you say it in plain words, and the giant helper from the teammate section answers “On it.” Three asks, three answers, back where it started.",
+        },
+        {
+          key: "C",
+          id: "c",
+          page: "c-busywork.html",
+          name: "Busywork band",
+          thesis:
+            "The promise in one gesture: the field painting crowded with jobs taken word for word from the site, a wave of checks clears it while the headline helper watches, then the closing question.",
+        },
+      ];
+
+      const SITE = "https://www.seestemic.com";
+      const TITLE = "AI Helpers for Small Businesses in Estonia | Seestemic";
+      const DESCRIPTION =
+        "We set up AI helpers for quotes, email, bookings and invoices inside your own tools. You approve first. EU data. Book a free 30-min AI review.";
+
+      const manifest = await fetch("out/manifest.json")
+        .then((r) => (r.ok ? r.json() : {}))
+        .catch(() => ({}));
+      const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+
+      document.getElementById("variants").innerHTML = VARIANTS.map((v) => {
+        const m = manifest[v.id];
+        const spec = m
+          ? `1280×720 · ${m.duration} s loop · ${m.fps} fps · H.264, no audio · ${(m.bytes / 1024 / 1024).toFixed(2)} MB · poster = frame 0`
+          : "Not rendered yet: run npm run render";
+        const meta = [
+          `<meta property="og:video" content="${SITE}/og/home.mp4" />`,
+          `<meta property="og:video:secure_url" content="${SITE}/og/home.mp4" />`,
+          `<meta property="og:video:type" content="video/mp4" />`,
+          `<meta property="og:video:width" content="1280" />`,
+          `<meta property="og:video:height" content="720" />`,
+          `<!-- og:image stays, now the poster crop (out/${v.id}-og.png, 1200×630) -->`,
+          `<meta property="og:image" content="${SITE}/og.png" />`,
+        ].join("\n");
+        return `
+          <section class="variant" data-proto-variant="${v.key}" hidden>
+            <div class="variant-head">
+              <h2>${v.key} · ${v.name}</h2>
+              <nav class="links">
+                <a href="${v.page}">Live composition</a>
+                <a href="out/review/${v.id}-sheet.png">Frames</a>
+                <a href="out/${v.id}.mp4" download>MP4</a>
+                <a href="out/${v.id}-og.png" download>og:image</a>
+              </nav>
+            </div>
+            <p class="thesis">${v.thesis}</p>
+            <div class="player">
+              <video src="out/${v.id}.mp4" poster="out/${v.id}-poster.png" muted loop playsinline controls preload="auto"></video>
+            </div>
+            <p class="spec">${spec}</p>
+
+            <h3>How it shows up</h3>
+            <div class="wild">
+              <figure>
+                <div class="chat">
+                  <div class="embed">
+                    <small>Seestemic</small>
+                    <b>${TITLE}</b>
+                    <p>${DESCRIPTION}</p>
+                    <div class="media"><video src="out/${v.id}.mp4" muted loop playsinline preload="auto"></video></div>
+                  </div>
+                </div>
+                <figcaption>Playing inline at chat-embed width (Discord, Telegram)</figcaption>
+              </figure>
+              <figure>
+                <div class="chat">
+                  <div class="embed">
+                    <small>Seestemic</small>
+                    <b>${TITLE}</b>
+                    <p>${DESCRIPTION}</p>
+                    <div class="media"><img src="out/${v.id}-poster.png" alt="" /><span class="play"></span></div>
+                  </div>
+                </div>
+                <figcaption>Before it plays: frame 0 with the play button over the centre</figcaption>
+              </figure>
+              <figure>
+                <div class="card">
+                  <img src="out/${v.id}-og.png" alt="" />
+                  <div><small>seestemic.com</small><b>${TITLE}</b></div>
+                </div>
+                <figcaption>Image-only apps (most of them): the 1200×630 poster crop as og:image</figcaption>
+              </figure>
+            </div>
+
+            <h3>Tags</h3>
+            <pre><code>${esc(meta)}</code></pre>
+          </section>`;
+      }).join("");
+
+      const bar = document.querySelector(".proto-switch");
+      const panels = [...document.querySelectorAll("[data-proto-variant]")];
+      const keyEl = bar.querySelector("[data-key]");
+      const nameEl = bar.querySelector("[data-name]");
+      const countEl = bar.querySelector("[data-count]");
+      const wanted = (new URLSearchParams(location.search).get("variant") || "").toUpperCase();
+      let index = Math.max(0, VARIANTS.findIndex((v) => v.key === wanted));
+
+      const show = (next) => {
+        index = (next + VARIANTS.length) % VARIANTS.length;
+        const current = VARIANTS[index];
+        for (const panel of panels) {
+          const on = panel.dataset.protoVariant === current.key;
+          panel.hidden = !on;
+          for (const video of panel.querySelectorAll("video")) {
+            if (on) {
+              video.currentTime = 0;
+              video.play().catch(() => {});
+            } else video.pause();
+          }
+        }
+        keyEl.textContent = current.key;
+        nameEl.textContent = current.name;
+        countEl.textContent = `${index + 1}/${VARIANTS.length}`;
+        const url = new URL(location.href);
+        url.searchParams.set("variant", current.key);
+        history.replaceState(history.state, "", url);
+      };
+
+      show(index);
+
+      bar.addEventListener("click", (event) => {
+        const button = event.target.closest("button");
+        if (!button) return;
+        if (button.dataset.dir) show(index + Number(button.dataset.dir));
+        else panels[index].querySelector(".player")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return;
+        if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+        const active = document.activeElement;
+        if (active instanceof HTMLElement && (active.isContentEditable || active.matches("input, textarea, select, video"))) return;
+        show(index + (event.key === "ArrowLeft" ? -1 : 1));
+      });
+    </script>
+  </body>
+</html>

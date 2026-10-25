@@ -1,0 +1,160 @@
+/* PROTOTYPE (throwaway): shared pieces for the og:video compositions. Tokens mirror src/styles/global.css. */
+
+@font-face {
+  font-family: "Geist";
+  src: url("/src/assets/fonts/geist.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: block;
+}
+
+:root {
+  --bg: #fff;
+  --ink: #0b0b0b;
+  --ink-2: #5d5d5a;
+  --ink-3: #6b6b67;
+  --card: #f6f5f3;
+  --card-strong: #efeeeb;
+  --line: #e8e7e3;
+  --line-strong: #dddcd7;
+  --chrome: #fafaf9;
+  --ok: #157a48;
+  --ok-soft: #eaf5ee;
+  --lift: 0 1px 2px rgb(0 0 0 / 0.05), 0 14px 30px -14px rgb(0 0 0 / 0.3);
+  --float: 0 2px 4px rgb(0 0 0 / 0.04), 0 30px 70px -26px rgb(0 0 0 / 0.45);
+  --font: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #e7e6e2;
+  color: var(--ink);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+body[data-capture] {
+  display: block;
+  background: #fff;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* The 16:9 frame every composition draws into. The top and bottom 24px are
+   trimmed for the 1200x630 poster, so nothing important lives there. */
+.og {
+  position: relative;
+  isolation: isolate;
+  flex: none;
+  width: 1280px;
+  height: 720px;
+  overflow: hidden;
+  background: var(--bg);
+  transform-origin: 50% 50%;
+}
+
+body:not([data-capture]) .og {
+  scale: var(--fit, 1);
+  box-shadow: 0 20px 60px -30px rgb(0 0 0 / 0.4);
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+.art {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Logo: woven rosette and wordmark */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.29em;
+  font-size: 30px;
+}
+
+.logo-mark {
+  width: 1.47em;
+  height: 1.47em;
+  flex: none;
+}
+
+.logo-word {
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+/* The helper: speech-bubble squircle, two pill eyes (geometry from src/components/Helper.astro) */
+.helper {
+  display: block;
+  overflow: visible;
+}
+
+.helper-body {
+  fill: var(--helper-color, var(--ink));
+}
+
+.helper-eye {
+  fill: #fff;
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+
+.helper-eyes-happy {
+  opacity: 0;
+}
+
+.helper-eyes-happy path {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 6.5;
+  stroke-linecap: round;
+}
+
+/* Pills and tags */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3em 0.78em;
+  border-radius: 999px;
+  background: var(--card-strong);
+  color: var(--ink-2);
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.icon {
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
