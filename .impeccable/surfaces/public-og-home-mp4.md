@@ -2,7 +2,7 @@
 version: 1
 slug: "public-og-home-mp4"
 primary_target: "public/og/home.mp4"
-related_targets: ["src/layouts/BaseLayout.astro","src/pages/index.astro","public/og/home.jpg"]
+related_targets: ["src/layouts/BaseLayout.astro","public/og/home.jpg"]
 ---
 
 # Share video (og:video)
@@ -19,7 +19,7 @@ The muted, looping video a link to seestemic.com plays where it is shared, in **
 - Only the site's own copy, except that it says "teammate" wherever the live site still says "helper", so the window title reads "Your teammates". The hero line comes from `src/pages/index.astro`, and the job, steps, labels and amounts from `src/data/helpers.ts` and `src/scripts/demo.ts`. Depicted work keeps its "Example" pill. Never add claims, metrics or customers.
 
 ## Constraints
-- Shipped on the homepage only: `public/og/home.mp4` as og:video and `public/og/home.jpg` (frame 0) as og:image, set through the `video` and `image` props of `src/layouts/BaseLayout.astro`. The other pages keep the static `og.png`.
+- The site-wide default until a page gets its own: `src/layouts/BaseLayout.astro` shares `public/og/home.mp4` as og:video and `public/og/home.jpg` (frame 0) as og:image on every page. A page that sets its own `image` gets no video unless it sets one, so the loop never plays over another poster. Articles share only the still, keeping `og:type` `article` and their dates.
 - Discord plays og:video only when `og:type` is a video type, and takes its layout from whichever of `twitter:card` and `og:type` comes last. So a page with a video gets `og:type` `video.other`, printed after `twitter:card`, while X keeps `summary_large_image`.
 - The og:image stays under 300KB, or WhatsApp drops it; it ships as a JPEG of about 125KB.
 - 1280×720 (16:9), a 10 s seamless loop, 30 fps, no audio, H.264 High yuv420p with faststart, about 1 MB.
@@ -40,4 +40,4 @@ The muted, looping video a link to seestemic.com plays where it is shared, in **
 - X shows only the still. Playing the video there needs a twitter:player card and an HTML player page.
 - The composition and renderer live only on the `prototype/og-video` branch. The video has to be re-rendered there, and both files copied into `public/og/`, whenever the hero line or the demo strings change.
 - The video says "teammates" before the site does. Until the teammates copy ships, its "Your teammates" title differs from the live demo window's "Your helpers", and the homepage's og:title and og:description still say "AI helpers".
-- The Estonia and EIS pages have no share video of their own.
+- Every page shares the homepage's hero, so a guide or the Estonia page shows the homepage promise rather than its own topic until it gets its own share image or video. The EIS guide plays nothing in Discord.
