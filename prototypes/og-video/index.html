@@ -361,7 +361,7 @@
           page: "a-one-job.html",
           name: "One job, start to finish",
           thesis:
-            "The hero in miniature: the promise on white, the dawn painting below, and the helpers window rising into it to run one real quote from email to “Sent”, big enough to read in a chat.",
+            "The hero in miniature: the promise on white, the dawn painting below, and the “Your teammates” window rising into it to run one real quote from email to “Sent”, big enough to read in a chat.",
         },
         {
           key: "B",
@@ -369,7 +369,7 @@
           page: "b-on-it.html",
           name: "On it.",
           thesis:
-            "Seestemic in one exchange: you say it in plain words, and the giant helper from the teammate section answers “On it.” Three asks, three answers, back where it started.",
+            "Seestemic in one exchange: you say it in plain words, and the giant teammate from the site's teammate card answers “On it.” Three asks, three answers, back where it started.",
         },
         {
           key: "C",
@@ -377,14 +377,15 @@
           page: "c-busywork.html",
           name: "Busywork band",
           thesis:
-            "The promise in one gesture: the field painting crowded with jobs taken word for word from the site, a wave of checks clears it while the headline helper watches, then the closing question.",
+            "The promise in one gesture: the field painting crowded with jobs taken word for word from the site, a wave of checks clears it while the teammate in the headline watches, then the closing question.",
         },
       ];
 
       const SITE = "https://www.seestemic.com";
-      const TITLE = "AI Helpers for Small Businesses in Estonia | Seestemic";
+      // The homepage title and description from src/pages/index.astro, with "teammates" for the live "helpers".
+      const TITLE = "AI Teammates for Small Businesses in Estonia | Seestemic";
       const DESCRIPTION =
-        "We set up AI helpers for quotes, email, bookings and invoices inside your own tools. You approve first. EU data. Book a free 30-min AI review.";
+        "We set up AI teammates for quotes, email, bookings and invoices inside your own tools. You approve first. EU data. Book a free 30-min AI review.";
 
       const manifest = await fetch("out/manifest.json")
         .then((r) => (r.ok ? r.json() : {}))

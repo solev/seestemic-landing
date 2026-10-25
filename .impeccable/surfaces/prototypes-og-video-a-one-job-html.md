@@ -12,11 +12,11 @@ The muted, looping video a link to seestemic.com plays where it is shared, in **
 
 ## Audience, job, action
 - **Viewer:** someone who was sent the link in a chat, seeing it at roughly 400px wide, muted, often only on frame 0.
-- **Their job:** know at a glance that Seestemic gives a business AI helpers that do the busywork while the owner approves.
+- **Their job:** know at a glance that Seestemic gives a business AI teammates that do the busywork while the owner approves.
 - **Action:** open the link. The video carries no button of its own.
 
 ## Proof and content
-- Only verbatim site copy: the hero line from `src/pages/index.astro`; the job, steps, labels and amounts from `src/data/helpers.ts` and `src/scripts/demo.ts`. Depicted work keeps its "Example" pill. Never add claims, metrics or customers.
+- Only the site's own copy, except that it says "teammate" wherever the live site still says "helper", so the window title reads "Your teammates". The hero line comes from `src/pages/index.astro`, and the job, steps, labels and amounts from `src/data/helpers.ts` and `src/scripts/demo.ts`. Depicted work keeps its "Example" pill. Never add claims, metrics or customers.
 
 ## Constraints
 - 1280×720 (16:9), a 10 s seamless loop, 30 fps, no audio, H.264 High yuv420p with faststart, about 1 MB.
@@ -41,4 +41,5 @@ The muted, looping video a link to seestemic.com plays where it is shared, in **
   - swapping og:image for A's frame 0, so the still and the video match;
   - whether X gets a twitter:player page.
 - The video has to be re-rendered whenever the hero line or the demo strings change.
+- The video says "teammates" before the site does. Until the teammates copy ships, its "Your teammates" title differs from the live demo window's "Your helpers", and the homepage's og:title and og:description still say "AI helpers".
 - The Estonia and EIS pages have no share video of their own.
