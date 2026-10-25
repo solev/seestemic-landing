@@ -6,24 +6,31 @@ import { analytics } from "../data/site";
 interface Props {
   title: string;
   description: string;
-  /** Share image for og:image and twitter:image, 1200x630, as a path under public/ or an absolute URL. */
+  /** Share image for og:image and twitter:image, 1200x630, as a path under public/ or an absolute URL. Defaults to the site share video's first frame. */
   image?: { src: string; alt: string };
+  /** Muted looping MP4 for og:video, as a path under public/ or an absolute URL. Chat apps such as Discord and Telegram play it inline, with `image` as its poster, so `image` should be its first frame. Defaults to the site share video, except on articles and on pages that set their own `image`. */
+  video?: { src: string; width: number; height: number };
   /** For pages that must stay out of search, such as the 404 page. Also drops the canonical link. */
   noindex?: boolean;
   /** Open Graph type. Guides are articles, with their published and modified dates. */
   article?: { published: string; modified: string };
 }
 
-const {
-  title,
-  description,
-  image = { src: "/og.png", alt: "Seestemic: AI helpers for the busywork in your business" },
-  noindex = false,
-  article,
-} = Astro.props;
+const siteShare = {
+  image: {
+    src: "/og/home.jpg",
+    alt: "Seestemic: Let AI handle the busywork, above an example window where the Quotes teammate gets a new request from a dental clinic",
+  },
+  video: { src: "/og/home.mp4", width: 1280, height: 720 },
+};
+const { title, description, noindex = false, article } = Astro.props;
+const image = Astro.props.image ?? siteShare.image;
+// The site video plays only over its own first frame, and articles keep og:type article, which Discord shows without video.
+const video = Astro.props.video ?? (Astro.props.image || article ? undefined : siteShare.video);
 // Canonical URLs have no trailing slash, so /ai-for-small-business-estonia/ and the bare path count as one page.
 const canonical = new URL(Astro.url.pathname.replace(/(.)\/$/, "$1"), Astro.site).href;
 const imageUrl = new URL(image.src, Astro.site).href;
+const videoUrl = video && new URL(video.src, Astro.site).href;
 ---
 
 <!doctype html>
@@ -35,7 +42,9 @@ const imageUrl = new URL(image.src, Astro.site).href;
     <meta name="description" content={description} />
     <meta name="theme-color" content="#ffffff" />
     {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
-    <meta property="og:type" content={article ? "article" : "website"} />
+    {/* Discord takes its layout from whichever of twitter:card and og:type comes last, and plays og:video only for a video og:type. So og:type comes second: a page with a video plays it inline there, and X keeps the large image. */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:type" content={article ? "article" : video ? "video.other" : "website"} />
     {
       article && (
         <>
@@ -53,7 +62,17 @@ const imageUrl = new URL(image.src, Astro.site).href;
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={image.alt} />
-    <meta name="twitter:card" content="summary_large_image" />
+    {
+      video && (
+        <>
+          <meta property="og:video" content={videoUrl} />
+          <meta property="og:video:secure_url" content={videoUrl} />
+          <meta property="og:video:type" content="video/mp4" />
+          <meta property="og:video:width" content={video.width} />
+          <meta property="og:video:height" content={video.height} />
+        </>
+      )
+    }
     <meta name="twitter:image" content={imageUrl} />
     <meta name="twitter:image:alt" content={image.alt} />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
