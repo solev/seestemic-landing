@@ -12,7 +12,7 @@ import field from "../assets/art/field.webp";
 import { helpers } from "../data/helpers";
 import { care, eur, founding, pilot, pilotOpen, review, setup } from "../data/offer";
 import { offers, orgId, siteUrl, toJsonLd, websiteId } from "../data/schema";
-import { eisGrantsPage, email, estoniaPage, introCallUrl } from "../data/site";
+import { costGuidePage, eisGrantsPage, email, estoniaPage, introCallUrl } from "../data/site";
 import {
   answers,
   businessTypes,
@@ -344,7 +344,13 @@ const schema = {
               Setups of <span class="tnum">€4,000</span> or more may qualify for <a href="#funding">EIS co-funding</a>.
             </li>
           </ul>
-          {/* TODO: link to the AI cost guide (board #3) and the founding pilot page (board #14) once they are live. */}
+          <p class="guide-more">
+            <a href={costGuidePage.href}>
+              Read our guide to what AI automation costs a small business
+              <Icon name="arrowRight" size={16} />
+            </a>
+          </p>
+          {/* TODO: link to the founding pilot page (board #14) once it is live. */}
           <div class="guide-cta">
             <a class="btn btn-primary" {...booking}>Book a free AI review</a>
           </div>
