@@ -51,7 +51,7 @@ export const answers: Record<SectionId, Answer> = {
     nav: "Data and GDPR",
     question: "Is AI safe for your customer data?",
     answer:
-      "It can be, when it’s set up with clear limits. Each helper only sees the tools and data you allow, anything important waits for your OK, and its work is logged so you can check it. Your data can stay in the EU, and we sign a data processing agreement with you, as GDPR requires.",
+      "It can be, when it’s set up with clear limits. Each helper only sees the tools and data you allow, anything important waits for your OK, and its work is logged so you can check it. We sign a data processing agreement with you, as GDPR requires.",
   },
   cost: {
     nav: "Prices",
@@ -85,7 +85,7 @@ export const glance: { label: string; value: string }[] = [
   { label: "What we do", value: "Set up AI helpers for repetitive jobs, like quotes, email and invoice reminders" },
   { label: "Where they work", value: "Inside the tools you already use, such as Microsoft 365 or Google Workspace" },
   { label: "Who decides", value: "You. Anything important waits for your OK" },
-  { label: "Your data", value: "Can stay in the EU, under a data processing agreement" },
+  { label: "Your data", value: "Covered by a data processing agreement" },
   { label: "First step", value: `A free ${review.minutes}-minute AI review` },
   {
     label: "First helper",
@@ -167,7 +167,7 @@ export const jobs: { helper: HelperId; job: string; example: string }[] = [
 
 export const safety: { title: string; text: string }[] = [
   { title: "You set the limits.", text: "Decide what each helper may do on its own and what always needs your OK." },
-  { title: "We pick the AI provider with you.", text: "We choose the one that fits your needs, so your data can stay in the EU." },
+  { title: "We pick the AI provider with you.", text: "We choose the one that fits your needs." },
   { title: "You keep what we build.", text: "Everything we set up is yours, even if you stop Care." },
 ];
 
