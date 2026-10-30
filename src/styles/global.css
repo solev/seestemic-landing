@@ -464,6 +464,18 @@ dd {
   color: var(--ok);
 }
 
+.hero-note--martin {
+  gap: 0.5rem;
+}
+
+.hero-note-photo {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .stage-wrap {
   margin-top: clamp(1.5rem, 2.6vw, 2.25rem);
 }
@@ -724,6 +736,22 @@ dd {
   color: var(--ink-3);
   font-size: 0.72rem;
   font-weight: 400;
+}
+
+/* Our team sits under the owner, so the window shows who looks after the AI teammates. */
+.side-team {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.side-team-mark {
+  background: var(--ink);
+  color: #fff;
+}
+
+.side-team-mark svg {
+  width: 18px;
+  height: 18px;
 }
 
 .threads {
@@ -4125,7 +4153,8 @@ dd {
   }
 }
 
-@media (min-width: 761px) and (max-width: 1279px) {
+/* The job titles make one row of chips about 1288px wide, so it needs a 1366px viewport. */
+@media (min-width: 761px) and (max-width: 1365px) {
   .chips {
     display: grid;
     grid-template-columns: repeat(4, max-content);

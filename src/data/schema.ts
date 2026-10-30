@@ -9,7 +9,7 @@ export const websiteId = `${siteUrl}#site`;
 
 /**
  * The prices shown on the homepage steps and the Estonia page's price table; the descriptions use the table's wording.
- * While founding places remain, the first helper is the pilot; after that, the setup. The figures come from offer.ts.
+ * While founding places remain, the first AI teammate is the pilot; after that, the setup. The figures come from offer.ts.
  */
 export const offers = [
   {
@@ -22,15 +22,16 @@ export const offers = [
   pilotOpen
     ? {
         "@type": "Offer",
-        name: "Founding-client pilot: one AI helper for one task",
-        description: `One small helper, set up for one task, for our first ${founding.places} clients. One-time, normally from ${eur(setup.from)}. In return, you write a short case study after ${pilot.caseStudyAfter}.`,
+        name: "Founding-client pilot: one AI teammate for one task",
+        description: `One AI teammate for one task, training included, for our first ${founding.places} clients. One-time, normally from ${eur(setup.from)}. In return, you write a short case study after ${pilot.caseStudyAfter}.`,
         price: String(pilot.price),
         priceCurrency: "EUR",
       }
     : {
         "@type": "Offer",
-        name: "First helper setup",
-        description: "Your first helper, set up for one job inside your tools, with your approval rules built in. One-time.",
+        name: "First AI teammate setup",
+        description:
+          "Your first AI teammate, set up for one job and connected to your tools, with your approval rules built in and training included. One-time.",
         priceSpecification: { "@type": "PriceSpecification", minPrice: String(setup.from), priceCurrency: "EUR" },
       },
   {
@@ -51,7 +52,7 @@ const partnerOffer = {
   "@type": "Offer",
   name: "Partner",
   description:
-    "We help every team adopt AI in the ways that fit, not only through helpers: a plan for where AI can help, team by team; help picking AI tools, plus simple rules for using them safely; and hands-on training for every team.",
+    "We help every team adopt AI in the ways that fit, not only through AI teammates: a plan for where AI can help, team by team; help picking AI tools, plus simple rules for using them safely; and hands-on training for every team.",
   priceSpecification: {
     "@type": "UnitPriceSpecification",
     minPrice: String(partner.from),
@@ -66,10 +67,10 @@ export const organization = {
   name: "Seestemic",
   url: siteUrl,
   logo: `${siteUrl}apple-touch-icon.png`,
-  image: `${siteUrl}og.png`,
+  image: `${siteUrl}og/home.jpg`,
   email,
   description:
-    "Seestemic sets up AI helpers that take repetitive jobs off your plate, inside the tools you already use. You stay in charge: nothing important happens without your OK.",
+    "Seestemic sets up AI teammates that take repetitive jobs off your plate, connected to the tools you already use, and can look after them for you. You stay in charge: nothing important happens without your OK.",
   address: { "@type": "PostalAddress", addressLocality: "Tallinn", addressCountry: "EE" },
   areaServed: ["EE", "EU"],
   knowsLanguage: "en",

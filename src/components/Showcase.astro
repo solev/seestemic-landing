@@ -4,7 +4,7 @@ import Helper from "./Helper.astro";
 import Icon from "./Icon.astro";
 import coast from "../assets/art/coast.webp";
 import meadow from "../assets/art/meadow.webp";
-import { helpers, type IconName } from "../data/helpers";
+import { helpers, yourName, type IconName } from "../data/helpers";
 
 const tools: { icon: IconName; label: string; color: string; x: number; y: number }[] = [
   { icon: "mail", label: "Email", color: "#2E9EFF", x: 14, y: 20 },
@@ -21,8 +21,8 @@ const sizes = "(min-width: 1280px) 530px, (min-width: 900px) 42vw, 100vw";
 <div class="showcase">
   <article class="vig">
     <div class="vig-copy">
-      <h3>Works inside your tools</h3>
-      <p>Email, calendar, spreadsheets, accounting. Your helpers use what you already have, so there’s nothing new to learn.</p>
+      <h3>Works with your tools</h3>
+      <p>Email, calendar, spreadsheets, accounting. Your AI teammates use what you already have, so you keep the tools you know.</p>
     </div>
     <div class="vig-art">
       <Art src={coast} sizes={sizes} />
@@ -48,7 +48,7 @@ const sizes = "(min-width: 1280px) 530px, (min-width: 900px) 42vw, 100vw";
   <article class="vig">
     <div class="vig-copy">
       <h3>Asks before it acts</h3>
-      <p>You decide what a helper may do on its own and what needs your OK. Anything important waits for you.</p>
+      <p>You decide what an AI teammate may do on its own and what needs your OK. Anything important waits for you.</p>
     </div>
     <div class="vig-art">
       <Art src={meadow} sizes={sizes} />
@@ -56,7 +56,7 @@ const sizes = "(min-width: 1280px) 530px, (min-width: 900px) 42vw, 100vw";
       <div class="v-panel v-approve" aria-hidden="true">
         <header class="v-approve-head">
           <Helper variant="avatar" color={helpers.quotes.color} class="v-avatar" />
-          <span><b>Quotes</b> wants to send a quote</span>
+          <span><b>{helpers.quotes.name}</b> wants to send a quote</span>
           <span class="tnum">9:41</span>
         </header>
         <div class="v-approve-body">
@@ -79,14 +79,14 @@ const sizes = "(min-width: 1280px) 530px, (min-width: 900px) 42vw, 100vw";
   <article class="vig vig--quiet">
     <div class="vig-copy">
       <h3>Remembers how you like it</h3>
-      <p>Correct it once and it sticks. Your prices, your tone, your rules.</p>
+      <p>Correct it and it saves that as a rule. Your prices, your tone, your rules.</p>
     </div>
     <div class="vig-stage">
       <span class="example-tag" aria-hidden="true">Example</span>
       <div class="v-flat v-memory" aria-hidden="true">
         <header class="v-memory-head">
           <Icon name="bookmark" size={15} />
-          What Quotes remembers
+          What {yourName(helpers.quotes)} remembers
         </header>
         <ul>
           <li class="is-new">
@@ -109,7 +109,7 @@ const sizes = "(min-width: 1280px) 530px, (min-width: 900px) 42vw, 100vw";
 
   <article class="vig vig--quiet">
     <div class="vig-copy">
-      <h3>Hands work to the next helper</h3>
+      <h3>Hands work to the next teammate</h3>
       <p>A booking becomes a quote, and a quote becomes an invoice. You can see every step along the way.</p>
     </div>
     <div class="vig-stage">
@@ -117,17 +117,17 @@ const sizes = "(min-width: 1280px) 530px, (min-width: 900px) 42vw, 100vw";
       <ol class="v-flat v-handoff" aria-hidden="true">
         <li>
           <Helper variant="avatar" color={helpers.frontDesk.color} class="v-avatar" />
-          <span><b>Front desk</b> booked a site visit with a new customer</span>
+          <span><b>{helpers.frontDesk.name}</b> booked a site visit with a new customer</span>
           <small class="tnum">Mon</small>
         </li>
         <li>
           <Helper variant="avatar" color={helpers.quotes.color} class="v-avatar" />
-          <span><b>Quotes</b> sent them the quote</span>
+          <span><b>{helpers.quotes.name}</b> sent them the quote</span>
           <small class="tnum">Thu</small>
         </li>
         <li class="is-next">
           <Helper variant="avatar" color={helpers.invoices.color} class="v-avatar" />
-          <span><b>Invoices</b> will bill when the job is done</span>
+          <span><b>{helpers.invoices.name}</b> will bill when the job is done</span>
           <small>Next</small>
         </li>
       </ol>

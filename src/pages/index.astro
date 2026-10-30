@@ -1,18 +1,21 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Art from "../components/Art.astro";
 import BookingPanel from "../components/BookingPanel.astro";
 import BookingScript from "../components/BookingScript.astro";
 import DemoWindow from "../components/DemoWindow.astro";
+import ExampleJobs from "../components/ExampleJobs.astro";
 import FounderChat from "../components/FounderChat.astro";
 import Helper from "../components/Helper.astro";
 import Icon from "../components/Icon.astro";
-import JobPicker from "../components/JobPicker.astro";
 import Process from "../components/Process.astro";
+import ServiceSection from "../components/ServiceSection.astro";
 import Showcase from "../components/Showcase.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import dawn from "../assets/art/hero-dawn.webp";
+import martin from "../assets/martin.jpg";
 import { faqs } from "../data/helpers";
 import { review } from "../data/offer";
 import { homeSchema, toJsonLd } from "../data/schema";
@@ -29,8 +32,8 @@ const booking = {
 ---
 
 <BaseLayout
-  title="AI Helpers for Small Businesses in Estonia | Seestemic"
-  description={`We set up AI helpers for quotes, email, bookings and invoices inside your own tools. You approve first. Book a free ${review.minutes}-min AI review.`}
+  title="AI Teammates for Small Businesses | Seestemic"
+  description={`We set up AI teammates for whatever eats your week, connected to the tools you already use. You approve first. Book a free ${review.minutes}-min AI review.`}
 >
   <script slot="head" type="application/ld+json" is:inline set:html={toJsonLd(homeSchema)} />
   <SiteHeader />
@@ -39,19 +42,19 @@ const booking = {
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="shell">
         <h1 class="hero-title" id="hero-title">
-          Let <Helper follow class="h1-helper" reach={8} /> AI handle the busywork
+          Let <Helper follow class="h1-helper" reach={8} /> AI teammates handle the busywork
         </h1>
         <p class="hero-sub">
-          We set up AI helpers that take repetitive jobs off your plate, inside the tools you already use. You stay in
-          charge: nothing important happens without your OK.
+          We set up AI teammates that take repetitive jobs off your plate, connected to the tools you already use, and
+          we can look after them for you.
         </p>
         <div class="cta-row">
           <a class="btn btn-primary" {...booking}>Book a free AI review</a>
           <a class="btn btn-secondary" href="#how">How it works</a>
         </div>
-        <p class="hero-note">
-          <Icon name="check" size={16} />
-          No tech skills needed.
+        <p class="hero-note hero-note--martin">
+          <Image src={martin} alt="" widths={[24, 48]} sizes="24px" class="hero-note-photo" />
+          Free {review.minutes}-minute call with Martin, our founder. No tech skills needed.
         </p>
       </div>
 
@@ -61,21 +64,22 @@ const booking = {
           <DemoWindow />
         </div>
         <figcaption class="stage-caption">
-          An example of a helper at work. Yours are set up around your own jobs and tools.
+          Example: your AI teammates at work. We set them up around your jobs and tools, and our team can look after
+          them.
         </figcaption>
       </figure>
     </section>
+
+    <ServiceSection />
+    <ExampleJobs />
 
     <section class="section section--teammate" aria-labelledby="talk-title">
       <div class="shell">
         <div class="teammate">
           <div class="teammate-copy">
-            <h2 class="h2" id="talk-title">Just tell it what you need</h2>
-            <p class="lead">
-              No settings, no code. Ask in plain words, the way you’d ask a colleague, and it remembers how you like
-              things done.
-            </p>
-            <ul class="teammate-chat" aria-label="Things you could ask a helper">
+            <h2 class="h2" id="talk-title">Talk to it like a new colleague</h2>
+            <p class="lead">No settings, no code. Ask in plain words, and it remembers how you like things done.</p>
+            <ul class="teammate-chat" aria-label="Things you could ask an AI teammate">
               <li class="say">Chase the café’s late invoice.</li>
               <li class="say">Reply to new reviews in my tone.</li>
               <li class="say">Always offer Thursday visits.</li>
@@ -83,7 +87,7 @@ const booking = {
           </div>
           <div class="teammate-figure">
             <Helper follow class="teammate-helper" reach={8} tilt={-9} />
-            <p class="say-reply">On it.</p>
+            <p class="say-reply">On it. I’ll check with you first.</p>
           </div>
         </div>
       </div>
@@ -92,26 +96,13 @@ const booking = {
     <section class="section" aria-labelledby="fits-title">
       <div class="shell">
         <header class="section-head">
-          <h2 class="h2" id="fits-title">It fits the way you already work</h2>
+          <h2 class="h2" id="fits-title">It becomes part of your team</h2>
           <p class="lead">
-            No new system to learn. Your helpers work in your email, calendar and files, and check with you whenever
-            it matters.
+            We connect each AI teammate to your email, calendar and files. You and your team message it, and it checks
+            with you whenever it matters.
           </p>
         </header>
         <Showcase />
-      </div>
-    </section>
-
-    <section class="section" id="examples" aria-labelledby="examples-title">
-      <div class="shell">
-        <header class="section-head section-head--center">
-          <h2 class="h2" id="examples-title">Give each helper one job</h2>
-          <p class="lead">Start with the job that wastes the most time. Add the next one when it’s working.</p>
-        </header>
-        <JobPicker />
-        <p class="jobs-more">
-          Have a different job in mind? <a href={`mailto:${email}`}>Tell us about it</a>
-        </p>
       </div>
     </section>
 
@@ -123,7 +114,7 @@ const booking = {
         </header>
         <Process />
         <p class="process-note">
-          Everything we build is yours to keep. AI costs, such as an AI subscription, are paid separately.
+          Everything we set up is yours to keep. AI costs, such as an AI subscription, are paid separately.
         </p>
         <p class="process-note">No VAT is added, as Seestemic isn’t <span class="nowrap">VAT-registered</span>.</p>
         <p class="process-note">
@@ -138,8 +129,8 @@ const booking = {
     <section class="section" id="about" aria-labelledby="about-title">
       <div class="shell">
         <header class="section-head section-head--center">
-          <h2 class="h2" id="about-title">Who’s behind Seestemic</h2>
-          <p class="lead">Short answer: Martin. Here’s the longer one.</p>
+          <h2 class="h2" id="about-title">The people behind your AI teammates</h2>
+          <p class="lead">Short answer: Martin and our team. Here’s the longer one.</p>
         </header>
         <FounderChat />
       </div>
@@ -160,25 +151,25 @@ const booking = {
         <div class="faq-list">
           {
             faqs.map(({ id, question, answer, link }) => (
-              <details class="faq-item" name="faq" id={id}>
-                <summary>
-                  {question}
-                  <span class="faq-icon" aria-hidden="true">
-                    <Icon name="plus" size={16} />
-                  </span>
-                </summary>
-                <p>
-                  {answer}
-                  {link && (
-                    <>
-                      {" "}
-                      <a href={link.href} target="_blank" rel="noreferrer">
-                        {link.label}
-                      </a>
-                    </>
-                  )}
-                </p>
-              </details>
+                <details class="faq-item" name="faq" id={id}>
+                  <summary>
+                    {question}
+                    <span class="faq-icon" aria-hidden="true">
+                      <Icon name="plus" size={16} />
+                    </span>
+                  </summary>
+                  <p>
+                    {answer}
+                    {link && (
+                      <>
+                        {" "}
+                        <a href={link.href} target="_blank" rel="noreferrer">
+                          {link.label}
+                        </a>
+                      </>
+                    )}
+                  </p>
+                </details>
             ))
           }
         </div>
@@ -187,10 +178,9 @@ const booking = {
 
     <section class="closing" id="book" aria-labelledby="book-title">
       <div class="shell">
-        <h2 class="h2 closing-title" id="book-title">What should AI take off your plate?</h2>
+        <h2 class="h2 closing-title" id="book-title">Your first AI teammate starts with a conversation</h2>
         <p class="closing-sub">
-          Bring one repetitive job to a free {review.minutes}-minute AI review. We’ll tell you honestly whether AI can help, and what
-          a first helper could look like.
+          A free {review.minutes}-minute AI review with Martin. Bring one repetitive job. There’s nothing else to prepare.
         </p>
         <div class="cta-row">
           <a class="btn btn-primary" {...booking}>Book a free AI review</a>
@@ -198,7 +188,7 @@ const booking = {
         </div>
         <p class="closing-note">
           <Icon name="lock" size={16} />
-          We sign a data processing agreement with you.
+          You decide what your AI teammates can see, and we sign a data processing agreement with you.
         </p>
         <BookingPanel />
       </div>

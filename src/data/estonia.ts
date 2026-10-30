@@ -1,7 +1,7 @@
 // Copy for /ai-for-small-business-estonia, a search page that answers one question per section.
 // Each section opens with a short answer that makes sense on its own, so search snippets and AI
 // assistants can quote it. Those answers and the FAQ feed both the page and the FAQPage JSON-LD,
-// so the two always match. Helper messages are illustrative examples, not client results.
+// so the two always match. AI teammate messages are illustrative examples, not client results.
 import type { HelperId } from "./helpers";
 import { care, eur, founding, pilot, pilotOpen, review, setup } from "./offer";
 
@@ -33,30 +33,30 @@ export const answers: Record<SectionId, Answer> = {
     nav: "Who it’s for",
     question: "Who is Seestemic for?",
     answer:
-      "Seestemic is built for small businesses in Estonia with 1 to 20 people, such as trades, clinics and shops. Most have no IT team, so the owner or someone in the office handles the quotes, bookings, emails and invoices. Our AI helpers take on those repetitive jobs, inside the tools the business already uses.",
+      "Seestemic is built for small businesses in Estonia with 1 to 20 people, such as trades, clinics and shops. Most have no IT team, so the owner or someone in the office handles the quotes, bookings, emails and invoices. Our AI teammates take on those repetitive jobs, connected to the tools the business already uses.",
   },
   worth: {
     nav: "Is it worth it?",
     question: "Is AI worth it for a small business?",
     answer:
-      "Usually, if one repetitive job eats hours of your week, such as writing quotes, answering the same emails or chasing unpaid invoices. You don’t need an IT team or a big budget. We start with one job, set it up in the tools you already use and only add more once it clearly helps.",
+      "Usually, if one repetitive job eats hours of your week, such as writing quotes, answering the same emails or chasing unpaid invoices. You don’t need an IT team or a big budget. We start with one job, set it up with the tools you already use and only add more once it clearly helps.",
   },
   what: {
     nav: "What AI can do",
     question: "What can AI do for a small business?",
     answer:
-      "It can take over the repetitive parts of your week: drafting quotes, sorting email, booking appointments, chasing late invoices, filing receipts, answering everyday customer questions and summing up your numbers. Each AI helper does one job inside your own tools and asks before anything important happens.",
+      "It can take over the repetitive parts of your week: drafting quotes, sorting email, booking appointments, chasing late invoices, filing receipts, answering everyday customer questions and summing up your numbers. Each AI teammate does one job, connected to your own tools, and asks before anything important happens.",
   },
   safe: {
     nav: "Data and GDPR",
     question: "Is AI safe for your customer data?",
     answer:
-      "It can be, when it’s set up with clear limits. Each helper only sees the tools and data you allow, anything important waits for your OK, and its work is logged so you can check it. We sign a data processing agreement with you, as GDPR requires.",
+      "It can be, when it’s set up with clear limits. Each AI teammate only sees the tools and data you allow, anything important waits for your OK, and its work is logged so you can check it. We sign a data processing agreement with you, as GDPR requires.",
   },
   cost: {
     nav: "Prices",
     question: "How much does AI cost for a small business?",
-    answer: `At Seestemic, you start with a free ${review.minutes}-minute AI review. Setting up your first helper costs from ${eur(setup.from)}, one-time${
+    answer: `At Seestemic, you start with a free ${review.minutes}-minute AI review. Setting up your first AI teammate costs from ${eur(setup.from)}, one-time${
       pilotOpen ? `, or ${eur(pilot.price)} for our first ${founding.places} clients` : ""
     }. Care, our optional monthly support, starts at ${eur(care.from)} a month. AI costs, such as an AI subscription, are paid separately.`,
   },
@@ -70,7 +70,7 @@ export const answers: Record<SectionId, Answer> = {
     nav: "Getting started",
     question: "How do you start using AI in a small business?",
     answer:
-      "Start with one job, not a big AI project. At Seestemic, we look at your week on a free call, set up one helper for the job that takes the most time, train the people who’ll use it and only add more once it clearly works.",
+      "Start with one job, not a big AI project. At Seestemic, we look at your week on a free call, set up one AI teammate for the job that takes the most time, train the people who’ll use it and only add more once it clearly works.",
   },
   why: {
     nav: "DIY or done for you",
@@ -82,13 +82,13 @@ export const answers: Record<SectionId, Answer> = {
 
 /** The "at a glance" card in the first screen. Keep values short: the card sits beside the H1. */
 export const glance: { label: string; value: string }[] = [
-  { label: "What we do", value: "Set up AI helpers for repetitive jobs, like quotes, email and invoice reminders" },
-  { label: "Where they work", value: "Inside the tools you already use, such as Microsoft 365 or Google Workspace" },
+  { label: "What we do", value: "Set up AI teammates for repetitive jobs, like quotes, email and invoice reminders" },
+  { label: "Where they work", value: "Connected to the tools you already use, such as Microsoft 365 or Google Workspace" },
   { label: "Who decides", value: "You. Anything important waits for your OK" },
   { label: "Your data", value: "Covered by a data processing agreement" },
   { label: "First step", value: `A free ${review.minutes}-minute AI review` },
   {
-    label: "First helper",
+    label: "First AI teammate",
     value: pilotOpen
       ? `${eur(pilot.price)} one-time for our first ${founding.places} clients, normally from ${eur(setup.from)}`
       : `From ${eur(setup.from)}, one-time`,
@@ -99,20 +99,20 @@ export const glance: { label: string; value: string }[] = [
 
 /**
  * "Who is Seestemic for?": examples, not a limit (Martin's decision for this page, October 2026).
- * Each line only names jobs the helpers in `jobs` below already do.
+ * Each line only names jobs the AI teammates in `jobs` below already do.
  */
 export const businessTypes: { type: string; text: string }[] = [
   {
     type: "Trades",
-    text: "Electricians, plumbers, builders and cleaners. Helpers draft quotes from your price list, book jobs and chase late invoices.",
+    text: "Electricians, plumbers, builders and cleaners. AI teammates draft quotes from your price list, book jobs and chase late invoices.",
   },
   {
     type: "Clinics",
-    text: "Dental, physio, beauty and vet clinics. Helpers book appointments, send reminders and answer everyday questions.",
+    text: "Dental, physio, beauty and vet clinics. AI teammates book appointments, send reminders and answer everyday questions.",
   },
   {
     type: "Shops",
-    text: "Local and online shops. Helpers answer questions about prices, delivery and returns, and sum up the week’s sales.",
+    text: "Local and online shops. AI teammates answer questions about prices, delivery and returns, and sum up the week’s sales.",
   },
 ];
 
@@ -166,9 +166,9 @@ export const jobs: { helper: HelperId; job: string; example: string }[] = [
 ];
 
 export const safety: { title: string; text: string }[] = [
-  { title: "You set the limits.", text: "Decide what each helper may do on its own and what always needs your OK." },
+  { title: "You set the limits.", text: "Decide what each AI teammate may do on its own and what always needs your OK." },
   { title: "We pick the AI provider with you.", text: "We choose the one that fits your needs." },
-  { title: "You keep what we build.", text: "Everything we set up is yours, even if you stop Care." },
+  { title: "You keep what we set up.", text: "It’s all yours, even if you stop Care." },
 ];
 
 /** Repeats the homepage FAQ's wording. Re-check against eis.ee before changing it, and update grantChecked. */
@@ -187,8 +187,8 @@ export const steps: { title: string; text: string }[] = [
     text: `A ${review.minutes}-minute call. Tell us which jobs take too long, and we’ll be honest about where AI can help.`,
   },
   {
-    title: "One helper, set up for you",
-    text: "We set it up inside the tools you already use, with your approval rules built in.",
+    title: "One AI teammate, set up for you",
+    text: "We connect it to the tools you already use, with your approval rules built in.",
   },
   {
     title: "Training, then results",
@@ -205,7 +205,7 @@ export const comparison: { topic: string; diy: string; us: string }[] = [
   {
     topic: "Setup",
     diy: "You connect the tools and write the instructions",
-    us: "We set it up inside the tools you already use",
+    us: "We connect it to the tools you already use",
   },
   {
     topic: "Safety",
@@ -231,31 +231,31 @@ export const faqs: Faq[] = [
   {
     question: "Do I need to be technical to use AI?",
     answer:
-      "No. We set everything up and explain it in plain language, so you don’t need an IT team. If you can write an email, you can work with an AI helper, and we train the people who’ll use it.",
+      "No. We set everything up and explain it in plain language, so you don’t need an IT team. If you can write an email, you can work with an AI teammate, and we train the people who’ll use it.",
   },
   {
     question: "Will AI replace my staff?",
     answer:
-      "That isn’t the goal. Helpers take the repetitive parts of the job off people’s plates, so your team spends more time with customers and on decisions that need a person. Anything important still waits for someone’s OK.",
+      "That isn’t the goal. AI teammates take the repetitive parts of the job off people’s plates, so your team spends more time with customers and on decisions that need a person. Anything important still waits for someone’s OK.",
   },
   {
     question: "Does it work with Microsoft 365, Google Workspace and my accounting software?",
     answer:
-      "Usually, yes. We build around the tools you already have, such as Microsoft 365, Google Workspace, your CRM, help desk or accounting software, instead of asking you to switch. If something won’t fit, we’ll tell you on the free AI review.",
+      "Usually, yes. We connect your AI teammates to the tools you already have, such as Microsoft 365, Google Workspace, your CRM, help desk or accounting software, instead of asking you to switch. If something won’t fit, we’ll tell you on the free AI review.",
   },
   {
-    question: "Which languages do the helpers speak?",
+    question: "Which languages do the AI teammates speak?",
     answer:
-      "Your customers’ languages. A helper can reply to each customer in their own language, using your prices, policies and saved replies. Our calls and training with you are in English.",
+      "Your customers’ languages. An AI teammate can reply to each customer in their own language, using your prices, policies and saved replies. Our calls and training with you are in English.",
   },
   {
     question: "How quickly will I see results?",
     answer:
-      "You start with one job, so your first helper can be useful early. We don’t promise a fixed timeline. We measure the helper with you, fix what isn’t right and only expand what clearly works.",
+      "You start with one job, so your first AI teammate can be useful early. We don’t promise a fixed timeline. We measure it with you, fix what isn’t right and only expand what clearly works.",
   },
   {
     question: "What happens if I stop paying for Care?",
-    answer: `You keep everything we built. Care is optional: up to ${care.hours} hours of our team’s time each month, plus a monthly check-in. Without it, your helpers are still yours, and you keep paying any AI costs, such as an AI subscription, directly.`,
+    answer: `You keep everything we set up. Care is optional: up to ${care.hours} hours of our team’s time each month, plus a monthly check-in. Without it, your AI teammates are still yours, and you keep paying any AI costs, such as an AI subscription, directly.`,
   },
   {
     question: "What do I need to prepare for the free AI review?",

@@ -69,7 +69,7 @@ const schema = {
       headline: h1,
       description,
       inLanguage: "en",
-      image: new URL("/og.png", siteUrl).href,
+      image: new URL("/og/home.jpg", siteUrl).href,
       datePublished: published.iso,
       dateModified: lastChecked.iso,
       author,
@@ -465,11 +465,11 @@ const schema = {
                   </>
                 ) : (
                   <>
-                    Setting up a <a href="/#how">first helper</a> starts at <span class="tnum">{eur(setup.from)}</span>, one-time.
+                    Setting up a <a href="/#how">first AI teammate</a> starts at <span class="tnum">{eur(setup.from)}</span>, one-time.
                   </>
                 )
               }{" "}
-              See <a href={`${estoniaPage.href}#what`}>what an AI helper does</a>. We don’t apply for grants on anyone’s behalf; your
+              See <a href={`${estoniaPage.href}#what`}>what an AI teammate does</a>. We don’t apply for grants on anyone’s behalf; your
               company applies itself. In a <a href="#review">free {review.minutes}-minute review</a>, we’ll tell you honestly whether
               a grant is worth it for your case.
             </p>

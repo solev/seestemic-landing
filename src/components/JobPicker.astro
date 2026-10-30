@@ -3,7 +3,7 @@ import Art from "./Art.astro";
 import Helper from "./Helper.astro";
 import Icon from "./Icon.astro";
 import field from "../assets/art/field.webp";
-import { helpers, jobs } from "../data/helpers";
+import { helpers, jobs, yourName } from "../data/helpers";
 ---
 
 <div class="jobs" data-jobs>
@@ -57,7 +57,7 @@ import { helpers, jobs } from "../data/helpers";
               </ul>
             </div>
 
-            <div class="phone" role="group" aria-label={`Example conversation with ${job.phoneTitle}`}>
+            <div class="phone" role="group" aria-label={`Example conversation with ${yourName(helper)}`}>
               <div class="phone-screen">
                 <div class="phone-status" aria-hidden="true">
                   <span>9:41</span>
@@ -78,7 +78,7 @@ import { helpers, jobs } from "../data/helpers";
                   <Icon name="chevronLeft" size={20} class="phone-back" />
                   <Helper variant="avatar" color={helper.color} class="phone-avatar" />
                   <span class="phone-name">
-                    <b>{job.phoneTitle}</b>
+                    <b>{helper.name}</b>
                     <small>{job.phoneSubtitle}</small>
                   </span>
                 </header>
