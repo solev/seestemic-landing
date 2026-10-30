@@ -496,7 +496,7 @@ export const faqs: Faq[] = [
   {
     question: "Is our information safe?",
     answer:
-      "You decide what each helper can see and which actions need your approval, and its work is logged so you can check it. We choose the AI provider that fits your needs, your data can stay in the EU, and we sign a data processing agreement with you.",
+      "You decide what each helper can see and which actions need your approval, and its work is logged so you can check it. We choose the AI provider that fits your needs, and we sign a data processing agreement with you.",
   },
   {
     question: "Which languages do the helpers speak?",

@@ -43,7 +43,7 @@ Offer and prices, approved by Martin in October 2026:
 - Clients keep everything Seestemic builds, including if they stop Care. Minimum terms and notice periods are not decided, so do not claim any.
 - Seestemic is not VAT-registered (exempt for now). The page says "No VAT is added, as Seestemic isn't VAT-registered." Do not write "prices exclude VAT" until it registers, because that reads as 24% on top; once it registers, switch to that line.
 - Helpers can talk to each customer in that customer's own language; do not list specific languages. Calls and training are in English.
-- Client data can stay in the EU, and Seestemic signs a data processing agreement with each client.
+- Seestemic signs a data processing agreement with each client. Do not promise more than that about client data, such as keeping it in the EU or out of AI training: the AI tools Seestemic sets up can't guarantee either for every client (Martin's call, October 2026).
 - Larger setups of €4,000 or more may qualify for EIS co-funding (see Evidence on Hand); the page says so under the prices and links to the FAQ answer.
 - The company's legal name, registry code and address are pending a company rename. Leave them, and the Privacy page, off the site until Martin supplies them.
 - The site lives at https://www.seestemic.com (the primary domain; the apex redirects to www). Canonicals, og:url and the sitemap all use www. Older design proposals live on design.seestemic.com; only their known paths (listed in `vercel.json`) redirect there, and any other unknown path gets the site's own 404 page.

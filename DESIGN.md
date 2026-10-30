@@ -406,7 +406,7 @@ Pills you can't misread: one black, one gray.
 - **Secondary:** a stone pill with an ink label that turns Pressed Stone on hover.
 - **Small:** 38px tall with 1rem side padding, in the header and booking panel.
 - **Mini pills:** inside product UI, 30px tall at UI size (0.8125rem) and weight 500. Dark (ink) marks the action, light (stone) the alternative, and ghost (graphite text, no fill) the dismissal.
-- **Pairing:** a CTA row pairs one primary with one secondary, centred and 0.75rem apart. A short graphite note may sit 1rem below a CTA row with a small Done Green glyph, such as "No tech skills needed." in the hero and the EU data note at the close. The glyph stays inline, so it travels with the first word when the note wraps.
+- **Pairing:** a CTA row pairs one primary with one secondary, centred and 0.75rem apart. A short graphite note may sit 1rem below a CTA row with a small Done Green glyph, such as "No tech skills needed." in the hero and the data agreement note at the close. The glyph stays inline, so it travels with the first word when the note wraps.
 
 **The One Black Choice Rule.** In any set of choices exactly one element is black: the primary action or the current selection. This covers CTA rows, Approve / Edit / Not now, the job tabs and the picked row in a list. Everything else is stone, linen or ghost.
 
