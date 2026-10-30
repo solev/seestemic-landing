@@ -48,8 +48,11 @@ const booking = {
         <span class="process-num" aria-hidden="true">2</span>
       )
     }
-    <h3>We set up your first helper</h3>
-    <p>One job, done well, inside the tools you already use, with your approval rules built in.</p>
+    <h3>We set up your first AI teammate</h3>
+    <p>
+      One job, done well, connected to the tools you already use, with your approval rules built in and your team trained
+      to use it.
+    </p>
     {
       pilotOpen ? (
         <p class="process-price">
@@ -59,21 +62,21 @@ const booking = {
               <span class="sr-only">normally from </span>{eur(setup.from)}
             </s>
           </b>
-          <span>Founding-client pilot: one small helper, set up for one task</span>
+          <span>Founding-client pilot: one AI teammate for one task, such as drafting quotes</span>
         </p>
       ) : (
         <p class="process-price">
           <b>
             <small>from</small> {eur(setup.from)}
           </b>
-          <span>One-time setup</span>
+          <span>One-time setup, training included</span>
         </p>
       )
     }
     <div class="process-mini mini-setup" aria-hidden="true">
       <span class="mini-setup-head">
         <Helper variant="avatar" color={helpers.quotes.color} class="mini-avatar" />
-        <b>Quotes</b>
+        <b>{helpers.quotes.name}</b>
         <small>Ready</small>
       </span>
       <span class="mini-setup-row">
@@ -96,8 +99,8 @@ const booking = {
 
   <li class="process-card">
     <span class="process-num" aria-hidden="true">3</span>
-    <h3>We train your team and stay</h3>
-    <p>Hands-on training for the people who’ll use it. Then we measure, fix and add what works.</p>
+    <h3>We stay and keep improving it</h3>
+    <p>With Care, we measure, fix and add what works.</p>
     <p class="process-price">
       <b>
         <small>from</small> {eur(care.from)} <small class="nowrap">a month,</small>{" "}
@@ -113,9 +116,9 @@ const booking = {
         <i style="--c:#E7DDF8">+4</i>
       </span>
       <span class="mini-event">
-        <Icon name="calendar" size={14} />
-        Team training
-        <span class="tnum">Tue 10:00</span>
+        <Icon name="sheet" size={14} />
+        Price list updated
+        <span class="tnum">Fri</span>
       </span>
       <span class="mini-event">
         <Icon name="replay" size={14} />
@@ -132,13 +135,13 @@ const booking = {
       <Art src={harvest} sizes="(min-width: 1280px) 1200px, 100vw" widths={[640, 960, 1400]} class="pilot-art" />
       <div class="pilot-figure" aria-hidden="true">
         <Helper follow class="pilot-helper" reach={8} tilt={-8} />
-        <p class="say-reply pilot-reply">I could be your first helper.</p>
+        <p class="say-reply pilot-reply">I could be your first AI teammate.</p>
       </div>
       <div class="pilot-card">
         <h3 id="pilot-title">Be one of our first {founding.places} clients</h3>
         <p>
-          Founding-client pilot: we set up one small AI helper for you at a one-time founding price. In return, we ask
-          for a short written case study after <span class="nowrap">{pilot.caseStudyAfter}.</span>
+          Founding-client pilot: we set up one small AI teammate for you at a one-time founding price. In return, we
+          ask for a short written case study after <span class="nowrap">{pilot.caseStudyAfter}.</span>
         </p>
         <p class="process-price pilot-price">
           <b>
@@ -147,7 +150,7 @@ const booking = {
               <span class="sr-only">normally from </span>{eur(setup.from)}
             </s>
           </b>
-          <span>One small helper, set up for one task</span>
+          <span>One AI teammate for one task, training included</span>
         </p>
         <div class="pilot-foot">
           <span class="pilot-seats" aria-hidden="true">
@@ -174,7 +177,7 @@ const booking = {
 <div class="partner">
   <div class="partner-intro">
     <h3>Want AI across your whole company?</h3>
-    <p>As your Partner, we help every team adopt AI in the ways that fit, not only through helpers.</p>
+    <p>As your Partner, we help every team adopt AI in the ways that fit, not only through AI teammates.</p>
   </div>
   <ul class="partner-list">
     <li><Icon name="check" size={16} />A plan for where AI can help, team by team</li>

@@ -10,10 +10,10 @@ export const placesLeft = founding.places - founding.taken;
 /** The free AI review, booked through Cal.com. */
 export const review = { price: 0, minutes: 30 } as const;
 
-/** One small helper for one task, at a one-time founding price; the client writes a short case study afterwards. */
+/** One AI teammate for one task, at a one-time founding price; the client writes a short case study afterwards. */
 export const pilot = { price: 500, caseStudyAfter: "6 to 8 weeks" } as const;
 
-/** One-time setup of the first helper. While the pilot is open, it is the pilot's "normally from" price. */
+/** One-time setup of the first AI teammate. While the pilot is open, it is the pilot's "normally from" price. */
 export const setup = { from: 1500 } as const;
 
 /** Optional monthly support: hours of our team's time plus a monthly check-in. It starts after the pilot or the setup. */

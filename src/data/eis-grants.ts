@@ -99,7 +99,7 @@ export const answers: Record<SectionId, Answer> = {
     nav: "Where Seestemic fits",
     question: "Where does Seestemic fit in?",
     answer:
-      "We set up AI helpers that take repetitive jobs off a small business’s plate. Many useful AI helpers cost less than a grant process.",
+      "We set up AI teammates that take repetitive jobs off a small business’s plate. Many useful AI teammates cost less than a grant process.",
   },
 };
 
@@ -216,7 +216,7 @@ export const faqs: Faq[] = [
   {
     question: "What if my revenue is under €50,000?",
     answer:
-      "Then none of EIS’s current digital grants fit, as of 22 October 2026. Options are RAISE (if your company is growth-stage and generally up to five years old) or starting small with your own budget. A single AI helper often costs less than the paperwork of a grant.",
+      "Then none of EIS’s current digital grants fit, as of 22 October 2026. Options are RAISE (if your company is growth-stage and generally up to five years old) or starting small with your own budget. A single AI teammate often costs less than the paperwork of a grant.",
     link: { href: "/ai-for-small-business-estonia#cost", label: "What AI costs for a small business in Estonia" },
   },
   {
