@@ -31,9 +31,9 @@ import {
 } from "../data/estonia";
 
 const title = "AI for Small Business in Estonia | Seestemic";
-const description = `Tallinn-based AI setup for small businesses: quotes, inbox, bookings, invoices, inside your own tools. You approve first. Free ${review.minutes}-min AI review.`;
+const description = `Tallinn-based AI setup for small businesses: quotes, inbox, bookings, invoices, connected to your own tools. You approve first. Free ${review.minutes}-min AI review.`;
 const lead =
-  "We set up AI helpers that take repetitive jobs off your plate, inside the tools you already use. Nothing important happens without your OK.";
+  "We set up AI teammates that take repetitive jobs off your plate, connected to the tools you already use. Nothing important happens without your OK.";
 
 const booking = {
   href: introCallUrl,
@@ -83,7 +83,7 @@ const schema = {
     {
       "@type": "Service",
       "@id": serviceId,
-      name: "AI helpers for small businesses in Estonia",
+      name: "AI teammates for small businesses in Estonia",
       description: lead,
       provider: { "@id": orgId },
       areaServed: { "@type": "Country", name: "Estonia" },
@@ -128,7 +128,7 @@ const schema = {
           <p class="lead guide-hero-lead">{lead}</p>
           <div class="cta-row guide-hero-ctas">
             <a class="btn btn-primary" {...booking}>Book a free {review.minutes}-minute AI review</a>
-            <a class="btn btn-secondary" href="#what">See what a helper does</a>
+            <a class="btn btn-secondary" href="#what">See what an AI teammate does</a>
           </div>
           <p class="hero-note">
             <Icon name="check" size={16} />
@@ -234,7 +234,7 @@ const schema = {
           </ul>
           <p class="guide-more">
             <a href="/#examples">
-              See the helpers at work
+              See the AI teammates at work
               <Icon name="arrowRight" size={16} />
             </a>
           </p>
@@ -250,7 +250,7 @@ const schema = {
               <div class="v-panel v-approve">
                 <header class="v-approve-head">
                   <Helper variant="avatar" color={helpers.quotes.color} class="v-avatar" />
-                  <span><b>Quotes</b> wants to send a quote</span>
+                  <span><b>{helpers.quotes.name}</b> wants to send a quote</span>
                   <span class="tnum">9:41</span>
                 </header>
                 <div class="v-approve-body">
@@ -268,7 +268,7 @@ const schema = {
                 </p>
               </div>
             </div>
-            <figcaption>The Quotes helper waits for your OK before it sends a quote over €1,000.</figcaption>
+            <figcaption>Your quote writer waits for your OK before it sends a quote over €1,000.</figcaption>
           </figure>
           <ul class="guide-points">
             {
@@ -305,7 +305,7 @@ const schema = {
                   pilotOpen ? (
                     <tr role="row">
                       <th scope="row" role="rowheader">
-                        First helper
+                        First AI teammate
                         <span class="pill pill-light guide-pill">First {founding.places} clients</span>
                       </th>
                       <td role="cell" class="guide-price tnum">
@@ -314,15 +314,15 @@ const schema = {
                           <span class="sr-only">normally from </span>{eur(setup.from)}
                         </s>
                       </td>
-                      <td role="cell">One small helper, set up for one task. In return, you write a short case study after {pilot.caseStudyAfter}.</td>
+                      <td role="cell">One AI teammate for one task, training included. In return, you write a short case study after {pilot.caseStudyAfter}.</td>
                     </tr>
                   ) : (
                     <tr role="row">
-                      <th scope="row" role="rowheader">First helper</th>
+                      <th scope="row" role="rowheader">First AI teammate</th>
                       <td role="cell" class="guide-price tnum">
                         from <b>{eur(setup.from)}</b> one-time
                       </td>
-                      <td role="cell">Your first helper, set up for one job inside your tools, with your approval rules built in.</td>
+                      <td role="cell">Your first AI teammate, set up for one job and connected to your tools, with your approval rules built in and training included.</td>
                     </tr>
                   )
                 }
@@ -339,7 +339,7 @@ const schema = {
           <ul class="guide-notes">
             <li>AI costs, such as an AI subscription, are paid separately.</li>
             <li>No VAT is added, as Seestemic isn’t <span class="nowrap">VAT-registered</span>.</li>
-            <li>You keep everything we build, even if you stop Care.</li>
+            <li>You keep everything we set up, even if you stop Care.</li>
             <li>
               Setups of <span class="tnum">€4,000</span> or more may qualify for <a href="#funding">EIS co-funding</a>.
             </li>

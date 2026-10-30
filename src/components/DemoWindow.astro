@@ -1,7 +1,8 @@
 ---
 import Helper from "./Helper.astro";
 import Icon from "./Icon.astro";
-import { demoThreads, helpers, type IconName } from "../data/helpers";
+import { demoThreads, helpers, yourName, type IconName } from "../data/helpers";
+import Mark from "../assets/brand/seestemic-mark-small.svg";
 
 const docIcons: Record<string, IconName> = {
   quotes: "doc",
@@ -16,7 +17,7 @@ const docIcons: Record<string, IconName> = {
 <div class="window" data-demo>
   <div class="window-bar">
     <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-    <span class="window-title">Your helpers</span>
+    <span class="window-title">Your teammates</span>
     <span class="window-tools">
       <button class="window-replay" type="button" data-demo-replay hidden>
         <Icon name="replay" size={14} />
@@ -32,7 +33,7 @@ const docIcons: Record<string, IconName> = {
         <Icon name="search" size={15} />
         <span>Search</span>
       </div>
-      <div class="side-list" role="tablist" aria-orientation="vertical" aria-label="Example helpers">
+      <div class="side-list" role="tablist" aria-orientation="vertical" aria-label="Example AI teammates">
         {
           demoThreads.map((thread, index) => {
             const helper = helpers[thread.helper];
@@ -65,6 +66,10 @@ const docIcons: Record<string, IconName> = {
       <div class="side-me" aria-hidden="true">
         <span class="side-me-avatar"><Icon name="user" size={15} /></span>
         <span class="side-me-name">You<small>Owner</small></span>
+      </div>
+      <div class="side-me side-team" aria-hidden="true">
+        <span class="side-me-avatar side-team-mark"><Mark focusable="false" /></span>
+        <span class="side-me-name">Seestemic team<small>Looks after your AI teammates</small></span>
       </div>
     </div>
 
@@ -116,7 +121,7 @@ const docIcons: Record<string, IconName> = {
                     )}
                   </article>
 
-                  <ol class="steps" aria-label={`What ${helper.name} did`}>
+                  <ol class="steps" aria-label={`What ${yourName(helper)} did`}>
                     {thread.steps.map((step) => (
                       <li class="step" data-step>
                         <span class="step-mark" aria-hidden="true">
@@ -222,7 +227,7 @@ const docIcons: Record<string, IconName> = {
               <div class="composer" aria-hidden="true">
                 <span class="composer-field">
                   <span class="composer-text" data-composer-text />
-                  <span class="composer-placeholder">Message {helper.name}…</span>
+                  <span class="composer-placeholder">Message {yourName(helper)}…</span>
                 </span>
                 <span class="composer-send" data-composer-send>
                   <Icon name="arrowUp" size={16} />

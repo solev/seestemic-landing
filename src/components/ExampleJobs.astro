@@ -1,0 +1,17 @@
+---
+import JobPicker from "./JobPicker.astro";
+import { email } from "../data/site";
+---
+
+<section class="section" id="examples" aria-labelledby="examples-title">
+  <div class="shell">
+    <header class="section-head section-head--center">
+      <h2 class="h2" id="examples-title">Give each AI teammate one job</h2>
+      <p class="lead">Start with the job that wastes the most time. Add the next one when it’s working.</p>
+    </header>
+    <JobPicker />
+    <p class="jobs-more">
+      Have a different job in mind? <a href={`mailto:${email}`}>Tell us about it</a>
+    </p>
+  </div>
+</section>

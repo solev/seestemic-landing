@@ -10,8 +10,8 @@ export const analytics = {
 } as const;
 
 export const navLinks = [
-  { label: "How it works", href: "#how" },
   { label: "Examples", href: "#examples" },
+  { label: "How it works", href: "#how" },
   { label: "About", href: "#about" },
   { label: "Questions", href: "#questions" },
 ] as const;

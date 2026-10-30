@@ -1,6 +1,6 @@
 // Everything in this file is illustrative example content for the landing page.
 // None of it describes a real customer, result, or measurement.
-import { care } from "./offer";
+import { care, eur, pilot, pilotOpen, review, setup } from "./offer";
 
 export type IconName =
   | "check"
@@ -48,16 +48,20 @@ export interface Helper {
   color: string;
 }
 
+// Each AI teammate is named after the job you'd hire for. No "assistant" in a title, so it never reads as a person.
 export const helpers: Record<HelperId, Helper> = {
-  quotes: { id: "quotes", name: "Quotes", color: "#F07C3A" },
-  inbox: { id: "inbox", name: "Inbox", color: "#2FB39A" },
-  frontDesk: { id: "frontDesk", name: "Front desk", color: "#7A5CFA" },
-  invoices: { id: "invoices", name: "Invoices", color: "#E9558B" },
-  bookkeeping: { id: "bookkeeping", name: "Bookkeeping", color: "#6BAF4B" },
-  questions: { id: "questions", name: "Customer questions", color: "#2E9EFF" },
-  report: { id: "report", name: "Weekly report", color: "#E8B22F" },
-  handbook: { id: "handbook", name: "Staff handbook", color: "#4A5BD4" },
+  quotes: { id: "quotes", name: "Quote writer", color: "#F07C3A" },
+  inbox: { id: "inbox", name: "Inbox manager", color: "#2FB39A" },
+  frontDesk: { id: "frontDesk", name: "Receptionist", color: "#7A5CFA" },
+  invoices: { id: "invoices", name: "Invoice chaser", color: "#E9558B" },
+  bookkeeping: { id: "bookkeeping", name: "Bookkeeper", color: "#6BAF4B" },
+  questions: { id: "questions", name: "Customer care", color: "#2E9EFF" },
+  report: { id: "report", name: "Report writer", color: "#E8B22F" },
+  handbook: { id: "handbook", name: "Staff helpdesk", color: "#4A5BD4" },
 };
+
+/** A job title mid-sentence: "Message your quote writer…". */
+export const yourName = (helper: Helper) => `your ${helper.name.charAt(0).toLowerCase()}${helper.name.slice(1)}`;
 
 /* ------------------------------------------------------------------ */
 /* Hero app window                                                     */
@@ -292,7 +296,7 @@ export const demoThreads: DemoThread[] = [
 ];
 
 /* ------------------------------------------------------------------ */
-/* "Give each helper one job" phone picker                             */
+/* "Give each AI teammate one job" phone picker                       */
 /* ------------------------------------------------------------------ */
 
 export type ConvoLine =
@@ -306,7 +310,6 @@ export interface Job {
   uses: { icon: IconName; label: string }[];
   /** Whose phone this is. */
   phoneOwner: "owner" | "customer" | "staff";
-  phoneTitle: string;
   phoneSubtitle: string;
   convo: ConvoLine[];
 }
@@ -323,8 +326,7 @@ export const jobs: Job[] = [
       { icon: "calendar", label: "Calendar" },
     ],
     phoneOwner: "owner",
-    phoneTitle: "Quotes",
-    phoneSubtitle: "Your AI helper",
+    phoneSubtitle: "Your AI teammate",
     convo: [
       { from: "card", icon: "mail", title: "New request from a dental clinic", lines: ["Flooring for 3 rooms · 4 photos"] },
       { from: "helper", text: "Quote Q-1042 is ready: €4,860, with a site visit on Thursday at 10:00. Send it?" },
@@ -343,8 +345,7 @@ export const jobs: Job[] = [
       { icon: "doc", label: "Saved replies" },
     ],
     phoneOwner: "owner",
-    phoneTitle: "Inbox",
-    phoneSubtitle: "Your AI helper",
+    phoneSubtitle: "Your AI teammate",
     convo: [
       { from: "helper", text: "Good morning. 48 new emails: I answered 9 and filed 36." },
       { from: "helper", text: "3 need you: a price increase, a refund over €500 and a partnership idea." },
@@ -362,8 +363,7 @@ export const jobs: Job[] = [
       { icon: "phone", label: "Text messages" },
     ],
     phoneOwner: "owner",
-    phoneTitle: "Front desk",
-    phoneSubtitle: "Your AI helper",
+    phoneSubtitle: "Your AI teammate",
     convo: [
       { from: "helper", text: "6 new bookings overnight. Tomorrow is full until 14:00." },
       { from: "me", text: "Great. Can you move my 16:00 today to Friday?" },
@@ -382,8 +382,7 @@ export const jobs: Job[] = [
       { icon: "mail", label: "Email" },
     ],
     phoneOwner: "owner",
-    phoneTitle: "Invoices",
-    phoneSubtitle: "Your AI helper",
+    phoneSubtitle: "Your AI teammate",
     convo: [
       { from: "helper", text: "Two invoices are more than 30 days late." },
       { from: "card", icon: "receipt", title: "Overdue · €2,100", lines: ["Café · €1,240", "Hardware store · €860"] },
@@ -402,8 +401,7 @@ export const jobs: Job[] = [
       { icon: "book", label: "Accounts" },
     ],
     phoneOwner: "owner",
-    phoneTitle: "Bookkeeping",
-    phoneSubtitle: "Your AI helper",
+    phoneSubtitle: "Your AI teammate",
     convo: [
       { from: "card", icon: "receipt", title: "Fuel · €86.40", lines: ["Mar 14 · card ending 4417"] },
       { from: "helper", text: "Is this fuel receipt for the business?" },
@@ -422,7 +420,6 @@ export const jobs: Job[] = [
       { icon: "calendar", label: "Calendar" },
     ],
     phoneOwner: "customer",
-    phoneTitle: "Customer questions",
     phoneSubtitle: "Replies on your website",
     convo: [
       { from: "me", text: "Hi, do you deliver on Saturdays?" },
@@ -441,8 +438,7 @@ export const jobs: Job[] = [
       { icon: "star", label: "Reviews" },
     ],
     phoneOwner: "owner",
-    phoneTitle: "Weekly report",
-    phoneSubtitle: "Your AI helper",
+    phoneSubtitle: "Your AI teammate",
     convo: [
       { from: "card", icon: "doc", title: "Week 12 summary", lines: ["Sales €18,420 · up 6%", "23 new customers · 11 reviews"] },
       { from: "helper", text: "Saturday was your busiest day. Two reviews mention slow replies. Want me to draft answers?" },
@@ -460,7 +456,6 @@ export const jobs: Job[] = [
       { icon: "chat", label: "Team chat" },
     ],
     phoneOwner: "staff",
-    phoneTitle: "Staff handbook",
     phoneSubtitle: "Ask about any procedure",
     convo: [
       { from: "me", text: "How do I process a return without a receipt?" },
@@ -484,43 +479,75 @@ export interface Faq {
 
 export const faqs: Faq[] = [
   {
+    question: "Is Seestemic an app?",
+    answer:
+      "No, Seestemic is a service. We set up AI teammates for your business in a ready-made AI app, connect them to your email, calendar and files, and train your team. You message them from that app on your phone or computer, and there’s nothing technical for you to do. If a job needs something more custom, we build it.",
+  },
+  {
+    question: "What do I need to do?",
+    answer:
+      "Show us how the job is done today, decide what your AI teammate may do on its own, and say yes before anything important goes out. We do the setup and the training, and with Care, we look after it.",
+  },
+  {
+    question: "Why not just use an AI chatbot myself?",
+    answer:
+      "You can, and for one-off questions it works well. Out of the box, though, it doesn’t know your prices, your tone or your rules, and it can’t reach your email or files. We set all of that up, agree with you what it may do on its own and train your team, so it does the job your way.",
+  },
+  {
+    question: "What if it gets something wrong?",
+    answer:
+      "Anything important waits for your OK, so you see it before a customer does. Its work is logged, so you can check what it did. Correct it and it saves that as a rule for next time, and with Care, we fix anything that keeps going wrong.",
+  },
+  {
+    question: "What does it cost in total?",
+    answer: `${
+      pilotOpen
+        ? `The ${review.minutes}-minute AI review is free. Your first AI teammate is ${eur(pilot.price)} one-time as a founding-client pilot, normally from ${eur(setup.from)}, and that includes training your team. Care is optional, from ${eur(care.from)} a month after the pilot.`
+        : `The ${review.minutes}-minute AI review is free. Setting up your first AI teammate is from ${eur(setup.from)} one-time, including training your team. Care is optional, from ${eur(care.from)} a month after setup.`
+    } AI costs, such as an AI subscription, are paid separately, and no VAT is added.`,
+  },
+  {
+    question: "What is an AI teammate, exactly?",
+    answer:
+      "It’s software, not a person: an AI set up to do one job in your business, such as drafting quotes or chasing invoices. You message it from your phone or computer, and it works with your email, calendar and files. It follows your rules, asks you before anything important and saves your corrections as rules.",
+  },
+  {
     question: "Do I need to be technical?",
     answer:
-      "No. We handle the setup and explain everything in plain language. If you can write an email, you can work with an AI helper.",
+      "No. We handle the setup and explain everything in plain language. If you can write an email, you can work with an AI teammate.",
   },
   {
     question: "Will it work with the software we already use?",
     answer:
-      "Usually, yes. We build around what you have, such as Microsoft 365, Google Workspace, your CRM, help desk or accounting software, instead of asking you to switch.",
+      "Usually, yes. We connect your AI teammates to what you already have, such as Microsoft 365, Google Workspace, your CRM, help desk or accounting software, instead of asking you to switch.",
   },
   {
     question: "Is our information safe?",
     answer:
-      "You decide what each helper can see and which actions need your approval, and its work is logged so you can check it. We choose the AI provider that fits your needs, and we sign a data processing agreement with you.",
+      "You decide what each AI teammate can see and which actions need your approval, and its work is logged so you can check it. We also sign a data processing agreement with you.",
   },
   {
-    question: "Which languages do the helpers speak?",
+    question: "Which languages do the AI teammates speak?",
     answer:
-      "Your customers’ languages. A helper can talk to each customer in their own language. Our calls and training are in English.",
+      "Your customers’ languages. An AI teammate can talk to each customer in their own language. Our calls and training are in English.",
   },
   {
     question: "What happens if we stop Care?",
-    answer: `You keep everything we built. Care is simply our team’s time when you need it: up to ${care.hours} hours a month, plus a monthly check-in. AI costs, such as an AI subscription, are always paid separately.`,
+    answer: `You keep everything we set up. Care is simply our team’s time when you need it: up to ${care.hours} hours a month, plus a monthly check-in. AI costs, such as an AI subscription, are always paid separately.`,
   },
   {
     question: "Will AI replace my staff?",
     answer:
-      "That isn’t the goal. Helpers take the repetitive parts of the job off people’s plates, so your team spends more time with customers and on decisions that need a person.",
+      "That isn’t the goal. AI teammates take the repetitive parts of the job off people’s plates, so your team spends more time with customers and on decisions that need a person.",
   },
   {
     question: "How soon will we see results?",
     answer:
-      "We start with one job, so your first helper can be useful early. Then we measure it with you and only expand what clearly works.",
+      "We start with one job, so your first AI teammate can be useful early. Then we measure it with you and only expand what clearly works.",
   },
   {
     question: "Do you train our team?",
-    answer:
-      "Yes. Hands-on sessions and simple guides, so everyone knows when to use their helpers, how to check the work and when to step in.",
+    answer: `Yes, and it’s part of the setup price${pilotOpen ? ", including the founding-client pilot" : ""}. Hands-on sessions and simple guides, so everyone knows when to use their AI teammates, how to check the work and when to step in.`,
   },
   {
     id: "funding",
